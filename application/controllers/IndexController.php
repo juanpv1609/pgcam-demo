@@ -9,9 +9,9 @@ class IndexController extends Zend_Controller_Action
         $this->initView();
         $this->view->baseUrl = $this->_request->getBaseUrl();
         $this->view->user = Zend_Auth::getInstance()->getIdentity();
-        $this->view->baseUrl = $this->_request->getBaseUrl();
         $this->view->controlador=Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
         $this->view->accion=Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+        //$this->view->proyecto=$this->_request->getBasePath();
         
     }
 
