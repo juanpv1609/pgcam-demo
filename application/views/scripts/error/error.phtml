@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title><?php echo $this->titulo;?></title>
+  <!-- Custom fonts for this template-->
+  <link href="/zend/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="<?php echo $this->baseUrl; ?>/assets/css/sb-admin-2.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Begin Page Content -->
+    <div class="container-fluid py-5">
+      <!-- 404 Error Text -->
+      <div class="text-center">
+        <?php if($this->message=="Página no encontrada"){ ?>
+        <div class="error mx-auto" data-text="404">404</div>
+          <?php } else { ?>
+            <div class="error mx-auto" data-text="500">500</div>
+        <?php }  ?>
+        
+        <h1>Ocurrió un error <i class="fas fa-sad-tear "></i></h1>
+        <strong>Mensaje: </strong><span class="lead text-gray-800 mb-5">"<?php echo $this->message ?>"</span> <hr>
+        <a href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index')); ?>">
+        <h5 class="display-5">&larr; Regresar</h5> </a>
+      </div>
+      <?php if (isset($this->exception)): ?>
+  
+  <h3>Exception information:</h3>
+  <p>
+      <b>Message:</b> <?php echo $this->exception->getMessage() ?>
+  </p>
+
+  <h3>Stack trace:</h3>
+  <pre><?php echo $this->exception->getTraceAsString() ?>
+  </pre>
+
+  <h3>Request Parameters:</h3>
+  <pre><?php echo $this->escape(var_export($this->request->getParams(), true)) ?>
+  </pre>
+
+  <?php endif ?>
+</div>
+<!-- /.container-fluid -->
+
+ <!-- Bootstrap core JavaScript-->
+ <script src="/zend/vendor/jquery/jquery.min.js"></script>
+  <script src="/zend/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="/zend/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="<?php echo $this->baseUrl; ?>/assets/js/sb-admin-2.min.js"></script>
+
+  <input type="hidden" name="dir" id="dir" readonly="readonly"  value="<?php echo $this->baseUrl; ?>">
+
+</body>
+</html>
