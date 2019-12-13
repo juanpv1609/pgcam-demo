@@ -43,10 +43,10 @@ Después de la instalación, y ubicado dentro del proyecto ejecute `npm install`
 
 ### Tareas Gulp
 
--   `gulp` la tarea predeterminada que construye todo
--   `gulp watch` browserSync abre el proyecto en su navegador predeterminado y se vuelve a cargar en vivo cuando se realizan cambios
--   `gulp css` compila archivos SCSS en CSS y minimiza el CSS compilado
--   `gulp js` minimiza los archivos JS de temas
+-   `gulp`        la tarea predeterminada que construye todo
+-   `gulp watch`  browserSync abre el proyecto en su navegador predeterminado y se vuelve a cargar en vivo cuando se realizan cambios
+-   `gulp css`    compila archivos SCSS en CSS y minimiza el CSS compilado
+-   `gulp js`     minimiza los archivos JS de temas
 -   `gulp vendor` copia las dependencias de node_modules en el directorio de proveedores
 
 Debe tener npm instalado globalmente para usar este entorno de compilación. Este tema se creó con el nodo v11.6.0 y la CLI de Gulp v2.0.1. Si Gulp no se ejecuta correctamente después de ejecutar `npm install`, es posible que deba actualizar el nodo y / o la CLI de Gulp localmente.
