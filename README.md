@@ -1,16 +1,15 @@
 # [PG-CAM]
 
-[PG-CAM] es una plataforma para la gestion de camas e indicadores de calidad destinada para su uso en instituciones publicas de salud, desarrollado como proyecto de titulacion de la carrera de ingenieria en sistemas P56 de la [Universidad Politecnica Salesiana](https://ups.edu.ec/).
+[PG-CAM] es una plataforma para la gestion de camas e indicadores de calidad destinada a instituciones de salud, desarrollado como proyecto de titulacion de la carrera de ingenieria en sistemas en el periodo 56 de la [Universidad Politecnica Salesiana](https://www.ups.edu.ec/) EC.
 
-For the legacy Bootstrap 3 version of this theme, you can view the [last stable release](https://github.com/BlackrockDigital/startbootstrap-sb-admin-2/releases/tag/v3.3.7%2B1) of SB Admin 2 for Bootstrap 3.
 
-## Preview
+## Vista Previa
 
 [![SB Admin 2 Preview](https://startbootstrap.com/assets/img/screenshots/themes/sb-admin-2.png)](https://blackrockdigital.github.io/startbootstrap-sb-admin-2/)
 
 **[Launch Live Preview](https://blackrockdigital.github.io/startbootstrap-sb-admin-2/)**
 
-## Status
+## Estado
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/BlackrockDigital/startbootstrap-sb-admin-2/master/LICENSE)
 [![npm version](https://img.shields.io/npm/v/startbootstrap-sb-admin-2.svg)](https://www.npmjs.com/package/startbootstrap-sb-admin-2)
@@ -18,48 +17,51 @@ For the legacy Bootstrap 3 version of this theme, you can view the [last stable 
 [![dependencies Status](https://david-dm.org/BlackrockDigital/startbootstrap-sb-admin-2/status.svg)](https://david-dm.org/BlackrockDigital/startbootstrap-sb-admin-2)
 [![devDependencies Status](https://david-dm.org/BlackrockDigital/startbootstrap-sb-admin-2/dev-status.svg)](https://david-dm.org/BlackrockDigital/startbootstrap-sb-admin-2?type=dev)
 
-## Download and Installation
+## Pre Requisitos
+Configuracion incial del ambiente de soporte para el sistema PG-CAM:
+-  Contar con un servidor http (XAMPP, WAMP, Apache)
+-  Descargar libreria [Zend Framework v1.12](https://framework.zend.com/downloads/archives)
+-  Descomprimir la descarga y ubicar en C:
+-  Configurar el archivo php.ini ubicado en C:/xampp/php/php.ini
+-  Agregar la linea: `include_path = ".;c:\Zend\library"` "Agrega la libreria por defecto de Zend"
+-  Descomentar la linea: `extension=php_pdo_pgsql.dll`    "Habilita las conecciones a bases de datos PostgreSQL"
+-  Configurar el archivo http.conf ubicado en C:/xampp/apache/conf/httpd.conf  
+-  Cambiar las lineas `AllowOverride none` por `AllowOverride All` "Habilita el acceso a las rutas"
 
-To begin using this template, choose one of the following options to get started:
+## Descarga e instalacion
 
--   [Download the latest release on Start Bootstrap](https://startbootstrap.com/template-overviews/sb-admin-2/)
--   Install via npm: `npm i startbootstrap-sb-admin-2`
--   Clone the repo: `git clone https://github.com/BlackrockDigital/startbootstrap-sb-admin-2.git`
--   [Fork, Clone, or Download on GitHub](https://github.com/BlackrockDigital/startbootstrap-sb-admin-2)
+Para comenzar a usar esta aplicacion, elija una de las siguientes opciones para comenzar:
 
-## Usage
+-   Clonar el repositorio: `git clone https://github.com/juanpv1609/zend.git`
+-   [Fork, Clonar, o Descargar desde GitHub](https://github.com/juanpv1609/zend)
+-   Ubicarlo dentro de sus servidos de aplicaciones por ejemplo: C:/xampp/htdocs/zend
 
-After installation, run `npm install` and then run `npm start` which will open up a preview of the template in your default browser, watch for changes to core template files, and live reload the browser when changes are saved. You can view the `gulpfile.js` to see which tasks are included with the dev environment.
 
-### Gulp Tasks
+## Uso
 
--   `gulp` the default task that builds everything
--   `gulp watch` browserSync opens the project in your default browser and live reloads when changes are made
--   `gulp css` compiles SCSS files into CSS and minifies the compiled CSS
--   `gulp js` minifies the themes JS file
--   `gulp vendor` copies dependencies from node_modules to the vendor directory
+Después de la instalación, y ubicado dentro del proyecto ejecute `npm install` y luego ejecute` npm start`, que abrirá una vista previa de la plantilla en su navegador predeterminado, estará atento a los cambios en los archivos centrales de la plantilla y volverá a cargar el navegador cuando se guarden los cambios. Puede ver el `gulpfile.js` para ver qué tareas se incluyen con el entorno de desarrollo.
 
-You must have npm installed globally in order to use this build environment. This theme was built using node v11.6.0 and the Gulp CLI v2.0.1. If Gulp is not running properly after running `npm install`, you may need to update node and/or the Gulp CLI locally.
+### Tareas Gulp
 
-## Bugs and Issues
+-   `gulp` la tarea predeterminada que construye todo
+-   `gulp watch` browserSync abre el proyecto en su navegador predeterminado y se vuelve a cargar en vivo cuando se realizan cambios
+-   `gulp css` compila archivos SCSS en CSS y minimiza el CSS compilado
+-   `gulp js` minimiza los archivos JS de temas
+-   `gulp vendor` copia las dependencias de node_modules en el directorio de proveedores
 
-Have a bug or an issue with this template? [Open a new issue](https://github.com/BlackrockDigital/startbootstrap-sb-admin-2/issues) here on GitHub or leave a comment on the [template overview page at Start Bootstrap](http://startbootstrap.com/template-overviews/sb-admin-2/).
+Debe tener npm instalado globalmente para usar este entorno de compilación. Este tema se creó con el nodo v11.6.0 y la CLI de Gulp v2.0.1. Si Gulp no se ejecuta correctamente después de ejecutar `npm install`, es posible que deba actualizar el nodo y / o la CLI de Gulp localmente.
+
 
 ## About
 
-Start Bootstrap is an open source library of free Bootstrap templates and themes. All of the free templates and themes on Start Bootstrap are released under the MIT license, which means you can use them for any purpose, even for commercial projects.
+PG-CAM fue desarrollado bajo el uso de software libre, con la opcion de ser utilizado en multiplataforma, tiene una arquitectura MVC de la version 1.12 de Zend Framework. Incluye herramientas para el Front-End como [Bootstrap](http://getbootstrap.com/), JQUERY, POPPER, SASS.
 
--   <https://startbootstrap.com>
--   <https://twitter.com/SBootstrap>
 
-Start Bootstrap was created by and is maintained by **[David Miller](http://davidmiller.io/)**.
+PG-CAM fue creado por y es mantenido por **[Universidad Politecnica Salesiana](https://www.ups.edu.ec/)**.
 
--   <http://davidmiller.io>
--   <https://twitter.com/davidmillerskt>
--   <https://github.com/davidtmiller>
 
 Start Bootstrap is based on the [Bootstrap](http://getbootstrap.com/) framework created by [Mark Otto](https://twitter.com/mdo) and [Jacob Thorton](https://twitter.com/fat).
 
 ## Copyright and License
 
-Copyright 2013-2019 Blackrock Digital LLC. Code released under the [MIT](https://github.com/BlackrockDigital/startbootstrap-resume/blob/gh-pages/LICENSE) license.
+Copyright 2019 Universidad Politecnica Salesiana. Código publicado bajo el [MIT](https://github.com/juanpv1609/zend/blob/master/LICENSE) license.
