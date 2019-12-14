@@ -64,5 +64,34 @@ function SendFormRegister() {
     });
 }
 
-
+function logout(){
+    var dir = $('#dir').val();
+    Swal.fire({
+        position: 'top',
+        title: 'Está seguro?',
+        text: "¡Seleccione 'Aceptar' a continuación si está listo para finalizar su sesión actual!",
+        icon: 'question',
+        width: '22rem',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar'
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire({
+            position: 'top',
+            title: 'Correcto!',
+            text: 'Ah finalizado su sesion.',
+            width: '22rem',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+        }).then((result)=>{
+            window.location.href = dir + "/auth/logout";
+        })
+        
+        }
+        
+      })
+      
+}
 

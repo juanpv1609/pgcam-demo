@@ -48,6 +48,12 @@ function clean() {
 
 // Bring third party dependencies from node_modules into vendor directory
 function modules() {
+  // sweetAlert 2 JS
+  var sweetAlertJS = gulp.src('./node_modules/sweetalert2/dist/*.js')
+    .pipe(gulp.dest('./vendor/sweetalert2/js'));
+    // sweetAlert 2 CSS
+  var sweetAlertCSS = gulp.src('./node_modules/sweetalert2/dist/*.css')
+  .pipe(gulp.dest('./vendor/sweetalert2/css'));
   // Bootstrap JS
   var bootstrapJS = gulp.src('./node_modules/bootstrap/dist/js/*')
     .pipe(gulp.dest('./vendor/bootstrap/js'));
@@ -76,7 +82,7 @@ function modules() {
       '!./node_modules/jquery/dist/core.js'
     ])
     .pipe(gulp.dest('./vendor/jquery'));
-  return merge(bootstrapJS, bootstrapSCSS, chartJS, dataTables, fontAwesome, jquery, jqueryEasing);
+  return merge(sweetAlertJS,sweetAlertCSS,bootstrapJS, bootstrapSCSS, chartJS, dataTables, fontAwesome, jquery, jqueryEasing);
 }
 
 // CSS task

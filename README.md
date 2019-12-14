@@ -49,7 +49,7 @@ Después de la instalación, y ubicado dentro del proyecto ejecute `npm install`
 -   `gulp js`     minimiza los archivos JS de temas
 -   `gulp vendor` copia las dependencias de node_modules en el directorio de proveedores
 
-Debe tener npm instalado globalmente para usar este entorno de compilación. Este tema se creó con el nodo v11.6.0 y la CLI de Gulp v2.0.1. Si Gulp no se ejecuta correctamente después de ejecutar `npm install`, es posible que deba actualizar el nodo y / o la CLI de Gulp localmente.
+Debe tener npm instalado globalmente para usar este entorno de compilación. Este tema se creó con node v11.6.0 y la CLI de Gulp v2.0.1. Si Gulp no se ejecuta correctamente después de ejecutar `npm install`, es posible que deba actualizar el nodo y / o la CLI de Gulp localmente.
 
 
 ## About
@@ -59,8 +59,6 @@ PG-CAM fue desarrollado bajo el uso de software libre, con la opcion de ser util
 
 PG-CAM fue creado por y es mantenido por **[Universidad Politecnica Salesiana](https://www.ups.edu.ec/)**.
 
-
-Start Bootstrap is based on the [Bootstrap](http://getbootstrap.com/) framework created by [Mark Otto](https://twitter.com/mdo) and [Jacob Thorton](https://twitter.com/fat).
 
 ## Copyright and License
 

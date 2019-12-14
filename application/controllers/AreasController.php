@@ -44,10 +44,28 @@ class AreasController extends Zend_Controller_Action
     public function editarAction()
     {
         // action body
-        $this->view->titulo = "Editar - Area";
+        $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
+        $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
+        if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
+            $area_id = $this->getRequest()->getParam('id');
+            $area_nombre = $this->getRequest()->getParam('nombre');
+            $table = new Application_Model_DbTable_Areas();
+            $table->actualizararea($area_id,$area_nombre);
+            echo $this->tabla_area();
+        }
 
-        $this->view->area_id = $this->getRequest()->getParam('id');
-        $this->view->area_nombre = $this->getRequest()->getParam('nombre');
+    }
+    public function eliminarAction()
+    {
+        // action body
+        $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
+        $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
+        if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
+            $area_id = $this->getRequest()->getParam('id');
+            $table = new Application_Model_DbTable_Areas();
+            $table->eliminararea($area_id);
+            echo $this->tabla_area();
+        }
 
     }
 
@@ -87,10 +105,10 @@ class AreasController extends Zend_Controller_Action
                             <i class="fa fa-eye text-primary"></i>
                         </button>
                         <!--  debo enviar la busqueda por ajax -->
-                        <button type="button" class="btn btn-sm " onclick="editarModal()" >
+                        <button type="button" class="btn btn-sm " onclick="editarModal('. $item->area_id .')" >
                             <i class="fa fa-edit text-warning"></i>
                         </button>
-                        <button class="btn  btn-sm ">
+                        <button class="btn  btn-sm" onclick="eliminar('. $item->area_id .')" >
                             <i class="fa fa-trash text-danger"></i>
                         </button>
                     </td>
