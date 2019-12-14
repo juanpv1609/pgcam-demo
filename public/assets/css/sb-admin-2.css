@@ -139,7 +139,7 @@ strong {
 }
 
 small {
-  font-size: 80%;
+  font-size: 70%;
 }
 
 sub,
@@ -213,6 +213,7 @@ svg {
 
 table {
   border-collapse: collapse;
+  font-size: 1rem;
 }
 
 caption {
@@ -434,7 +435,7 @@ hr {
 
 small,
 .small {
-  font-size: 80%;
+  font-size: 70%;
   font-weight: 400;
 }
 
