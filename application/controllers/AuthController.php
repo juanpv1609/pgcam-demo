@@ -64,8 +64,8 @@ class AuthController extends Zend_Controller_Action
             $error = $this->_getParam('e', 1);
             if ($error == 0) {
                 $this->view->message = '<div class="alert alert-danger alert-dismissible">
-                    <button class="close" type="button" data-dismiss="alert" aria-hidden="true">脳</button>
-                    Las credenciales de autenticacion proporcionadas no tienen permiso para acceder a este m贸dulo</div>';
+                    <button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
+                    Las credenciales de autenticacion proporcionadas no tienen permiso para acceder a este modulo</div>';
             }
         }
 
@@ -96,7 +96,7 @@ class AuthController extends Zend_Controller_Action
             $datos = $table->insertarusuario($nombre,$apellido, $email, $clave);
             $response = array(); //Declaro un array para enviar los datos a la vista
         }
-        $response['data'] = $datoshc;
+        $response['data'] = $datos;
         $json = json_encode($response);
         echo $json;
 

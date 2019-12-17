@@ -17,6 +17,7 @@ function SendFormLogin(e)
     tecla = (document.all) ? e.keyCode : e.which;
     if (tecla == 13){
         e.preventDefault(); //prevent default action
+        
         document.login.submit();
     }
 
