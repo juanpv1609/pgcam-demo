@@ -50,38 +50,38 @@ function clean() {
 function modules() {
   // sweetAlert 2 JS
   var sweetAlertJS = gulp.src('./node_modules/sweetalert2/dist/*.js')
-    .pipe(gulp.dest('./vendor/sweetalert2/js'));
+    .pipe(gulp.dest('./public/vendor/sweetalert2/js'));
     // sweetAlert 2 CSS
   var sweetAlertCSS = gulp.src('./node_modules/sweetalert2/dist/*.css')
-  .pipe(gulp.dest('./vendor/sweetalert2/css'));
+  .pipe(gulp.dest('./public/vendor/sweetalert2/css'));
   // Bootstrap JS
   var bootstrapJS = gulp.src('./node_modules/bootstrap/dist/js/*')
-    .pipe(gulp.dest('./vendor/bootstrap/js'));
+    .pipe(gulp.dest('./public/vendor/bootstrap/js'));
   // Bootstrap SCSS
   var bootstrapSCSS = gulp.src('./node_modules/bootstrap/scss/**/*')
-    .pipe(gulp.dest('./vendor/bootstrap/scss'));
+    .pipe(gulp.dest('./public/vendor/bootstrap/scss'));
   // ChartJS
   var chartJS = gulp.src('./node_modules/chart.js/dist/*.js')
-    .pipe(gulp.dest('./vendor/chart.js'));
+    .pipe(gulp.dest('./public/vendor/chart.js'));
   // dataTables
   var dataTables = gulp.src([
       './node_modules/datatables.net/js/*.js',
       './node_modules/datatables.net-bs4/js/*.js',
       './node_modules/datatables.net-bs4/css/*.css'
     ])
-    .pipe(gulp.dest('./vendor/datatables'));
+    .pipe(gulp.dest('./public/vendor/datatables'));
   // Font Awesome
   var fontAwesome = gulp.src('./node_modules/@fortawesome/**/*')
-    .pipe(gulp.dest('./vendor'));
+    .pipe(gulp.dest('./public/vendor'));
   // jQuery Easing
   var jqueryEasing = gulp.src('./node_modules/jquery.easing/*.js')
-    .pipe(gulp.dest('./vendor/jquery-easing'));
+    .pipe(gulp.dest('./public/vendor/jquery-easing'));
   // jQuery
   var jquery = gulp.src([
       './node_modules/jquery/dist/*',
       '!./node_modules/jquery/dist/core.js'
     ])
-    .pipe(gulp.dest('./vendor/jquery'));
+    .pipe(gulp.dest('./public/vendor/jquery'));
   return merge(sweetAlertJS,sweetAlertCSS,bootstrapJS, bootstrapSCSS, chartJS, dataTables, fontAwesome, jquery, jqueryEasing);
 }
 
