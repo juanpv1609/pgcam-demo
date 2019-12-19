@@ -95,4 +95,15 @@ function logout(){
       })
       
 }
+function recuperarClave() {
+    const { value: email } = await Swal.fire({
+        title: 'Ingrese su direccion de correo',
+        input: 'email',
+        inputPlaceholder: 'ejemplo@ejemplo.com'
+      })
+      
+      if (email) {
+        Swal.fire(`Correo: ${email}`)
+      }
+}
 

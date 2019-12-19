@@ -6,6 +6,7 @@ const browsersync = require("browser-sync").create();
 const cleanCSS = require("gulp-clean-css");
 const del = require("del");
 const gulp = require("gulp");
+const php = require("gulp-connect-php");
 const header = require("gulp-header");
 const merge = require("merge-stream");
 const plumber = require("gulp-plumber");
@@ -26,11 +27,17 @@ const banner = ['/*!\n',
 ].join('');
 
 // BrowserSync
+
 function browserSync(done) {
   browsersync.init({
     proxy: "localhost:8080",
-    ws: true,
-    port: 3000
+    open: true,
+    injectChanges: true,
+    // Use a specific port (instead of the one auto-detected by Browsersync).
+    // port: 7000,
+    watchOptions: {
+      debounceDelay: 1000 // This introduces a small delay when watching for file change events to avoid triggering too many reloads
+    }
   });
   done();
 }
@@ -132,7 +139,6 @@ function js() {
 function watchFiles() {
   gulp.watch("./scss/**/*", css);
   gulp.watch(["./js/**/*", "!./js/**/*.min.js"], js);
-  gulp.watch("./**/*.php", browserSyncReload);
 }
 
 // Define complex tasks
