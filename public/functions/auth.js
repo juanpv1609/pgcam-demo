@@ -8,9 +8,7 @@ function isValidEmail(mail) {
 }
 $(document).ready(function() {
 });
-function login() {
 
-}
 function SendFormLogin(e)
 {
 
@@ -47,19 +45,32 @@ function SendFormRegister() {
                         },
                         success: function (requestData) {//armar la tabla
 
-                            alert("Cuenta creada exitosamente!");
-                            window.location.href = dir + "/auth/login";
+                            Swal.fire({
+                                position: 'top',
+                                title: 'Correcto!',
+                                text: 'Cuenta creada exitosamente.',
+                                width: '22rem',
+                                icon: 'success',
+                                confirmButtonText: 'Aceptar'
+                            }).then((result)=>{
+                                window.location.href = dir + "/auth/login";
+
+                            })
                             //console.log(requestData.data);
 
                         },
                         error: function (requestData, strError, strTipoError) {
+                            //console.log(strError+"\n"+strTipoError);
+                            $("#clave_igual").addClass('alert alert-danger').html('El correo ingresado ya existe').show(100).delay(2500).hide(100);
+
                         },
                         complete: function (requestData, exito) { //fin de la llamada ajax.
+                           // console.log(exito);
 
                         }
                     });
             } else {
-                $("#clave_igual").addClass('alert alert-warning').html('Deben coincidir las contraseñas').show(100).delay(2500).hide(100);
+                $("#clave_igual").addClass('alert alert-danger').html('Deben coincidir las contraseñas').show(100).delay(2500).hide(100);
             }
         }
     });
@@ -95,15 +106,22 @@ function logout(){
       })
       
 }
-function recuperarClave() {
-    const { value: email } = await Swal.fire({
-        title: 'Ingrese su direccion de correo',
-        input: 'email',
-        inputPlaceholder: 'ejemplo@ejemplo.com'
-      })
+function validar(){
+    $("#recuperar").removeClass('border border-danger').addClass('border border-success');
+    $("#correoHelp").removeClass('badge badge-danger text-wrap').addClass('badge badge-success text-wrap').html('');
+}
+function recuperarclave() {
+   // const { value: email } = await 
+   var recuperar = $("#recuperar").val();
+    var dir = $('#dir').val();
+        //console.log(nombre);
+        if ((!recuperar=="")) {
+                
+        }else{
+            $("#recuperar").removeClass('border border-success').addClass('border border-danger');
+            $("#correoHelp").removeClass('badge badge-success text-wrap').addClass('badge badge-danger text-wrap')
+            .html('<span>Este campo es necesario!</span>');
+        }
       
-      if (email) {
-        Swal.fire(`Correo: ${email}`)
-      }
 }
 
