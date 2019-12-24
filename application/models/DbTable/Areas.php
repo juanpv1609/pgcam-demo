@@ -21,7 +21,7 @@ class Application_Model_DbTable_Areas extends Zend_Db_Table_Abstract
         $select = "INSERT INTO area(area_nombre)
         VALUES ('".$nombre."'); ";
         return $db->fetchRow($select);
-        $this->listar();
+        //$this->listar();
     }
     public function actualizararea($id,$nombre) {
         $db = Zend_Registry::get('pgdb');
@@ -31,7 +31,7 @@ class Application_Model_DbTable_Areas extends Zend_Db_Table_Abstract
         SET area_nombre='".$nombre."'
       WHERE area_id=".$id."; ";
         return $db->fetchRow($select);
-        $this->listar();
+        //$this->listar();
     }
     public function eliminararea($id) {
         $db = Zend_Registry::get('pgdb');
@@ -40,7 +40,7 @@ class Application_Model_DbTable_Areas extends Zend_Db_Table_Abstract
         $select = "DELETE FROM area
         WHERE area_id=".$id.";";
         return $db->fetchRow($select);
-        $this->listar();
+        //$this->listar();
     }
     
 }

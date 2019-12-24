@@ -40,7 +40,7 @@ class AreasController extends Zend_Controller_Action
 
 
     }
-
+    
     public function editarAction()
     {
         // action body

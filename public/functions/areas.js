@@ -125,7 +125,7 @@ function InsertarArea() {
         }
 
 }
-function ActualizarArea(id) {
+function ActualizarArea() {
   //var nombre = $("#ci").val();
   var id = $("#area_id").val();
   var nombre = $("#nombre_area").val();

@@ -4,9 +4,9 @@
     });
 </script>
 <!-- Page Heading -->
-<div class="d-flex justify-content-between py-2">
+<div class="d-flex justify-content-between">
     <h1 class="h3  text-gray-800 text-capitalize"><?php echo $this->controlador; ?>
-        <small class="text-gray-400 text-capitalize"><?php echo $this->accion; ?></small></h1>
+    <i class="fas fa-fw fa-clinic-medical text-gray-700"></i></h1>
     <ol class="breadcrumb bg-light">
         <li class="breadcrumb-item"><a href="<?php echo $this->baseUrl; ?>">
                 Inicio</a></li>
@@ -18,7 +18,7 @@
 </div>
 
 <!-- DataTales Example -->
-<div class="card  shadow ">
+<div class="card  shadow-lg ">
     <div class="card-header d-flex justify-content-between">
         <h4 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h4>
         <button type="button"  onclick="agregarModal()" 
@@ -45,7 +45,6 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div id="divModal"></div>
                 <input type="hidden" id="area_id" name="area_id">
                     <div  class="form-group">
                         <label for="nombre_area">Nombre del area:</label>
