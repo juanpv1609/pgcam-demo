@@ -213,7 +213,7 @@ svg {
 
 table {
   border-collapse: collapse;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 caption {
@@ -10233,7 +10233,7 @@ a:focus {
 
 @media (min-width: 768px) {
   .sidebar {
-    width: 14rem !important;
+    width: 12rem !important;
   }
   .sidebar .nav-item .collapse {
     position: relative;
@@ -10260,10 +10260,10 @@ a:focus {
     width: 100%;
     text-align: left;
     padding: 1rem;
-    width: 14rem;
+    width: 12rem;
   }
   .sidebar .nav-item .nav-link i {
-    font-size: 0.85rem;
+    font-size: 1rem;
     margin-right: 0.25rem;
   }
   .sidebar .nav-item .nav-link span {
@@ -10985,7 +10985,7 @@ form.user .btn-user {
 }
 
 footer.sticky-footer {
-  padding: 2rem 0;
+  padding: 1rem 0;
   flex-shrink: 0;
 }
 

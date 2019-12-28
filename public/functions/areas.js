@@ -91,9 +91,7 @@ function InsertarArea() {
                         beforeSend: function (data) {
                         },
                         success: function (requestData) {//armar la tabla
-                            //alert("Area creada exitosamente!");
-                            //$("#mensaje").addClass('alert alert-success').html('Area creada correctamente!').show(100).delay(1500).hide(100);
-                            //$('#formModal').modal('hide');
+                            
                             const Toast = Swal.mixin({
                                 toast: true,
                                 position: 'top-end',
