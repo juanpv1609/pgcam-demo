@@ -1,11 +1,7 @@
-<script>
-    $(function () {
-        $('#dataTable').DataTable()
-    });
-</script>
+
         <!-- Page Heading -->
         <div class="d-flex justify-content-between">
-          <h1 class="h3 mb-2 text-gray-800 text-capitalize"><?php echo $this->controlador;?>
+          <h1 class="h3 mb-1 text-gray-800 text-capitalize"><?php echo $this->controlador;?>
           <i class="fas fa-fw fa-medkit text-gray-700"></i></h1>
             <ol class="breadcrumb bg-light">
               <li  class="breadcrumb-item"><a href="<?php echo $this->baseUrl; ?>">
@@ -29,7 +25,7 @@
                         <div class="alert alert-danger" role="alert">
                             No se encontraron resultados</div>
                     <?php } else { ?>
-                <table class="table table-sm" id="dataTable" width="100%" >
+                <table class="table table-sm" id="dataTableEspecialidades" width="100%" >
                   <thead>
                     <tr>
                       <th class="text-primary">ID</th>

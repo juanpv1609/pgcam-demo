@@ -105,7 +105,7 @@ class PisosController extends Zend_Controller_Action
                 </div>';
         } else {
 
-            $cadena .= '<table class="table table-sm" id="dataTable" width="100%">
+            $cadena .= '<table class="table table-sm" id="dataTablePisos" width="100%">
                 <thead>
                 <tr>
                     <th class="text-primary">ID</th>

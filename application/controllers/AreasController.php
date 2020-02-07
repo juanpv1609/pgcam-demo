@@ -83,7 +83,7 @@ class AreasController extends Zend_Controller_Action
                 </div>';
         } else {
 
-            $Listaarea .= '<table class="table table-sm" id="dataTable" width="100%">
+            $Listaarea .= '<table class="table table-sm " id="dataTableAreas" width="100%">
                 <thead>
                 <tr>
                     <th class="text-primary">ID</th>
