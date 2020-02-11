@@ -10,7 +10,7 @@ class Application_Model_DbTable_Pisos extends Zend_Db_Table_Abstract
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
-        $select = "select * from piso join area on area.area_id=piso.area_id;";
+        $select = "select * from piso join area on area.area_id=piso.area_id order by 1;";
         return $db->fetchAll($select);
     }
     public function insertarpiso($nombre,$area) {

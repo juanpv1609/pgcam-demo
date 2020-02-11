@@ -16,8 +16,6 @@ class PisosController extends Zend_Controller_Action
     public function indexAction()
     {
         // action body
-        //$table_m = new Application_Model_DbTable_Pisos();
-        //$datos=$table_m->listar();
         $this->view->data = $this->tabla_piso();
         $this->view->data_area = $this->select_area();
         $this->view->titulo="Pisos Registrados";

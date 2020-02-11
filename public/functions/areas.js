@@ -64,7 +64,7 @@ function eliminar(id){
                   icon: 'success',
                   title: 'Dato eliminado correctamente!'
                 });
-                  $("#dataTable").removeClass('border').html(requestData);
+                  $("#dataTableAreas").removeClass('border').html(requestData);
               },
               error: function (requestData, strError, strTipoError) {
               },
@@ -107,8 +107,9 @@ function InsertarArea() {
                                 icon: 'success',
                                 title: 'Dato creado correctamente!'
                               });
-                            $("#dataTable").removeClass('border').html(requestData);
-                            $("#nombre_area").removeClass('border border-success').removeClass('border border-danger').val("");
+                              $('#formModal').modal('hide');
+                            $("#dataTableAreas").removeClass('border').html(requestData);
+                            $("#nombre_area").val("").removeClass('border border-success').removeClass('border border-danger');
                         },
                         error: function (requestData, strError, strTipoError) {
                         },
@@ -157,7 +158,8 @@ function ActualizarArea() {
                               icon: 'success',
                               title: 'Dato actualizado correctamente!'
                             });
-                          $("#dataTable").removeClass('border').html(requestData);
+                            $('#formModal').modal('hide');
+                          $("#dataTableAreas").removeClass('border').html(requestData);
                           $("#nombre_area").removeClass('border border-success').removeClass('border border-danger').val("");
                       },
                       error: function (requestData, strError, strTipoError) {
