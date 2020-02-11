@@ -13,8 +13,8 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="<?php echo $this->baseUrl; ?>/assets/css/sb-admin-2.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="icon" type="image/vnd.microsoft.icon" href="<?php echo $this->baseUrl; ?>/favico.ico">
   <script src="<?php echo $this->baseUrl; ?>/vendor/sweetalert2/js/sweetalert2.min.js"></script>
  
 </head>
@@ -22,11 +22,12 @@
   <!-- Page Wrapper -->
   <div id="wrapper">
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion shadow" id="accordionSidebar" >
+    <ul class="navbar-nav bg bg-gray-900 sidebar sidebar-dark accordion shadow" id="accordionSidebar" >
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index')); ?>">
         <div class="sidebar-brand-icon ">
-          <i class="material-icons">face</i>
+          <link rel="icon" type="image/vnd.microsoft.icon" href="<?php echo $this->baseUrl; ?>/favico.ico">
+          <img src="<?php echo $this->baseUrl; ?>/favico.ico"></img>
         </div>
         <div class="sidebar-brand-text mx-3">PG - CAM <sup></sup></div>
       </a>
@@ -62,7 +63,7 @@
       <!-- Divider -->
       <hr class="sidebar-divider">
       <!-- Heading -->
-      <div class="sidebar-heading">Administracion</div>
+      <div class="sidebar-heading">Gestion</div>
       <!-- Nav Item - Charts -->
       <li class="nav-item">
         <a class="nav-link" href="<?php echo $this->url(array('controller' => 'areas', 'action' => 'index')); ?>">
@@ -93,7 +94,7 @@
           <span>Camas</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="<?php echo $this->url(array('controller' => 'cie10', 'action' => 'index')); ?>">
           <i class="fas fa-fw fa-heartbeat"></i>
           <span>CIE-10</span></a>
       </li>
@@ -110,7 +111,7 @@
       <!-- Main Content -->
       <div id="content">
         <!-- Topbar -->
-        <nav class="navbar  navbar-expand navbar-light bg-white topbar mb-1 static-top  " >
+        <nav class="navbar  navbar-expand bg bg-transparent navbar-light topbar mb-1 static-top  " >
           <!-- Sidebar Toggle (Topbar) -->
             
          
@@ -261,12 +262,13 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <small class="mr-2 d-none d-lg-inline text-gray-800 ">
+                <i class="fas fa-user fa-fw"></i>
+                
+                <span class="mr-2 mt-2 d-none d-lg-inline text-secondary text-xs">
                     <?php if($this->user) :
                         echo $this->escape($this->user->usu_nombres);
-                    endif; ?>
-                </small>
-                <i class="fas fa-user text-gray-800"></i>
+                        endif; ?>
+                </span>
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

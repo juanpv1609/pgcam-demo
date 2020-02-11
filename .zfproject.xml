@@ -33,6 +33,9 @@
           <actionMethod actionName="login"/>
           <actionMethod actionName="register"/>
         </controllerFile>
+        <controllerFile controllerName="Cie10">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -48,6 +51,7 @@
           <dbTableFile dbTableName="Habitaciones"/>
           <dbTableFile dbTableName="Camas"/>
           <dbTableFile dbTableName="Usuario"/>
+          <dbTableFile dbTableName="Cie10"/>
         </dbTableDirectory>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
@@ -89,6 +93,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Areas">
             <viewScriptFile forActionName="editar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Cie10">
+            <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
