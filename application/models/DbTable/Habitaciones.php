@@ -20,5 +20,33 @@ class Application_Model_DbTable_Habitaciones extends Zend_Db_Table_Abstract
                     on area.area_id=piso.area_id;";
         return $db->fetchAll($select);
     }
+    public function insertarhabitacion($nombre,$especialidad) {
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "INSERT INTO habitacion(especialidad_id, habitacion_nombre)
+        VALUES (".$especialidad.",'".$nombre."'); ";
+        return $db->fetchRow($select);
+        //$this->listar();
+    }
+    public function actualizarhabitacion($id,$nombre,$especialidad) {
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "UPDATE habitacion
+        SET especialidad_id=".$especialidad.",habitacion_nombre='".$nombre."'
+      WHERE habitacion_id=".$id."; ";
+        return $db->fetchRow($select);
+        //$this->listar();
+    }
+    public function eliminarhabitacion($id) {
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "DELETE FROM habitacion
+        WHERE habitacion_id=".$id.";";
+        return $db->fetchRow($select);
+        //$this->listar();
+    }
 }
 

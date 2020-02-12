@@ -23,7 +23,7 @@ function editarModal(id) {
     $("#accionForm").html('<button class="btn btn-primary" type="button"  onclick="ActualizarArea();">Actualizar</button>');
     $('#formModal').modal({
         show:true
-    });    
+    }); 
 }
 function eliminar(id){
   var dir = $('#dir').val();
@@ -64,7 +64,8 @@ function eliminar(id){
                   icon: 'success',
                   title: 'Dato eliminado correctamente!'
                 });
-                  $("#dataTableAreas").removeClass('border').html(requestData);
+                $("#data_Table").html(requestData);
+                toDataTable("#dataTableAreas");
               },
               error: function (requestData, strError, strTipoError) {
               },
@@ -108,7 +109,8 @@ function InsertarArea() {
                                 title: 'Dato creado correctamente!'
                               });
                               $('#formModal').modal('hide');
-                            $("#dataTableAreas").removeClass('border').html(requestData);
+                              $("#data_Table").html(requestData);
+                              toDataTable("#dataTableAreas");
                             $("#nombre_area").val("").removeClass('border border-success').removeClass('border border-danger');
                         },
                         error: function (requestData, strError, strTipoError) {
@@ -159,7 +161,8 @@ function ActualizarArea() {
                               title: 'Dato actualizado correctamente!'
                             });
                             $('#formModal').modal('hide');
-                          $("#dataTableAreas").removeClass('border').html(requestData);
+                            $("#data_Table").html(requestData);
+                           toDataTable("#dataTableAreas");
                           $("#nombre_area").removeClass('border border-success').removeClass('border border-danger').val("");
                       },
                       error: function (requestData, strError, strTipoError) {
@@ -174,4 +177,13 @@ function ActualizarArea() {
           .html('<span>Este campo es necesario!</span>');
       } 
 
+}
+function toDataTable(table){
+  const esp="//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json";
+  $(table).DataTable({
+    rowReorder: true,
+    "language": {
+       "url": esp
+   }
+ });
 }

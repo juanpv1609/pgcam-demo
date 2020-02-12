@@ -1,13 +1,14 @@
+
 function validar(){
-   $("#nombre_especialidad").removeClass('border border-danger').addClass('border border-success');
+   $("#nombre_cama").removeClass('border border-danger').addClass('border border-success');
    $("#nombreHelp").removeClass('badge badge-danger text-wrap').addClass('badge badge-success text-wrap').html('');
 }
 
 function agregarModal() {
-   $("#exampleModalLabel").text("Agregar - Especialidad");
-   $("#nombre_especialidad").removeClass('border border-danger').removeClass('border border-success');
+   $("#exampleModalLabel").text("Agregar - Cama");
+   $("#nombre_cama").removeClass('border border-danger').removeClass('border border-success');
    $("#nombreHelp").removeClass('badge badge-danger text-wrap').removeClass('badge badge-success text-wrap').html('');
-   $("#accionForm").html('<button class="btn btn-primary" type="button"  onclick="InsertarEspecialidad();">Agregar</button>');
+   $("#accionForm").html('<button class="btn btn-primary" type="button"  onclick="InsertarCama();">Agregar</button>');
 
    $('#formModal').modal({
        show:true
@@ -16,11 +17,11 @@ function agregarModal() {
 }
 
 function editarModal(id) {
-   $("#exampleModalLabel").text("Editar - Especialidad");
-   $("#especialidad_id").val(id);
-   $("#nombre_especialidad").removeClass('border border-danger').removeClass('border border-success');
+   $("#exampleModalLabel").text("Editar - Cama");
+   $("#cama_id").val(id);
+   $("#nombre_cama").removeClass('border border-danger').removeClass('border border-success');
    $("#nombreHelp").removeClass('badge badge-danger text-wrap').removeClass('badge badge-success text-wrap').html('');
-   $("#accionForm").html('<button class="btn btn-primary" type="button"  onclick="ActualizarEspecialidad();">Actualizar</button>');
+   $("#accionForm").html('<button class="btn btn-primary" type="button"  onclick="ActualizarCama();">Actualizar</button>');
    $('#formModal').modal({
        show:true
    });    
@@ -44,7 +45,7 @@ function eliminar(id){
          {
              dataType: "html",
              type: "POST",
-             url: dir + "/especialidades/eliminar", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
+             url: dir + "/camas/eliminar", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
              data: "id=" + id, //Se añade el parametro de busqueda del medico
              beforeSend: function (data) {
              },
@@ -65,7 +66,7 @@ function eliminar(id){
                  title: 'Dato eliminado correctamente!'
                });
                $("#data_Table").html(requestData);
-               toDataTable("#dataTableEspecialidad");
+               toDataTable("#dataTableCamas");
              },
              error: function (requestData, strError, strTipoError) {
              },
@@ -77,19 +78,20 @@ function eliminar(id){
      }
    })
 }
-function InsertarEspecialidad() {
+function InsertarCama() {
    //var nombre = $("#ci").val();
-   var nombre = $("#nombre_especialidad").val();
-   var piso = $("#comboPiso").val();
+   var nombre = $("#nombre_cama").val();
+   var habitacion = $("#comboHabitacion").val();
    var dir = $('#dir').val();
        //console.log(nombre);
+       //alert(habitacion+" "+nombre);
        if ((!nombre=="")) {
                $.ajax(
                    {
                        dataType: "html",
                        type: "POST",
-                       url: dir + "/especialidades/crear", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
-                       data: "nombre=" + nombre+"&piso="+piso, //Se añade el parametro de busqueda del medico
+                       url: dir + "/camas/crear", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
+                       data: "nombre=" + nombre+"&habitacion="+habitacion, //Se añade el parametro de busqueda del medico
                        beforeSend: function (data) {
                        },
                        success: function (requestData) {//armar la tabla
@@ -113,26 +115,27 @@ function InsertarEspecialidad() {
                              });
                              $('#formModal').modal('hide');
                              $("#data_Table").html(requestData);
-                             toDataTable("#dataTableEspecialidad");
-                           $("#nombre_especialidad").removeClass('border border-success').removeClass('border border-danger').val("");
+                             toDataTable("#dataTableCamas");
+                           $("#nombre_cama").removeClass('border border-success').removeClass('border border-danger').val("");
                        },
                        error: function (requestData, strError, strTipoError) {
+                          alert(strError+" "+strTipoError);
                        },
                        complete: function (requestData, exito) { //fin de la llamada ajax.
 
                        }
                    });
        }else{
-           $("#nombre_especialidad").removeClass('border border-success').addClass('border border-danger');
+           $("#nombre_cama").removeClass('border border-success').addClass('border border-danger');
            $("#nombreHelp").removeClass('badge badge-success text-wrap').addClass('badge badge-danger text-wrap')
            .html('<span>Este campo es necesario!</span>');
        }
 
 }
-function ActualizarEspecialidad() {
- var id = $("#especialidad_id").val();
- var piso = $("#comboPiso").val();
- var nombre = $("#nombre_especialidad").val();
+function ActualizarCama() {
+ var id = $("#cama_id").val();
+ var habitacion = $("#comboHabitacion").val();
+ var nombre = $("#nombre_cama").val();
  var dir = $('#dir').val();
      //console.log(nombre);
       if ((!nombre=="")) {
@@ -140,8 +143,8 @@ function ActualizarEspecialidad() {
                  {
                      dataType: "html",
                      type: "POST",
-                     url: dir + "/especialidades/editar", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
-                     data: "id="+id+ "&nombre=" + nombre+"&piso="+piso, //Se añade el parametro de busqueda del medico
+                     url: dir + "/camas/editar", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
+                     data: "id="+id+ "&nombre=" + nombre+"&habitacion="+habitacion, //Se añade el parametro de busqueda del medico
                      beforeSend: function (data) {
                      },
                      success: function (requestData) {//armar la tabla
@@ -164,9 +167,11 @@ function ActualizarEspecialidad() {
                              title: 'Dato actualizado correctamente!'
                            });
                            $('#formModal').modal('hide');
-                           $("#data_Table").html(requestData);
-                           toDataTable("#dataTableEspecialidad");
-                         $("#nombre_especialidad").removeClass('border border-success').removeClass('border border-danger').val("");
+                            $("#data_Table").html(requestData);
+                           toDataTable("#dataTableCamas");
+                        
+                         
+                         $("#nombre_cama").removeClass('border border-success').removeClass('border border-danger').val("");
                      },
                      error: function (requestData, strError, strTipoError) {
                      },
@@ -175,7 +180,7 @@ function ActualizarEspecialidad() {
                      }
                  });
      }else{
-         $("#nombre_especialidad").removeClass('border border-success').addClass('border border-danger');
+         $("#nombre_cama").removeClass('border border-success').addClass('border border-danger');
          $("#nombreHelp").removeClass('badge badge-success text-wrap').addClass('badge badge-danger text-wrap')
          .html('<span>Este campo es necesario!</span>');
      } 

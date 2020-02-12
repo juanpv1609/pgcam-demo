@@ -122,7 +122,6 @@ class EspecialidadesController extends Zend_Controller_Action
                 $cadena .= "<td>" . $item->especialidad_nombre . "</td>";
                 $cadena .= "<td>" . $item->piso_nombre . "</td>";
                 $cadena .= "<td>" . $item->area_nombre . "</td>";
-                $cadena .= "<td>Activa</td>";
 
                 $cadena .= '<td>Activa</td>
                     <td>

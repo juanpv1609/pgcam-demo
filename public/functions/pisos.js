@@ -64,7 +64,8 @@ function eliminar(id){
                  icon: 'success',
                  title: 'Dato eliminado correctamente!'
                });
-                 $("#dataTablePisos").removeClass('border').html(requestData);
+               $("#data_Table").html(requestData);
+               toDataTable("#dataTablePisos");
              },
              error: function (requestData, strError, strTipoError) {
              },
@@ -111,7 +112,8 @@ function InsertarPiso() {
                                title: 'Dato creado correctamente!'
                              });
                              $('#formModal').modal('hide');
-                           $("#dataTablePisos").removeClass('border').html(requestData);
+                             $("#data_Table").html(requestData);
+                             toDataTable("#dataTablePisos");
                            $("#nombre_piso").removeClass('border border-success').removeClass('border border-danger').val("");
                        },
                        error: function (requestData, strError, strTipoError) {
@@ -162,7 +164,8 @@ function ActualizarPiso() {
                              title: 'Dato actualizado correctamente!'
                            });
                            $('#formModal').modal('hide');
-                         $("#dataTablePisos").removeClass('border').html(requestData);
+                         $("#data_Table").html(requestData);
+                           toDataTable("#dataTablePisos");
                          $("#nombre_piso").removeClass('border border-success').removeClass('border border-danger').val("");
                      },
                      error: function (requestData, strError, strTipoError) {
@@ -177,4 +180,14 @@ function ActualizarPiso() {
          .html('<span>Este campo es necesario!</span>');
      } 
 
+}
+
+function toDataTable(table){
+  const esp="//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json";
+  $(table).DataTable({
+    rowReorder: true,
+    "language": {
+       "url": esp
+   }
+ });
 }
