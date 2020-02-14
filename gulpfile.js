@@ -67,6 +67,12 @@ function modules() {
   // Bootstrap SCSS
   var bootstrapSCSS = gulp.src('./node_modules/bootstrap/scss/**/*')
     .pipe(gulp.dest('./public/vendor/bootstrap/scss'));
+    // Select2 JS
+  var select2JS = gulp.src('./node_modules/select2/dist/js/*')
+  .pipe(gulp.dest('./public/vendor/select2/js'));
+// Select2 SCSS
+var select2CSS = gulp.src('./node_modules/select2/dist/css/*')
+  .pipe(gulp.dest('./public/vendor/select2/css'));
   // ChartJS
   var chartJS = gulp.src('./node_modules/chart.js/dist/*.js')
     .pipe(gulp.dest('./public/vendor/chart.js'));
@@ -89,7 +95,8 @@ function modules() {
       '!./node_modules/jquery/dist/core.js'
     ])
     .pipe(gulp.dest('./public/vendor/jquery'));
-  return merge(sweetAlertJS,sweetAlertCSS,bootstrapJS, bootstrapSCSS, chartJS, dataTables, fontAwesome, jquery, jqueryEasing);
+  return merge(sweetAlertJS,sweetAlertCSS,bootstrapJS, bootstrapSCSS, chartJS, dataTables,
+     fontAwesome, jquery, jqueryEasing,select2JS,select2CSS);
 }
 
 // CSS task

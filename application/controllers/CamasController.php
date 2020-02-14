@@ -11,6 +11,8 @@ class CamasController extends Zend_Controller_Action
         $this->view->user = Zend_Auth::getInstance()->getIdentity();
         $this->view->controlador=Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
         $this->view->accion=Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+        $this->view->icono = "fa-bed";
+
     }
 
     public function indexAction()

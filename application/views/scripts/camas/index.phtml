@@ -1,15 +1,19 @@
-
-        <!-- Page Heading -->
-        <div class="d-flex justify-content-between">
-          <h1 class="h3 mb-2 text-gray-800 text-capitalize"><?php echo $this->controlador;?>
-          <i class="fas fa-fw fa-bed text-gray-700"></i></h1>
-            <ol class="breadcrumb bg-light">
-              <li class="breadcrumb-item"><a href="<?php echo $this->baseUrl; ?>">
-              Inicio</a></li>
-              <li class="breadcrumb-item text-capitalize"><a href="#"><?php echo $this->controlador;?></a></li>
-              <li class="breadcrumb-item active text-capitalize" aria-current="page"><?php echo $this->accion;?></li>
-            </ol>
-        </div>
+<div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Minimal</label>
+        <select class="form-control select2" style="width: 100%;">
+          <option selected="selected">Alabama</option>
+          <option>Alaska</option>
+          <option>California</option>
+          <option>Delaware</option>
+          <option>Tennessee</option>
+          <option>Texas</option>
+          <option>Washington</option>
+        </select>
+      </div>
+      </div>
+    </div>
           <!-- DataTales Example -->
           <div class="card  shadow mb-4">
             <div class="card-header  py-3 d-flex justify-content-between">
@@ -26,6 +30,7 @@
             </div>
           </div>
 <!-- formulario Modal-->
+
 <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
@@ -60,3 +65,12 @@
     </div>
 </div>
 <script src="<?php echo $this->baseUrl; ?>/functions/camas.js"></script>
+<script>
+    $(document).ready(function() {
+      //Initialize Select2 Elements
+      $('.select2').select2();
+  
+      
+  
+    });
+  </script>

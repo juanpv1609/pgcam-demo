@@ -12,6 +12,7 @@ class AreasController extends Zend_Controller_Action
         $this->view->controlador = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
         $this->view->accion = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
         $this->view->titulo_formulario = "Area";
+        $this->view->icono = "fa-table";
 
     }
 

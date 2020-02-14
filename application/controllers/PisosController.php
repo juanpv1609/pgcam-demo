@@ -19,6 +19,8 @@ class PisosController extends Zend_Controller_Action
         $this->view->data = $this->tabla_piso();
         $this->view->data_area = $this->select_area();
         $this->view->titulo="Pisos Registrados";
+        $this->view->icono = "fa-layer-group";
+
     }
 
     public function crearAction()

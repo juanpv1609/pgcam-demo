@@ -20,6 +20,8 @@ class EspecialidadesController extends Zend_Controller_Action
         $this->view->data_pisos = $this->select_piso();
         
         $this->view->titulo="Especialidades Registradas"; 
+        $this->view->icono = "fa-medkit";
+
     }
     public function crearAction()
     {

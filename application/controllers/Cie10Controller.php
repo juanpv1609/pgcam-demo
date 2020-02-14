@@ -18,6 +18,8 @@ class Cie10Controller extends Zend_Controller_Action
         // action body
         //$this->view->data = $this->tabla_cie10();
         $this->view->titulo="Diagnosticos CIE-10";
+        $this->view->icono = "fa-heartbeat";
+
     }
     public function tabla_cie10()
     {
