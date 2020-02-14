@@ -36,6 +36,15 @@
         <controllerFile controllerName="Cie10">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="Paciente">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="listar"/>
+          <actionMethod actionName="registrar"/>
+          <actionMethod actionName="asignarCama"/>
+          <actionMethod actionName="cambioEgreso"/>
+          <actionMethod actionName="asignar"/>
+          <actionMethod actionName="cambio"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -96,6 +105,21 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Cie10">
             <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Paciente">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Paciente">
+            <viewScriptFile forActionName="listar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Paciente">
+            <viewScriptFile forActionName="registrar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Paciente">
+            <viewScriptFile forActionName="asignar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Paciente">
+            <viewScriptFile forActionName="cambio"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

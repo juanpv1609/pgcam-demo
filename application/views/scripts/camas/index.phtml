@@ -1,23 +1,8 @@
-<div class="row">
-    <div class="col-md-6">
-      <div class="form-group">
-        <label>Minimal</label>
-        <select class="form-control select2" style="width: 100%;">
-          <option selected="selected">Alabama</option>
-          <option>Alaska</option>
-          <option>California</option>
-          <option>Delaware</option>
-          <option>Tennessee</option>
-          <option>Texas</option>
-          <option>Washington</option>
-        </select>
-      </div>
-      </div>
-    </div>
+
           <!-- DataTales Example -->
-          <div class="card  shadow mb-4">
+          <div class="card  shadow ">
             <div class="card-header  py-3 d-flex justify-content-between">
-              <h4 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo;?></h4>
+              <h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo;?></h5>
               <button class="btn btn-success btn-sm" onclick="agregarModal()">
                   <i class="fa fa-plus"></i> Agregar
               </button>
@@ -65,12 +50,3 @@
     </div>
 </div>
 <script src="<?php echo $this->baseUrl; ?>/functions/camas.js"></script>
-<script>
-    $(document).ready(function() {
-      //Initialize Select2 Elements
-      $('.select2').select2();
-  
-      
-  
-    });
-  </script>
