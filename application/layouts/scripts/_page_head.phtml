@@ -1,0 +1,14 @@
+<!-- Page Heading -->
+<div class="d-flex justify-content-between px-sm-1">
+   <h1 class="h3  text-gray-800 text-capitalize"><?php echo $this->controlador; ?>
+   <i class="fas fa-fw <?php echo $this->icono; ?> text-gray-700"></i></h1>
+   <ol class="breadcrumb bg-light">
+       <li class="breadcrumb-item"><a href="<?php echo $this->baseUrl; ?>">
+           Inicio</a></li>
+       <li class="breadcrumb-item text-capitalize">
+           <a href="<?php echo $this->baseUrl; ?>/<?php echo $this->controlador; ?>">
+               <?php echo $this->controlador; ?></a></li>
+       <li class="breadcrumb-item active text-capitalize" aria-current="page"><?php echo $this->accion; ?></li>
+   </ol>
+ </div>
+ <!-- Page Heading -->

@@ -12,7 +12,7 @@ class IndexController extends Zend_Controller_Action
         $this->view->controlador=Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
         $this->view->accion=Zend_Controller_Front::getInstance()->getRequest()->getActionName();
         //$this->view->proyecto=$this->_request->getBasePath();
-        
+      
     }
 
     public function indexAction()

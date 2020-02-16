@@ -13,17 +13,17 @@ class AreasController extends Zend_Controller_Action
         $this->view->accion = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
         $this->view->titulo_formulario = "Area";
         $this->view->icono = "fa-table";
-
+        
     }
 
     public function indexAction()
     {
-        // $this->view->datos = $table->listar();
-        //$table_m = new Application_Model_DbTable_Areas();
-        //$datos=$table_m->listar();
+                        //$this->view->headScript()->appendFile($this->view->baseUrl('/functions/areas.js'));
+           //  importante             // do stuff
+                        // $this->_helper->layout->setLayout('profile');
         $this->view->data = $this->tabla_area();
         $this->view->titulo = "Areas Registradas";
-
+        
     }
 
     public function crearAction()

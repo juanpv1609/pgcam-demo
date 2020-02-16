@@ -1,0 +1,115 @@
+<!-- Sidebar -->
+<ul class="navbar-nav bg bg-gray-900 sidebar sidebar-dark accordion shadow" id="accordionSidebar" >
+   <!-- Sidebar - Brand -->
+   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index')); ?>">
+     <div class="sidebar-brand-icon ">
+       <link rel="icon" type="image/vnd.microsoft.icon" href="<?php echo $this->baseUrl; ?>/favico.ico">
+       <img src="<?php echo $this->baseUrl; ?>/favico.ico"></img>
+     </div>
+     <div class="sidebar-brand-text mx-3">PG - CAM <sup></sup></div>
+   </a>
+   <!-- Divider -->
+   <hr class="sidebar-divider my-0">
+   <!-- Nav Item - Dashboard -->
+   <li class="nav-item <?php 
+     if($this->controlador=="index")
+     echo 'active';
+   ?>">
+     <a class="nav-link" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index')); ?>">
+       <i class="fas fa-fw fa-tachometer-alt "></i>
+       <span>Dashboard</span></a>
+   </li>
+   <!-- Divider -->
+   <hr class="sidebar-divider">
+   <!-- Heading -->
+   <div class="sidebar-heading">
+     Proceso
+   </div>
+   <!-- Nav Item - Utilities Collapse Menu -->
+   <li class="nav-item <?php 
+     if($this->controlador=="paciente")
+     echo 'active';
+   ?>">
+     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+       <i class="fas fa-fw fa-procedures"></i>
+       <span>Paciente</span>
+     </a>
+     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+       <div class="bg-gradient-light  collapse-inner rounded">
+         <h6 class="collapse-header text-gray-800"><strong>Acciones:</strong></h6>
+         <a class="collapse-item" href="<?php echo $this->url(array('controller' => 'paciente', 'action' => 'listar')); ?>">
+           <i class="fas fa-fw fa-list"></i> <span>Listar</span></a>
+
+         <a class="collapse-item" href="<?php echo $this->url(array('controller' => 'paciente', 'action' => 'registrar')); ?>">
+           <i class="fas fa-fw fa-file-signature"></i> <span>Registrar</span></a>
+         <a class="collapse-item" href="<?php echo $this->url(array('controller' => 'paciente', 'action' => 'asignar')); ?>">
+           <i class="fas fa-fw fa-sign-in-alt"></i> <span>Asignar cama</span></a>
+         <a class="collapse-item" href="<?php echo $this->url(array('controller' => 'paciente', 'action' => 'cambio')); ?>">
+           <i class="fas fa-fw fa-exchange-alt"></i> <span>Cambio / Egreso</span></a>
+       </div>
+     </div>
+   </li>
+   <!-- Divider -->
+   <hr class="sidebar-divider">
+   <!-- Heading -->
+   <div class="sidebar-heading">Gestion</div>
+   <!-- Nav Item - Charts -->
+   <li class="nav-item <?php 
+     if($this->controlador=="areas")
+     echo 'active';
+   ?>" >
+     <a class="nav-link" href="<?php echo $this->url(array('controller' => 'areas', 'action' => 'index')); ?>">
+       <i class="fas fa-fw fa-table"></i>
+       <span>Areas</span></a>
+   </li>
+   <!-- Nav Item - Tables -->
+   <li class="nav-item <?php 
+     if($this->controlador=="pisos")
+     echo 'active';
+   ?>">
+     <a class="nav-link" href="<?php echo $this->url(array('controller' => 'pisos', 'action' => 'index')); ?>">
+       <i class="fas fa-fw fa-layer-group"></i>
+       <span>Pisos</span></a>
+   </li>
+   <li class="nav-item <?php 
+     if($this->controlador=="especialidades")
+     echo 'active';
+   ?>">
+     <a class="nav-link" href="<?php echo $this->url(array('controller' => 'especialidades', 'action' => 'index')); ?>">
+       <i class="fas fa-fw fa-medkit"></i>
+       <span>Especialidades</span></a>
+   </li>
+   <!-- Nav Item - Tables -->
+   <li class="nav-item <?php 
+     if($this->controlador=="habitaciones")
+     echo 'active';
+   ?>">
+     <a class="nav-link" href="<?php echo $this->url(array('controller' => 'habitaciones', 'action' => 'index')); ?>">
+       <i class="fas fa-fw fa-h-square"></i>
+       <span>Habitaciones</span></a>
+   </li>
+   <!-- Nav Item - Tables -->
+   <li class="nav-item <?php 
+     if($this->controlador=="camas")
+     echo 'active';
+   ?>">
+     <a class="nav-link" href="<?php echo $this->url(array('controller' => 'camas', 'action' => 'index')); ?>">
+       <i class="fas fa-fw fa-bed"></i>
+       <span>Camas</span><span class="badge badge-danger badge-counter">7</span></a>
+   </li>
+   <li class="nav-item <?php 
+     if($this->controlador=="cie10")
+     echo 'active';
+   ?>">
+     <a class="nav-link" href="<?php echo $this->url(array('controller' => 'cie10', 'action' => 'index')); ?>">
+       <i class="fas fa-fw fa-heartbeat"></i>
+       <span>CIE-10</span></a>
+   </li>
+   <!-- Divider -->
+   <hr class="sidebar-divider d-none d-md-block">
+   <!-- Sidebar Toggler (Sidebar) -->
+   <div class="text-center d-none d-md-inline">
+     <button class="rounded-circle border-0" id="sidebarToggle"></button>
+   </div>
+ </ul>
+ <!-- End of Sidebar -->
