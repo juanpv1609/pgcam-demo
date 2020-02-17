@@ -16,6 +16,8 @@ class EspecialidadesController extends Zend_Controller_Action
     public function indexAction()
     {
         // action body
+        $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/especialidades.js');
+        echo $this->view->headScript();
         $this->view->data = $this->tabla_especialidad();
         $this->view->data_pisos = $this->select_piso();
         

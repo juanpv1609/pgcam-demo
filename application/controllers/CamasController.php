@@ -18,6 +18,8 @@ class CamasController extends Zend_Controller_Action
     public function indexAction()
     {
         // action body
+        $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/camas.js');
+        echo $this->view->headScript();
         $this->view->data = $this->tabla_camas();
         $this->view->data_habitaciones = $this->select_habitacion();
         $this->view->titulo="Camas Registradas"; 

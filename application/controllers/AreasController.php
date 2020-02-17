@@ -18,9 +18,8 @@ class AreasController extends Zend_Controller_Action
 
     public function indexAction()
     {
-                        //$this->view->headScript()->appendFile($this->view->baseUrl('/functions/areas.js'));
-           //  importante             // do stuff
-                        // $this->_helper->layout->setLayout('profile');
+        $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/areas.js');
+        echo $this->view->headScript();
         $this->view->data = $this->tabla_area();
         $this->view->titulo = "Areas Registradas";
         

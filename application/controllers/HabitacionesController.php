@@ -16,6 +16,8 @@ class HabitacionesController extends Zend_Controller_Action
     public function indexAction()
     {
         // action body
+        $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/habitaciones.js');
+        echo $this->view->headScript();
         $this->view->data = $this->tabla_habitaciones();
         $this->view->data_especialidades = $this->select_piso();
         $this->view->titulo="Habitaciones Registradas";

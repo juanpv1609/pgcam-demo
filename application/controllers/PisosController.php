@@ -16,6 +16,8 @@ class PisosController extends Zend_Controller_Action
     public function indexAction()
     {
         // action body
+        $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/pisos.js');
+        echo $this->view->headScript();
         $this->view->data = $this->tabla_piso();
         $this->view->data_area = $this->select_area();
         $this->view->titulo="Pisos Registrados";
