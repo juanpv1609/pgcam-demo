@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <title><?php echo $this->titulo;?></title>
   <!-- Custom fonts for this template-->
-  <link href="/zend/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="<?php echo $this->baseUrl; ?>/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
@@ -18,13 +18,14 @@
 </head>
 <body>
     <!-- Begin Page Content -->
-    <div class="container-fluid py-5">
+    <div class="container py-5">
+      
       <!-- 404 Error Text -->
       <div class="text-center">
         <?php if($this->message=="Página no encontrada"){ ?>
-        <div class="error mx-auto text-danger" data-text="404">404</div>
+        <div class="error mx-auto " data-text="404">404</div>
           <?php } else { ?>
-            <div class="error mx-auto text-danger" data-text="500">500</div>
+            <div class="error mx-auto " data-text="500">500</div>
         <?php }  ?>
         
         <h1>Ocurrió un error <i class="fas fa-sad-tear "></i></h1>
@@ -48,15 +49,15 @@
   </pre>
 
   <?php endif ?>
-</div>
+    </div>
 <!-- /.container-fluid -->
 
  <!-- Bootstrap core JavaScript-->
- <script src="/zend/vendor/jquery/jquery.min.js"></script>
-  <script src="/zend/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+ <script src="<?php echo $this->baseUrl; ?>/vendor/jquery/jquery.min.js"></script>
+  <script src="<?php echo $this->baseUrl; ?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="/zend/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="<?php echo $this->baseUrl; ?>/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
   <script src="<?php echo $this->baseUrl; ?>/assets/js/sb-admin-2.min.js"></script>
