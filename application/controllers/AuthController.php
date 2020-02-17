@@ -21,7 +21,7 @@ class AuthController extends Zend_Controller_Action
     public function loginAction()
     {
         // action body
-        $this->_helper->layout->disableLayout();
+        $this->_helper->layout->setLayout('login');
         if ($this->_request->isPost()) {
             Zend_Loader::loadClass('Zend_Filter_StripTags'); //Filtro para parametros de imgreso
             $f = new Zend_Filter_StripTags();
@@ -79,7 +79,8 @@ class AuthController extends Zend_Controller_Action
     public function registerAction()
     {
         // action body
-        $this->_helper->layout->disableLayout();
+        $this->_helper->layout->setLayout('login');
+
 
     }
     public function agregarAction()
