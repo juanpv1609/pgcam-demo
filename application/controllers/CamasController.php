@@ -124,13 +124,13 @@ class CamasController extends Zend_Controller_Action
 
                 $cadena .= "<tr>";
                 $cadena .= "<td>" . $item->cama_id . "</td>";
-                $cadena .= "<td>" . $item->cama_nombre . "</td>";
+                $cadena .= "<td>Cama " . $item->cama_nombre . "</td>";
                 $cadena .= "<td>" . $item->habitacion_nombre . "</td>";
                 $cadena .= "<td>" . $item->especialidad_nombre . "</td>";
                 $cadena .= "<td>" . $item->piso_nombre . "</td>";
                 $cadena .= "<td>" . $item->area_nombre . "</td>";
 
-                $cadena .= '<td>Activa</td>
+                $cadena .= '<td>'. $item->cama_estado_descripcion .'</td>
                     <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
                     

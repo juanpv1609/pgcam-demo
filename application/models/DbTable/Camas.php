@@ -11,14 +11,16 @@ class Application_Model_DbTable_Camas extends Zend_Db_Table_Abstract
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = "select * from cama
-                        join habitacion
-                        on habitacion.habitacion_id=cama.habitacion_id
-                        join especialidad
-                        on especialidad.especialidad_id=habitacion.especialidad_id
-                        join piso
-                        on piso.piso_id=especialidad.piso_id
-                        join area
-                        on area.area_id=piso.area_id;";
+        join habitacion
+        on habitacion.habitacion_id=cama.habitacion_id
+        join especialidad
+        on especialidad.especialidad_id=habitacion.especialidad_id
+        join piso
+        on piso.piso_id=especialidad.piso_id
+        join area
+        on area.area_id=piso.area_id
+        join cama_estado
+        on cama_estado.cama_estado_id=cama.cama_estado;";
         return $db->fetchAll($select);
     }
     public function insertarcama($nombre,$habitacion) {

@@ -3,8 +3,11 @@
    <!-- Sidebar - Brand -->
    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index')); ?>">
      <div class="sidebar-brand-icon">
+      <img class="img-fluid" src="<?php echo $this->baseUrl; ?>/favico.png" alt="Logo"
+      data-toggle="tooltip" data-placement="bottom" title="Logo">
      </div>
-       <div class="sidebar-brand-text mx-3">PG - CAM <sup></sup></div>
+       <div class="sidebar-brand-text mx-3"data-toggle="tooltip" data-placement="bottom" title="Plataforma de Gestion de Camas">
+         PG - CAM <sup></sup></div>
    </a>
    <!-- Divider -->
    <hr class="sidebar-divider my-0">
@@ -33,7 +36,7 @@
        <span>Paciente</span>
      </a>
      <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-       <div class="bg-gradient-light  collapse-inner rounded">
+       <div class="bg-light  collapse-inner rounded">
          <h6 class="collapse-header text-gray-800"><strong>Acciones:</strong></h6>
          <a class="collapse-item" href="<?php echo $this->url(array('controller' => 'paciente', 'action' => 'listar')); ?>">
            <i class="fas fa-fw fa-list"></i> <span>Listar</span></a>
@@ -61,7 +64,7 @@
        <i class="fas fa-fw fa-users-cog"></i>
        <span>Usuarios</span></a>
        <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-gradient-light  collapse-inner rounded">
+          <div class="bg-light  collapse-inner rounded">
             <h6 class="collapse-header text-gray-800"><strong>Acciones:</strong></h6>
             <a class="collapse-item" 
             href="<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'index')); ?>">
@@ -145,7 +148,7 @@
        <i class="fas fa-fw fa-heartbeat"></i>
        <span>CIE-10</span></a>
        <div id="collapseUtilities3" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-        <div class="bg-gradient-light  collapse-inner rounded">
+        <div class="bg-light  collapse-inner rounded">
           <h6 class="collapse-header text-gray-800"><strong>Buscar:</strong></h6>
           <a class="collapse-item" 
           href="<?php echo $this->url(array('controller' => 'cie10', 'action' => 'descripcion')); ?>">

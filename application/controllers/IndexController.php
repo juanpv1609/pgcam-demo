@@ -9,8 +9,11 @@ class IndexController extends Zend_Controller_Action
         $this->initView();
         $this->view->baseUrl = $this->_request->getBaseUrl();
         $this->view->user = Zend_Auth::getInstance()->getIdentity();
-        $this->view->controlador=Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
+        $this->view->controlador="Dashboard";
         $this->view->accion=Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+        $this->view->icono = "fa-tachometer-alt";
+        //$this->view->controlador=Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
+        //$this->view->accion=Zend_Controller_Front::getInstance()->getRequest()->getActionName();
         //$this->view->proyecto=$this->_request->getBasePath();
       
     }
@@ -19,7 +22,7 @@ class IndexController extends Zend_Controller_Action
     {
         // action body
         $this->view->estado_activo=$datos="active";
-        $this->view->titulo="Index";
+        $this->view->titulo="Dashboard";
     }
 
 

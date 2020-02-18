@@ -3,7 +3,7 @@
    <!-- Sidebar Toggle (Topbar) -->
      
   <ul class="navbar-nav">
-    <li class="nav-item">
+    <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Contraer / Expandir">
      <button id="sidebarToggleTop" class="btn btn-circle border-0 ">
        <i class="fas fa-bars " aria-hidden="true"></i>
      </button>
@@ -45,14 +45,14 @@
          
       
      </li>
-     <li class="nav-item">
+     <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Manual de usuario">
       <a class="nav-link " href="#" >
         <i class="far fa-question-circle"></i>
         <!-- Counter - Alerts -->
       </a>
     </li>
      <!-- Nav Item - Alerts -->
-     <li class="nav-item dropdown no-arrow">
+     <li class="nav-item dropdown no-arrow " data-toggle="tooltip" data-placement="bottom" title="Notificaciones">
        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
          
          <i class="far fa-bell"></i>
@@ -101,7 +101,7 @@
        </div>
      </li>
      <!-- Nav Item - Messages -->
-     <li class="nav-item dropdown no-arrow mr-4">
+     <li class="nav-item dropdown no-arrow mr-4" data-toggle="tooltip" data-placement="bottom" title="Mensajes">
       <a class="nav-link dropdown-toggle" href="#" id="msgDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="far fa-envelope"></i>
         <span class="badge badge-warning navbar-badge">7</span>
@@ -142,14 +142,16 @@
             $obj = new Application_Model_DbTable_Usuario();
             $perfil = $obj->obtienePerfil($this->user->usu_id);
       ?>
-       <a class=" dropdown-toggle btn btn-primary btn-circle btn-sm" 
-       href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-       <span class="text-uppercase">
+       <a class=" dropdown-toggle btn btn-<?php echo $this->escape($perfil->perf_color); ?> btn-circle btn-sm" 
+       href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+       data-toggle="tooltip" data-placement="bottom" title="Informacion de usuario">
+       <span class="text-uppercase font-weight-bold">
         <?php 
-            echo substr($this->user->usu_nombres,0,1).substr($this->user->usu_apellidos,0,1); 
+            echo $this->user->usu_iniciales; 
             else : ?>
             <a href="<?php echo $this->url(array('controller' => 'auth', 'action' => 'login')); ?>"  
-              class="btn btn-outline-primary btn-sm">Iniciar Sesión</a>
+              class="btn btn-outline-primary btn-sm " data-toggle="tooltip" data-placement="bottom" title="Clic para iniciar sesion">
+              Iniciar Sesión</a>
               <?php  endif; ?>
             </span>        
              
@@ -159,14 +161,15 @@
         
          <h6 class="dropdown-header">Mi cuenta</h6>
          <div class="d-flex justify-content-between ">
-          <a class=" dropdown-toggle btn btn-primary btn-circle btn-lg ml-3" href="#">
-          <span class="text-uppercase"><?php echo substr($this->user->usu_nombres,0,1).substr($this->user->usu_apellidos,0,1); ?></span>
+          <a class=" dropdown-toggle btn btn-outline-<?php echo $this->escape($perfil->perf_color); ?>
+             btn-circle btn-lg ml-3" href="#">
+          <span class="text-uppercase font-weight-bold"><?php echo substr($this->user->usu_nombres,0,1).substr($this->user->usu_apellidos,0,1); ?></span>
           </a>
           <a class="dropdown-item" href="#">
-            <strong><?php echo $this->escape($this->user->usu_nombres." ".$this->user->usu_apellidos); ?></strong><br>
-            <span><?php  echo $this->escape($this->user->correo); ?> </span> 
+            <i class="far fa-fw fa-user"></i> <strong><?php echo $this->escape($this->user->usu_nombres." ".$this->user->usu_apellidos); ?></strong><br>
+            <i class="far fa-fw fa-envelope"></i> <span class="text-secondary"><?php  echo $this->escape($this->user->correo); ?> </span> 
             <br>
-            <span><?php  echo $this->escape($perfil->perf_nombre); ?> </span>              
+            <span class="text-primary"><?php  echo $this->escape($perfil->perf_nombre); ?> </span>              
             </a>
          </div>
          <!-- Divider -->

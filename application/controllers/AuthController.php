@@ -50,7 +50,11 @@ class AuthController extends Zend_Controller_Action
                 if ($result->isValid()) {
                     $data = $authAdapter->getResultRowObject(null, 'clave'); //almacenamos los datos excepto el password
                     $auth->getStorage()->write($data); //creamos la sesion para el usuario
-                    $this->_helper->redirector('index', 'index'); //direccionamos al menu de inicio
+                    
+                    /* control de rutas
+                    */
+                    $this->ruta_usuario($data->usu_id);
+
                 } else {// //Si las credenciales no son validas mostramos un error
                     $this->view->message = '<div class="alert alert-danger alert-dismissible">
                         <button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
@@ -69,6 +73,32 @@ class AuthController extends Zend_Controller_Action
             }
         }
 
+    }
+    public function ruta_usuario($usu_id){
+        /* controlar el perfil de usuario y de acuerdo a este direccionar la pagina */
+        $obj = new Application_Model_DbTable_Usuario();
+            $perfil = $obj->obtienePerfil($usu_id);
+        switch ($perfil->perf_id) {
+            case 1:
+                return $this->_helper->redirector($perfil->perf_accion, $perfil->perf_controlador); //direccionamos al menu de inicio
+                break;
+            case 2:
+                return $this->_helper->redirector('index', 'index'); //direccionamos al menu de inicio
+
+                break;
+            case 3:
+                return $this->_helper->redirector('index', 'index'); //direccionamos al menu de inicio
+
+                break;
+            case 4:
+                return $this->_helper->redirector($perfil->perf_accion, $perfil->perf_controlador); //direccionamos al menu de inicio
+
+                break;
+            default:
+            return $this->_helper->redirector('index', 'index'); //direccionamos al menu de inicio
+
+                break;
+        }
     }
     public function logoutAction()
     {
