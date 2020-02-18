@@ -11,14 +11,33 @@ class Cie10Controller extends Zend_Controller_Action
         $this->view->user = Zend_Auth::getInstance()->getIdentity();
         $this->view->controlador=Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
         $this->view->accion=Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+        $this->view->icono = "fa-heartbeat";
+
     }
 
     public function indexAction()
     {
+        $this->_helper->redirector('descripcion', 'cie10'); //direccionamos al menu de inicio
+
+    }
+    public function descripcionAction()
+    {
         // action body
-        //$this->view->data = $this->tabla_cie10();
-        $this->view->titulo="Diagnosticos CIE-10";
-        $this->view->icono = "fa-heartbeat";
+        $this->view->titulo = "Diagnosticos por descripcion";
+
+    }
+
+    public function categoriaAction()
+    {
+        // action body
+        $this->view->titulo = "Diagnosticos por categoria";
+
+    }
+
+    public function capituloAction()
+    {
+        // action body
+        $this->view->titulo = "Diagnosticos por capitulo";
 
     }
     public function tabla_cie10()
@@ -71,5 +90,14 @@ class Cie10Controller extends Zend_Controller_Action
         return $cadena;
     }
 
+    
+
+
 }
+
+
+
+
+
+
 

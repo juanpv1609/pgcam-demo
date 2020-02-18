@@ -35,6 +35,9 @@
         </controllerFile>
         <controllerFile controllerName="Cie10">
           <actionMethod actionName="index"/>
+          <actionMethod actionName="descripcion"/>
+          <actionMethod actionName="categoria"/>
+          <actionMethod actionName="capitulo"/>
         </controllerFile>
         <controllerFile controllerName="Paciente">
           <actionMethod actionName="index"/>
@@ -47,6 +50,7 @@
         </controllerFile>
         <controllerFile controllerName="Usuarios">
           <actionMethod actionName="index"/>
+          <actionMethod actionName="perfiles"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
@@ -126,6 +130,18 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Usuarios">
             <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Usuarios">
+            <viewScriptFile forActionName="perfiles"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Cie10">
+            <viewScriptFile forActionName="descripcion"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Cie10">
+            <viewScriptFile forActionName="categoria"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Cie10">
+            <viewScriptFile forActionName="capitulo"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

@@ -21,14 +21,17 @@ class UsuariosController extends Zend_Controller_Action
         $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/areas.js');
         echo $this->view->headScript();
         $this->view->data_usuarios = $this->tabla_usuarios();
-        $this->view->data_perfiles = $this->tabla_perfiles();
         $this->view->titulo = "Lista de usuarios";
 
     }
-
-
-
-    /* tablas */
+    public function perfilesAction()
+    {
+        // action body
+        $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/areas.js');
+        echo $this->view->headScript();
+        $this->view->data_perfiles = $this->tabla_perfiles();
+        $this->view->titulo = "Lista de perfiles";
+    }
     public function tabla_usuarios()
     {
         $table_m = new Application_Model_DbTable_Usuario();
@@ -86,6 +89,7 @@ class UsuariosController extends Zend_Controller_Action
 
         return $Listaarea;
     }
+
     public function tabla_perfiles()
     {
         $table_m = new Application_Model_DbTable_Usuario();
@@ -139,6 +143,10 @@ class UsuariosController extends Zend_Controller_Action
         return $Listaarea;
     }
 
+   
+
 
 }
+
+
 
