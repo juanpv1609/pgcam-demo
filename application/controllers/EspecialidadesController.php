@@ -107,7 +107,7 @@ class EspecialidadesController extends Zend_Controller_Action
                 </div>';
         } else {
 
-            $cadena .= '<table class="table table-sm" id="dataTableEspecialidad" width="100%">
+            $cadena .= '<table class="table table-sm dataTable" id="dataTableEspecialidad" width="100%">
                 <thead>
                 <tr>
                     <th class="text-primary">ID</th>

@@ -53,6 +53,15 @@
    <div class="sidebar-heading">Gestion</div>
    <!-- Nav Item - Charts -->
    <li class="nav-item <?php 
+     if($this->controlador=="usuarios")
+     echo 'active';
+   ?>" >
+     <a class="nav-link" href="<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'index')); ?>">
+       <i class="fas fa-fw fa-users-cog"></i>
+       <span>Usuarios</span></a>
+   </li>
+   <!-- Nav Item - Charts -->
+   <li class="nav-item <?php 
      if($this->controlador=="areas")
      echo 'active';
    ?>" >

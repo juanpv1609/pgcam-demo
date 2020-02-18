@@ -1,0 +1,46 @@
+<div class="card  shadow ">
+	<div class="card-header d-flex justify-content-between">
+		 <h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
+		 <!-- <button type="button"  onclick="agregarModal()" 
+		 class="btn btn-success btn-sm" >
+			  <i class="fa fa-plus"></i> Agregar
+		 </button> -->
+		 <nav >
+			<div class="nav nav-tabs" id="nav-tab" role="tablist">
+				
+			  <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" 
+			  href="#nav-usuarios" role="tab" aria-controls="nav-home" aria-selected="true">Usuarios</a>
+			  <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" 
+			  href="#nav-perfiles" role="tab" aria-controls="nav-profile" aria-selected="false">Perfiles</a>
+			</div>
+		 </nav>
+	</div>
+	<div class="card-body">
+		<div class="tab-content" id="nav-tabContent">
+			<div class="tab-pane fade show active" id="nav-usuarios" role="tabpanel" aria-labelledby="nav-home-tab">
+				
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="table-responsive">
+							<?php echo $this->data_usuarios; ?>
+					
+						</div>
+					</div>
+				</div>
+				
+				
+			</div>
+			<div class="tab-pane fade" id="nav-perfiles" role="tabpanel" aria-labelledby="nav-profile-tab">
+					
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="table-responsive">
+							<?php echo $this->data_perfiles; ?>
+					
+						</div>
+					</div>
+				</div>
+			</div>
+		 </div>
+	</div>
+</div>

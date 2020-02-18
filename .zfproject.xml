@@ -45,6 +45,9 @@
           <actionMethod actionName="asignar"/>
           <actionMethod actionName="cambio"/>
         </controllerFile>
+        <controllerFile controllerName="Usuarios">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -120,6 +123,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Paciente">
             <viewScriptFile forActionName="cambio"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Usuarios">
+            <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

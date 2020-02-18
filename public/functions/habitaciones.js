@@ -187,7 +187,6 @@ function ActualizarHabitacion() {
 function toDataTable(table){
   const esp="//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json";
   $(table).DataTable({
-    rowReorder: true,
     "language": {
        "url": esp
    }
