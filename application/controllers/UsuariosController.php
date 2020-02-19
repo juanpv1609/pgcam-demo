@@ -18,19 +18,54 @@ class UsuariosController extends Zend_Controller_Action
     public function indexAction()
     {
         // action body
-        $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/areas.js');
+        $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/usuarios.js');
         echo $this->view->headScript();
         $this->view->data_usuarios = $this->tabla_usuarios();
+        $this->view->data_perfiles = $this->select_perfiles();
+        $this->view->data_estado = $this->select_estado();
+
         $this->view->titulo = "Lista de usuarios";
 
     }
     public function perfilesAction()
     {
         // action body
-        $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/areas.js');
+        $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/usuarios.js');
         echo $this->view->headScript();
         $this->view->data_perfiles = $this->tabla_perfiles();
         $this->view->titulo = "Lista de perfiles";
+    }
+    public function crearAction()
+    {
+        // action body
+        $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
+        $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
+        if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
+            $nombres = $this->getRequest()->getParam('nombres');
+            $apellidos = $this->getRequest()->getParam('apellidos');
+            $correo = $this->getRequest()->getParam('correo');
+            $perfil = $this->getRequest()->getParam('perfil');
+            $estado = $this->getRequest()->getParam('estado');
+            $clave="HGOPNA2020";
+            $table = new Application_Model_DbTable_Usuario();
+            $table->crearusuario($nombres,$apellidos, $correo, $clave,$perfil,$estado);
+            echo $this->tabla_usuarios();
+        }
+
+
+    }
+    public function eliminarAction()
+    {
+        // action body
+        $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
+        $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
+        if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
+            $id = $this->getRequest()->getParam('id');
+            $table = new Application_Model_DbTable_Usuario();
+            $table->eliminarusuario($id);
+            echo $this->tabla_usuarios();
+        }
+
     }
     public function tabla_usuarios()
     {
@@ -49,11 +84,12 @@ class UsuariosController extends Zend_Controller_Action
             $Listaarea .= '<table class="table table-sm dataTable" id="dataTableUsuarios" width="100%">
                 <thead>
                 <tr>
-                <th class="text-primary ">E</th>
                     <th class="text-primary">ID</th>
                     <th class="text-primary">NOMBRE</th>
                     <th class="text-primary">CORREO</th>
+                    <th class="text-primary">ALIAS</th>
                     <th class="text-primary">PERFIL</th>
+                    <th class="text-primary ">ESTADO</th>
                     <th class="text-primary">ACCION</th>
                 </tr>
                 </thead>
@@ -61,12 +97,13 @@ class UsuariosController extends Zend_Controller_Action
             foreach ($datosarea as $item):
 
                 $Listaarea .= "<tr>";
-                $Listaarea .= "<td><i class='fa fa-circle " . $item->estado_color . "'></i></td>";
 
                 $Listaarea .= "<td>" . $item->usu_id . "</td>";
                 $Listaarea .= "<td>" . $item->usu_nombres . " ". $item->usu_apellidos . "</td>";
                 $Listaarea .= "<td>" . $item->correo . "</td>";
+                $Listaarea .= "<td>" . $item->usu_iniciales . "</td>";
                 $Listaarea .= "<td>" . $item->perf_nombre . "</td>";
+                $Listaarea .= "<td>" . $item->usu_estado_nombre . "</td>";
 
                 $Listaarea .= ' <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
@@ -142,7 +179,52 @@ class UsuariosController extends Zend_Controller_Action
 
         return $Listaarea;
     }
+    public function select_perfiles(){
+        $table_m = new Application_Model_DbTable_Usuario();
+        $datosarea = $table_m->listar_perfiles();
+        $Listaarea = '<div  class="form-group">';
+        if (!$datosarea) {
+            $Listaarea .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error !</strong> No se encontraron resultados
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                </div>';
+        } else {
+            $Listaarea .= '<label for="comboPerfil">Seleccione un perfil:</label>';
 
+            $Listaarea .= '<select class="form-control" name="comboPerfil" id="comboPerfil">';
+            foreach ($datosarea as $item):
+                $Listaarea .= "<option value='". $item->perf_id ."'>" . $item->perf_nombre . "</option>";
+            endforeach;
+            $Listaarea .= "</select></div>";
+        }
+        return $Listaarea;
+    }
+    public function select_estado(){
+        $table_m = new Application_Model_DbTable_Usuario();
+        $datosarea = $table_m->listar_estado();
+        $Listaarea = '<div  class="form-group">';
+        if (!$datosarea) {
+            $Listaarea .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error !</strong> No se encontraron resultados
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                </div>';
+        } else {
+            $Listaarea .= '<label for="comboEstado">Estado:</label>';
+
+            $Listaarea .= '<select class="form-control" name="comboEstado" id="comboEstado">';
+            foreach ($datosarea as $item):
+                $Listaarea .= "<option value='". $item->usu_estado_id ."'>" . $item->usu_estado_nombre . "</option>";
+            endforeach;
+            $Listaarea .= "</select></div>";
+        }
+        return $Listaarea;
+    }
    
 
 

@@ -8,9 +8,22 @@
 		 
 	</div>
 	<div class="card-body">
+		<div class="row">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+				<div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
+					<a class="btn btn-outline-primary btn-sm"
+					href="<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'index')); ?>">Usuarios</a>
+					<a class="btn btn-outline-dark btn-sm"
+					href="<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'perfiles')); ?>">Perfiles</a>
+					
+				</div>
+			</div>
+			<div class="col-sm-4"></div>
+		</div>
 				<div class="row">
 					<div class="col-sm-12">
-						<div class="table-responsive">
+						<div id="data_Table" class="table-responsive">
 							<?php echo $this->data_perfiles; ?>
 					
 						</div>

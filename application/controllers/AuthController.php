@@ -87,7 +87,7 @@ class AuthController extends Zend_Controller_Action
 
                 break;
             case 3:
-                return $this->_helper->redirector('index', 'index'); //direccionamos al menu de inicio
+                return $this->_helper->redirector($perfil->perf_accion, $perfil->perf_controlador); //direccionamos al menu de inicio
 
                 break;
             case 4:

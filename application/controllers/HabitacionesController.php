@@ -82,7 +82,7 @@ class HabitacionesController extends Zend_Controller_Action
                 </div>
                 </div>';
         } else {
-            $Listaarea .= '<label for="comboArea">Seleccione una especialidad:</label>';
+            $Listaarea .= '<label for="comboEspecialidad">Seleccione una especialidad:</label>';
 
             $Listaarea .= '<select class="form-control" name="comboEspecialidad" id="comboEspecialidad">';
             foreach ($datosarea as $item):

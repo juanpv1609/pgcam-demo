@@ -167,7 +167,8 @@
           </a>
           <a class="dropdown-item" href="#">
             <i class="far fa-fw fa-user"></i> <strong><?php echo $this->escape($this->user->usu_nombres." ".$this->user->usu_apellidos); ?></strong><br>
-            <i class="far fa-fw fa-envelope"></i> <span class="text-secondary"><?php  echo $this->escape($this->user->correo); ?> </span> 
+            <i class="far fa-fw fa-envelope"></i> <span class="text-secondary font-italic">
+              <?php  echo $this->escape($this->user->correo); ?> </span> 
             <br>
             <span class="text-primary"><?php  echo $this->escape($perfil->perf_nombre); ?> </span>              
             </a>
@@ -176,7 +177,7 @@
    <hr class="sidebar-divider">
          <a class="dropdown-item" href="#">
            <i class="fas fa-cogs fa-sm fa-fw mr-2"></i>
-           Configuracion
+           Configurar
          </a>
          <button class="dropdown-item" onclick="logout()" >
            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>

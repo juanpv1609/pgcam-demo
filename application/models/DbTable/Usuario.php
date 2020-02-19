@@ -6,12 +6,34 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
     protected $_name = 'usuario';
     
     public function insertarusuario($nombre,$apellido, $correo, $clave) {
+        $iniciales=substr($nombre,0,1).substr($apellido,0,1);
+        $iniciales = strtoupper($iniciales);
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
-        $select = "INSERT INTO usuario(usu_nombres, correo, clave,usu_estado_id,perf_id)
-    VALUES ('".$nombre." ".$apellido."','".$correo."',MD5('".$clave."'),1,1); ";
+        $select = "INSERT INTO usuario(usu_nombres,usu_apellidos,usu_iniciales, correo, clave,usu_estado_id,perf_id)
+                    VALUES ('".$nombre."','".$apellido."','".$iniciales."','".$correo."',MD5('".$clave."'),2,1); ";
+                    return $db->fetchRow($select);
+    }
+    public function crearusuario($nombre,$apellido, $correo, $clave ,$perfil,$estado) {
+        $iniciales=substr($nombre,0,1).substr($apellido,0,1);
+        $iniciales = strtoupper($iniciales);
+
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "INSERT INTO usuario(usu_nombres,usu_apellidos,usu_iniciales, correo, clave,perf_id,usu_estado_id)
+                    VALUES ('".$nombre."','".$apellido."','".$iniciales."','".$correo."',MD5('".$clave."'),".$perfil.",".$estado."); ";
+                    return $db->fetchRow($select);
+    }
+    public function eliminarusuario($id) {
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "DELETE FROM usuario
+        WHERE usu_id=".$id.";";
         return $db->fetchRow($select);
+        //$this->listar();
     }
     public function obtienePerfil($perfil_id)
     {
@@ -48,6 +70,14 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
         $select = "select * from perfiles";
         return $db->fetchAll($select);
     }
-
+    public function listar_estado()
+    {
+        //devuelve todos los registros de la tabla
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "select * from usu_estado";
+        return $db->fetchAll($select);
+    }
 }
 
