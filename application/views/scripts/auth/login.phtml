@@ -50,12 +50,12 @@
                   </form>
 
                   <hr>
-                  <div class="text-center">
+                  <div class="d-flex justify-content-between text-center">
                     <button class="btn btn-link btn-sm" data-toggle="modal" data-target="#exampleModal" >Olvido su contraseña?</button>
+                    <a class="btn btn-link btn-sm" 
+                    href="<?php echo $this->url(array('controller' => 'auth', 'action' => 'register')); ?>">Crear una cuenta!</a>
                   </div>
-                  <div class="text-center">
-                    <a class="small" href="<?php echo $this->url(array('controller' => 'auth', 'action' => 'register')); ?>">Crear una cuenta!</a>
-                  </div>
+                  
               </div>
 
             </div>

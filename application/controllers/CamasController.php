@@ -22,6 +22,7 @@ class CamasController extends Zend_Controller_Action
         echo $this->view->headScript();
         $this->view->data = $this->tabla_camas();
         $this->view->data_habitaciones = $this->select_habitacion();
+        $this->view->data_estado_cama = $this->select_estado_cama();
         $this->view->titulo="Camas Registradas"; 
     }
     public function crearAction()
@@ -32,9 +33,10 @@ class CamasController extends Zend_Controller_Action
         if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
             $cama_nombre = $this->getRequest()->getParam('nombre');
             $habitacion = $this->getRequest()->getParam('habitacion');
+            $cama_estado = $this->getRequest()->getParam('cama_estado');
 
             $table = new Application_Model_DbTable_Camas();
-            $table->insertarcama($cama_nombre,$habitacion);
+            $table->insertarcama($cama_nombre,$habitacion,$cama_estado);
             echo $this->tabla_camas();
         }
 
@@ -50,8 +52,10 @@ class CamasController extends Zend_Controller_Action
             $id = $this->getRequest()->getParam('id');
             $habitacion = $this->getRequest()->getParam('habitacion');
             $cama_nombre = $this->getRequest()->getParam('nombre');
+            $cama_estado = $this->getRequest()->getParam('cama_estado');
+
             $table = new Application_Model_DbTable_Camas();
-            $table->actualizarcama($id,$cama_nombre,$habitacion);
+            $table->actualizarcama($id,$cama_nombre,$habitacion,$cama_estado);
             echo $this->tabla_camas();
         }
 
@@ -87,6 +91,29 @@ class CamasController extends Zend_Controller_Action
             $Listaarea .= '<select class="form-control" name="comboHabitacion" id="comboHabitacion">';
             foreach ($datosarea as $item):
                 $Listaarea .= "<option value='". $item->habitacion_id ."'>" . $item->habitacion_nombre . "</option>";
+            endforeach;
+            $Listaarea .= "</select></div>";
+        }
+        return $Listaarea;
+    }
+    public function select_estado_cama(){
+        $table_m = new Application_Model_DbTable_Camas();
+        $datosarea = $table_m->listar_estado_cama();
+        $Listaarea = '<div  class="form-group">';
+        if (!$datosarea) {
+            $Listaarea .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error !</strong> No se encontraron resultados
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                </div>';
+        } else {
+            $Listaarea .= '<label for="comboEstadoCama">Estado de la cama:</label>';
+
+            $Listaarea .= '<select class="form-control" name="comboEstadoCama" id="comboEstadoCama">';
+            foreach ($datosarea as $item):
+                $Listaarea .= "<option value='". $item->cama_estado_id ."'>" . $item->cama_estado_descripcion . "</option>";
             endforeach;
             $Listaarea .= "</select></div>";
         }
@@ -130,20 +157,21 @@ class CamasController extends Zend_Controller_Action
                 $cadena .= "<td>" . $item->piso_nombre . "</td>";
                 $cadena .= "<td>" . $item->area_nombre . "</td>";
 
-                $cadena .= '<td>'. $item->cama_estado_descripcion .'</td>
-                    <td>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                    
-                    <!--  debo enviar la busqueda por ajax -->
-                    <button type="button" class="btn btn-outline-warning btn-sm " onclick="editarModal('. $item->cama_id .')" >
-                        <i class="fa fa-edit  "></i>
-                    </button>
-                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminar('. $item->cama_id .')" >
-                        <i class="fa fa-trash "></i>
-                    </button>
-                    </div>
-                    </td>
-                </tr>';
+                $cadena .= "<td>". $item->cama_estado_descripcion ."</td>
+                <td>
+                <div class='btn-group' role='group' aria-label='Basic example'>
+                
+                <!--  debo enviar la busqueda por ajax -->
+                <button type='button' class='btn btn-outline-warning btn-sm ' 
+                onclick='editarModal(". $item->cama_id .",". $item->habitacion_id .",". $item->cama_estado .",`". $item->cama_nombre ."`)' >
+                    <i class='fas fa-edit  '></i>
+                </button>
+                <button type='button' class='btn btn-outline-danger btn-sm' onclick='eliminar(". $item->cama_id .")' >
+                    <i class='fas fa-trash '></i>
+                </button>
+                </div>
+                </td>
+                </tr>";
             endforeach;
 
             $cadena .= "</tbody></table>";

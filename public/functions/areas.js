@@ -15,10 +15,10 @@ function agregarModal() {
     
 }
 
-function editarModal(id) {
+function editarModal(id, nombre) {
     $("#exampleModalLabel").text("Editar - Area");
     $("#area_id").val(id);
-    $("#nombre_area").removeClass('border border-danger').removeClass('border border-success');
+    $("#nombre_area").removeClass('border border-danger').removeClass('border border-success').val(nombre);
     $("#nombreHelp").removeClass('badge badge-danger text-wrap').removeClass('badge badge-success text-wrap').html('');
     $("#accionForm").html('<button class="btn btn-primary" type="button"  onclick="ActualizarArea();">Actualizar</button>');
     $('#formModal').modal({

@@ -127,20 +127,21 @@ class EspecialidadesController extends Zend_Controller_Action
                 $cadena .= "<td>" . $item->piso_nombre . "</td>";
                 $cadena .= "<td>" . $item->area_nombre . "</td>";
 
-                $cadena .= '<td>Activa</td>
+                $cadena .= "<td>Activa</td>
                     <td>
-                    <div class="btn-group" role="group" aria-label="Basic example">
+                    <div class='btn-group' role='group' aria-label='Basic example'>
                     
                     <!--  debo enviar la busqueda por ajax -->
-                    <button type="button" class="btn btn-outline-warning btn-sm " onclick="editarModal('. $item->especialidad_id .')" >
-                        <i class="fa fa-edit  "></i>
+                    <button type='button' class='btn btn-outline-warning btn-sm ' 
+                    onclick='editarModal(". $item->especialidad_id .",". $item->piso_id .",`". $item->especialidad_nombre ."`)' >
+                        <i class='fas fa-edit  '></i>
                     </button>
-                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminar('. $item->especialidad_id .')" >
-                        <i class="fa fa-trash "></i>
+                    <button type='button' class='btn btn-outline-danger btn-sm' onclick='eliminar(". $item->especialidad_id .")' >
+                        <i class='fas fa-trash '></i>
                     </button>
                     </div>
                     </td>
-                </tr>';
+                </tr>";
             endforeach;
 
             $cadena .= "</tbody></table>";

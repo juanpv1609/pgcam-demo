@@ -15,10 +15,11 @@ function agregarModal() {
    
 }
 
-function editarModal(id) {
+function editarModal(id,piso_id,nombre) {
    $("#exampleModalLabel").text("Editar - Especialidad");
    $("#especialidad_id").val(id);
-   $("#nombre_especialidad").removeClass('border border-danger').removeClass('border border-success');
+   $("#nombre_especialidad").removeClass('border border-danger').removeClass('border border-success').val(nombre);
+   $("#comboPiso").val(piso_id);
    $("#nombreHelp").removeClass('badge badge-danger text-wrap').removeClass('badge badge-success text-wrap').html('');
    $("#accionForm").html('<button class="btn btn-primary" type="button"  onclick="ActualizarEspecialidad();">Actualizar</button>');
    $('#formModal').modal({

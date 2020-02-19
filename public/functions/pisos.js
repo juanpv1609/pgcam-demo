@@ -15,10 +15,11 @@ function agregarModal() {
    
 }
 
-function editarModal(id) {
+function editarModal(id,area_id,nombre) {
    $("#exampleModalLabel").text("Editar - Piso");
    $("#piso_id").val(id);
-   $("#nombre_piso").removeClass('border border-danger').removeClass('border border-success');
+   $("#nombre_piso").removeClass('border border-danger').removeClass('border border-success').val(nombre);
+   $("#comboArea").val(area_id);
    $("#nombreHelp").removeClass('badge badge-danger text-wrap').removeClass('badge badge-success text-wrap').html('');
    $("#accionForm").html('<button class="btn btn-primary" type="button"  onclick="ActualizarPiso();">Actualizar</button>');
    $('#formModal').modal({

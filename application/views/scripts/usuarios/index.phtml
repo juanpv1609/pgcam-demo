@@ -24,7 +24,6 @@
 					<div class="col-sm-12">
 						<div id="data_Table" class="table-responsive">
 							<?php echo $this->data_usuarios; ?>
-					
 						</div>
 					</div>
 				</div>
@@ -121,3 +120,13 @@
         </div>
     </div>
 </div>
+<input type="checkbox" checked data-toggle="toggle" data-on="Ready" data-off="Not Ready" data-onstyle="success" data-offstyle="danger">
+
+<script>
+  $(function() {
+    $('#toggle-two').bootstrapToggle({
+      on: 'Enabled',
+      off: 'Disabled'
+    });
+  })
+</script>
