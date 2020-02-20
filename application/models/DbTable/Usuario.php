@@ -26,6 +26,19 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
                     VALUES ('".$nombre."','".$apellido."','".$iniciales."','".$correo."',MD5('".$clave."'),".$perfil.",".$estado."); ";
                     return $db->fetchRow($select);
     }
+    public function actualizarusuario($id,$nombre,$apellido, $correo ,$perfil,$estado) {
+        $iniciales=substr($nombre,0,1).substr($apellido,0,1);
+        $iniciales = strtoupper($iniciales);
+
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "UPDATE usuario
+        SET usu_nombres='".$nombre."', correo='".$correo."', usu_estado_id=".$estado.", 
+            perf_id=".$perfil.", usu_apellidos='".$apellido."', usu_iniciales='".$iniciales."'
+      WHERE usu_id=".$id.";";
+                    return $db->fetchRow($select);
+    }
     public function eliminarusuario($id) {
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo

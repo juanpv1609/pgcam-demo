@@ -1,0 +1,153 @@
+<?php
+				$obj = new Application_Model_DbTable_Usuario();
+            $perfil = $obj->obtienePerfil($this->user->usu_id); ?>
+<div class="card  shadow ">
+	<div class="card-header d-flex justify-content-between">
+		 <h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
+		 <div class='btn-group' role='group' aria-label='Basic example'>
+		  <button type="button"  onclick="agregarModal()" 
+		 class="btn btn-outline-success btn-sm" >
+			  <i class="fas fa-cogs"></i> Modificar
+		 </button> 
+		 <button type="button"  onclick="agregarModal()" 
+		 class="btn btn-outline-info btn-sm" >
+			  <i class="fas fa-key"></i> Cambiar clave
+		 </button> 
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="row ">
+			<div class="col-sm-3 d-flex justify-content-center">
+				<i class="far fa-user fa-7x text-primary mx-lg-5 my-lg-5"></i>
+			</div>
+			<div class="col-sm-6">
+				<input type="hidden" id="usuario_id" name="usuario_id" value="<?php echo $this->user->usu_id; ?>">
+					 <div class="row">
+						 <div class="col-sm-6">
+							<div  class="form-group">
+                        <label for="nombres">Nombres:</label>
+                        <input type="text"
+                        id="nombres"
+                        class="form-control bg-white"
+								name="nombres"
+								placeholder="Nombres..."
+								required autocomplete="off" 
+								disabled
+								value="<?php echo $this->user->usu_nombres; ?>">
+                        <div class="valid-feedback">
+								</div>
+								<div class="invalid-feedback">
+									 Este campo es necesario.
+								</div>
+						  </div>
+						 </div>
+						 <div class="col-sm-6">
+							<div  class="form-group">
+                        <label for="apellidos">Apellidos:</label>
+                        <input type="text"
+                        id="apellidos"
+                        class="form-control bg-white"
+								name="apellidos"
+								placeholder="Apellidos..."
+								required autocomplete="off"
+								disabled
+								value="<?php echo $this->user->usu_apellidos; ?>" >
+                        <div class="valid-feedback">
+								</div>
+								<div class="invalid-feedback">
+									 Este campo es necesario.
+								</div>
+						  </div>
+						 </div>
+					 </div>
+					 <div class="row">
+						 <div class="col-sm-12">
+							<div  class="form-group">
+                        <label for="correo">Correo electronico:</label>
+                        <input type="email"
+                        id="correo"
+                        class="form-control bg-white"
+								name="correo"
+								placeholder="ejemplo@ejemplo.com"
+								required autocomplete="off" 
+								disabled
+								value="<?php echo $this->user->correo; ?>">
+                        <div class="valid-feedback">
+								</div>
+								<div class="invalid-feedback">
+									 Por favor ingrese un correo electronico valido.
+								</div>
+						  </div>
+						 </div>
+					 </div>
+					 <div class="row">
+						<div class="col-sm-4">
+							<div  class="form-group">
+                        <label for="perfil">Perfil:</label>
+                        <input type="text"
+                        id="perfil"
+                        class="form-control bg-white"
+								name="perfil"
+								placeholder="Perfil"
+								required autocomplete="off" 
+								disabled
+								value="<?php echo $this->escape($perfil->perf_nombre); ?>">
+                        <div class="valid-feedback">
+								</div>
+								<div class="invalid-feedback">
+									 Por favor ingrese un correo electronico valido.
+								</div>
+						  </div>
+
+						</div>
+						<div class="col-sm-4">
+							<div  class="form-group">
+                        <label for="estado">Estado:</label>
+                        <input type="text"
+                        id="estado"
+                        class="form-control bg-white"
+								name="estado"
+								placeholder="estado"
+								required autocomplete="off" 
+								disabled
+								value="<?php echo $this->user->usu_estado_id; ?>">
+                        <div class="valid-feedback">
+								</div>
+								<div class="invalid-feedback">
+									 Por favor ingrese un correo electronico valido.
+								</div>
+						  </div>
+
+						</div>
+						<div class="col-sm-4">
+							<div  class="form-group">
+                        <label for="iniciales">Iniciales:</label>
+                        <input type="text"
+                        id="iniciales"
+                        class="form-control bg-white"
+								name="iniciales"
+								placeholder="Iniciales"
+								required autocomplete="off" 
+								disabled
+								value="<?php echo $this->user->usu_iniciales; ?>">
+                        <div class="valid-feedback">
+								</div>
+								<div class="invalid-feedback">
+									 Por favor ingrese un correo electronico valido.
+								</div>
+						  </div>
+
+						</div>
+					</div>
+					<div id="accionFormCambiaClave">
+						clave antigua y nueva
+					</div>
+					<div id="accionForm">
+						boton aceptar y cancelar
+					</div>
+			</div>
+			<div class="col-sm-3"></div>
+		</div>
+				
+	</div>
+</div>

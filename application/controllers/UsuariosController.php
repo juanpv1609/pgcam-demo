@@ -27,6 +27,7 @@ class UsuariosController extends Zend_Controller_Action
         $this->view->titulo = "Lista de usuarios";
 
     }
+
     public function perfilesAction()
     {
         // action body
@@ -35,6 +36,16 @@ class UsuariosController extends Zend_Controller_Action
         $this->view->data_perfiles = $this->tabla_perfiles();
         $this->view->titulo = "Lista de perfiles";
     }
+    public function perfilAction()
+    {
+        // action body
+        $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/usuarios.js');
+        echo $this->view->headScript();
+        $this->view->user = Zend_Auth::getInstance()->getIdentity();
+
+        $this->view->titulo = "Informacion de usuario";
+    }
+
     public function crearAction()
     {
         // action body
@@ -54,6 +65,26 @@ class UsuariosController extends Zend_Controller_Action
 
 
     }
+
+    public function editarAction()
+    {
+        // action body
+        $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
+        $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
+        if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
+            $id = $this->getRequest()->getParam('id');
+            $nombres = $this->getRequest()->getParam('nombres');
+            $apellidos = $this->getRequest()->getParam('apellidos');
+            $correo = $this->getRequest()->getParam('correo');
+            $perfil = $this->getRequest()->getParam('perfil');
+            $estado = $this->getRequest()->getParam('estado');
+            $table = new Application_Model_DbTable_Usuario();
+            $table->actualizarusuario($id,$nombres,$apellidos, $correo,$perfil,$estado);
+            echo $this->tabla_usuarios();
+        }
+
+    }
+
     public function eliminarAction()
     {
         // action body
@@ -67,6 +98,7 @@ class UsuariosController extends Zend_Controller_Action
         }
 
     }
+
     public function tabla_usuarios()
     {
         $table_m = new Application_Model_DbTable_Usuario();
@@ -104,21 +136,21 @@ class UsuariosController extends Zend_Controller_Action
                 $Listaarea .= "<td>" . $item->usu_iniciales . "</td>";
                 $Listaarea .= "<td>" . $item->perf_nombre . "</td>";
                 $Listaarea .= "<td>" . $item->usu_estado_nombre . "</td>";
-
-                $Listaarea .= ' <td>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        
-                        <!--  debo enviar la busqueda por ajax -->
-                        <button type="button" class="btn btn-outline-warning btn-sm " onclick="editarModal('. $item->usu_id .')" >
-                            <i class="fa fa-edit  "></i>
-                        </button>
-                        <button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminar('. $item->usu_id .')" >
-                            <i class="fa fa-trash "></i>
-                        </button>
-                        </div>
-                        
-                    </td>
-                </tr>';
+                //$data_array =array($item->usu_id.','.$item->usu_nombres.','.$item->usu_apellidos.','.$item->correo);
+                $Listaarea .= " <td>
+                <div class='btn-group' role='group' aria-label='Basic example'>
+                
+                <!--  debo enviar la busqueda por ajax -->
+                <button type='button' class='btn btn-outline-warning btn-sm ' 
+                onclick='editarModal(". $item->usu_id .",`". $item->usu_nombres ."`,`". $item->usu_apellidos ."`,`". $item->correo ."`,". $item->usu_estado_id .",". $item->perf_id .")' >
+                    <i class='fas fa-edit  '></i>
+                </button>
+                <button type='button' class='btn btn-outline-danger btn-sm' onclick='eliminar(". $item->usu_id .")' >
+                    <i class='fas fa-trash '></i>
+                </button>
+                </div>
+                </td>
+                </tr>";
             endforeach;
 
             $Listaarea .= "</tbody></table>";
@@ -179,7 +211,9 @@ class UsuariosController extends Zend_Controller_Action
 
         return $Listaarea;
     }
-    public function select_perfiles(){
+
+    public function select_perfiles()
+    {
         $table_m = new Application_Model_DbTable_Usuario();
         $datosarea = $table_m->listar_perfiles();
         $Listaarea = '<div  class="form-group">';
@@ -202,7 +236,9 @@ class UsuariosController extends Zend_Controller_Action
         }
         return $Listaarea;
     }
-    public function select_estado(){
+
+    public function select_estado()
+    {
         $table_m = new Application_Model_DbTable_Usuario();
         $datosarea = $table_m->listar_estado();
         $Listaarea = '<div  class="form-group">';
@@ -225,10 +261,13 @@ class UsuariosController extends Zend_Controller_Action
         }
         return $Listaarea;
     }
-   
+
+    
 
 
 }
+
+
 
 
 

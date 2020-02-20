@@ -163,7 +163,7 @@
          <div class="d-flex justify-content-between ">
           <a class=" dropdown-toggle btn btn-outline-<?php echo $this->escape($perfil->perf_color); ?>
              btn-circle btn-lg ml-3" href="#">
-          <span class="text-uppercase font-weight-bold"><?php echo substr($this->user->usu_nombres,0,1).substr($this->user->usu_apellidos,0,1); ?></span>
+          <span class="text-uppercase font-weight-bold"><?php echo $this->user->usu_iniciales; ?></span>
           </a>
           <a class="dropdown-item" href="#">
             <i class="far fa-fw fa-user"></i> <strong><?php echo $this->escape($this->user->usu_nombres." ".$this->user->usu_apellidos); ?></strong><br>
@@ -175,7 +175,7 @@
          </div>
          <!-- Divider -->
    <hr class="sidebar-divider">
-         <a class="dropdown-item" href="#">
+         <a class="dropdown-item" href="<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'perfil')); ?>">
            <i class="fas fa-cogs fa-sm fa-fw mr-2"></i>
            Configurar
          </a>

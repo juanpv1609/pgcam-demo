@@ -10,9 +10,14 @@ function agregarModal() {
    
 }
 
-function editarModal(id) {
+function editarModal(id,nombre,apellido,correo,estado,perfil) {
    $("#exampleModalLabel").text("Editar - Usuario");
    $("#usuario_id").val(id);
+   $("#nombres").val(nombre);
+    $("#apellidos").val(apellido);
+    $("#correo").val(correo);
+    $("#comboPerfil").val(perfil);
+    $("#comboEstado").val(estado);
    $("#accionForm").html('<button class="btn btn-primary" type="submit"  onclick="ActualizarUsuario();">Actualizar</button>');
    $('#formModal').modal({
        show:true
@@ -72,11 +77,11 @@ function eliminar(id){
 }
 function InsertarUsuario() {
    //var nombre = $("#ci").val();
-   var nombres = $("#nombres").val();
-   var apellidos = $("#apellidos").val();
-   var correo = $("#correo").val();
-   var perfil = $("#comboPerfil").val();
-   var estado = $("#comboEstado").val();
+  var nombres =   $("#nombres").val();
+  var apellidos = $("#apellidos").val();
+  var correo =    $("#correo").val();
+  var perfil =    $("#comboPerfil").val();
+  var estado =    $("#comboEstado").val();
    var dir = $('#dir').val();
        //console.log(nombre);
        $("#register").submit(function(event){
@@ -113,7 +118,6 @@ function InsertarUsuario() {
                               $('#formModal').modal('hide');
                               $("#data_Table").html(requestData);
                              toDataTable("#dataTableUsuarios");
-
                             //console.log(requestData.data);
 
                         },
@@ -132,19 +136,25 @@ function InsertarUsuario() {
     });
 
 }
-function ActualizarHabitacion() {
- var id = $("#habitacion_id").val();
- var especialidad = $("#comboEspecialidad").val();
- var nombre = $("#nombre_habitacion").val();
+function ActualizarUsuario() {
+ var id = $("#usuario_id").val();
+ var nombres =   $("#nombres").val();
+  var apellidos = $("#apellidos").val();
+  var correo =    $("#correo").val();
+  var perfil =    $("#comboPerfil").val();
+  var estado =    $("#comboEstado").val();
  var dir = $('#dir').val();
      //console.log(nombre);
-      if ((!nombre=="")) {
+     $("#register").submit(function(event){
+      event.preventDefault(); //prevent default action
+      if ((!nombres=="") && (!apellidos=="") && (!correo=="")) {
              $.ajax(
                  {
                      dataType: "html",
                      type: "POST",
-                     url: dir + "/habitaciones/editar", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
-                     data: "id="+id+ "&nombre=" + nombre+"&especialidad="+especialidad, //Se añade el parametro de busqueda del medico
+                     url: dir + "/usuarios/editar", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
+                     data: "id="+id+ "&nombres=" + nombres + "&apellidos=" + apellidos + "&correo=" + correo
+                     + "&perfil=" + perfil + "&estado=" + estado, //Se añade el parametro de busqueda del medico
                      beforeSend: function (data) {
                      },
                      success: function (requestData) {//armar la tabla
@@ -168,10 +178,10 @@ function ActualizarHabitacion() {
                            });
                            $('#formModal').modal('hide');
                             $("#data_Table").html(requestData);
-                           toDataTable("#dataTableHabitaciones");
+                           toDataTable("#dataTableUsuarios");
                         
                          
-                         $("#nombre_habitacion").removeClass('border border-success').removeClass('border border-danger').val("");
+                         //$("#nombre_habitacion").removeClass('border border-success').removeClass('border border-danger').val("");
                      },
                      error: function (requestData, strError, strTipoError) {
                      },
@@ -179,11 +189,8 @@ function ActualizarHabitacion() {
 
                      }
                  });
-     }else{
-         $("#nombre_habitacion").removeClass('border border-success').addClass('border border-danger');
-         $("#nombreHelp").removeClass('badge badge-success text-wrap').addClass('badge badge-danger text-wrap')
-         .html('<span>Este campo es necesario!</span>');
-     } 
+     }
+    });
 
 }
 function toDataTable(table){
