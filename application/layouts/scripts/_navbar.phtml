@@ -141,6 +141,7 @@
       <?php if($this->user) : 
             $obj = new Application_Model_DbTable_Usuario();
             $perfil = $obj->obtienePerfil($this->user->usu_id);
+            $ultima_conexion = $obj->obtiene_ultima_conexion_usuario($this->user->usu_id);
       ?>
        <a class=" dropdown-toggle btn btn-<?php echo $this->escape($perfil->perf_color); ?> btn-circle btn-sm" 
        href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -165,14 +166,21 @@
              btn-circle btn-lg ml-3" href="#">
           <span class="text-uppercase font-weight-bold"><?php echo $this->user->usu_iniciales; ?></span>
           </a>
-          <a class="dropdown-item" href="#">
-            <i class="far fa-fw fa-user"></i> <strong><?php echo $this->escape($this->user->usu_nombres." ".$this->user->usu_apellidos); ?></strong><br>
+          <a class="dropdown-item" href="<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'perfil')); ?>"
+            data-toggle="tooltip" data-placement="bottom" title="Clic para ver el perfil">
+            <i class="far fa-fw fa-user"></i> 
+            <strong><?php echo $this->escape($this->user->usu_nombres." ".$this->user->usu_apellidos); ?></strong>
+            <br>
             <i class="far fa-fw fa-envelope"></i> <span class="text-secondary font-italic">
               <?php  echo $this->escape($this->user->correo); ?> </span> 
             <br>
-            <span class="text-primary"><?php  echo $this->escape($perfil->perf_nombre); ?> </span>              
+            <span class="text-primary"><?php  echo $this->escape($perfil->perf_nombre); ?> </span>  
+            
+                        
             </a>
          </div>
+            <span class="d-flex justify-content-center text-xs"
+            ><strong>Ultimo acceso hace:  <?php  echo $this->escape($ultima_conexion->dias." dias y ".$ultima_conexion->horas." horas"); ?></strong> </span>
          <!-- Divider -->
    <hr class="sidebar-divider">
          <a class="dropdown-item" href="<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'perfil')); ?>">

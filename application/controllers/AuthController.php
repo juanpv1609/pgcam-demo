@@ -49,18 +49,30 @@ class AuthController extends Zend_Controller_Action
 
                 if ($result->isValid()) {
                     $data = $authAdapter->getResultRowObject(null, 'clave'); //almacenamos los datos excepto el password
-                    $auth->getStorage()->write($data); //creamos la sesion para el usuario
-                    
-                    /* control de rutas
-                    */
+                    if ($data->usu_estado_id==1) { //verifica si el usuario esta activo 1=activo
+                        $auth->getStorage()->write($data); //creamos la sesion para el usuario
+                    //inserta la fecha de conexion
+                    $this->ultima_conexion($data->usu_id);
+                /* control de rutas */
                     $this->ruta_usuario($data->usu_id);
+                    }else {// //Si las credenciales no son validas mostramos un error
+
+                        $this->view->message = '<div class="alert alert-warning alert-dismissible">
+                            <button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
+                            <strong>Error! </strong><span>El usuario no esta habilitado!</span>
+                            <span>Comuniquese con el administrador!</span></div>';
+                        //$this->view->usuario_value=$usuario;
+                        //$this->view->clave_value=$clave;
+    
+                    }
+                    
 
                 } else {// //Si las credenciales no son validas mostramos un error
                     $this->view->message = '<div class="alert alert-danger alert-dismissible">
                         <button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
-                        Las credenciales de autenticacion no son validas</div>';
-                    $this->view->usuario_value=$usuario;
-                    $this->view->clave_value=$clave;
+                        <strong>Error! </strong><span> Las credenciales de autenticacion no son validas</span></div>';
+                    //$this->view->usuario_value=$usuario;
+                    //$this->view->clave_value=$clave;
 
                 }
             }
@@ -72,6 +84,11 @@ class AuthController extends Zend_Controller_Action
                     Las credenciales de autenticacion proporcionadas no tienen permiso para acceder a este modulo</div>';
             }
         }
+
+    }
+    public function ultima_conexion($usu_id){
+        $obj = new Application_Model_DbTable_Usuario();
+        $obj->actualizar_ultima_conexion_usuario($usu_id);
 
     }
     public function ruta_usuario($usu_id){

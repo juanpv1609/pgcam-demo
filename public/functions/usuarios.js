@@ -23,6 +23,35 @@ function editarModal(id,nombre,apellido,correo,estado,perfil) {
        show:true
    });    
 }
+function cambiarClave() {
+  $("#exampleModalLabel").text("Cambio de clave");
+  $("#accionFormCambiaClave").show();
+  $('#formModal').modal({
+    show:true
+});
+}
+function activaPerfilForm() {
+  if ($("#nombres").prop("disabled")==true)
+    $("#nombres").prop("disabled",false).addClass('border border-warning');
+  if ($("#apellidos").prop("disabled")==true)
+    $("#apellidos").prop("disabled",false).addClass('border border-warning');
+  if ($("#correo").prop("disabled")==true)
+    $("#correo").prop("disabled",false).addClass('border border-warning');
+  
+    $("#accionForm").html('<button class="btn btn-danger" type="button"  onclick="descativarPerfilForm();">Cancelar</button><button class="btn btn-primary" type="submit"  onclick="ActualizarUsuario();">Actualizar</button>');
+ 
+}
+function descativarPerfilForm() {
+  if ($("#nombres").prop("disabled")==false)
+    $("#nombres").prop("disabled",true).removeClass('border border-warning');
+  if ($("#apellidos").prop("disabled")==false)
+    $("#apellidos").prop("disabled",true).removeClass('border border-warning');
+  if ($("#correo").prop("disabled")==false)
+    $("#correo").prop("disabled",true).removeClass('border border-warning');
+  
+    $("#accionForm").html('');
+ 
+}
 function eliminar(id){
  var dir = $('#dir').val();
  Swal.fire({

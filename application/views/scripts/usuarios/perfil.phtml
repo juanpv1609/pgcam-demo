@@ -4,23 +4,36 @@
 <div class="card  shadow ">
 	<div class="card-header d-flex justify-content-between">
 		 <h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
-		 <div class='btn-group' role='group' aria-label='Basic example'>
-		  <button type="button"  onclick="agregarModal()" 
-		 class="btn btn-outline-success btn-sm" >
-			  <i class="fas fa-cogs"></i> Modificar
-		 </button> 
-		 <button type="button"  onclick="agregarModal()" 
-		 class="btn btn-outline-info btn-sm" >
-			  <i class="fas fa-key"></i> Cambiar clave
-		 </button> 
-		</div>
+		 
 	</div>
 	<div class="card-body">
 		<div class="row ">
-			<div class="col-sm-3 d-flex justify-content-center">
-				<i class="far fa-user fa-7x text-primary mx-lg-5 my-lg-5"></i>
+			<div class="col-sm-3 ">
+				<div class="row">
+					<div class="col-sm-12 d-flex justify-content-center">
+						<i class="far fa-user fa-7x text-primary mx-lg-5 my-lg-5"></i>
+					</div>					
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col sm-12 d-flex justify-content-center">
+						<div class='btn-group' role='group' aria-label='Basic example'>
+							<button type="button"  onclick="activaPerfilForm()" 
+						  class="btn btn-outline-success btn-sm" >
+								<i class="fas fa-cogs"></i> Modificar
+						  </button> 
+						  <button type="button"  onclick="cambiarClave()" 
+						  class="btn btn-outline-info btn-sm" >
+								<i class="fas fa-key"></i> Cambiar clave
+						  </button> 
+						 </div>
+					</div>
+				</div>
 			</div>
-			<div class="col-sm-6">
+
+			<div class="col-sm-6 ml-4">
+			<form class="user needs-validation" method="post" id="register" name="register" novalidate >
+
 				<input type="hidden" id="usuario_id" name="usuario_id" value="<?php echo $this->user->usu_id; ?>">
 					 <div class="row">
 						 <div class="col-sm-6">
@@ -91,11 +104,12 @@
 								placeholder="Perfil"
 								required autocomplete="off" 
 								disabled
-								value="<?php echo $this->escape($perfil->perf_nombre); ?>">
+								value="<?php echo $this->escape($perfil->perf_nombre); ?>"
+								data-toggle="tooltip" data-placement="bottom" title="Este campo no puede ser cambiado">
                         <div class="valid-feedback">
 								</div>
 								<div class="invalid-feedback">
-									 Por favor ingrese un correo electronico valido.
+									Este campo es necesario.
 								</div>
 						  </div>
 
@@ -110,11 +124,12 @@
 								placeholder="estado"
 								required autocomplete="off" 
 								disabled
-								value="<?php echo $this->user->usu_estado_id; ?>">
+								value="<?php echo $this->user->usu_estado_id; ?>"
+								data-toggle="tooltip" data-placement="bottom" title="Este campo no puede ser cambiado">
                         <div class="valid-feedback">
 								</div>
 								<div class="invalid-feedback">
-									 Por favor ingrese un correo electronico valido.
+									Este campo es necesario.
 								</div>
 						  </div>
 
@@ -129,25 +144,108 @@
 								placeholder="Iniciales"
 								required autocomplete="off" 
 								disabled
-								value="<?php echo $this->user->usu_iniciales; ?>">
+								value="<?php echo $this->user->usu_iniciales; ?>"
+								data-toggle="tooltip" data-placement="bottom" title="Este campo no puede ser cambiado">
                         <div class="valid-feedback">
 								</div>
 								<div class="invalid-feedback">
-									 Por favor ingrese un correo electronico valido.
+									Este campo es necesario.
 								</div>
 						  </div>
 
 						</div>
 					</div>
-					<div id="accionFormCambiaClave">
-						clave antigua y nueva
+					
+					<div id="accionForm" class="d-flex justify-content-between">
+						
 					</div>
-					<div id="accionForm">
-						boton aceptar y cancelar
-					</div>
+			
+			
+				</form>
+				</div>
+			<div class="col-sm-3">
+				
 			</div>
-			<div class="col-sm-3"></div>
 		</div>
 				
 	</div>
+</div>
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-primary" id="exampleModalLabel"></h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+				</div>
+				<form class="user needs-validation" method="post" id="register" name="register" novalidate >
+				
+            <div class="modal-body">
+					<div id="accionFormCambiaClave" style="display: none;">
+						<div class="row">
+							<div class="col-sm-12">
+								<div  class="form-group">
+									<input type="password"
+									id="clave_actual"
+									class="form-control bg-white"
+									name="clave_actual"
+									placeholder="Ingrese su contraseña actual"
+									required autocomplete="off" >
+									<div class="valid-feedback">
+									</div>
+									<div class="invalid-feedback">
+										Este campo es necesario.
+									</div>
+							  </div>
+							</div>
+						</div>
+						<div class="row">
+	
+							<div class="col-sm-12">
+								<div  class="form-group">
+									<input type="password"
+									id="nueva_clave"
+									class="form-control bg-white"
+									name="nueva_clave"
+									placeholder="Ingrese una nueva contraseña"
+									required autocomplete="off"  minlength="6">
+									<div class="valid-feedback">
+									</div>
+									<div class="invalid-feedback">
+										Al menos 6 caracteres.
+									</div>
+							  </div>
+							</div>
+						</div>
+						<div class="row">
+	
+							<div class="col-sm-12">
+								<div  class="form-group">
+									<input type="password"
+									id="nueva_clave_2"
+									class="form-control bg-white"
+									name="nueva_clave_2"
+									placeholder="Repita la nueva contraseña"
+									required autocomplete="off" minlength="6" >
+									<div class="valid-feedback">
+									</div>
+									<div class="invalid-feedback">
+										Al menos 6 caracteres.
+									</div>
+									<hr>
+									<div class=" d-flex justify-content-between">
+										<button class="btn btn-outline-danger" type="button" data-dismiss="modal">Cancelar</button>
+										<button type="submit" class="btn btn-outline-success">Cambiar clave</button>
+									</div>
+							  </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+				
+        </div>
+    </div>
 </div>

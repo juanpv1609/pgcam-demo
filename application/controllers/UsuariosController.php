@@ -23,10 +23,13 @@ class UsuariosController extends Zend_Controller_Action
         $this->view->data_usuarios = $this->tabla_usuarios();
         $this->view->data_perfiles = $this->select_perfiles();
         $this->view->data_estado = $this->select_estado();
+        $this->view->user = Zend_Auth::getInstance()->getIdentity();
+
 
         $this->view->titulo = "Lista de usuarios";
 
     }
+    
 
     public function perfilesAction()
     {
@@ -116,26 +119,25 @@ class UsuariosController extends Zend_Controller_Action
             $Listaarea .= '<table class="table table-sm dataTable" id="dataTableUsuarios" width="100%">
                 <thead>
                 <tr>
-                    <th class="text-primary">ID</th>
                     <th class="text-primary">NOMBRE</th>
                     <th class="text-primary">CORREO</th>
                     <th class="text-primary">ALIAS</th>
                     <th class="text-primary">PERFIL</th>
                     <th class="text-primary ">ESTADO</th>
+                    <th class="text-primary ">ULTIMO ACCESO</th>
                     <th class="text-primary">ACCION</th>
                 </tr>
                 </thead>
                 <tbody>';
             foreach ($datosarea as $item):
-
+               
                 $Listaarea .= "<tr>";
-
-                $Listaarea .= "<td>" . $item->usu_id . "</td>";
                 $Listaarea .= "<td>" . $item->usu_nombres . " ". $item->usu_apellidos . "</td>";
                 $Listaarea .= "<td>" . $item->correo . "</td>";
                 $Listaarea .= "<td>" . $item->usu_iniciales . "</td>";
                 $Listaarea .= "<td>" . $item->perf_nombre . "</td>";
                 $Listaarea .= "<td>" . $item->usu_estado_nombre . "</td>";
+                $Listaarea .= "<td >" . $item->ultima_conexion . "</td>";
                 //$data_array =array($item->usu_id.','.$item->usu_nombres.','.$item->usu_apellidos.','.$item->correo);
                 $Listaarea .= " <td>
                 <div class='btn-group' role='group' aria-label='Basic example'>
