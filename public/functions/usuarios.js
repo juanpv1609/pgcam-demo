@@ -1,6 +1,6 @@
 
 
-function agregarModal() {
+function agregarModalU() {
    $("#exampleModalLabel").text("Agregar - Usuario");
    $("#accionForm").html('<button class="btn btn-primary" type="submit"  onclick="InsertarUsuario();">Agregar</button>');
 
@@ -10,7 +10,7 @@ function agregarModal() {
    
 }
 
-function editarModal(id,nombre,apellido,correo,estado,perfil) {
+function editarModalU(id,nombre,apellido,correo,estado,perfil) {
    $("#exampleModalLabel").text("Editar - Usuario");
    $("#usuario_id").val(id);
    $("#nombres").val(nombre);
@@ -23,7 +23,7 @@ function editarModal(id,nombre,apellido,correo,estado,perfil) {
        show:true
    });    
 }
-function cambiarClave(id) {
+function cambiarClaveU(id) {
   $("#usuario_clave_id").val(id);
   $("#accionFormCambiaClave").show();
   $('#formModal_password').modal({
@@ -54,7 +54,7 @@ function descativarPerfilForm() {
     $("#accionForm").html('');
  
 }
-function eliminar(id){
+function eliminarU(id){
  var dir = $('#dir').val();
  Swal.fire({
      position: 'top',

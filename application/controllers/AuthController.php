@@ -21,6 +21,8 @@ class AuthController extends Zend_Controller_Action
     public function loginAction()
     {
         // action body
+        $this->view->titulo="Iniciar Sesión"; 
+
         $this->_helper->layout->setLayout('login');
         if ($this->_request->isPost()) {
             Zend_Loader::loadClass('Zend_Filter_StripTags'); //Filtro para parametros de imgreso
@@ -128,6 +130,7 @@ class AuthController extends Zend_Controller_Action
     {
         // action body
         $this->_helper->layout->setLayout('login');
+        $this->view->titulo="Registro"; 
 
 
     }

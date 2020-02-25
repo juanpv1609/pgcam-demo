@@ -159,10 +159,10 @@ class UsuariosController extends Zend_Controller_Action
                 
                 <!--  debo enviar la busqueda por ajax -->
                 <button type='button' class='btn btn-outline-warning btn-sm ' 
-                onclick='editarModal(". $item->usu_id .",`". $item->usu_nombres ."`,`". $item->usu_apellidos ."`,`". $item->correo ."`,". $item->usu_estado_id .",". $item->perf_id .")' >
+                onclick='editarModalU(". $item->usu_id .",`". $item->usu_nombres ."`,`". $item->usu_apellidos ."`,`". $item->correo ."`,". $item->usu_estado_id .",". $item->perf_id .")' >
                     <i class='fas fa-edit  '></i>
                 </button>
-                <button type='button' class='btn btn-outline-danger btn-sm' onclick='eliminar(". $item->usu_id .")' >
+                <button type='button' class='btn btn-outline-danger btn-sm' onclick='eliminarU(". $item->usu_id .")' >
                     <i class='fas fa-trash '></i>
                 </button>
                 </div>

@@ -182,29 +182,22 @@
             <span class="d-flex justify-content-center text-xs">
               <strong>Ultimo acceso:  <?php  echo $this->escape($ultima_conexion->dias." dias ".$ultima_conexion->horas." horas ".$ultima_conexion->min." min"); ?></strong> </span>
          <!-- Divider -->
-          <div class="row">
-            <div class="col-xs-12 d-flex justify-content-center mx-auto my-2">
-              <button  class=" btn btn-outline-dark btn-sm btn-block border-0" onclick="cambiarClave(<?php echo $this->user->usu_id; ?>)">
-                <i class="fas fa-key fa-sm fa-fw"></i> <span>Cambiar contraseña</span>
-              </button>
-            </div>
+         <div class="btn-group d-flex justify-content-end" role="group" aria-label="Basic example">
+          <button  class=" btn btn-outline-dark btn-sm  border-0" onclick="cambiarClaveU('<?php echo $this->user->usu_id; ?>')">
+            <i class="fas fa-key fa-sm fa-fw"></i> <span>Cambiar contraseña</span>
+          </button>
           </div>
-          <div class="row d-flex justify-content-around mx-auto">
-            <div class="col-xs-6">
-              <a class=" btn btn-outline-dark btn-sm btn-block border-0" href="<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'perfil')); ?>">
-                <i class="fas fa-cogs fa-sm fa-fw mr-2"></i>
-                <span>Perfil</span>
-              </a>
-            </div>
-            <div class="col-xs-6">
-              <button class=" btn btn-outline-dark btn-sm btn-block border-0" onclick="logout()" >
-                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>
-                <span>Salir</span>
-              </button>
-            </div>
+          <div class="btn-group d-flex justify-content-end" role="group" aria-label="Basic example">
+            <button type="button" class=" btn btn-outline-primary btn-sm  border-0" 
+            onclick="window.location.href=`<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'perfil')); ?>`">
+              <i class="fas fa-cogs fa-sm fa-fw mr-2"></i>
+              <span>Perfil</span>
+            </button>
+            <button type="button" class=" btn btn-outline-danger btn-sm  border-0" onclick="logout()" >
+              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>
+              <span>Salir</span>
+            </button>
           </div>
-        
-         
        </div>
      </li>
    </ul>

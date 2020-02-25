@@ -17,6 +17,7 @@ function SendFormLogin(e)
         e.preventDefault(); //prevent default action
         
         document.login.submit();
+        
     }
 
 }

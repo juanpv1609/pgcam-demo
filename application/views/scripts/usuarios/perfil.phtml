@@ -11,7 +11,7 @@
 			<div class="col-sm-3 ">
 				<div class="row">
 					<div class="col-sm-12 d-flex justify-content-center">
-						<i class="far fa-user fa-7x text-primary mx-lg-5 my-lg-5"></i>
+						<i class="far fa-user fa-7x text-<?php echo $this->escape($perfil->perf_color); ?> mx-lg-5 my-lg-5"></i>
 					</div>					
 				</div>
 				<hr>
@@ -22,7 +22,7 @@
 						  class="btn btn-outline-success btn-sm" >
 								<i class="fas fa-cogs"></i> Modificar
 						  </button> 
-						  <button type="button"  onclick="cambiarClave()" 
+						  <button type="button"  onclick="cambiarClaveU()" 
 						  class="btn btn-outline-info btn-sm" >
 								<i class="fas fa-key"></i> Cambiar clave
 						  </button> 
