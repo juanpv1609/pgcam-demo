@@ -23,10 +23,10 @@ function editarModal(id,nombre,apellido,correo,estado,perfil) {
        show:true
    });    
 }
-function cambiarClave() {
-  $("#exampleModalLabel").text("Cambio de clave");
+function cambiarClave(id) {
+  $("#usuario_clave_id").val(id);
   $("#accionFormCambiaClave").show();
-  $('#formModal').modal({
+  $('#formModal_password').modal({
     show:true
 });
 }
@@ -37,6 +37,7 @@ function activaPerfilForm() {
     $("#apellidos").prop("disabled",false).addClass('border border-warning');
   if ($("#correo").prop("disabled")==true)
     $("#correo").prop("disabled",false).addClass('border border-warning');
+    $("#formGroupPassword").show();
   
     $("#accionForm").html('<button class="btn btn-danger" type="button"  onclick="descativarPerfilForm();">Cancelar</button><button class="btn btn-primary" type="submit"  onclick="ActualizarUsuario();">Actualizar</button>');
  
@@ -48,6 +49,7 @@ function descativarPerfilForm() {
     $("#apellidos").prop("disabled",true).removeClass('border border-warning');
   if ($("#correo").prop("disabled")==false)
     $("#correo").prop("disabled",true).removeClass('border border-warning');
+    $("#formGroupPassword").hide();
   
     $("#accionForm").html('');
  
@@ -222,6 +224,62 @@ function ActualizarUsuario() {
     });
 
 }
+function ActualizaClaveUsuario() {
+  var clave_actual = $("#clave_actual").val();
+  var nueva_clave =   $("#nueva_clave").val();
+   var nueva_clave_2 = $("#nueva_clave_2").val();
+  var id= $("#usuario_clave_id").val();
+  var dir = $('#dir').val();
+      //console.log(nombre);
+      $("#register").submit(function(event){
+       event.preventDefault(); //prevent default action
+       if ((!clave_actual=="") && (!nueva_clave=="") && (!nueva_clave_2=="")) {
+         if (nueva_clave==nueva_clave_2) {   
+              $.ajax(
+                  {
+                      dataType: "html",
+                      type: "POST",
+                      url: dir + "/usuarios/editarclave", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
+                      data: "id="+id+"&clave_actual="+clave_actual+ "&nueva_clave=" + nueva_clave, //Se añade el parametro de busqueda del medico
+                      beforeSend: function (data) {
+                      },
+                      success: function (requestData) {//armar la tabla
+                          //alert("Area creada exitosamente!");
+                          //$("#mensaje").addClass('alert alert-success').html('Area creada correctamente!').show(100).delay(1500).hide(100);
+                          //$('#formModal').modal('hide');
+                            
+                          //$("#nombre_habitacion").removeClass('border border-success').removeClass('border border-danger').val("");
+                      },
+                      error: function (requestData, strError, strTipoError) {
+                      },
+                      complete: function (requestData, exito) { //fin de la llamada ajax.
+                        const Toast = Swal.mixin({
+                          toast: true,
+                          position: 'top-end',
+                          showConfirmButton: false,
+                          timer: 3000,
+                          timerProgressBar: true,
+                          onOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                          }
+                        });                              
+                        Toast.fire({
+                          icon: 'success',
+                          title: 'Dato actualizado correctamente!'
+                        });
+                        $('#formModal_password').modal('hide');
+                      // cerrar sesion y direccionar al login
+                      window.location.href = dir + "/auth/logout";
+                      }
+                  });
+                } else {
+                  $("#clave_igual").addClass('alert alert-danger').html('Deben coincidir las contraseñas').show(100).delay(2500).hide(100);
+              }
+      }
+     });
+ 
+ }
 function toDataTable(table){
   const esp="//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json";
   $(table).DataTable({

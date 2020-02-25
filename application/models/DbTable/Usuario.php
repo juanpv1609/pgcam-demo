@@ -39,6 +39,17 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
       WHERE usu_id=".$id.";";
                     return $db->fetchRow($select);
     }
+    public function actualizarclaveusuario($id,$clave_actual,$nueva_clave ) {
+        
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "UPDATE usuario
+        SET clave=MD5('".$nueva_clave."')
+      WHERE clave=MD5('".$clave_actual."')
+      AND usu_id=".$id.";";
+    return $db->fetchRow($select);
+    }
     public function actualizar_ultima_conexion_usuario($id) {
         
         $db = Zend_Registry::get('pgdb');
@@ -58,7 +69,9 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
         FROM usuario
         WHERE usu_id=".$id.")::timestamp) as dias,DATE_PART('hour',current_timestamp(0)::timestamp -(SELECT ultima_conexion
         FROM usuario
-        WHERE usu_id=".$id.")::timestamp) as horas;";
+        WHERE usu_id=".$id.")::timestamp) as horas,DATE_PART('min',current_timestamp(0)::timestamp -(SELECT ultima_conexion
+        FROM usuario
+        WHERE usu_id=".$id.")::timestamp) as min;;";
                     return $db->fetchRow($select);
     }
     public function eliminarusuario($id) {

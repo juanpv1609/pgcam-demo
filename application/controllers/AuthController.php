@@ -52,7 +52,6 @@ class AuthController extends Zend_Controller_Action
                     if ($data->usu_estado_id==1) { //verifica si el usuario esta activo 1=activo
                         $auth->getStorage()->write($data); //creamos la sesion para el usuario
                     //inserta la fecha de conexion
-                    $this->ultima_conexion($data->usu_id);
                 /* control de rutas */
                     $this->ruta_usuario($data->usu_id);
                     }else {// //Si las credenciales no son validas mostramos un error
@@ -119,6 +118,8 @@ class AuthController extends Zend_Controller_Action
     }
     public function logoutAction()
     {
+        $this->user = Zend_Auth::getInstance()->getIdentity();
+        $this->ultima_conexion($this->user->usu_id);
         Zend_Auth::getInstance()->clearIdentity(); //cerramos la sesion del usuario
         $this->_redirect('auth/login'); // direccionamos al login
     }

@@ -87,6 +87,21 @@ class UsuariosController extends Zend_Controller_Action
         }
 
     }
+    public function editarclaveAction()
+    {
+        // action body
+        $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
+        $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
+        if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
+            $id = $this->getRequest()->getParam('id');
+            $clave_actual = $this->getRequest()->getParam('clave_actual');
+            $nueva_clave = $this->getRequest()->getParam('nueva_clave');
+            $table = new Application_Model_DbTable_Usuario();
+            $table->actualizarclaveusuario($id,$clave_actual,$nueva_clave);
+           // echo $this->tabla_usuarios();
+        }
+
+    }
 
     public function eliminarAction()
     {

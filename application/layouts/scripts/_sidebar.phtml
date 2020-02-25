@@ -12,10 +12,7 @@
    <!-- Divider -->
    <hr class="sidebar-divider my-0">
    <!-- Nav Item - Dashboard -->
-   <li class="nav-item <?php 
-     if($this->controlador=="index")
-     echo 'active';
-   ?>">
+   <li class="nav-item <?php print(($this->controlador=='index') ? 'active' : ''); ?>">
      <a class="nav-link" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index')); ?>">
        <i class="fas fa-fw fa-tachometer-alt "></i>
        <span>Dashboard</span></a>
@@ -27,10 +24,7 @@
      Proceso
    </div>
    <!-- Nav Item - Utilities Collapse Menu -->
-   <li class="nav-item <?php 
-     if($this->controlador=="paciente")
-     echo 'active';
-   ?>">
+   <li class="nav-item <?php print(($this->controlador=='paciente') ? 'active' : ''); ?>">
      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
        <i class="fas fa-fw fa-procedures"></i>
        <span>Paciente</span>
@@ -55,10 +49,7 @@
    <!-- Heading -->
    <div class="sidebar-heading">Gestion</div>
    <!-- Nav Item - Charts -->
-   <li class="nav-item <?php 
-     if($this->controlador=="usuarios")
-     echo 'active';
-      ?>" >
+   <li class="nav-item <?php print(($this->controlador=='usuarios') ? 'active' : ''); ?>" >
      <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseUtilities2" aria-expanded="true" aria-controls="collapseUtilities"
      href="">
        <i class="fas fa-fw fa-users-cog"></i>
@@ -78,45 +69,30 @@
       </div>
    </li>
    <!-- Nav Item - Charts -->
-   <li class="nav-item <?php 
-     if($this->controlador=="areas")
-     echo 'active';
-   ?>" >
+   <li class="nav-item <?php print(($this->controlador=='areas') ? 'active' : ''); ?>" >
      <a class="nav-link" href="<?php echo $this->url(array('controller' => 'areas', 'action' => 'index')); ?>">
        <i class="fas fa-fw fa-table"></i>
        <span>Areas</span></a>
    </li>
    <!-- Nav Item - Tables -->
-   <li class="nav-item <?php 
-     if($this->controlador=="pisos")
-     echo 'active';
-   ?>">
+   <li class="nav-item <?php print(($this->controlador=='pisos') ? 'active' : ''); ?>">
      <a class="nav-link" href="<?php echo $this->url(array('controller' => 'pisos', 'action' => 'index')); ?>">
        <i class="fas fa-fw fa-layer-group"></i>
        <span>Pisos</span></a>
    </li>
-   <li class="nav-item <?php 
-     if($this->controlador=="especialidades")
-     echo 'active';
-   ?>">
+   <li class="nav-item <?php print(($this->controlador=='especialidades') ? 'active' : ''); ?>">
      <a class="nav-link" href="<?php echo $this->url(array('controller' => 'especialidades', 'action' => 'index')); ?>">
        <i class="fas fa-fw fa-medkit"></i>
        <span>Especialidades</span></a>
    </li>
    <!-- Nav Item - Tables -->
-   <li class="nav-item <?php 
-     if($this->controlador=="habitaciones")
-     echo 'active';
-   ?>">
+   <li class="nav-item <?php print(($this->controlador=='habitaciones') ? 'active' : ''); ?>">
      <a class="nav-link" href="<?php echo $this->url(array('controller' => 'habitaciones', 'action' => 'index')); ?>">
        <i class="fas fa-fw fa-h-square"></i>
        <span>Habitaciones</span></a>
    </li>
    <!-- Nav Item - Tables -->
-   <li class="nav-item <?php 
-     if($this->controlador=="camas")
-     echo 'active';
-   ?>">
+   <li class="nav-item <?php print(($this->controlador=='camas') ? 'active' : ''); ?>">
      <a class="nav-link" href="<?php echo $this->url(array('controller' => 'camas', 'action' => 'index')); ?>">
        <i class="fas fa-fw fa-bed"></i>
        <span>Camas</span><span class="badge badge-danger badge-counter">7</span></a>
@@ -126,10 +102,7 @@
    <!-- Heading -->
    <div class="sidebar-heading">Reportes</div>
    <!-- Nav Item - Charts -->
-   <li class="nav-item <?php 
-     if($this->controlador=="areas")
-     echo 'active';
-   ?>" >
+   <li class="nav-item <?php print(($this->controlador=='areas') ? 'active' : ''); ?>" >
      <a class="nav-link" href="<?php echo $this->url(array('controller' => 'areas', 'action' => 'index')); ?>">
        <i class="fas fa-fw fa-chart-line"></i>
        <span>Reportes</span></a>
@@ -139,10 +112,7 @@
    <hr class="sidebar-divider">
    <!-- Heading -->
    <div class="sidebar-heading">Buscador</div>
-   <li class="nav-item <?php 
-     if($this->controlador=="cie10")
-     echo 'active';
-   ?>">
+   <li class="nav-item <?php print(($this->controlador=='cie10') ? 'active' : ''); ?>">
      <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseUtilities3" aria-expanded="true" aria-controls="collapseUtilities"
      href="#">
        <i class="fas fa-fw fa-heartbeat"></i>

@@ -155,7 +155,20 @@
 
 						</div>
 					</div>
-					
+					<div id="formGroupPassword"  class="form-group" style="display: none;">
+						<label for="confirma_clave">A continuacion ingrese su contraseña para confirmar el cambio:</label>
+						<input type="password"
+						id="confirma_clave"
+						class="form-control bg-white border border-warning"
+						name="confirma_clave"
+						placeholder="Ingrese su contraseña"
+						required autocomplete="off" >
+						<div class="valid-feedback">
+						</div>
+						<div class="invalid-feedback">
+							Este campo es necesario.
+						</div>
+				  </div>
 					<div id="accionForm" class="d-flex justify-content-between">
 						
 					</div>
@@ -169,83 +182,4 @@
 		</div>
 				
 	</div>
-</div>
-<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-primary" id="exampleModalLabel"></h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-				</div>
-				<form class="user needs-validation" method="post" id="register" name="register" novalidate >
-				
-            <div class="modal-body">
-					<div id="accionFormCambiaClave" style="display: none;">
-						<div class="row">
-							<div class="col-sm-12">
-								<div  class="form-group">
-									<input type="password"
-									id="clave_actual"
-									class="form-control bg-white"
-									name="clave_actual"
-									placeholder="Ingrese su contraseña actual"
-									required autocomplete="off" >
-									<div class="valid-feedback">
-									</div>
-									<div class="invalid-feedback">
-										Este campo es necesario.
-									</div>
-							  </div>
-							</div>
-						</div>
-						<div class="row">
-	
-							<div class="col-sm-12">
-								<div  class="form-group">
-									<input type="password"
-									id="nueva_clave"
-									class="form-control bg-white"
-									name="nueva_clave"
-									placeholder="Ingrese una nueva contraseña"
-									required autocomplete="off"  minlength="6">
-									<div class="valid-feedback">
-									</div>
-									<div class="invalid-feedback">
-										Al menos 6 caracteres.
-									</div>
-							  </div>
-							</div>
-						</div>
-						<div class="row">
-	
-							<div class="col-sm-12">
-								<div  class="form-group">
-									<input type="password"
-									id="nueva_clave_2"
-									class="form-control bg-white"
-									name="nueva_clave_2"
-									placeholder="Repita la nueva contraseña"
-									required autocomplete="off" minlength="6" >
-									<div class="valid-feedback">
-									</div>
-									<div class="invalid-feedback">
-										Al menos 6 caracteres.
-									</div>
-									<hr>
-									<div class=" d-flex justify-content-between">
-										<button class="btn btn-outline-danger" type="button" data-dismiss="modal">Cancelar</button>
-										<button type="submit" class="btn btn-outline-success">Cambiar clave</button>
-									</div>
-							  </div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>
-				
-        </div>
-    </div>
 </div>

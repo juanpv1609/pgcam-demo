@@ -179,18 +179,32 @@
                         
             </a>
          </div>
-            <span class="d-flex justify-content-center text-xs"
-            ><strong>Ultimo acceso hace:  <?php  echo $this->escape($ultima_conexion->dias." dias y ".$ultima_conexion->horas." horas"); ?></strong> </span>
+            <span class="d-flex justify-content-center text-xs">
+              <strong>Ultimo acceso:  <?php  echo $this->escape($ultima_conexion->dias." dias ".$ultima_conexion->horas." horas ".$ultima_conexion->min." min"); ?></strong> </span>
          <!-- Divider -->
-   <hr class="sidebar-divider">
-         <a class="dropdown-item" href="<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'perfil')); ?>">
-           <i class="fas fa-cogs fa-sm fa-fw mr-2"></i>
-           Configurar
-         </a>
-         <button class="dropdown-item" onclick="logout()" >
-           <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>
-           Salir
-         </button>
+          <div class="row">
+            <div class="col-xs-12 d-flex justify-content-center mx-auto my-2">
+              <button  class=" btn btn-outline-dark btn-sm btn-block border-0" onclick="cambiarClave(<?php echo $this->user->usu_id; ?>)">
+                <i class="fas fa-key fa-sm fa-fw"></i> <span>Cambiar contraseña</span>
+              </button>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-around mx-auto">
+            <div class="col-xs-6">
+              <a class=" btn btn-outline-dark btn-sm btn-block border-0" href="<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'perfil')); ?>">
+                <i class="fas fa-cogs fa-sm fa-fw mr-2"></i>
+                <span>Perfil</span>
+              </a>
+            </div>
+            <div class="col-xs-6">
+              <button class=" btn btn-outline-dark btn-sm btn-block border-0" onclick="logout()" >
+                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>
+                <span>Salir</span>
+              </button>
+            </div>
+          </div>
+        
+         
        </div>
      </li>
    </ul>
