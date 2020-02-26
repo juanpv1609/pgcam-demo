@@ -50,6 +50,16 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
       AND usu_id=".$id.";";
     return $db->fetchRow($select);
     }
+    public function actualizarclave_recuperacion($correo,$nueva_clave) {
+        
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "UPDATE usuario
+        SET clave=MD5('".$nueva_clave."')
+        WHERE correo='".$correo."';";
+        return $db->fetchRow($select);
+    }
     public function actualizar_ultima_conexion_usuario($id) {
         
         $db = Zend_Registry::get('pgdb');
@@ -93,6 +103,16 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
         JOIN perfiles p
         ON p.perf_id=u.perf_id
         WHERE u.usu_id=".$perfil_id;
+        return $db->fetchRow($select);
+    }
+    public function existeUsuario($correo)
+    {
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "SELECT correo
+        FROM usuario
+        WHERE correo='".$correo."';";
         return $db->fetchRow($select);
     }
     public function listar_usuarios()

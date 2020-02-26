@@ -37,8 +37,11 @@
       <div class="form-group">
       <label for="recuperar">Direccion de correo electronico:</label>
             <input type="email" autofocus class="form-control form-control-user" id="recuperar" name="recuperar"
-              aria-describedby="correoHelp" required placeholder="Ingrese su correo electronico..." autocomplete="off" onkeyup="validar()">
+              aria-describedby="correoHelp" required placeholder="Ingrese su correo electronico..." 
+              autocomplete="off" onkeypress="validarCorreo()">
               <small  id="correoHelp" ></small>
+          </div>
+          <div id="mensaje" >
           </div>
       </div>
       <div class="modal-footer d-flex justify-content-between">

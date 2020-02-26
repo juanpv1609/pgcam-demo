@@ -6,8 +6,7 @@
 function isValidEmail(mail) {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(mail);
 }
-$(document).ready(function() {
-});
+
 
 function SendFormLogin(e)
 {
@@ -107,7 +106,7 @@ function logout(){
       })
       
 }
-function validar(){
+function validarCorreo(){
     $("#recuperar").removeClass('border border-danger').addClass('border border-success');
     $("#correoHelp").removeClass('badge badge-danger text-wrap').addClass('badge badge-success text-wrap').html('');
 }
@@ -116,12 +115,50 @@ function recuperarclave() {
    var recuperar = $("#recuperar").val();
     var dir = $('#dir').val();
         //console.log(nombre);
-        if ((!recuperar=="")) {
-                
+        if ((!recuperar=="")&&(isValidEmail(recuperar))) {
+            $.ajax(
+                {
+                    dataType: "json",
+                    type: "POST",
+                    url: dir + "/auth/recupera", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
+                    data: "recuperar=" + recuperar, //Se añade el parametro de busqueda del medico
+                    beforeSend: function (data) {
+                        $("#mensaje").addClass('alert alert-info')
+                        .html('<i class="fas fa-spinner fa-pulse"></i><span> Espere por favor, enviando correo electronico...</span>');
+                    },
+                    success: function (requestData) {//armar la tabla
+                        if (!requestData.data.correo=="") {
+                            Swal.fire({
+                                position: 'top',
+                                title: 'Correcto!',
+                                text: 'Correo electronico enviado.',
+                                width: '22rem',
+                                icon: 'success',
+                                confirmButtonText: 'Aceptar'
+                            }).then((result)=>{
+                                window.location.href = dir + "/auth/login";
+    
+                            })
+                        }else {
+                            $("#mensaje").addClass('alert alert-info')
+                        .html('<i class="fas fa-exclamation-circle"></i><span> El correo ingresado no existe en el sistema!</span>');
+                    
+                        }
+
+                    },
+                    error: function (requestData, strError, strTipoError) {
+                        //console.log(strError+"\n"+strTipoError);
+                        
+                    },
+                    complete: function (requestData, exito) { //fin de la llamada ajax.
+                       // console.log(exito);
+
+                    }
+                });
         }else{
             $("#recuperar").removeClass('border border-success').addClass('border border-danger');
             $("#correoHelp").removeClass('badge badge-success text-wrap').addClass('badge badge-danger text-wrap')
-            .html('<span>Este campo es necesario!</span>');
+            .html('<span>Ingrese un correo electronico valido!</span>');
         }
       
 }

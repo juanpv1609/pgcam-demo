@@ -38,6 +38,7 @@
           <actionMethod actionName="descripcion"/>
           <actionMethod actionName="categoria"/>
           <actionMethod actionName="capitulo"/>
+          <actionMethod actionName="busca"/>
         </controllerFile>
         <controllerFile controllerName="Paciente">
           <actionMethod actionName="index"/>
@@ -146,6 +147,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Usuarios">
             <viewScriptFile forActionName="perfil"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Cie10">
+            <viewScriptFile forActionName="busca"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

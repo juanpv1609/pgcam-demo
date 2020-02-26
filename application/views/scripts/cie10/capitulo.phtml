@@ -16,22 +16,22 @@
 					<a class="btn btn-outline-success btn-sm"
 					href="<?php echo $this->url(array('controller' => 'cie10', 'action' => 'capitulo')); ?>">Capitulo</a>
 				</div><hr>
-				<div class="input-group input-group">
-					<input type="text" class="form-control " placeholder="Buscar por capitulo..." aria-label="Search" aria-describedby="basic-addon2">
-					<div class="input-group-append">
-					  <button class="btn btn-primary" type="button">
-						 <i class="fas fa-search fa-sm"></i>
-					  </button>
-					</div>
-				 </div>
-				<div class="table-responsive">
-			
-				</div>
+				
+				
 			</div>
 			<div class="col-sm-2"></div>
 
-		</div>		
+		</div>	
+		<div class="row">
+			<div class="col-sm-12">
+				<div id="data_Table" class="table-responsive">
+					<?php echo $this->data;?>
+			
+				</div>
+			</div>
+		</div>	
 	</div>
 </div>
+
 
 
