@@ -39,15 +39,26 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
       WHERE usu_id=".$id.";";
                     return $db->fetchRow($select);
     }
-    public function actualizarclaveusuario($id,$clave_actual,$nueva_clave ) {
+    public function actualizarinfousuario($id,$nombre,$apellido, $correo ) {
+        $iniciales=substr($nombre,0,1).substr($apellido,0,1);
+        $iniciales = strtoupper($iniciales);
+
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "UPDATE usuario
+        SET usu_nombres='".$nombre."', correo='".$correo."', usu_apellidos='".$apellido."', usu_iniciales='".$iniciales."'
+      WHERE usu_id=".$id.";";
+          return $db->fetchRow($select);
+    }
+    public function actualizarclaveusuario($id,$nueva_clave ) {
         
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = "UPDATE usuario
         SET clave=MD5('".$nueva_clave."')
-      WHERE clave=MD5('".$clave_actual."')
-      AND usu_id=".$id.";";
+      WHERE usu_id=".$id.";";
     return $db->fetchRow($select);
     }
     public function actualizarclave_recuperacion($correo,$nueva_clave) {
@@ -128,6 +139,21 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
         JOIN usu_estado e
         ON e.usu_estado_id=u.usu_estado_id";
         return $db->fetchAll($select);
+    }
+    public function listar_usuario($usu_id)
+    {
+        //devuelve todos los registros de la tabla
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "SELECT *
+        FROM usuario u
+        JOIN perfiles p
+        ON p.perf_id=u.perf_id
+        JOIN usu_estado e
+        ON e.usu_estado_id=u.usu_estado_id
+        WHERE usu_id=".$usu_id;
+        return $db->fetchRow($select);
     }
     public function listar_perfiles()
     {

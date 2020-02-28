@@ -7,7 +7,7 @@ class AuthController extends Zend_Controller_Action
     {
         /* Initialize action controller here */
         $this->initView();
-        $this->view->baseUrl = $this->_request->getBaseUrl();
+        //$this->view->baseUrl = $this->_request->getBaseUrl();
         $this->view->user = Zend_Auth::getInstance()->getIdentity();
         //$this->_helper->layout()->disableLayout();
 
@@ -200,17 +200,30 @@ class AuthController extends Zend_Controller_Action
 
             $mail = new Zend_Mail(); 
             $mail->setBodyText("Recuperacion de clave"); 
-            $mail->setBodyHtml('<h5>PG-CAM</h5>
-            <p>Su nueva contrase&ntilde;a provisional es la siguiente: <strong>'.$clave_provisional.'</strong></p>
-            <p>Una vez haya ingresado al sistema, debe cambiar su contrase&ntilde;a.</p>
-            <p>Puede iniciar sesion accediendo al siguiente link: <a href="http://localhost/zend/public/auth/login">PG-CAM Login</a></p>');
+            $mail->setBodyHtml('<html lang="en">
+            <head>
+               <meta charset="UTF-8">
+               <meta name="viewport" content="width=device-width, initial-scale=1.0">
+               <title>Recuperacion de clave</title>
+            </head>
+            <body>
+               <h4>PG-CAM</h4>
+                  <p>Hola! '.$correo_recuperacion.' su nueva contrase&ntilde;a provisional es la siguiente: <strong>'.$clave_provisional.'</strong>
+                  , una vez haya ingresado al sistema, debe cambiar su contrase&ntilde;a.</p>
+                  <p>Puede iniciar sesion accediendo al siguiente link: <a href="http://localhost/zend/public/auth/login">PG-CAM Login</a></p>
+                  
+                 <p>Este correo ha sido generado automaticamente. No debe responder</p>
+               
+            </body>
+            </html>');
             $mail->setFrom('juanpv1609@gmail.com', 'PG-CAM Admin'); //quien envia el correo
             $mail->addTo($correo_recuperacion); //destinatario
             $mail->setSubject('Recuperacion de clave'); 
             // adjuntamos un archivo, $file es un archivo local 
             //$at = $mail->createAttachment(file_get_contents("prueba.txt")); 
             // nombre del archivo adjunto 
-            //$at->filename = "archivo_adjunto.txt";             
+            //$at->filename = "archivo_adjunto.txt";      
+                   
             $mail->send($transport);
             //------------actualizar la clave
             $obj->actualizarclave_recuperacion($correo_recuperacion,$clave_provisional);

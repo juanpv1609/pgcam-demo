@@ -1,6 +1,4 @@
-<?php
-				$obj = new Application_Model_DbTable_Usuario();
-            $perfil = $obj->obtienePerfil($this->user->usu_id); ?>
+
 <div class="card  shadow ">
 	<div class="card-header d-flex justify-content-between">
 		 <h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
@@ -11,7 +9,7 @@
 			<div class="col-sm-3 ">
 				<div class="row">
 					<div class="col-sm-12 d-flex justify-content-center">
-						<i class="far fa-user fa-7x text-<?php echo $this->escape($perfil->perf_color); ?> mx-lg-5 my-lg-5"></i>
+						<i class="far fa-user fa-7x text-<?php echo $this->data->perf_color; ?> mx-lg-5 my-lg-5"></i>
 					</div>					
 				</div>
 				<hr>
@@ -19,34 +17,33 @@
 					<div class="col sm-12 d-flex justify-content-center">
 						<div class='btn-group' role='group' aria-label='Basic example'>
 							<button type="button"  onclick="activaPerfilForm()" 
-						  class="btn btn-outline-success btn-sm" >
-								<i class="fas fa-cogs"></i> Modificar
-						  </button> 
-						  <button type="button"  onclick="cambiarClaveU()" 
-						  class="btn btn-outline-info btn-sm" >
-								<i class="fas fa-key"></i> Cambiar clave
-						  </button> 
+						  class="btn btn-outline-primary btn-sm" >
+								<i class="fas fa-cogs"></i> Modificar informacion
+						  </button>  
+						  <button  class=" btn btn-outline-danger btn-sm" onclick="cambiarClaveU('<?php echo $this->user->usu_id; ?>')">
+							<i class="fas fa-key fa-fw"></i> <span>Cambiar contraseña</span>
+						 </button>
 						 </div>
 					</div>
 				</div>
 			</div>
 
 			<div class="col-sm-6 ml-4">
-			<form class="user needs-validation" method="post" id="register" name="register" novalidate >
+			<form class="user needs-validation" method="post" id="perfil_register" name="perfil_register" novalidate >
 
-				<input type="hidden" id="usuario_id" name="usuario_id" value="<?php echo $this->user->usu_id; ?>">
+				<input type="hidden" id="perfil_usuario_id" name="perfil_usuario_id" value="<?php echo $this->data->usu_id; ?>">
 					 <div class="row">
 						 <div class="col-sm-6">
 							<div  class="form-group">
-                        <label for="nombres">Nombres:</label>
+                        <label for="perfil_nombres">Nombres:</label>
                         <input type="text"
-                        id="nombres"
+                        id="perfil_nombres"
                         class="form-control bg-white"
-								name="nombres"
+								name="perfil_nombres"
 								placeholder="Nombres..."
 								required autocomplete="off" 
 								disabled
-								value="<?php echo $this->user->usu_nombres; ?>">
+								value="<?php echo $this->data->usu_nombres; ?>">
                         <div class="valid-feedback">
 								</div>
 								<div class="invalid-feedback">
@@ -56,15 +53,15 @@
 						 </div>
 						 <div class="col-sm-6">
 							<div  class="form-group">
-                        <label for="apellidos">Apellidos:</label>
+                        <label for="perfil_apellidos">Apellidos:</label>
                         <input type="text"
-                        id="apellidos"
+                        id="perfil_apellidos"
                         class="form-control bg-white"
-								name="apellidos"
+								name="perfil_apellidos"
 								placeholder="Apellidos..."
 								required autocomplete="off"
 								disabled
-								value="<?php echo $this->user->usu_apellidos; ?>" >
+								value="<?php echo $this->data->usu_apellidos; ?>" >
                         <div class="valid-feedback">
 								</div>
 								<div class="invalid-feedback">
@@ -76,15 +73,15 @@
 					 <div class="row">
 						 <div class="col-sm-12">
 							<div  class="form-group">
-                        <label for="correo">Correo electronico:</label>
+                        <label for="perfil_correo">Correo electronico:</label>
                         <input type="email"
-                        id="correo"
+                        id="perfil_correo"
                         class="form-control bg-white"
-								name="correo"
+								name="perfil_correo"
 								placeholder="ejemplo@ejemplo.com"
 								required autocomplete="off" 
 								disabled
-								value="<?php echo $this->user->correo; ?>">
+								value="<?php echo $this->data->correo; ?>">
                         <div class="valid-feedback">
 								</div>
 								<div class="invalid-feedback">
@@ -96,15 +93,15 @@
 					 <div class="row">
 						<div class="col-sm-4">
 							<div  class="form-group">
-                        <label for="perfil">Perfil:</label>
+                        <label for="perfil_perfil">Perfil:</label>
                         <input type="text"
-                        id="perfil"
+                        id="perfil_perfil"
                         class="form-control bg-white"
-								name="perfil"
+								name="perfil_perfil"
 								placeholder="Perfil"
 								required autocomplete="off" 
 								disabled
-								value="<?php echo $this->escape($perfil->perf_nombre); ?>"
+								value="<?php echo $this->data->perf_nombre; ?>"
 								data-toggle="tooltip" data-placement="bottom" title="Este campo no puede ser cambiado">
                         <div class="valid-feedback">
 								</div>
@@ -116,15 +113,15 @@
 						</div>
 						<div class="col-sm-4">
 							<div  class="form-group">
-                        <label for="estado">Estado:</label>
+                        <label for="perfil_estado">Estado:</label>
                         <input type="text"
-                        id="estado"
+                        id="perfil_estado"
                         class="form-control bg-white"
-								name="estado"
+								name="perfil_estado"
 								placeholder="estado"
 								required autocomplete="off" 
 								disabled
-								value="<?php echo $this->user->usu_estado_id; ?>"
+								value="<?php echo $this->data->usu_estado_nombre; ?>"
 								data-toggle="tooltip" data-placement="bottom" title="Este campo no puede ser cambiado">
                         <div class="valid-feedback">
 								</div>
@@ -136,15 +133,15 @@
 						</div>
 						<div class="col-sm-4">
 							<div  class="form-group">
-                        <label for="iniciales">Iniciales:</label>
+                        <label for="perfil_iniciales">Iniciales:</label>
                         <input type="text"
-                        id="iniciales"
+                        id="perfil_iniciales"
                         class="form-control bg-white"
-								name="iniciales"
+								name="perfil_iniciales"
 								placeholder="Iniciales"
 								required autocomplete="off" 
 								disabled
-								value="<?php echo $this->user->usu_iniciales; ?>"
+								value="<?php echo $this->data->usu_iniciales; ?>"
 								data-toggle="tooltip" data-placement="bottom" title="Este campo no puede ser cambiado">
                         <div class="valid-feedback">
 								</div>

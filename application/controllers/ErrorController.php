@@ -6,7 +6,7 @@ class ErrorController extends Zend_Controller_Action
     public function errorAction()
     {
          $this->initView();
-        $this->view->baseUrl = $this->_request->getBaseUrl();
+        //$this->view->baseUrl = $this->_request->getBaseUrl();
         $this->_helper->layout()->disableLayout();  
         $errors = $this->_getParam('error_handler');
         $this->view->titulo="Error";

@@ -7,7 +7,7 @@ class CamasController extends Zend_Controller_Action
     {
         /* Initialize action controller here */
         $this->initView();
-        $this->view->baseUrl = $this->_request->getBaseUrl();
+        //$this->view->baseUrl = $this->_request->getBaseUrl();
         $this->view->user = Zend_Auth::getInstance()->getIdentity();
         $this->view->controlador=Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
         $this->view->accion=Zend_Controller_Front::getInstance()->getRequest()->getActionName();

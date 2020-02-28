@@ -140,17 +140,17 @@
      <li class="nav-item dropdown no-arrow my-auto mx-1">
       <?php if($this->user) : 
             $obj = new Application_Model_DbTable_Usuario();
-            $perfil = $obj->obtienePerfil($this->user->usu_id);
+            $usuario= $obj->listar_usuario($this->user->usu_id);
             $ultima_conexion = $obj->obtiene_ultima_conexion_usuario($this->user->usu_id);
       ?>
-       <a class=" dropdown-toggle btn btn-<?php echo $this->escape($perfil->perf_color); ?> btn-circle btn-sm" 
+       <a class=" dropdown-toggle btn btn-<?php echo $this->escape($usuario->perf_color); ?> btn-circle btn-sm" 
        href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
        data-toggle="tooltip" data-placement="bottom" title="Informacion de usuario">
        <span class="text-uppercase font-weight-bold">
         <?php 
-            echo $this->user->usu_iniciales; 
+            echo $usuario->usu_iniciales; 
             else : ?>
-            <a href="<?php echo $this->url(array('controller' => 'auth', 'action' => 'login')); ?>"  
+            <a href="<?php echo $this->baseUrl();?>/auth/login"  
               class="btn btn-outline-primary btn-sm " data-toggle="tooltip" data-placement="bottom" title="Clic para iniciar sesion">
               Iniciar Sesión</a>
               <?php  endif; ?>
@@ -162,25 +162,26 @@
         
          <h6 class="dropdown-header">Mi cuenta</h6>
          <div class="d-flex justify-content-between ">
-          <a class=" dropdown-toggle btn btn-outline-<?php echo $this->escape($perfil->perf_color); ?>
-             btn-circle btn-lg ml-3" href="<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'perfil')); ?>">
-          <span class="text-uppercase font-weight-bold"><?php echo $this->user->usu_iniciales; ?></span>
+          <a class=" dropdown-toggle btn btn-outline-<?php echo $this->escape($usuario->perf_color); ?>
+             btn-circle btn-lg ml-3" href="<?php echo $this->baseUrl();?>/usuarios/perfil">
+          <span class="text-uppercase font-weight-bold"><?php echo $usuario->usu_iniciales; ?></span>
           </a>
-          <a class="dropdown-item" href="<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'perfil')); ?>"
+          <a class="dropdown-item" href="<?php echo $this->baseUrl();?>/usuarios/perfil"
             data-toggle="tooltip" data-placement="bottom" title="Clic para ver el perfil">
             <i class="far fa-fw fa-user"></i> 
-            <strong><?php echo $this->escape($this->user->usu_nombres." ".$this->user->usu_apellidos); ?></strong>
+            <strong><?php echo $this->escape($usuario->usu_nombres." ".$usuario->usu_apellidos); ?></strong>
             <br>
             <i class="far fa-fw fa-envelope"></i> <span class="text-secondary font-italic">
-              <?php  echo $this->escape($this->user->correo); ?> </span> 
+              <?php  echo $this->escape($usuario->correo); ?> </span> 
             <br>
-            <span class="text-primary"><?php  echo $this->escape($perfil->perf_nombre); ?> </span>  
+            <span class="text-primary"><?php  echo $this->escape($usuario->perf_nombre); ?> </span>  
             
                         
             </a>
          </div>
             <span class="d-flex justify-content-center text-xs">
-              <strong>Ultimo acceso:  <?php  echo $this->escape($ultima_conexion->dias." dias ".$ultima_conexion->horas." horas ".$ultima_conexion->min." min"); ?></strong> </span>
+              <strong>
+                Ultimo acceso:  <?php  echo $this->escape($ultima_conexion->dias." dias ".$ultima_conexion->horas." horas ".$ultima_conexion->min." min"); ?></strong> </span>
          <!-- Divider -->
          <div class="btn-group d-flex justify-content-end" role="group" aria-label="Basic example">
           <button  class=" btn btn-outline-dark btn-sm  border-0" onclick="cambiarClaveU('<?php echo $this->user->usu_id; ?>')">
@@ -189,7 +190,7 @@
           </div>
           <div class="btn-group d-flex justify-content-end" role="group" aria-label="Basic example">
             <button type="button" class=" btn btn-outline-primary btn-sm  border-0" 
-            onclick="window.location.href=`<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'perfil')); ?>`">
+            onclick="window.location.href=`<?php echo $this->baseUrl();?>/usuarios/perfil`">
               <i class="fas fa-users-cog fa-sm fa-fw mr-2"></i>
               <span>Perfil</span>
             </button>

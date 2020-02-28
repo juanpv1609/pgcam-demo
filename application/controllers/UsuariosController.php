@@ -7,7 +7,7 @@ class UsuariosController extends Zend_Controller_Action
     {
         /* Initialize action controller here */
         $this->initView();
-        $this->view->baseUrl = $this->_request->getBaseUrl();
+        //$this->view->baseUrl = $this->_request->getBaseUrl();
         $this->view->user = Zend_Auth::getInstance()->getIdentity();
         $this->view->controlador = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
         $this->view->accion = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
@@ -44,8 +44,10 @@ class UsuariosController extends Zend_Controller_Action
         // action body
         $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/usuarios.js');
         echo $this->view->headScript();
-        $this->view->user = Zend_Auth::getInstance()->getIdentity();
+        $user = Zend_Auth::getInstance()->getIdentity();
+        $obj = new Application_Model_DbTable_Usuario();
 
+        $this->view->data= $obj->listar_usuario($user->usu_id);
         $this->view->titulo = "Informacion de usuario";
     }
 
@@ -87,17 +89,33 @@ class UsuariosController extends Zend_Controller_Action
         }
 
     }
-    public function editarclaveAction()
+    public function editarperfilAction()
     {
         // action body
         $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
         $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
         if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
             $id = $this->getRequest()->getParam('id');
-            $clave_actual = $this->getRequest()->getParam('clave_actual');
-            $nueva_clave = $this->getRequest()->getParam('nueva_clave');
+            $nombres = $this->getRequest()->getParam('nombres');
+            $apellidos = $this->getRequest()->getParam('apellidos');
+            $correo = $this->getRequest()->getParam('correo');
+            $confirma_clave = $this->getRequest()->getParam('confirma_clave');
             $table = new Application_Model_DbTable_Usuario();
-            $table->actualizarclaveusuario($id,$clave_actual,$nueva_clave);
+            $table->actualizarinfousuario($id,$nombres,$apellidos, $correo);
+            echo $this->tabla_usuarios();
+        }
+
+    }
+    public function editarclaveAction()
+    {
+        // action body
+        $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
+        $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
+        if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
+            $user = Zend_Auth::getInstance()->getIdentity();
+            $nueva_clave = $this->getRequest()->getParam('nueva_clave');
+            $obj = new Application_Model_DbTable_Usuario();
+            $obj->actualizarclaveusuario($user->usu_id,$nueva_clave);
            // echo $this->tabla_usuarios();
         }
 
