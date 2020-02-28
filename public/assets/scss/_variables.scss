@@ -31,6 +31,14 @@ $cyan: #36b9cc !default;
 $brand-google: #ea4335;
 $brand-facebook: #3b5998;
 
+$primary:       $blue !default;
+$secondary:     $gray-600 !default;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $orange !default;
+$danger:        $red !default;
+$light:         $gray-100 !default;
+$dark:          $gray-800 !default;
 // Set Contrast Threshold
 $yiq-contrasted-threshold: 195 !default;
 
@@ -54,11 +62,11 @@ $border-color: darken($gray-200, 2%);
 
 // Spacing Variables
 // Change below variable if the height of the navbar changes
-$topbar-base-height: 4.375rem;
+$topbar-base-height: 3.375rem;
 // Change below variable to change the width of the sidenav
-$sidebar-base-width: 14rem;
+$sidebar-base-width: 12rem;
 // Change below variable to change the width of the sidenav when collapsed
-$sidebar-collapsed-width: 6.5rem;
+$sidebar-collapsed-width: 7.5rem;
 
 // Card
 $card-cap-bg: $gray-100;
@@ -74,3 +82,4 @@ $transition-collapse: height .15s ease !default;
 // Dropdowns
 $dropdown-font-size: 0.85rem;
 $dropdown-border-color: $border-color;
+$enable-responsive-font-sizes:                true !default;

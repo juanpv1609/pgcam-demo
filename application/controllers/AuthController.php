@@ -198,18 +198,19 @@ class AuthController extends Zend_Controller_Action
             // generacion de clave aleatoria
             $clave_provisional= substr(md5(time()), 0, 8); //genera una cadena alfanumerica aleatoria de 8 caracteres
 
-            $mail = new Zend_Mail(); 
+            $mail = new Zend_Mail("UTF-8"); 
             $mail->setBodyText("Recuperacion de clave"); 
             $mail->setBodyHtml('<html lang="en">
             <head>
                <meta charset="UTF-8">
                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-               <title>Recuperacion de clave</title>
+               <title>Recuperación de contraseña</title>
             </head>
-            <body>
-               <h4>PG-CAM</h4>
-                  <p>Hola! '.$correo_recuperacion.' su nueva contrase&ntilde;a provisional es la siguiente: <strong>'.$clave_provisional.'</strong>
-                  , una vez haya ingresado al sistema, debe cambiar su contrase&ntilde;a.</p>
+            <body><br>
+               <h3>PG-CAM <small> Admin</small></h3> 
+                  <p>Hola! <code>'.$correo_recuperacion.'</code> su nueva contraseña provisional es la siguiente: <strong>
+                  <span style="background-color: yellow;">'.$clave_provisional.'</span></strong>
+                  , una vez que haya ingresado al sistema, deberá cambiar su contraseña.</p>
                   <p>Puede iniciar sesion accediendo al siguiente link: <a href="http://localhost/zend/public/auth/login">PG-CAM Login</a></p>
                   
                  <p>Este correo ha sido generado automaticamente. No debe responder</p>
