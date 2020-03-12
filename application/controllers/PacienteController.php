@@ -30,7 +30,7 @@ class PacienteController extends Zend_Controller_Action
 
     public function registrarAction()
     {
-        $this->view->titulo = "Registro de paciente";
+        $this->view->titulo = "Registro de admisión";
         
 
     }

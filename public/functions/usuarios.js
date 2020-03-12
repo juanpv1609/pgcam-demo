@@ -129,25 +129,43 @@ function InsertarUsuario() {
 
                         },
                         success: function (requestData) {//armar la tabla
-
-                          const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                            onOpen: (toast) => {
-                              toast.addEventListener('mouseenter', Swal.stopTimer)
-                              toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                          });                              
-                          Toast.fire({
-                            icon: 'success',
-                            title: 'Dato creado correctamente!'
-                          });
-                              $('#formModal').modal('hide');
-                              $("#data_Table").html(requestData);
-                             toDataTable("#dataTableUsuarios");
+                          if (requestData=='') {
+                            const Toast = Swal.mixin({
+                              toast: true,
+                              position: 'top-end',
+                              showConfirmButton: false,
+                              timer: 3000,
+                              timerProgressBar: true,
+                              onOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                              }
+                            });                              
+                            Toast.fire({
+                              icon: 'error',
+                              title: 'Correo ingresado ya existe!'
+                            });
+                          }else{
+                            const Toast = Swal.mixin({
+                              toast: true,
+                              position: 'top-end',
+                              showConfirmButton: false,
+                              timer: 3000,
+                              timerProgressBar: true,
+                              onOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                              }
+                            });                              
+                            Toast.fire({
+                              icon: 'success',
+                              title: 'Dato creado correctamente!'
+                            });
+                                $('#formModal').modal('hide');
+                                $("#data_Table").html(requestData);
+                               toDataTable("#dataTableUsuarios");
+                          }
+                          
                             //console.log(requestData.data);
 
                         },
@@ -348,7 +366,8 @@ function ActualizaClaveUsuario() {
                       }
                   });
                 } else {
-                  $("#clave_igual").addClass('alert alert-danger').html('Deben coincidir las contraseñas').show(100).delay(2500).hide(100);
+                   $("#clave_igual").addClass('badge badge-danger text-wrap')
+                  .html('Deben coincidir las contraseñas').show(100).delay(2500).hide(100);
               }
       }
      });

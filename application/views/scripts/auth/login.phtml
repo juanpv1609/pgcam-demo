@@ -5,7 +5,7 @@
             <!-- Nested Row within Card Body -->
             <div class="row justify-content-center py-auto">
               <div class="col-xl-5 col-lg-6 col-md-5 my-auto">
-				  	  	<img class="img-fluid py-5 px-2" src="<?php echo $this->baseUrl(); ?>/assets/img/login.svg" alt="Login">
+				  	  	<img class="img-fluid py-5 " src="<?php echo $this->baseUrl(); ?>/assets/img/login.svg" alt="Login">
 				      </div>
               <div class="col-lg-6 p-4">
                   <div class="text-center">
@@ -15,7 +15,7 @@
                     <div class="form-group">
                       <input type="email" autofocus class="form-control form-control-user" id="email" name="email"
 							 aria-describedby="emailHelp" required placeholder="Ingrese su correo electronico..." autocomplete="off"
-                      >
+                      value="<?php if (isset($this->usuario_value)) echo $this->usuario_value; ?>">
                         <div class="valid-feedback">
                         </div>
                         <div class="invalid-feedback">
@@ -25,7 +25,7 @@
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user" name="password"
 							 id="password" required placeholder="Ingrese su contraseña..." autocomplete="off"
-                             >
+                 >
                         <div class="valid-feedback">
                         </div>
                         <div class="invalid-feedback">

@@ -1,10 +1,518 @@
-<div class="card  shadow ">
+<div class="card shadow ">
 	<div class="card-header d-flex justify-content-between">
 		 <h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
-		 
+		 <div>
+				<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-md-0 mw-100 navbar-search">
+					<div class="input-group input-group-sm ">
+					<input type="text" class="form-control" placeholder="Buscar por hc o cedula..." aria-label="Search" aria-describedby="buscar_paciente_hc">
+					<div class="input-group-append">
+						<button class="btn btn-primary" type="button">
+							<i class="fas fa-search fa-sm"></i>
+						</button>
+					</div>
+					</div>
+				</form>
+				<ul class="navbar-nav ml-auto">
+				<li class="nav-item dropdown no-arrow d-sm-none">
+					<a class="nav-link dropdown-toggle" href="#" id="searchDropdown_p" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<i class="fas fa-search fa-fw text-primary"></i>
+					</a>
+					<!-- Dropdown - Messages -->
+					<div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown_p">
+					<form class="form-inline mr-auto w-100 navbar-search">
+						<div class="input-group input-group-sm">
+							<input type="text" class="form-control" placeholder="Buscar..." aria-label="Search" aria-describedby="buscar_paciente_hc">
+							<div class="input-group-append">
+							<button class="btn btn-primary" type="button">
+								<i class="fas fa-search fa-sm text-white"></i>
+							</button>
+							</div>
+						</div>
+					</form>
+					</div>
+					
+				
+				</li>
+				</ul>	
+		</div>	 
 	</div>
-	<div class="card-body">
-
+	<div class="card-body text-xs">
+		<div class="row">
+			<div class="col-sm-2">
+				<div  class="form-group">
+					<label for="apellido_paterno">Apellido paterno:</label>
+					<input type="text"
+					id="apellido_paterno"
+					class="form-control form-control-sm"
+					name="apellido_paterno"
+					required autocomplete="off" >
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div  class="form-group">
+                        <label for="apellido_materno">Apellido materno:</label>
+                        <input type="text"
+                        id="apellido_materno"
+                        class="form-control form-control-sm"
+								name="apellido_materno"
+                        required autocomplete="off" >
+                        <div class="valid-feedback">
+								</div>
+								<div class="invalid-feedback">
+									 Este campo es necesario.
+								</div>
+						  </div>
+			</div>
+			<div class="col-sm-2">
+				<div  class="form-group ">
+                        <label for="primer_nombre">Primer nombre:</label>
+                        <input type="text"
+                        id="primer_nombre"
+                        class="form-control form-control-sm"
+								name="primer_nombre"
+								
+                        required autocomplete="off" >
+                        <div class="valid-feedback">
+								</div>
+								<div class="invalid-feedback">
+									 Este campo es necesario.
+								</div>
+						  </div>
+			</div>
+			<div class="col-sm-2">
+				<div  class="form-group">
+                        <label for="segundo_nombre">Segundo nombre:</label>
+                        <input type="text"
+                        id="segundo_nombre"
+                        class="form-control form-control-sm"
+								name="segundo_nombre"
+								
+                        required autocomplete="off" >
+                        <div class="valid-feedback">
+								</div>
+								<div class="invalid-feedback">
+									 Este campo es necesario.
+								</div>
+						  </div>
+			</div>
+			<div class="col-sm-2">
+				<div  class="form-group">
+                        <label for="cedula">N Cedula:</label>
+                        <input type="text"
+                        id="cedula"
+                        class="form-control form-control-sm"
+								name="cedula"
+								
+                        required autocomplete="off" >
+                        <div class="valid-feedback">
+								</div>
+								<div class="invalid-feedback">
+									 Este campo es necesario.
+								</div>
+						  </div>
+			</div>
+			<div class="col-sm-2">
+				<div  class="form-group">
+                        <label for="telefono">N Telefono:</label>
+                        <input type="text"
+                        id="telefono"
+                        class="form-control form-control-sm"
+								name="telefono"
+								
+                        required autocomplete="off" >
+                        <div class="valid-feedback">
+								</div>
+								<div class="invalid-feedback">
+									 Este campo es necesario.
+								</div>
+						  </div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-2">
+				<div  class="form-group">
+					<label for="apellido_paterno">Provincia:</label>
+					<select name="" id="" class="form-control form-control-sm" >
+						<option value=""></option>
+						<option value="">Pichincha</option>
+					</select>
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div  class="form-group">
+					<label for="apellido_paterno">Canton:</label>
+					<select name="" id="" class="form-control form-control-sm" >
+						<option value=""></option>
+						<option value="">Pichincha</option>
+					</select>
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div  class="form-group">
+					<label for="apellido_paterno">Parroquia:</label>
+					<select name="" id="" class="form-control form-control-sm" >
+						<option value=""></option>
+						<option value="">Pichincha</option>
+					</select>
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div  class="form-group">
+					<label for="apellido_paterno">Barrio:</label>
+					<select name="" id="" class="form-control form-control-sm" >
+						<option value=""></option>
+						<option value="">Pichincha</option>
+					</select>
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div  class="form-group">
+					<label for="direccion">Direccion domiciliaria:</label>
+					<input type="text"
+					id="direccion"
+					class="form-control form-control-sm"
+					name="direccion"
+					required autocomplete="off" >
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-2">
+				<div  class="form-group">
+					<label for="apellido_paterno">Fecha de nacimiento:</label>
+					<input type="text"
+					id="apellido_paterno"
+					class="form-control form-control-sm"
+					name="apellido_paterno"
+					required autocomplete="off" >
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div  class="form-group">
+					<label for="apellido_paterno">Lugar de nacimiento:</label>
+					<input type="text"
+					id="apellido_paterno"
+					class="form-control form-control-sm"
+					name="apellido_paterno"
+					required autocomplete="off" >
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div  class="form-group">
+					<label for="apellido_paterno">Nacionalidad:</label>
+					<select name="" id="" class="form-control form-control-sm" >
+						<option value=""></option>
+						<option value="">Pichincha</option>
+					</select>
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div  class="form-group">
+					<label for="apellido_paterno">Grupo cultural:</label>
+					<select name="" id="" class="form-control form-control-sm" >
+						<option value=""></option>
+						<option value="">Pichincha</option>
+					</select>
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-1">
+				<div  class="form-group">
+					<label for="apellido_paterno">Edad:</label>
+					<select name="" id="" class="form-control form-control-sm" >
+						<option value=""></option>
+						<option value="">18</option>
+					</select>
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-1">
+				<div  class="form-group">
+					<label for="apellido_paterno">Genero:</label>
+					<select name="" id="" class="form-control form-control-sm" >
+						<option value=""></option>
+						<option value="">M</option>
+						<option value="">F</option>
+					</select>
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div  class="form-group">
+					<label for="apellido_paterno">Estado civil:</label>
+					<select name="" id="" class="form-control form-control-sm" >
+						<option value=""></option>
+						<option value="">soltero</option>
+						<option value="">casado</option>
+					</select>
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-2">
+				<div  class="form-group">
+					<label for="apellido_paterno">Instruccion:</label>
+					<input type="text"
+					id="apellido_paterno"
+					class="form-control form-control-sm"
+					name="apellido_paterno"
+					required autocomplete="off" >
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div  class="form-group">
+					<label for="apellido_paterno">Ocupacion:</label>
+					<input type="text"
+					id="apellido_paterno"
+					class="form-control form-control-sm"
+					name="apellido_paterno"
+					required autocomplete="off" >
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div  class="form-group">
+					<label for="apellido_paterno">Empresa donde trabaja:</label>
+					<input type="text"
+					id="apellido_paterno"
+					class="form-control form-control-sm"
+					name="apellido_paterno"
+					required autocomplete="off" >
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div  class="form-group">
+					<label for="apellido_paterno">Tipo de seguro:</label>
+					<select name="" id="" class="form-control form-control-sm" >
+						<option value=""></option>
+						<option value="">Pichincha</option>
+					</select>
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div  class="form-group">
+					<label for="apellido_paterno">Referido de:</label>
+					<input type="text"
+					id="apellido_paterno"
+					class="form-control form-control-sm"
+					name="apellido_paterno"
+					required autocomplete="off" >
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+				<div  class="form-group">
+					<label for="apellido_paterno">En caso necesario avisar a:</label>
+					<input type="text"
+					id="apellido_paterno"
+					class="form-control form-control-sm"
+					name="apellido_paterno"
+					required autocomplete="off" >
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div  class="form-group">
+					<label for="apellido_paterno">Parentezco:</label>
+					<input type="text"
+					id="apellido_paterno"
+					class="form-control form-control-sm"
+					name="apellido_paterno"
+					required autocomplete="off" >
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div  class="form-group">
+					<label for="apellido_paterno">Direccion:</label>
+					<input type="text"
+					id="apellido_paterno"
+					class="form-control form-control-sm"
+					name="apellido_paterno"
+					required autocomplete="off" >
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div  class="form-group">
+					<label for="apellido_paterno">N Telefono:</label>
+					<input type="text"
+					id="apellido_paterno"
+					class="form-control form-control-sm"
+					name="apellido_paterno"
+					required autocomplete="off" >
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+				<div  class="form-group">
+					<label for="apellido_paterno">Forma de llegada:</label>
+					<select name="" id="" class="form-control form-control-sm" >
+						<option value=""></option>
+						<option value="">Ambulatorio</option>
+					</select>
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div  class="form-group">
+					<label for="apellido_paterno">Fuente de informacion:</label>
+					<input type="text"
+					id="apellido_paterno"
+					class="form-control form-control-sm"
+					name="apellido_paterno"
+					required autocomplete="off" >
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div  class="form-group">
+					<label for="apellido_paterno">Institucion o persona que entrega al paciente:</label>
+					<input type="text"
+					id="apellido_paterno"
+					class="form-control form-control-sm"
+					name="apellido_paterno"
+					required autocomplete="off" >
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div  class="form-group">
+					<label for="apellido_paterno">N Telefono:</label>
+					<input type="text"
+					id="apellido_paterno"
+					class="form-control form-control-sm"
+					name="apellido_paterno"
+					required autocomplete="off" >
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+							Este campo es necesario.
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="card-footer d-flex justify-content-center">
+		<button type="submit" class="btn btn-primary btn-block">Registrar paciente</button>
 	</div>
 </div>
+
 

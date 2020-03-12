@@ -12,7 +12,7 @@ const merge = require("merge-stream");
 const plumber = require("gulp-plumber");
 const rename = require("gulp-rename");
 const sass = require("gulp-sass");
-const uglify = require("gulp-uglify");
+const uglify = require("gulp-uglify-es").default;
 
 // Load package.json for banner
 const pkg = require('./package.json');
@@ -30,13 +30,8 @@ const banner = ['/*!\n',
 
 function browserSync(done) {
   browsersync.init({
-    proxy: "localhost:8080",
-    open: true,
-    injectChanges: true,
-    // Use a specific port (instead of the one auto-detected by Browsersync).
-    // port: 7000,
-    watchOptions: {
-      debounceDelay: 1000 // This introduces a small delay when watching for file change events to avoid triggering too many reloads
+    server: {
+      baseDir: "./public"
     }
   });
   done();
@@ -142,11 +137,29 @@ function js() {
     .pipe(gulp.dest('./public/assets/js'))
     .pipe(browsersync.stream());
 }
+// JS task
+function js_functions() {
+  return gulp
+    .src([
+      './public/functions/*.js',
+      '!./public/functions/*.min.js',
+    ])
+    .pipe(uglify())
+    .pipe(header(banner, {
+      pkg: pkg
+    }))
+    .pipe(rename({
+      suffix: '.min'
+    }))
+    .pipe(gulp.dest('./public/functions'))
+    .pipe(browsersync.stream());
+}
 
 // Watch files
 function watchFiles() {
   gulp.watch("./public/assets/scss/**/*", css);
   gulp.watch(["./public/assets/js/**/*", "!./public/assets/js/**/*.min.js"], js);
+  gulp.watch(["./public/funtions/*", "!./public/funtions/*.min.js"], js_functions);
 }
 
 // Define complex tasks
@@ -157,6 +170,7 @@ const watch = gulp.series(build, gulp.parallel(watchFiles, browserSync));
 // Export tasks
 exports.css = css;
 exports.js = js;
+exports.js_functions = js_functions;
 exports.clean = clean;
 exports.vendor = vendor;
 exports.build = build;

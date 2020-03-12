@@ -25,12 +25,15 @@
         <span class="lead text-gray-800 mb-5"><?php echo $this->message ?></span>
         <?php if($this->message=="Página no encontrada"){ ?>
         <div class="error mx-auto " data-text="404">404</div>
+        <h1>Ocurrió un error <i class="fas fa-sad-tear "></i></h1>
+        <span>Lo sentimos, pero no se encontró la página que solicitó</span>
           <?php } else { ?>
             <div class="error mx-auto " data-text="500">500</div>
+            <h1>Ocurrió un error <i class="fas fa-sad-tear "></i></h1>
+        <span>Error de la base de datos</span>
         <?php }  ?>
         
-        <h1>Ocurrió un error <i class="fas fa-sad-tear "></i></h1>
-        <span>Lo sentimos, pero no se encontró la página que solicitó</span> <hr>
+         <hr>
         <a href="<?php echo $this->baseUrl(); ?>/index" class="btn btn-outline-primary btn-user">
         <i class="fas fa-home"></i> Regresar al Inicio</a>
       </div>

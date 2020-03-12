@@ -63,9 +63,36 @@ class UsuariosController extends Zend_Controller_Action
             $perfil = $this->getRequest()->getParam('perfil');
             $estado = $this->getRequest()->getParam('estado');
             $clave="HGOPNA2020";
-            $table = new Application_Model_DbTable_Usuario();
-            $table->crearusuario($nombres,$apellidos, $correo, $clave,$perfil,$estado);
-            echo $this->tabla_usuarios();
+            $obj = new Application_Model_DbTable_Usuario();
+            $existe_correo = $obj->existeUsuario($correo);
+            if (!$existe_correo) {
+                $obj->crearusuario($nombres,$apellidos, $correo, $clave,$perfil,$estado);
+            //envio de correo de bienvenida
+                $asunto='Bienvenido al sistema';
+                $contenido='<html lang="en">
+                <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Bienvenido al sistema PG-CAM</title>
+                </head>
+                <body><br>
+                <h3>PG-CAM <small> Admin</small></h3> 
+                    <p>Hola! <code>'.$nombres.' '.$apellidos.'</code> su cuenta ha sido creada exitosamente, sin embargo para poder ingresar al sistema
+                    debera requerir al administrador que active su cuenta.</p>
+                    <p>Puede iniciar sesion accediendo al siguiente link: <a href="http://localhost/zend/public/auth/login">PG-CAM Login</a></p>
+                    
+                    <p>Este correo ha sido generado automaticamente. No debe responder</p>
+                
+                </body>
+                </html>';
+                $obj->enviaEmail($correo,$contenido,$asunto);
+                echo $this->tabla_usuarios();
+            }else{
+                echo '';
+
+            }
+
+            
         }
 
 

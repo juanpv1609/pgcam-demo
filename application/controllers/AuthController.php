@@ -22,7 +22,8 @@ class AuthController extends Zend_Controller_Action
     {
         // action body
         $this->view->titulo="Iniciar Sesión"; 
-
+        $usuario;
+        $clave;
         $this->_helper->layout->setLayout('login');
         if ($this->_request->isPost()) {
             Zend_Loader::loadClass('Zend_Filter_StripTags'); //Filtro para parametros de imgreso
@@ -81,6 +82,8 @@ class AuthController extends Zend_Controller_Action
                             $this->view->message = '<div class="alert alert-danger alert-dismissible">
                         <button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
                         <i class="fas fa-exclamation-circle"></i><strong> Error: </strong><span>"La contraseña ingresada es incorrecta!"</span></div>';
+                        $this->view->usuario_value=$usuario; //para que no se borre el campo de usuario
+                        $this->view->clave_value="";
                             break; 
                         default:
                             /* otro error */
@@ -162,13 +165,39 @@ class AuthController extends Zend_Controller_Action
             $apellido= $this->getRequest()->getParam('apellido');
             $email = $this->getRequest()->getParam('email');
             $clave = $this->getRequest()->getParam('clave');
-            $table = new Application_Model_DbTable_Usuario();
-            $datos = $table->insertarusuario($nombre,$apellido, $email, $clave);
+            $obj = new Application_Model_DbTable_Usuario();
+            $existe_correo = $obj->existeUsuario($email);
             $response = array(); //Declaro un array para enviar los datos a la vista
+
+            if (!$existe_correo) {
+                $datos = $obj->insertarusuario($nombre,$apellido, $email, $clave);
+                $asunto='Bienvenido al sistema';
+                $contenido='<html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Bienvenido al sistema PG-CAM</title>
+                </head>
+                <body><br>
+                    <h3>PG-CAM <small> Admin</small></h3> 
+                        <p>Hola! <code>'.$nombre.' '.$apellido.'</code> su cuenta ha sido creada exitosamente, sin embargo para poder ingresar al sistema
+                        deberá requerir al administrador que active su cuenta.</p>
+                        <p>Puede iniciar sesión accediendo al siguiente link: <a href="http://localhost/zend/public/auth/login">PG-CAM Login</a></p>
+                        
+                        <p>Este correo ha sido generado automaticamente. No debe responder</p>
+                    
+                </body>
+                </html>';
+                //envio el email con los datos creados
+                $obj->enviaEmail($email,$contenido,$asunto);
+            }  
         }
-        $response['data'] = $datos;
+
+        $response['data'] = $existe_correo;
         $json = json_encode($response);
         echo $json;
+
+         
 
     }
     public function recuperaAction()
@@ -187,20 +216,9 @@ class AuthController extends Zend_Controller_Action
         $json = json_encode($response);
         echo $json;
         if ($existe_correo) {
-            // ---2) configuración del smtp y datos para realizar la autenticación en el mismo 
-            $config = array( 
-                'auth' => 'login', 
-                'username' => 'f2d6e876eeddf3', 
-                'password' => '13f1714f4f2789', 
-                'port' => 2525); 
-                
-            $transport = new Zend_Mail_Transport_Smtp('smtp.mailtrap.io', $config); 
-            // generacion de clave aleatoria
+            $asunto='Recuperacion de clave';
             $clave_provisional= substr(md5(time()), 0, 8); //genera una cadena alfanumerica aleatoria de 8 caracteres
-
-            $mail = new Zend_Mail("UTF-8"); 
-            $mail->setBodyText("Recuperacion de clave"); 
-            $mail->setBodyHtml('<html lang="en">
+            $contenido='<html lang="en">
             <head>
                <meta charset="UTF-8">
                <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -216,22 +234,16 @@ class AuthController extends Zend_Controller_Action
                  <p>Este correo ha sido generado automaticamente. No debe responder</p>
                
             </body>
-            </html>');
-            $mail->setFrom('juanpv1609@gmail.com', 'PG-CAM Admin'); //quien envia el correo
-            $mail->addTo($correo_recuperacion); //destinatario
-            $mail->setSubject('Recuperacion de clave'); 
-            // adjuntamos un archivo, $file es un archivo local 
-            //$at = $mail->createAttachment(file_get_contents("prueba.txt")); 
-            // nombre del archivo adjunto 
-            //$at->filename = "archivo_adjunto.txt";      
-                   
-            $mail->send($transport);
+            </html>';
+            //envio el email con los datos creados
+            $obj->enviaEmail($correo_recuperacion,$contenido,$asunto);
             //------------actualizar la clave
             $obj->actualizarclave_recuperacion($correo_recuperacion,$clave_provisional);
-            
         }
+        
     }
-
+    
+    
 }
 
 

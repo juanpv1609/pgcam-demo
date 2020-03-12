@@ -21,7 +21,7 @@ class HabitacionesController extends Zend_Controller_Action
         $this->view->data = $this->tabla_habitaciones();
         $this->view->data_especialidades = $this->select_piso();
         $this->view->titulo="Habitaciones Registradas";
-        $this->view->icono = "fa-h-square";
+        $this->view->icono = "fa-door-open";
 
     }
     public function crearAction()

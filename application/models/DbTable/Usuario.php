@@ -173,5 +173,24 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
         $select = "select * from usu_estado";
         return $db->fetchAll($select);
     }
+    public function enviaEmail($destinatario,$contenido,$asunto){
+        // ---2) configuración del smtp y datos para realizar la autenticación en el mismo 
+        $config = array( 
+            'auth' => 'login', 
+            'username' => 'f2d6e876eeddf3', 
+            'password' => '13f1714f4f2789', 
+            'port' => 2525); 
+            
+        $transport = new Zend_Mail_Transport_Smtp('smtp.mailtrap.io', $config); 
+        // generacion de clave aleatoria
+        
+        $mail = new Zend_Mail("UTF-8"); 
+        $mail->setBodyHtml($contenido);
+        $mail->setFrom('juanpv1609@gmail.com', 'PG-CAM Admin'); //quien envia el correo
+        $mail->addTo($destinatario); //destinatario
+        $mail->setSubject($asunto);                        
+        $mail->send($transport);           
+            
+    }
 }
 

@@ -8,19 +8,18 @@
   <div id="wrapper">
     <!-- Sidebar -->
     <?php echo $this->render('_sidebar.phtml'); ?>
-     <!-- End of Sidebar -->
+    <!-- End of Sidebar -->
       <!-- Content Wrapper -->
-      <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content-wrapper" class="d-flex flex-column">
         <!-- Main Content -->
         <div id="content">
           <!-- Topbar -->
           <?php echo $this->render('_navbar.phtml'); ?>
           <!-- End of Topbar -->
-
           <!-- Begin Page Content -->
           <div class="container-fluid pt-sm-3">
             <!-- Page Heading -->
-          <?php echo $this->render('_page_head.phtml'); ?>            
+            <?php echo $this->render('_page_head.phtml'); ?>            
             <!-- Page Heading -->
             <?php echo $this->layout()->content; ?> 
           </div>

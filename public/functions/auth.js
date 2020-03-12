@@ -44,7 +44,10 @@ function SendFormRegister() {
 
                         },
                         success: function (requestData) {//armar la tabla
-
+                           if (!requestData.data.correo=='') {
+                                $("#clave_igual").addClass('alert alert-danger').html('El correo <strong>'+requestData.data.correo+'</strong> ya existe!').show(100).delay(2500).hide(100);
+                            
+                           }else{
                             Swal.fire({
                                 position: 'top',
                                 title: 'Correcto!',
@@ -56,12 +59,14 @@ function SendFormRegister() {
                                 window.location.href = dir + "/auth/login";
 
                             })
+
+                           }
                             //console.log(requestData.data);
 
                         },
                         error: function (requestData, strError, strTipoError) {
-                            //console.log(strError+"\n"+strTipoError);
-                            $("#clave_igual").addClass('alert alert-danger').html('El correo ingresado ya existe').show(100).delay(2500).hide(100);
+                        //alert(strError+"\n"+strTipoError);
+                          //  $("#clave_igual").addClass('alert alert-danger').html('El correo ingresado ya existe').show(100).delay(2500).hide(100);
 
                         },
                         complete: function (requestData, exito) { //fin de la llamada ajax.
