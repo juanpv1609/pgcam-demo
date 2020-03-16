@@ -290,7 +290,7 @@ class UsuariosController extends Zend_Controller_Action
         } else {
             $Listaarea .= '<label for="comboPerfil">Seleccione un perfil:</label>';
 
-            $Listaarea .= '<select class="form-control" name="comboPerfil" id="comboPerfil">';
+            $Listaarea .= '<select class="custom-select" name="comboPerfil" id="comboPerfil">';
             foreach ($datosarea as $item):
                 $Listaarea .= "<option value='". $item->perf_id ."'>" . $item->perf_nombre . "</option>";
             endforeach;
@@ -315,7 +315,7 @@ class UsuariosController extends Zend_Controller_Action
         } else {
             $Listaarea .= '<label for="comboEstado">Estado:</label>';
 
-            $Listaarea .= '<select class="form-control" name="comboEstado" id="comboEstado">';
+            $Listaarea .= '<select class="custom-select" name="comboEstado" id="comboEstado">';
             foreach ($datosarea as $item):
                 $Listaarea .= "<option value='". $item->usu_estado_id ."'>" . $item->usu_estado_nombre . "</option>";
             endforeach;

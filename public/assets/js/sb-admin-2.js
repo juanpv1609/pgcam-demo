@@ -62,4 +62,5 @@
             }, false);
         });
     }, false);
+    
 })(jQuery); // End of use strict

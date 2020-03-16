@@ -42,80 +42,80 @@
 				</div>
 				<form class="user needs-validation" method="post" id="register" name="register" novalidate >
 				
-            <div class="modal-body">
-					 <input type="hidden" id="usuario_id" name="usuario_id">
-					 <div class="row">
-						 <div class="col-sm-6">
-							<div  class="form-group">
-                        <label for="nombres">Nombres:</label>
-                        <input type="text"
-                        id="nombres"
-                        class="form-control "
-								name="nombres"
-								placeholder="Nombres..."
-                        required autocomplete="off" >
-                        <div class="valid-feedback">
-								</div>
-								<div class="invalid-feedback">
-									 Este campo es necesario.
-								</div>
-						  </div>
-						 </div>
-						 <div class="col-sm-6">
-							<div  class="form-group">
-                        <label for="apellidos">Apellidos:</label>
-                        <input type="text"
-                        id="apellidos"
-                        class="form-control "
-								name="apellidos"
-								placeholder="Apellidos..."
-                        required autocomplete="off" >
-                        <div class="valid-feedback">
-								</div>
-								<div class="invalid-feedback">
-									 Este campo es necesario.
-								</div>
-						  </div>
-						 </div>
-					 </div>
-					 <div class="row">
-						 <div class="col-sm-12">
-							<div  class="form-group">
-                        <label for="correo">Correo electronico:</label>
-                        <input type="email"
-                        id="correo"
-                        class="form-control input-group-sm"
-								name="correo"
-								placeholder="ejemplo@ejemplo.com"
-								required autocomplete="off" >
-                        <div class="valid-feedback">
-								</div>
-								<div class="invalid-feedback">
-									 Por favor ingrese un correo electronico valido.
-								</div>
-						  </div>
-						 </div>
-					 </div>
-					 <div class="row">
-						<div class="col-sm-6">
-							<?php echo $this->data_perfiles;?>
+					<div class="modal-body">
+						<input type="hidden" id="usuario_id" name="usuario_id">
+						<div class="row">
+							<div class="col-sm-6">
+								<div  class="form-group">
+									<label for="nombres">Nombres:</label>
+									<input type="text"
+									id="nombres"
+									class="form-control "
+									name="nombres"
+									placeholder="Nombres..."
+									required autocomplete="off" >
+									<div class="valid-feedback">
+									</div>
+									<div class="invalid-feedback">
+										Este campo es necesario.
+									</div>
+							</div>
+							</div>
+							<div class="col-sm-6">
+								<div  class="form-group">
+									<label for="apellidos">Apellidos:</label>
+									<input type="text"
+									id="apellidos"
+									class="form-control "
+									name="apellidos"
+									placeholder="Apellidos..."
+									required autocomplete="off" >
+									<div class="valid-feedback">
+									</div>
+									<div class="invalid-feedback">
+										Este campo es necesario.
+									</div>
+							</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<div  class="form-group">
+									<label for="correo">Correo electronico:</label>
+									<input type="email"
+									id="correo"
+									class="form-control input-group-sm"
+									name="correo"
+									placeholder="ejemplo@ejemplo.com"
+									required autocomplete="off" >
+									<div class="valid-feedback">
+									</div>
+									<div class="invalid-feedback">
+										Por favor ingrese un correo electronico valido.
+									</div>
+							</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<?php echo $this->data_perfiles;?>
+
+							</div>
+							<div class="col-sm-6">
+								<?php echo $this->data_estado;?>
+
+							</div>
+						</div>   
+						<div id="clave_igual"></div>
+							
+					<div class="modal-footer d-flex justify-content-between ">
+						<button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+						<div id="accionForm">
 
 						</div>
-						<div class="col-sm-6">
-							<?php echo $this->data_estado;?>
-
-						</div>
-					</div>   
-					<div id="clave_igual"></div>
-						  
-				<div class="modal-footer d-flex justify-content-between ">
-					<button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
-					<div id="accionForm">
-
 					</div>
-				</div>
-				</div>
-			</form>
+					</div>
+				</form>
 				
         </div>
     </div>

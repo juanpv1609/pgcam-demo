@@ -88,7 +88,7 @@ class CamasController extends Zend_Controller_Action
         } else {
             $Listaarea .= '<label for="comboArea">Seleccione una habitacion:</label>';
 
-            $Listaarea .= '<select class="form-control" name="comboHabitacion" id="comboHabitacion">';
+            $Listaarea .= '<select class="custom-select" name="comboHabitacion" id="comboHabitacion">';
             foreach ($datosarea as $item):
                 $Listaarea .= "<option value='". $item->habitacion_id ."'>" . $item->habitacion_nombre . "</option>";
             endforeach;
@@ -111,7 +111,7 @@ class CamasController extends Zend_Controller_Action
         } else {
             $Listaarea .= '<label for="comboEstadoCama">Estado de la cama:</label>';
 
-            $Listaarea .= '<select class="form-control" name="comboEstadoCama" id="comboEstadoCama">';
+            $Listaarea .= '<select class="custom-select" name="comboEstadoCama" id="comboEstadoCama">';
             foreach ($datosarea as $item):
                 $Listaarea .= "<option value='". $item->cama_estado_id ."'>" . $item->cama_estado_descripcion . "</option>";
             endforeach;

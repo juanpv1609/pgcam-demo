@@ -9,6 +9,7 @@
       <controllersDirectory>
         <controllerFile controllerName="Index">
           <actionMethod actionName="index"/>
+          <actionMethod actionName="dashboard"/>
         </controllerFile>
         <controllerFile controllerName="Error"/>
         <controllerFile controllerName="Camas">
@@ -70,6 +71,7 @@
           <dbTableFile dbTableName="Camas"/>
           <dbTableFile dbTableName="Usuario"/>
           <dbTableFile dbTableName="Cie10"/>
+          <dbTableFile dbTableName="Admision"/>
         </dbTableDirectory>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
@@ -150,6 +152,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Cie10">
             <viewScriptFile forActionName="busca"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Index">
+            <viewScriptFile forActionName="dashboard"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

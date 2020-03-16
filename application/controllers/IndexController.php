@@ -13,7 +13,7 @@ class IndexController extends Zend_Controller_Action
         $this->view->controlador=Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
 
         $this->view->accion=Zend_Controller_Front::getInstance()->getRequest()->getActionName();
-        $this->view->icono = "fa-tachometer-alt";
+        $this->view->icono = "fa-chart-pie";
         //$this->view->controlador=Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
         //$this->view->accion=Zend_Controller_Front::getInstance()->getRequest()->getActionName();
         //$this->view->proyecto=$this->_request->getBasePath();
@@ -23,10 +23,21 @@ class IndexController extends Zend_Controller_Action
     public function indexAction()
     {
         // action body
-        $this->view->estado_activo=$datos="active";
+        $this->view->titulo="Index";
+    }
+
+    public function dashboardAction()
+    {
+        // action body
         $this->view->titulo="Dashboard";
+        $this->view->controlador="Dashboard";
+
+        $this->view->accion="Index";
+
     }
 
 
 }
+
+
 

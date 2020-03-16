@@ -85,7 +85,7 @@ class EspecialidadesController extends Zend_Controller_Action
         } else {
             $Listaarea .= '<label for="comboArea">Seleccione un piso:</label>';
 
-            $Listaarea .= '<select class="form-control" name="comboPiso" id="comboPiso">';
+            $Listaarea .= '<select class="custom-select" name="comboPiso" id="comboPiso">';
             foreach ($datosarea as $item):
                 $Listaarea .= "<option value='". $item->piso_id ."'>" . $item->piso_nombre . "</option>";
             endforeach;

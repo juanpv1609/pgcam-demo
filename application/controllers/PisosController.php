@@ -85,7 +85,7 @@ class PisosController extends Zend_Controller_Action
         } else {
             $Listaarea .= '<label for="comboArea">Seleccione un area:</label>';
 
-            $Listaarea .= '<select class="form-control" name="comboArea" id="comboArea">';
+            $Listaarea .= '<select class="custom-select" name="comboArea" id="comboArea">';
             foreach ($datosarea as $item):
                 $Listaarea .= "<option value='". $item->area_id ."'>" . $item->area_nombre . "</option>";
             endforeach;
