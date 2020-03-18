@@ -161,7 +161,7 @@
       </div>
     </li>
      <!-- Nav Item - User Information -->
-     <li class="nav-item dropdown no-arrow my-auto mx-1" data-toggle="tooltip" data-placement="bottom" title="Perfil">
+     <li class="nav-item dropdown no-arrow my-auto mr-1" data-toggle="tooltip" data-placement="bottom" title="Perfil">
       <?php if($this->user) : 
             $obj = new Application_Model_DbTable_Usuario();
             $usuario= $obj->listar_usuario($this->user->usu_id);
@@ -174,12 +174,14 @@
         <?php 
             echo $usuario->usu_iniciales; 
             else : ?>
-            <a href="<?php echo $this->baseUrl();?>/auth/login"  
-              class="btn btn-outline-primary btn-sm " data-toggle="tooltip" data-placement="bottom" title="Clic para iniciar sesion">
-              Iniciar Sesión</a>
+              <a class=" btn btn-outline-primary btn-sm" href="<?php echo $this->baseUrl();?>/auth/login">
+                Login
+              </a>
               <?php  endif; ?>
             </span>  
        </a>
+       
+      
        <!-- Dropdown - User Information -->
        <div class=" dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
         

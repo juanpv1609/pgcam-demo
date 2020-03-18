@@ -24,7 +24,7 @@ class PacienteController extends Zend_Controller_Action
     public function listarAction()
     {
         $this->view->titulo = "Lista de pacientes";
-        
+        $this->view->data = $this->tabla_pacientes();
 
     }
 
@@ -40,15 +40,15 @@ class PacienteController extends Zend_Controller_Action
     {
         $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
         $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
-        if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
+        if ($this->getRequest()->isXmlHttpRequest()) { //Detectamos si es una llamada AJAX
             
             $apellido_paterno = $this->getRequest()->getParam('apellido_paterno');
-            //$apellido_materno = $this->getRequest()->getParam('apellido_materno');
+            $apellido_materno = $this->getRequest()->getParam('apellido_materno');
             $primer_nombre = $this->getRequest()->getParam('primer_nombre');
-            //$segundo_nombre = $this->getRequest()->getParam('segundo_nombre');
+            $segundo_nombre = $this->getRequest()->getParam('segundo_nombre');
             $cedula = $this->getRequest()->getParam('cedula');
             $telefono = $this->getRequest()->getParam('telefono');
-            /* $comboParroq = $this->getRequest()->getParam('comboParroq');
+            $comboParroq = $this->getRequest()->getParam('comboParroq');
             $barrio = $this->getRequest()->getParam('barrio');
             $direccion = $this->getRequest()->getParam('direccion');
             $fecha_n = $this->getRequest()->getParam('fecha_n');
@@ -70,16 +70,17 @@ class PacienteController extends Zend_Controller_Action
             $comboFormaLLeg = $this->getRequest()->getParam('comboForma');
             $fuente_info = $this->getRequest()->getParam('fuente_info');
             $institucion = $this->getRequest()->getParam('institucion');
-            $institucion_telefono = $this->getRequest()->getParam('institucion_telefono'); */
+            $institucion_telefono = $this->getRequest()->getParam('institucion_telefono'); 
             //$response = array();
-            $obj2 = new Application_Model_DbTable_Admision();
-            $obj2->admisionp($apellido_paterno,$primer_nombre,$cedula,$telefono);
+            $obj = new Application_Model_DbTable_Admision();
+            $data_p = $obj->admisionpaciente($apellido_paterno,$apellido_materno,$primer_nombre,$segundo_nombre,$cedula
+            ,$telefono,$comboParroq,$barrio,$direccion,$fecha_n,$lugar_n,$comboNacionalidad
+            ,$comboGrupo,$comboEdad,$comboGenero,$comboEstado,$comboInstruccion,$ocupacion
+            ,$trabajo,$comboTipoSeguro,$referido,$contacto_nombre,$contacto_parentezco,$contacto_direccion
+            ,$contacto_telefono,$comboFormaLLeg,$fuente_info,$institucion,$institucion_telefono);
             //echo $this->tabla_area();
            // $response = array();
         }
-        //$response['data'] = $datos;
-        //$json = json_encode($response);
-        //echo $json;
         
 
     }
@@ -94,6 +95,69 @@ class PacienteController extends Zend_Controller_Action
     {
         $this->view->titulo = "Cambio / Egreso de paciente";
         
+    }
+    public function tabla_pacientes()
+    {
+        $table_m = new Application_Model_DbTable_Admision();
+        $datosarea = $table_m->listarPacientes();
+        $Listaarea = '';
+        if (!$datosarea) {
+            $Listaarea .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error !</strong> No se encontraron resultados
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>';
+        } else {
+
+            $Listaarea .= '<table class="table table-sm dataTable" id="dataTableAreas" width="100%">
+                <thead>
+                <tr>
+                    <th class="text-primary">HC</th>
+                    <th class="text-primary">CEDULA</th>
+                    <th class="text-primary">NOMBRE</th>
+                    <th class="text-primary">SEXO</th>
+                    <th class="text-primary">EDAD</th>
+                    <th class="text-primary">F NAC</th>
+                    <th class="text-primary">SEGURO</th>
+                    <th class="text-primary ">ACCION</th>
+                </tr>
+                </thead>
+                <tbody>';
+            foreach ($datosarea as $item):
+
+                $Listaarea .= "<tr>";
+                $Listaarea .= "<td>" . $item->p_hc . "</td>";
+                $Listaarea .= "<td>" . $item->p_ci . "</td>";
+                $Listaarea .= "<td>" . $item->p_apellidos ." " . $item->p_nombres . "</td>";
+                $Listaarea .= "<td>" . $item->p_sexo . "</td>";
+                $Listaarea .= "<td>" . $item->p_edad . "</td>";
+                $Listaarea .= "<td>" . $item->p_fecha_n . "</td>";
+                $Listaarea .= "<td>" . $item->p_tipo_seguro . "</td>";
+                $Listaarea .= "<td>
+                    <div class='btn-group' role='group' aria-label='Basic example'>
+                        
+                        <!--  debo enviar la busqueda por ajax -->
+                        <button type='button' class='btn btn-outline-info btn-sm' onclick='eliminar(". $item->p_id .")' >
+                            <i class='fas fa-eye '></i>
+                        </button>
+                        <button type='button' class='btn btn-outline-secondary btn-sm ' 
+                        onclick='editarModal(". $item->p_id .",`". $item->p_ci ."`)' >
+                            <i class='fas fa-edit  '></i>
+                        </button>
+                        <button type='button' class='btn btn-outline-danger btn-sm' onclick='eliminar(". $item->p_id .")' >
+                            <i class='fas fa-trash '></i>
+                        </button>
+                        </div>
+                        
+                    </td>
+                </tr>";
+            endforeach;
+
+            $Listaarea .= "</tbody></table>";
+        }
+
+        return $Listaarea;
     }
     public function cantonAction()
     {

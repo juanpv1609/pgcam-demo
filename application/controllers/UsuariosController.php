@@ -68,7 +68,7 @@ class UsuariosController extends Zend_Controller_Action
             if (!$existe_correo) {
                 $obj->crearusuario($nombres,$apellidos, $correo, $clave,$perfil,$estado);
             //envio de correo de bienvenida
-                $asunto='Bienvenido al sistema';
+                $asunto='Bienvenido!';
                 $contenido='<html lang="en">
                 <head>
                 <meta charset="UTF-8">

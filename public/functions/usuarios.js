@@ -106,17 +106,14 @@ function eliminarU(id){
    })
 }
 function InsertarUsuario() {
-   //var nombre = $("#ci").val();
   var nombres =   $("#nombres").val();
   var apellidos = $("#apellidos").val();
   var correo =    $("#correo").val();
   var perfil =    $("#comboPerfil").val();
   var estado =    $("#comboEstado").val();
    var dir = $('#dir').val();
-       //console.log(nombre);
        $("#register").submit(function(event){
         event.preventDefault(); //prevent default action
-        //console.log(nombre);
         if ((!nombres=="") && (!apellidos=="") && (!correo=="")) {
                 $.ajax(
                     {

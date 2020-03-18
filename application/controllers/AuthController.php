@@ -9,6 +9,8 @@ class AuthController extends Zend_Controller_Action
         $this->initView();
         //$this->view->baseUrl = $this->_request->getBaseUrl();
         $this->view->user = Zend_Auth::getInstance()->getIdentity();
+        $this->view->controlador = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
+        $this->view->accion = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
         //$this->_helper->layout()->disableLayout();
 
     }
@@ -165,12 +167,13 @@ class AuthController extends Zend_Controller_Action
             $apellido= $this->getRequest()->getParam('apellido');
             $email = $this->getRequest()->getParam('email');
             $clave = $this->getRequest()->getParam('clave');
+            $comboPerfil = $this->getRequest()->getParam('comboPerfil');
             $obj = new Application_Model_DbTable_Usuario();
             $existe_correo = $obj->existeUsuario($email);
             $response = array(); //Declaro un array para enviar los datos a la vista
 
             if (!$existe_correo) {
-                $datos = $obj->insertarusuario($nombre,$apellido, $email, $clave);
+                $datos = $obj->insertarusuario($nombre,$apellido, $email, $clave,$comboPerfil);
                 $asunto='Bienvenido al sistema';
                 $contenido='<html lang="en">
                 <head>

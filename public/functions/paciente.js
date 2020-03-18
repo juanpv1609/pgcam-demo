@@ -53,49 +53,50 @@ function getParroquias() {
 
 function AdmisionPaciente() {
       var dir = $('#dir').val(); 
-      var apellido_paterno = $('#apellido_paterno').val(); 
-      var primer_nombre = $('#primer_nombre').val(); 
-      var cedula = $('#cedula').val(); 
-      var telefono = $('#telefono').val(); 
-          $("#paciente_admision").submit(function(event){
-      //var dataString = $('#paciente_admision').serialize(); //recorre todo el formulario
+      var dataString = $('#paciente_admision').serialize(); //recorre todo el formulario
+      $("#paciente_admision").submit(function(event){      
+      event.preventDefault(); //prevent default action  
+            if ($('#cedula').val().length==10) {         
+                  $.ajax({
+                        dataType: "html",
+                        type: "POST",
+                        url: dir + "/paciente/admision", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
+                        data: dataString, //Se añade el parametro de busqueda del medico
+                        beforeSend: function (data) {
+                        //console.log(data)
+                        },
+                        success: function (requestData) {//armar la tabla
+                              const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                    timerProgressBar: true,
+                                    onOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                    });                              
+                                    Toast.fire({
+                                    icon: 'success',
+                                    title: 'Paciente registrado correctamente!'
+                                    }).then((result)=>{
+                                          window.location.href = dir + "/paciente/registrar";
 
-           event.preventDefault(); //prevent default action           
-            $.ajax(
-            {
-                  dataType: "html",
-                  type: "POST",
-                  url: dir + "/paciente/admision", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
-                  data: "apellido_paterno="+apellido_paterno+"&cedula="+cedula+"&primer_nombre="+primer_nombre+"&telefono="+telefono, //Se añade el parametro de busqueda del medico
-                  beforeSend: function (data) {
-                  //console.log(data)
-                  },
-                  success: function (requestData) {//armar la tabla
-                  
-                        /* const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        onOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                          });
+
+                              
+                                    
+                        },
+                        error: function (requestData, strError, strTipoErro) {
+                              // alert(xhr.statusText+" "+xhr.status);
+                              //alert(xhr.responseText);
+                        },
+                        complete: function (requestData, exito) { //fin de la llamada ajax.
+                        
                         }
-                        });                              
-                        Toast.fire({
-                        icon: 'success',
-                        title: 'Dato creado correctamente!'
-                        }); */ 
-                  },
-                  error: function (requestData, strError, strTipoErro) {
-                        alert(xhr.statusText+" "+xhr.status);
-                        //alert(xhr.responseText);
-                  },
-                  complete: function (requestData, exito) { //fin de la llamada ajax.
-                  
-                  }
-            });
+                  });
+            }
                
        }); 
    

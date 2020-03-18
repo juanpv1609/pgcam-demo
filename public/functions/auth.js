@@ -28,18 +28,20 @@ function SendFormRegister() {
     var email = $("#email").val();
     var clave = $("#clave1").val();
     var clave2 = $("#clave2").val();
+    var comboPerfil = $("#comboPerfil").val();
     var dir = $('#dir').val();
     $("#register").submit(function(event){
         event.preventDefault(); //prevent default action
         //console.log(nombre);
-        if ((!nombre=="") && (!apellido=="") && (!email=="") && (!clave=="") && (!clave2=="")) {
+        if ((!nombre=="") && (!apellido=="") && (!email=="") && (!clave=="") && (!clave2=="") && (!comboPerfil=="")) {
             if (clave == clave2) {
                 $.ajax(
                     {
                         dataType: "json",
                         type: "POST",
                         url: dir + "/auth/agregar", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
-                        data: "nombre=" + nombre + "&apellido=" + apellido + "&email=" + email + "&clave=" + clave, //Se añade el parametro de busqueda del medico
+                        data: "nombre=" + nombre + "&apellido=" + apellido + "&email=" + email 
+                        + "&clave=" + clave+"&comboPerfil="+comboPerfil, //Se añade el parametro de busqueda del medico
                         beforeSend: function (data) {
 
                         },

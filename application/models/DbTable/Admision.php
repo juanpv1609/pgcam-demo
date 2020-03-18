@@ -11,6 +11,8 @@ class Application_Model_DbTable_Admision extends Zend_Db_Table_Abstract
         ,$comboGrupo,$comboEdad,$comboGenero,$comboEstado,$comboInstruccion,$ocupacion
         ,$trabajo,$comboTipoSeguro,$referido,$contacto_nombre,$contacto_parentezco,$contacto_direccion
         ,$contacto_telefono,$comboFormaLLeg,$fuente_info,$institucion,$institucion_telefono){
+        
+        $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = "INSERT INTO pg_paciente(p_ci, p_nombres, p_apellidos, p_telefono, p_parroq, 
@@ -25,12 +27,15 @@ class Application_Model_DbTable_Admision extends Zend_Db_Table_Abstract
         '".$institucion."', '".$institucion_telefono."')";
         return $db->fetchRow($select);
     }
-    public function admisionp($apellido_paterno,$primer_nombre,$cedula,$telefono){
+    
+    public function listarPacientes()
+    {
+        //devuelve todos los registros de la tabla
+        $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
-        $select = "INSERT INTO p(p_nombre, p_apellido, p_cedula, p_telefono) 
-        VALUES ('".$primer_nombre."', '".$apellido_paterno."', '".$cedula."','".$telefono."')";
-        return $db->fetchRow($select);
+        $select = "select * from pg_paciente";
+        return $db->fetchAll($select);
     }
 
 

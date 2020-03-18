@@ -5,14 +5,14 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
 
     protected $_name = 'usuario';
     
-    public function insertarusuario($nombre,$apellido, $correo, $clave) {
+    public function insertarusuario($nombre,$apellido, $correo, $clave,$comboPerfil) {
         $iniciales=substr($nombre,0,1).substr($apellido,0,1);
         $iniciales = strtoupper($iniciales);
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = "INSERT INTO usuario(usu_nombres,usu_apellidos,usu_iniciales, correo, clave,usu_estado_id,perf_id,fecha_creacion)
-                    VALUES ('".$nombre."','".$apellido."','".$iniciales."','".$correo."',MD5('".$clave."'),2,1,(SELECT now())); ";
+                    VALUES ('".$nombre."','".$apellido."','".$iniciales."','".$correo."',MD5('".$clave."'),2,".$comboPerfil.",(SELECT now())); ";
                     return $db->fetchRow($select);
     }
     public function crearusuario($nombre,$apellido, $correo, $clave ,$perfil,$estado) {
