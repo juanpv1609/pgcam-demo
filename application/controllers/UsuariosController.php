@@ -97,7 +97,20 @@ class UsuariosController extends Zend_Controller_Action
 
 
     }
+    public function estadoAction()
+    {
+        // action body
+        $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
+        $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
+        if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
+            $estado = $this->getRequest()->getParam('opcion');
+            $id = $this->getRequest()->getParam('id');
+            $obj = new Application_Model_DbTable_Usuario();
+            $obj->actualizarEstadoUsuario($id,$estado);
+            echo $this->tabla_usuarios();
+        }
 
+    }
     public function editarAction()
     {
         // action body
@@ -179,6 +192,8 @@ class UsuariosController extends Zend_Controller_Action
             $Listaarea .= '<table class="table table-sm dataTable" id="dataTableUsuarios" width="100%">
                 <thead>
                 <tr>
+                <th class="text-primary">ID</th>
+
                     <th class="text-primary">NOMBRE</th>
                     <th class="text-primary">CORREO</th>
                     <th class="text-primary">ALIAS</th>
@@ -190,13 +205,18 @@ class UsuariosController extends Zend_Controller_Action
                 </thead>
                 <tbody>';
             foreach ($datosarea as $item):
-               
+                $estado = ($item->usu_estado_id == 1) ? "checked" : "";
                 $Listaarea .= "<tr>";
+                $Listaarea .= "<td>" . $item->usu_id . "</td>";
+
                 $Listaarea .= "<td>" . $item->usu_nombres . " ". $item->usu_apellidos . "</td>";
                 $Listaarea .= "<td>" . $item->correo . "</td>";
                 $Listaarea .= "<td>" . $item->usu_iniciales . "</td>";
                 $Listaarea .= "<td>" . $item->perf_nombre . "</td>";
-                $Listaarea .= "<td>" . $item->usu_estado_nombre . "</td>";
+                $Listaarea .= "<td><input class='toggle-event' type='checkbox' ".$estado." data-toggle='toggle'  
+                data-onstyle='success' data-offstyle='danger' data-size='xs' 
+                value=". $item->usu_id ."></td>";
+                //$Listaarea .= "<td>" . $item->usu_estado_nombre . "</td>";
                 $Listaarea .= "<td >" . $item->ultima_conexion . "</td>";
                 //$data_array =array($item->usu_id.','.$item->usu_nombres.','.$item->usu_apellidos.','.$item->correo);
                 $Listaarea .= " <td>
@@ -223,6 +243,8 @@ class UsuariosController extends Zend_Controller_Action
 
     public function tabla_perfiles()
     {
+        $fc = Zend_Controller_Front::getInstance()->getRequest()->getBaseUrl();
+
         $table_m = new Application_Model_DbTable_Usuario();
         $datosarea = $table_m->listar_perfiles();
         $Listaarea = '';
@@ -240,16 +262,24 @@ class UsuariosController extends Zend_Controller_Action
                 <tr>
                     <th class="text-primary">ID</th>
                     <th class="text-primary">DESCRIPCION</th>
+                    <th class="text-primary">USUARIOS</th>
+                    <th class="text-primary">C</th>
+                    <th class="text-primary">RUTA PREDETERMINADA</th>
                     <th class="text-primary">ESTADO</th>
                     <th class="text-primary ">ACCION</th>
                 </tr>
                 </thead>
                 <tbody>';
             foreach ($datosarea as $item):
-
+                $cuenta = $table_m->cuenta_usuarios_perfil($item->perf_id);
+                
                 $Listaarea .= "<tr>";
                 $Listaarea .= "<td>" . $item->perf_id . "</td>";
                 $Listaarea .= "<td>" . $item->perf_nombre . "</td>";
+                $Listaarea .= "<td>".count($cuenta)."</td>";
+                $Listaarea .= "<td ><i class='fa fa-circle text-".$item->perf_color."'></i></td>";
+                $Listaarea .= "<td><a class='btn-link' href='" .$fc."/". $item->perf_controlador ."/". $item->perf_accion . "'>
+                " .$fc."/". $item->perf_controlador ."/". $item->perf_accion . "</a></td>";
 
                 $Listaarea .= '<td>Activa</td>
                     <td>

@@ -26,6 +26,16 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
                     VALUES ('".$nombre."','".$apellido."','".$iniciales."','".$correo."',MD5('".$clave."'),".$perfil.",".$estado.",(SELECT now())); ";
                     return $db->fetchRow($select);
     }
+    public function actualizarEstadoUsuario($id,$estado) {
+
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "UPDATE usuario
+                SET  usu_estado_id=".$estado."
+                WHERE usu_id=".$id.";";
+         return $db->fetchRow($select);
+    }
     public function actualizarusuario($id,$nombre,$apellido, $correo ,$perfil,$estado) {
         $iniciales=substr($nombre,0,1).substr($apellido,0,1);
         $iniciales = strtoupper($iniciales);
@@ -154,6 +164,18 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
         ON e.usu_estado_id=u.usu_estado_id
         WHERE usu_id=".$usu_id;
         return $db->fetchRow($select);
+    }
+    public function cuenta_usuarios_perfil($perfil_id)
+    {
+        //devuelve todos los registros de la tabla
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "select u.usu_iniciales from perfiles p
+        join usuario u
+        on p.perf_id=u.perf_id
+        where p.perf_id=".$perfil_id;
+        return $db->fetchAll($select);
     }
     public function listar_perfiles()
     {

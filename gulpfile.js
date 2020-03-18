@@ -51,6 +51,12 @@ function clean() {
 // Bring third party dependencies from node_modules into vendor directory
 function modules() {
   // sweetAlert 2 JS
+  var b4ToggleJS = gulp.src('./node_modules/bootstrap4-toggle/js/*.js')
+    .pipe(gulp.dest('./public/vendor/bootstrap4-toggle/js'));
+    // sweetAlert 2 CSS
+  var b4ToggleCSS = gulp.src('./node_modules/bootstrap4-toggle/css/*.css')
+  .pipe(gulp.dest('./public/vendor/bootstrap4-toggle/css'));
+  // sweetAlert 2 JS
   var sweetAlertJS = gulp.src('./node_modules/sweetalert2/dist/*.js')
     .pipe(gulp.dest('./public/vendor/sweetalert2/js'));
     // sweetAlert 2 CSS
@@ -91,7 +97,7 @@ var select2CSS = gulp.src('./node_modules/select2/dist/css/*')
       '!./node_modules/jquery/dist/core.js'
     ])
     .pipe(gulp.dest('./public/vendor/jquery'));
-  return merge(sweetAlertJS,sweetAlertCSS,bootstrapJS, bootstrapSCSS, chartJS, dataTables,
+  return merge(b4ToggleJS,b4ToggleCSS,sweetAlertJS,sweetAlertCSS,bootstrapJS, bootstrapSCSS, chartJS, dataTables,
      fontAwesome, jquery, jqueryEasing,select2JS,select2CSS);
 }
 

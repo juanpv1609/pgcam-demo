@@ -20,7 +20,7 @@ class Zend_View_Helper_GetGrupoc extends Zend_View_Helper_Abstract {
             $Listaarea .= '<select class="form-control form-control-sm" name="comboGrupo" id="comboGrupo" required autocomplete="off">
              <option value="" ></option>';
             foreach ($datos as $item):
-                $Listaarea .= "<option value='". $item->id_grupcultural ."' >" . $item->nombre_grupcultural . "</option>";
+                $Listaarea .= "<option value='". $item->id_grupcultural ."' >" . strtoupper($item->nombre_grupcultural) . "</option>";
             endforeach;
             $Listaarea .= "</select>
                         <div class='valid-feedback'></div>

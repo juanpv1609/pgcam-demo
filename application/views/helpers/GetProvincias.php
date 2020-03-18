@@ -17,11 +17,11 @@ class Zend_View_Helper_GetProvincias extends Zend_View_Helper_Abstract {
         } else {
             $Listaarea .= '<label for="comboProv">Provincia:</label>';
 
-            $Listaarea .= '<select class="form-control form-control-sm" name="comboProv" id="comboProv"
+            $Listaarea .= '<select class="form-control form-control-sm " name="comboProv" id="comboProv"
              onchange="getCantones();"  required autocomplete="off">
              <option value="" ></option>';
             foreach ($datos as $item):
-                $Listaarea .= "<option value='". $item->id_provincia ."' >" . $item->nombre_provincia . "</option>";
+                $Listaarea .= "<option value='". $item->id_provincia ."' >" . strtoupper($item->nombre_provincia) . "</option>";
             endforeach;
             $Listaarea .= "</select>
                 <div class='valid-feedback'>

@@ -1,43 +1,29 @@
 <div class="card shadow ">
 	<div class="card-header d-flex justify-content-between">
 		 <h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
-		 <div>
-				<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-md-0 mw-100 navbar-search">
-					<div class="input-group input-group-sm ">
-					<input type="text" class="form-control" placeholder="Buscar por hc o cedula..." aria-label="Search" aria-describedby="buscar_paciente_hc">
-					<div class="input-group-append">
-						<button class="btn btn-primary" type="button">
-							<i class="fas fa-search fa-sm"></i>
-						</button>
-					</div>
-					</div>
-				</form>
-				<ul class="navbar-nav ml-auto">
-				<li class="nav-item dropdown no-arrow d-sm-none">
-					<a class="nav-link dropdown-toggle" href="#" id="searchDropdown_p" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<i class="fas fa-search fa-fw text-primary"></i>
-					</a>
-					<!-- Dropdown - Messages -->
-					<div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown_p">
-					<form class="form-inline mr-auto w-100 navbar-search">
-						<div class="input-group input-group-sm">
-							<input type="text" class="form-control" placeholder="Buscar..." aria-label="Search" aria-describedby="buscar_paciente_hc">
-							<div class="input-group-append">
-							<button class="btn btn-primary" type="button">
-								<i class="fas fa-search fa-sm text-white"></i>
-							</button>
-							</div>
-						</div>
-					</form>
-					</div>
+	<div>
+		<form class="needs-validation"
+			method="post" id="paciente_busca" name="paciente_busca" novalidate>
+			<div class="input-group input-group-sm ">
+			<input type="text" class="form-control" id="busca-paciente" name="busca-paciente" 
+			placeholder="Buscar por hc o cedula..." aria-label="Search" aria-describedby="buscar_paciente_hc"
+			required  autocomplete="off">
+			<div class="input-group-append">
+				<button class="btn btn-primary" type="submit" onclick="BuscaPaciente();">
+					<i class="fas fa-search fa-sm"></i>
+				</button>
+			</div>
+			<div class="valid-feedback">
+			</div>
+			<div class="invalid-feedback">
+			</div>
+			</div>
+		</form>
 					
-				
-				</li>
-				</ul>	
 		</div>	 
 	</div>
 	<form class="needs-validation" method="post" id="paciente_admision" name="paciente_admision" novalidate >
-		<div class="card-body text-xs">
+		<div class="card-body text-xs" id="contenido"> 
 
 			<div class="row">
 				<div class="col-sm-2">
@@ -47,7 +33,7 @@
 						id="apellido_paterno"
 						class="form-control form-control-sm"
 						name="apellido_paterno"
-						required autocomplete="off" minlength="3">
+						required autocomplete="off" >
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -120,7 +106,7 @@
 									id="telefono"
 									class="form-control form-control-sm"
 									name="telefono"
-									maxlength="10"
+									maxlength="10" minlength="10"
 									required autocomplete="off" >
 									<div class="valid-feedback">
 									</div>
@@ -345,7 +331,7 @@
 						id="contacto_telefono"
 						class="form-control form-control-sm"
 						name="contacto_telefono"
-						required autocomplete="off" maxlength="10">
+						required autocomplete="off" maxlength="10" minlength="10">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -391,9 +377,9 @@
 						<label for="institucion_telefono">N Telefono:</label>
 						<input type="text"
 						id="institucion_telefono"
-						class="form-control form-control-sm"
+						class="form-control form-control-sm "
 						name="institucion_telefono"
-						required autocomplete="off" maxlength="10">
+						required autocomplete="off" maxlength="10" minlength="10">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">

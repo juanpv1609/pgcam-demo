@@ -1,3 +1,54 @@
+//---FUNCION QUE CAMBIA EL ESTADO DE UN USUARIO
+  $(function() {
+    $('.toggle-event').change(function(event) {
+      event.preventDefault(); //prevent default action
+      //alert('Toggle: ' + $(this).prop('checked'))
+      var opcion = 0;
+      var dir = $('#dir').val();
+      var id=$(this).val();
+      opcion = $(this).prop('checked') ? 1 : 2; //operador ternario comprueba si es true = 1 sino =2    
+        
+          $.ajax(
+          {
+              dataType: "html",
+              type: "POST",
+              url: dir + "/usuarios/estado", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
+              data: "opcion="+opcion+"&id="+id, //Se añade el parametro de busqueda del medico
+              beforeSend: function (data) {
+              },
+              success: function (requestData) {//armar la tabla
+                  const Toast = Swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      showConfirmButton: false,
+                      timer: 1000,
+                      timerProgressBar: true,
+                      onOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                      }
+                    });                              
+                    Toast.fire({
+                      icon: 'success',
+                      title: 'Dato actualizado correctamente!'
+                    }).then((result)=>{
+                      window.location.href = dir + "/usuarios/index";
+
+                      });
+                      
+                  
+                  //$("#nombre_habitacion").removeClass('border border-success').removeClass('border border-danger').val("");
+              },
+              error: function (requestData, strError, strTipoError) {
+                //alert('error')
+              },
+              complete: function (requestData, exito) { //fin de la llamada ajax.
+  
+              }
+          });  
+     // alert(opcion+" "+dir+" "+id);
+    })
+  })
 
 
 function agregarModalU() {
@@ -94,6 +145,7 @@ function eliminarU(id){
                });
                $("#data_Table").html(requestData);
                toDataTable("#dataTableUsuarios");
+               $('.toggle-event').bootstrapToggle();
              },
              error: function (requestData, strError, strTipoError) {
              },
@@ -161,6 +213,7 @@ function InsertarUsuario() {
                                 $('#formModal').modal('hide');
                                 $("#data_Table").html(requestData);
                                toDataTable("#dataTableUsuarios");
+                               $('.toggle-event').bootstrapToggle();
                           }
                           
                             //console.log(requestData.data);
@@ -224,6 +277,7 @@ function ActualizarUsuario() {
                            $('#formModal').modal('hide');
                             $("#data_Table").html(requestData);
                            toDataTable("#dataTableUsuarios");
+                           $('.toggle-event').bootstrapToggle();
                         
                          
                          //$("#nombre_habitacion").removeClass('border border-success').removeClass('border border-danger').val("");

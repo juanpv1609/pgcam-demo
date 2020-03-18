@@ -42,13 +42,13 @@ class PacienteController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
         if ($this->getRequest()->isXmlHttpRequest()) { //Detectamos si es una llamada AJAX
             
-            $apellido_paterno = $this->getRequest()->getParam('apellido_paterno');
-            $apellido_materno = $this->getRequest()->getParam('apellido_materno');
-            $primer_nombre = $this->getRequest()->getParam('primer_nombre');
-            $segundo_nombre = $this->getRequest()->getParam('segundo_nombre');
+            //$apellido_paterno = $this->getRequest()->getParam('apellido_paterno');
+            //$apellido_materno = $this->getRequest()->getParam('apellido_materno');
+            //$primer_nombre = $this->getRequest()->getParam('primer_nombre');
+            //$segundo_nombre = $this->getRequest()->getParam('segundo_nombre');
             $cedula = $this->getRequest()->getParam('cedula');
             $telefono = $this->getRequest()->getParam('telefono');
-            $comboParroq = $this->getRequest()->getParam('comboParroq');
+           // $comboParroq = $this->getRequest()->getParam('comboParroq');
             $barrio = $this->getRequest()->getParam('barrio');
             $direccion = $this->getRequest()->getParam('direccion');
             $fecha_n = $this->getRequest()->getParam('fecha_n');
@@ -84,7 +84,26 @@ class PacienteController extends Zend_Controller_Action
         
 
     }
-
+    public function buscaAction()
+    {
+        // action body
+        $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
+        $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
+        if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
+            $paciente= $this->getRequest()->getParam('paciente');
+            $obj = new Application_Model_DbTable_Admision();
+            $data = $obj->buscaPaciente($paciente);
+            $response = array(); //Declaro un array para enviar los datos a la vista
+        }
+        if ($data) {
+            $response['data'] = $data;
+            $json = json_encode($response);
+            echo $json;
+        }
+            
+        
+        
+    }
     public function asignarAction()
     {
         $this->view->titulo = "Formulario de asignacion de cama";
@@ -169,7 +188,7 @@ class PacienteController extends Zend_Controller_Action
             //echo $this->select_canton($prov);
         }
         $obj = new Application_Model_DbTable_Admision();
-            $datos = $obj->listarCantones($prov);
+        $datos = $obj->listarCantones($prov);
         $Listaarea = '';
         if (!$datos) {
             $Listaarea .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">

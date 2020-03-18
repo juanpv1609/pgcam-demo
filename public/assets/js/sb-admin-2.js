@@ -62,5 +62,5 @@
             }, false);
         });
     }, false);
-    
+    $(function(){ $('.toggle-event').bootstrapToggle() });
 })(jQuery); // End of use strict
