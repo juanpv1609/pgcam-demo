@@ -62,5 +62,5 @@
             }, false);
         });
     }, false);
-    $(function(){ $('.toggle-event').bootstrapToggle() });
+    $(function(){ const newLocal = $('.toggle-event').bootstrapToggle(); }); //boton toggle
 })(jQuery); // End of use strict

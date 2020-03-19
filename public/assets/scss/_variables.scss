@@ -54,7 +54,7 @@ $headings-font-weight: 400 !default;
 // Shadows
 $box-shadow-sm: 0 0.125rem 0.25rem 0 rgba($gray-900, .2) !default;
 $box-shadow: 0 0.15rem 1.75rem 0 rgba($gray-900, .15) !default;
-// $box-shadow-lg: 0 1rem 3rem rgba($black, .175) !default;
+ $box-shadow-lg: 0 1rem 3rem rgba($black, .175) !default;
 
 // Borders Radius
 $border-radius: 0.35rem !default;
@@ -66,7 +66,7 @@ $topbar-base-height: 3.375rem;
 // Change below variable to change the width of the sidenav
 $sidebar-base-width: 12rem;
 // Change below variable to change the width of the sidenav when collapsed
-$sidebar-collapsed-width: 7.5rem;
+$sidebar-collapsed-width: 6.5rem;
 
 // Card
 $card-cap-bg: $gray-100;
