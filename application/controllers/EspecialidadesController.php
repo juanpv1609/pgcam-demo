@@ -2,7 +2,6 @@
 
 class EspecialidadesController extends Zend_Controller_Action
 {
-
     public function init()
     {
         /* Initialize action controller here */
@@ -21,9 +20,8 @@ class EspecialidadesController extends Zend_Controller_Action
         $this->view->data = $this->tabla_especialidad();
         $this->view->data_pisos = $this->select_piso();
         
-        $this->view->titulo="Especialidades Registradas"; 
+        $this->view->titulo="Especialidades Registradas";
         $this->view->icono = "fa-medkit";
-
     }
     public function crearAction()
     {
@@ -35,11 +33,9 @@ class EspecialidadesController extends Zend_Controller_Action
             $piso_id = $this->getRequest()->getParam('piso');
 
             $table = new Application_Model_DbTable_Especialidades();
-            $table->insertarespecialidad($especialidad_nombre,$piso_id);
+            $table->insertarespecialidad($especialidad_nombre, $piso_id);
             echo $this->tabla_especialidad();
         }
-
-
     }
 
     public function editarAction()
@@ -52,10 +48,9 @@ class EspecialidadesController extends Zend_Controller_Action
             $piso_id = $this->getRequest()->getParam('piso');
             $especialidad_nombre = $this->getRequest()->getParam('nombre');
             $table = new Application_Model_DbTable_Especialidades();
-            $table->actualizarespecialidad($id,$especialidad_nombre,$piso_id);
+            $table->actualizarespecialidad($id, $especialidad_nombre, $piso_id);
             echo $this->tabla_especialidad();
         }
-
     }
     public function eliminarAction()
     {
@@ -68,9 +63,9 @@ class EspecialidadesController extends Zend_Controller_Action
             $table->eliminarespecialidad($id);
             echo $this->tabla_especialidad();
         }
-
     }
-    public function select_piso(){
+    public function select_piso()
+    {
         $table_m = new Application_Model_DbTable_Pisos();
         $datosarea = $table_m->listar();
         $Listaarea = '<div  class="form-group">';
@@ -106,7 +101,6 @@ class EspecialidadesController extends Zend_Controller_Action
                     </button>
                 </div>';
         } else {
-
             $cadena .= '<table class="table table-sm dataTable" id="dataTableEspecialidad" width="100%">
                 <thead>
                 <tr>
@@ -122,12 +116,12 @@ class EspecialidadesController extends Zend_Controller_Action
             foreach ($datos as $item):
 
                 $cadena .= "<tr>";
-                $cadena .= "<td>" . $item->especialidad_id . "</td>";
-                $cadena .= "<td>" . $item->especialidad_nombre . "</td>";
-                $cadena .= "<td>" . $item->piso_nombre . "</td>";
-                $cadena .= "<td>" . $item->area_nombre . "</td>";
+            $cadena .= "<td>" . $item->especialidad_id . "</td>";
+            $cadena .= "<td>" . $item->especialidad_nombre . "</td>";
+            $cadena .= "<td>" . $item->piso_nombre . "</td>";
+            $cadena .= "<td>" . $item->area_nombre . "</td>";
 
-                $cadena .= "<td>Activa</td>
+            $cadena .= "<td>Activa</td>
                     <td>
                     <div class='btn-group' role='group' aria-label='Basic example'>
                     
@@ -149,6 +143,4 @@ class EspecialidadesController extends Zend_Controller_Action
 
         return $cadena;
     }
-
 }
-

@@ -1,11 +1,12 @@
 <?php
-class Zend_View_Helper_GetProvincias extends Zend_View_Helper_Abstract {
- 
-  
-  public function getProvincias() {
-   $obj = new Application_Model_DbTable_Admision();
-   $datos = $obj->listarProvincias();
-   $Listaarea = '<div  class="form-group">';
+class Zend_View_Helper_GetProvincias extends Zend_View_Helper_Abstract
+{
+
+    public function getProvincias()
+    {
+        $obj = new Application_Model_DbTable_Admision();
+        $datos = $obj->listarProvincias();
+        $Listaarea = '<div  class="form-group">';
         if (!$datos) {
             $Listaarea .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <strong>Error !</strong> No se encontraron resultados
@@ -21,7 +22,7 @@ class Zend_View_Helper_GetProvincias extends Zend_View_Helper_Abstract {
              onchange="getCantones();"  required autocomplete="off">
              <option value="" ></option>';
             foreach ($datos as $item):
-                $Listaarea .= "<option value='". $item->id_provincia ."' >" . strtoupper($item->nombre_provincia) . "</option>";
+                $Listaarea .= "<option value='" . $item->id_provincia . "' >" . strtoupper($item->nombre_provincia) . "</option>";
             endforeach;
             $Listaarea .= "</select>
                 <div class='valid-feedback'>
@@ -30,6 +31,5 @@ class Zend_View_Helper_GetProvincias extends Zend_View_Helper_Abstract {
                         </div></div>";
         }
         return $Listaarea;
-  }
+    }
 }
-

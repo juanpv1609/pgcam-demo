@@ -1,12 +1,8 @@
-
-
-
 <!-- DataTales Example -->
 <div class="card  shadow ">
     <div class="card-header d-flex justify-content-between">
         <h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
-        <button type="button"  onclick="agregarModal()" 
-        class="btn btn-success btn-sm" >
+        <button type="button" onclick="agregarModal()" class="btn btn-success btn-sm">
             <i class="fa fa-plus"></i> Agregar
         </button>
     </div>
@@ -18,7 +14,7 @@
 </div>
 <!-- formulario Modal-->
 <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
+    aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -29,22 +25,19 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" id="area_id" name="area_id">
-                    <div  class="form-group">
-                        <label for="nombre_area">Nombre del area:</label>
-                        <input type="text"
-                        id="nombre_area"
-                        class="form-control "
-                        name="nombre_area"
-                        required autocomplete="off" >
-                        <small  id="nombreHelp" ></small>
-                    </div>
-                    <hr>
-                    <div class="d-flex justify-content-between">
-                        <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
-                        <div id="accionForm">
+                <div class="form-group">
+                    <label for="nombre_area">Nombre del area:</label>
+                    <input type="text" id="nombre_area" class="form-control " name="nombre_area" required
+                        autocomplete="off">
+                    <small id="nombreHelp"></small>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+                    <div id="accionForm">
 
-                        </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>

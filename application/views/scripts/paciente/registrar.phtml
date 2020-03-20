@@ -1,39 +1,35 @@
 <div class="card shadow ">
 	<div class="card-header d-flex justify-content-between">
-		 <h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
-	<div>
-		<form class="needs-validation"
-			method="post" id="paciente_busca" name="paciente_busca" novalidate>
-			<div class="input-group input-group-sm ">
-			<input type="text" class="form-control" id="busca-paciente" name="busca-paciente" 
-			placeholder="Buscar por hc o cedula..." aria-label="Search" aria-describedby="buscar_paciente_hc"
-			required  autocomplete="off">
-			<div class="input-group-append">
-				<button class="btn btn-primary" type="submit" onclick="BuscaPaciente();">
-					<i class="fas fa-search fa-sm"></i>
-				</button>
-			</div>
-			<div class="valid-feedback">
-			</div>
-			<div class="invalid-feedback">
-			</div>
-			</div>
-		</form>
-					
-		</div>	 
+		<h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
+		<div>
+			<form class="needs-validation" method="post" id="paciente_busca" name="paciente_busca" novalidate>
+				<div class="input-group input-group-sm ">
+					<input type="text" class="form-control" id="busca-paciente" name="busca-paciente"
+						placeholder="Buscar por hc o cedula..." aria-label="Search" aria-describedby="buscar_paciente_hc"
+						required autocomplete="off">
+					<div class="input-group-append">
+						<button class="btn btn-primary" type="submit" onclick="BuscaPaciente();">
+							<i class="fas fa-search fa-sm"></i>
+						</button>
+					</div>
+					<div class="valid-feedback">
+					</div>
+					<div class="invalid-feedback">
+					</div>
+				</div>
+			</form>
+
+		</div>
 	</div>
-	<form class="needs-validation" method="post" id="paciente_admision" name="paciente_admision" novalidate >
-		<div class="card-body text-xs" id="contenido"> 
+	<form class="needs-validation" method="post" id="paciente_admision" name="paciente_admision" novalidate>
+		<div class="card-body text-xs" id="contenido">
 
 			<div class="row">
 				<div class="col-sm-2">
-					<div  class="form-group">
+					<div class="form-group">
 						<label for="apellido_paterno">Apellido paterno:</label>
-						<input type="text"
-						id="apellido_paterno"
-						class="form-control form-control-sm"
-						name="apellido_paterno"
-						required autocomplete="off" >
+						<input type="text" id="apellido_paterno" class="form-control form-control-sm" name="apellido_paterno"
+							required autocomplete="off">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -41,116 +37,94 @@
 					</div>
 				</div>
 				<div class="col-sm-2">
-					<div  class="form-group">
-									<label for="apellido_materno">Apellido materno:</label>
-									<input type="text"
-									id="apellido_materno"
-									class="form-control form-control-sm"
-									name="apellido_materno"
-									required autocomplete="off" >
-									<div class="valid-feedback">
-									</div>
-									<div class="invalid-feedback">
-									</div>
-							</div>
+					<div class="form-group">
+						<label for="apellido_materno">Apellido materno:</label>
+						<input type="text" id="apellido_materno" class="form-control form-control-sm" name="apellido_materno"
+							required autocomplete="off">
+						<div class="valid-feedback">
+						</div>
+						<div class="invalid-feedback">
+						</div>
+					</div>
 				</div>
 				<div class="col-sm-2">
-					<div  class="form-group ">
-									<label for="primer_nombre">Primer nombre:</label>
-									<input type="text"
-									id="primer_nombre"
-									class="form-control form-control-sm"
-									name="primer_nombre"
-									
-									required autocomplete="off" >
-									<div class="valid-feedback">
-									</div>
-									<div class="invalid-feedback">
-									</div>
-							</div>
+					<div class="form-group ">
+						<label for="primer_nombre">Primer nombre:</label>
+						<input type="text" id="primer_nombre" class="form-control form-control-sm" name="primer_nombre"
+							required autocomplete="off">
+						<div class="valid-feedback">
+						</div>
+						<div class="invalid-feedback">
+						</div>
+					</div>
 				</div>
 				<div class="col-sm-2">
-					<div  class="form-group">
-									<label for="segundo_nombre">Segundo nombre:</label>
-									<input type="text"
-									id="segundo_nombre"
-									class="form-control form-control-sm"
-									name="segundo_nombre"
-									
-									required autocomplete="off" >
-									<div class="valid-feedback">
-									</div>
-									<div class="invalid-feedback">
-									</div>
-							</div>
+					<div class="form-group">
+						<label for="segundo_nombre">Segundo nombre:</label>
+						<input type="text" id="segundo_nombre" class="form-control form-control-sm" name="segundo_nombre"
+							required autocomplete="off">
+						<div class="valid-feedback">
+						</div>
+						<div class="invalid-feedback">
+						</div>
+					</div>
 				</div>
 				<div class="col-sm-2">
-					<div  class="form-group">
-									<label for="cedula">N Cedula:</label>
-									<input type="text"
-									id="cedula"
-									class="form-control form-control-sm"
-									name="cedula"
-									maxlength="10" minlength="10"
-									required autocomplete="off" >
-									<div class="valid-feedback">
-									</div>
-									<div class="invalid-feedback">
-									</div>
-							</div>
+					<div class="form-group">
+						<label for="cedula">N Cedula:</label>
+						<input type="text" id="cedula" class="form-control form-control-sm" name="cedula" maxlength="10"
+							minlength="10" required autocomplete="off">
+						<div class="valid-feedback">
+						</div>
+						<div class="invalid-feedback">
+						</div>
+					</div>
 				</div>
 				<div class="col-sm-2">
-					<div  class="form-group">
-									<label for="telefono">N Telefono:</label>
-									<input type="text"
-									id="telefono"
-									class="form-control form-control-sm"
-									name="telefono"
-									maxlength="10" minlength="10"
-									required autocomplete="off" >
-									<div class="valid-feedback">
-									</div>
-									<div class="invalid-feedback">
-									</div>
-							</div>
+					<div class="form-group">
+						<label for="telefono">N Telefono:</label>
+						<input type="text" id="telefono" class="form-control form-control-sm" name="telefono" maxlength="10"
+							minlength="10" required autocomplete="off">
+						<div class="valid-feedback">
+						</div>
+						<div class="invalid-feedback">
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-2">
-						<?php echo $this->getProvincias(); ?>
+					<?php echo $this->getProvincias(); ?>
 				</div>
 				<div class="col-sm-2">
-					<div  class="form-group">
+					<div class="form-group">
 						<label for="comboCant">Canton:</label>
 						<select class="form-control form-control-sm" name="comboCant" id="comboCant"
-						onchange="getParroquias();"    required autocomplete="off">						
+							onchange="getParroquias();" required autocomplete="off">
 						</select>
 						<div class='valid-feedback'>
 						</div>
 						<div class='invalid-feedback'>
 						</div>
 					</div>
-			</div>
+				</div>
 				<div class="col-sm-2">
-					<div  class="form-group">
+					<div class="form-group">
 						<label for="comboParroq">Parroquia:</label>
-						<select class="form-control form-control-sm" 
-						name="comboParroq" id="comboParroq" required autocomplete="off">						
-						</select>	
+						<select class="form-control form-control-sm" name="comboParroq" id="comboParroq" required
+							autocomplete="off">
+						</select>
 						<div class='valid-feedback'>
 						</div>
 						<div class='invalid-feedback'>
-						</div>			
+						</div>
 					</div>
 				</div>
 				<div class="col-sm-2">
-					<div  class="form-group">
+					<div class="form-group">
 						<label for="barrio">Barrio:</label>
-						<input type="text"
-						id="barrio"
-						class="form-control form-control-sm"
-						name="barrio"
-						required autocomplete="off" maxlength="50">
+						<input type="text" id="barrio" class="form-control form-control-sm" name="barrio" required
+							autocomplete="off" maxlength="50">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -158,13 +132,10 @@
 					</div>
 				</div>
 				<div class="col-sm-4">
-					<div  class="form-group">
+					<div class="form-group">
 						<label for="direccion">Direccion domiciliaria:</label>
-						<input type="text"
-						id="direccion"
-						class="form-control form-control-sm"
-						name="direccion"
-						required autocomplete="off" maxlength="120">
+						<input type="text" id="direccion" class="form-control form-control-sm" name="direccion" required
+							autocomplete="off" maxlength="120">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -174,13 +145,10 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-2">
-					<div  class="form-group">
+					<div class="form-group">
 						<label for="fecha_n">Fecha de nacimiento:</label>
-						<input type="date"
-						id="fecha_n"
-						class="form-control form-control-sm"
-						name="fecha_n"
-						required autocomplete="off" >
+						<input type="date" id="fecha_n" class="form-control form-control-sm" name="fecha_n" required
+							autocomplete="off">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -188,13 +156,10 @@
 					</div>
 				</div>
 				<div class="col-sm-2">
-					<div  class="form-group">
+					<div class="form-group">
 						<label for="lugar_n">Lugar de nacimiento:</label>
-						<input type="text"
-						id="lugar_n"
-						class="form-control form-control-sm"
-						name="lugar_n"
-						required autocomplete="off" maxlength="20">
+						<input type="text" id="lugar_n" class="form-control form-control-sm" name="lugar_n" required
+							autocomplete="off" maxlength="20">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -213,9 +178,10 @@
 
 				</div>
 				<div class="col-sm-1">
-					<div  class="form-group">
+					<div class="form-group">
 						<label for="comboGenero">Genero:</label>
-						<select name="comboGenero" id="comboGenero" class="form-control form-control-sm" required autocomplete="off">
+						<select name="comboGenero" id="comboGenero" class="form-control form-control-sm" required
+							autocomplete="off">
 							<option value=""></option>
 							<option value="F">F</option>
 							<option value="M">M</option>
@@ -236,13 +202,10 @@
 
 				</div>
 				<div class="col-sm-2">
-					<div  class="form-group">
+					<div class="form-group">
 						<label for="ocupacion">Ocupacion:</label>
-						<input type="text"
-						id="ocupacion"
-						class="form-control form-control-sm"
-						name="ocupacion"
-						required autocomplete="off" maxlength="50">
+						<input type="text" id="ocupacion" class="form-control form-control-sm" name="ocupacion" required
+							autocomplete="off" maxlength="50">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -250,13 +213,10 @@
 					</div>
 				</div>
 				<div class="col-sm-3">
-					<div  class="form-group">
+					<div class="form-group">
 						<label for="trabajo">Empresa donde trabaja:</label>
-						<input type="text"
-						id="trabajo"
-						class="form-control form-control-sm"
-						name="trabajo"
-						required autocomplete="off" maxlength="50">
+						<input type="text" id="trabajo" class="form-control form-control-sm" name="trabajo" required
+							autocomplete="off" maxlength="50">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -267,13 +227,10 @@
 					<?php echo $this->getTiposeguro(); ?>
 				</div>
 				<div class="col-sm-3">
-					<div  class="form-group">
+					<div class="form-group">
 						<label for="referido">Referido de:</label>
-						<input type="text"
-						id="referido"
-						class="form-control form-control-sm"
-						name="referido"
-						required autocomplete="off" maxlength="50" >
+						<input type="text" id="referido" class="form-control form-control-sm" name="referido" required
+							autocomplete="off" maxlength="50">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -283,13 +240,10 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-3">
-					<div  class="form-group">
+					<div class="form-group">
 						<label for="contacto_nombre">En caso necesario avisar a:</label>
-						<input type="text"
-						id="contacto_nombre"
-						class="form-control form-control-sm"
-						name="contacto_nombre"
-						required autocomplete="off" maxlength="50">
+						<input type="text" id="contacto_nombre" class="form-control form-control-sm" name="contacto_nombre"
+							required autocomplete="off" maxlength="50">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -297,13 +251,10 @@
 					</div>
 				</div>
 				<div class="col-sm-3">
-					<div  class="form-group">
+					<div class="form-group">
 						<label for="contacto_parentezco">Parentezco:</label>
-						<input type="text"
-						id="contacto_parentezco"
-						class="form-control form-control-sm"
-						name="contacto_parentezco"
-						required autocomplete="off" maxlength="30" >
+						<input type="text" id="contacto_parentezco" class="form-control form-control-sm"
+							name="contacto_parentezco" required autocomplete="off" maxlength="30">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -311,13 +262,10 @@
 					</div>
 				</div>
 				<div class="col-sm-4">
-					<div  class="form-group">
+					<div class="form-group">
 						<label for="contacto_direccion">Direccion:</label>
-						<input type="text"
-						id="contacto_direccion"
-						class="form-control form-control-sm"
-						name="contacto_direccion"
-						required autocomplete="off" maxlength="50">
+						<input type="text" id="contacto_direccion" class="form-control form-control-sm"
+							name="contacto_direccion" required autocomplete="off" maxlength="50">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -325,13 +273,10 @@
 					</div>
 				</div>
 				<div class="col-sm-2">
-					<div  class="form-group">
+					<div class="form-group">
 						<label for="contacto_telefono">N Telefono:</label>
-						<input type="text"
-						id="contacto_telefono"
-						class="form-control form-control-sm"
-						name="contacto_telefono"
-						required autocomplete="off" maxlength="10" minlength="10">
+						<input type="text" id="contacto_telefono" class="form-control form-control-sm"
+							name="contacto_telefono" required autocomplete="off" maxlength="10" minlength="10">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -345,13 +290,10 @@
 
 				</div>
 				<div class="col-sm-3">
-					<div  class="form-group">
+					<div class="form-group">
 						<label for="fuente_info">Fuente de informacion:</label>
-						<input type="text"
-						id="fuente_info"
-						class="form-control form-control-sm"
-						name="fuente_info"
-						required autocomplete="off" maxlength="50">
+						<input type="text" id="fuente_info" class="form-control form-control-sm" name="fuente_info" required
+							autocomplete="off" maxlength="50">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -359,13 +301,10 @@
 					</div>
 				</div>
 				<div class="col-sm-4">
-					<div  class="form-group">
+					<div class="form-group">
 						<label for="institucion">Institucion o persona que entrega al paciente:</label>
-						<input type="text"
-						id="institucion"
-						class="form-control form-control-sm"
-						name="institucion"
-						required autocomplete="off" maxlength="50">
+						<input type="text" id="institucion" class="form-control form-control-sm" name="institucion" required
+							autocomplete="off" maxlength="50">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -373,13 +312,10 @@
 					</div>
 				</div>
 				<div class="col-sm-2">
-					<div  class="form-group">
+					<div class="form-group">
 						<label for="institucion_telefono">N Telefono:</label>
-						<input type="text"
-						id="institucion_telefono"
-						class="form-control form-control-sm "
-						name="institucion_telefono"
-						required autocomplete="off" maxlength="10" minlength="10">
+						<input type="text" id="institucion_telefono" class="form-control form-control-sm "
+							name="institucion_telefono" required autocomplete="off" maxlength="10" minlength="10">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -389,11 +325,9 @@
 			</div>
 		</div>
 		<div class="card-footer d-flex justify-content-center">
-			<button type="submit" class="btn btn-primary btn-block" onclick="AdmisionPaciente();">Registrar paciente</button>
+			<button type="submit" class="btn btn-primary btn-block" onclick="AdmisionPaciente();">Registrar
+				paciente</button>
 		</div>
 	</form>
 
 </div>
-
-
-

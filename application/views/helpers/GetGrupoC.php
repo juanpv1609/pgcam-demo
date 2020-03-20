@@ -1,11 +1,12 @@
 <?php
-class Zend_View_Helper_GetGrupoc extends Zend_View_Helper_Abstract {
- 
-  
-  public function getGrupoc() {
-   $obj = new Application_Model_DbTable_Admision();
-   $datos = $obj->listarGrupoCultural();
-   $Listaarea = '<div  class="form-group">';
+class Zend_View_Helper_GetGrupoc extends Zend_View_Helper_Abstract
+{
+
+    public function getGrupoc()
+    {
+        $obj = new Application_Model_DbTable_Admision();
+        $datos = $obj->listarGrupoCultural();
+        $Listaarea = '<div  class="form-group">';
         if (!$datos) {
             $Listaarea .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <strong>Error !</strong> No se encontraron resultados
@@ -20,7 +21,7 @@ class Zend_View_Helper_GetGrupoc extends Zend_View_Helper_Abstract {
             $Listaarea .= '<select class="form-control form-control-sm" name="comboGrupo" id="comboGrupo" required autocomplete="off">
              <option value="" ></option>';
             foreach ($datos as $item):
-                $Listaarea .= "<option value='". $item->id_grupcultural ."' >" . strtoupper($item->nombre_grupcultural) . "</option>";
+                $Listaarea .= "<option value='" . $item->id_grupcultural . "' >" . strtoupper($item->nombre_grupcultural) . "</option>";
             endforeach;
             $Listaarea .= "</select>
                         <div class='valid-feedback'></div>
@@ -28,6 +29,5 @@ class Zend_View_Helper_GetGrupoc extends Zend_View_Helper_Abstract {
                         </div>";
         }
         return $Listaarea;
-  }
+    }
 }
-

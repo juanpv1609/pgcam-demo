@@ -1,64 +1,59 @@
+<!-- Outer Row -->
 
-    <!-- Outer Row -->
-    
-          <div class="card-body py-2 ">
-            <!-- Nested Row within Card Body -->
-            <div class="row justify-content-center py-auto">
-              <div class="col-xl-5 col-lg-6 col-md-5 my-auto">
-				  	  	<img class="img-fluid py-5 " src="<?php echo $this->baseUrl(); ?>/assets/img/login.svg" alt="Login">
-				      </div>
-              <div class="col-lg-6 p-4">
-                  <div class="text-center">
-                    <h1 class="h2 text-gray-900 mb-4">Iniciar Sesión!</h1>
-                  </div>
-                  <form class="user needs-validation" id="login" name="login" action="" method="post" novalidate>
-                    <div class="form-group">
-                      <input type="email" autofocus class="form-control " id="email" name="email"
-							 aria-describedby="emailHelp" required placeholder="Ingrese su correo electronico..." autocomplete="off"
-                      value="<?php if (isset($this->usuario_value)) echo $this->usuario_value; ?>">
-                        <div class="valid-feedback">
-                        </div>
-                        <div class="invalid-feedback">
-                            Por favor ingrese un correo electronico valido.
-                        </div>
-                    </div>
-                    <div class="form-group">
-                      <input type="password" class="form-control " name="password"
-							 id="password" required placeholder="Ingrese su contraseña..." autocomplete="off"
-                 >
-                        <div class="valid-feedback">
-                        </div>
-                        <div class="invalid-feedback">
-                            Debe ingresar su contraseña.
-                        </div>
-                    </div>
-                    <!-- <div class="form-group">
+<div class="card-body py-2 ">
+  <!-- Nested Row within Card Body -->
+  <div class="row justify-content-center py-auto">
+    <div class="col-xl-5 col-lg-6 col-md-5 my-auto">
+      <img class="img-fluid py-5 " src="<?php echo $this->baseUrl(); ?>/assets/img/login.svg" alt="Login">
+    </div>
+    <div class="col-lg-6 p-4">
+      <div class="text-center">
+        <h1 class="h2 text-gray-900 mb-4">Iniciar Sesión!</h1>
+      </div>
+      <form class="user needs-validation" id="login" name="login" action="" method="post" novalidate>
+        <div class="form-group">
+          <input type="email" autofocus class="form-control " id="email" name="email" aria-describedby="emailHelp"
+            required placeholder="Ingrese su correo electronico..." autocomplete="off"
+            value="<?php if (isset($this->usuario_value)) echo $this->usuario_value; ?>">
+          <div class="valid-feedback">
+          </div>
+          <div class="invalid-feedback">
+            Por favor ingrese un correo electronico valido.
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control " name="password" id="password" required
+            placeholder="Ingrese su contraseña..." autocomplete="off">
+          <div class="valid-feedback">
+          </div>
+          <div class="invalid-feedback">
+            Debe ingresar su contraseña.
+          </div>
+        </div>
+        <!-- <div class="form-group">
                       <div class="custom-control custom-checkbox small">
                         <input type="checkbox" class="custom-control-input" id="customCheck">
                         <label class="custom-control-label" for="customCheck">Recordarme</label>
                       </div>
                     </div> -->
-                      <?php if (!empty($this->message))
+        <?php if (!empty($this->message))
                                 echo $this->message; ?>
-                                
-                      <button type="submit" onclick="SendFormLogin(event);" class="btn btn-primary btn-block">
-                          <strong>Ingresar</strong> 
-                      </button>
-                  </form>
 
-                  <hr>
-                  <div class="d-flex justify-content-between text-center">
-                    <button class="btn btn-link btn-sm" data-toggle="modal" data-target="#exampleModal" >Olvido su contraseña?</button>
-                    <a class="btn btn-link btn-sm" 
-                    href="<?php echo $this->url(array('controller' => 'auth', 'action' => 'register')); ?>">Crear una cuenta!</a>
-                  </div>
-                  
-              </div>
+        <button type="submit" onclick="SendFormLogin(event);" class="btn btn-primary btn-block">
+          <strong>Ingresar</strong>
+        </button>
+      </form>
 
-            </div>
-              
-          </div>
-          
+      <hr>
+      <div class="d-flex justify-content-between text-center">
+        <button class="btn btn-link btn-sm" data-toggle="modal" data-target="#exampleModal">Olvido su
+          contraseña?</button>
+        <a class="btn btn-link btn-sm"
+          href="<?php echo $this->url(array('controller' => 'auth', 'action' => 'register')); ?>">Crear una cuenta!</a>
+      </div>
 
+    </div>
 
-  
+  </div>
+
+</div>

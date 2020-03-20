@@ -1,23 +1,21 @@
+<!-- DataTales Example -->
+<div class="card  shadow ">
+    <div class="card-header  py-3 d-flex justify-content-between">
+        <h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo;?></h5>
+        <button class="btn btn-success btn-sm" onclick="agregarModal()">
+            <i class="fa fa-plus"></i> Agregar
+        </button>
+    </div>
+    <div class="card-body">
 
-        
-          <!-- DataTales Example -->
-          <div class="card  shadow ">
-            <div class="card-header  py-3 d-flex justify-content-between">
-              <h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo;?></h5>
-              <button class="btn btn-success btn-sm" onclick="agregarModal()">
-                  <i class="fa fa-plus"></i> Agregar
-              </button>
-            </div>
-            <div class="card-body">
-           
-              <div id="data_Table" class="table-responsive text-xs">
-                <?php echo $this->data; ?>
-              </div>
-            </div>
-          </div>
+        <div id="data_Table" class="table-responsive text-xs">
+            <?php echo $this->data; ?>
+        </div>
+    </div>
+</div>
 <!-- formulario Modal-->
 <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
+    aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -28,23 +26,20 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" id="habitacion_id" name="habitacion_id">
-                    <?php echo $this->data_especialidades;?>
-                    <div  class="form-group">
-                        <label for="nombre_habitacion">Nombre de la habitacion:</label>
-                        <input type="text"
-                        id="nombre_habitacion"
-                        class="form-control "
-                        name="nombre_habitacion"
-                        required autocomplete="off" onkeyup="validar()">
-                        <small  id="nombreHelp" ></small>
-                    </div>
-                    <hr>
-                    <div class="d-flex justify-content-between">
-                        <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
-                        <div id="accionForm">
+                <?php echo $this->data_especialidades;?>
+                <div class="form-group">
+                    <label for="nombre_habitacion">Nombre de la habitacion:</label>
+                    <input type="text" id="nombre_habitacion" class="form-control " name="nombre_habitacion" required
+                        autocomplete="off" onkeyup="validar()">
+                    <small id="nombreHelp"></small>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+                    <div id="accionForm">
 
-                        </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>

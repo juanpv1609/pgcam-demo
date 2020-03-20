@@ -1,10 +1,9 @@
 <div class="card  shadow ">
 	<div class="card-header d-flex justify-content-between">
-		 <h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
-		  <button type="button"  onclick="agregarModalU()" 
-		 class="btn btn-success btn-sm" >
-			  <i class="fa fa-plus"></i> Agregar
-		 </button> 
+		<h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
+		<button type="button" onclick="agregarModalU()" class="btn btn-success btn-sm">
+			<i class="fa fa-plus"></i> Agregar
+		</button>
 	</div>
 	<div class="card-body">
 		<div class="row">
@@ -12,112 +11,99 @@
 			<div class="col-sm-4">
 				<div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
 					<a class="btn btn-outline-primary btn-sm"
-					href="<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'index')); ?>">Usuarios</a>
+						href="<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'index')); ?>">Usuarios</a>
 					<a class="btn btn-outline-dark btn-sm"
-					href="<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'perfiles')); ?>">Perfiles</a>
-					
+						href="<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'perfiles')); ?>">Perfiles</a>
+
 				</div>
 			</div>
 			<div class="col-sm-4"></div>
 		</div>
-				<div class="row">
-					<div class="col-sm-12">
-						<div id="data_Table" class="table-responsive text-xs">
-							<?php echo $this->data_usuarios; ?>
-						</div>
-					</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<div id="data_Table" class="table-responsive text-xs">
+					<?php echo $this->data_usuarios; ?>
 				</div>
+			</div>
+		</div>
 	</div>
 </div>
 <!-- formulario Modal-->
 <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog " role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-primary" id="exampleModalLabel"></h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-				</div>
-				<form class="user needs-validation" method="post" id="register" name="register" novalidate >
-				
-					<div class="modal-body">
-						<input type="hidden" id="usuario_id" name="usuario_id">
-						<div class="row">
-							<div class="col-sm-6">
-								<div  class="form-group">
-									<label for="nombres">Nombres:</label>
-									<input type="text"
-									id="nombres"
-									class="form-control "
-									name="nombres"
-									placeholder="Nombres..."
-									required autocomplete="off" >
-									<div class="valid-feedback">
-									</div>
-									<div class="invalid-feedback">
-										Este campo es necesario.
-									</div>
-							</div>
-							</div>
-							<div class="col-sm-6">
-								<div  class="form-group">
-									<label for="apellidos">Apellidos:</label>
-									<input type="text"
-									id="apellidos"
-									class="form-control "
-									name="apellidos"
-									placeholder="Apellidos..."
-									required autocomplete="off" >
-									<div class="valid-feedback">
-									</div>
-									<div class="invalid-feedback">
-										Este campo es necesario.
-									</div>
-							</div>
+	aria-hidden="true">
+	<div class="modal-dialog " role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title text-primary" id="exampleModalLabel"></h5>
+				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<form class="user needs-validation" method="post" id="register" name="register" novalidate>
+
+				<div class="modal-body">
+					<input type="hidden" id="usuario_id" name="usuario_id">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="nombres">Nombres:</label>
+								<input type="text" id="nombres" class="form-control " name="nombres" placeholder="Nombres..."
+									required autocomplete="off">
+								<div class="valid-feedback">
+								</div>
+								<div class="invalid-feedback">
+									Este campo es necesario.
+								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-sm-12">
-								<div  class="form-group">
-									<label for="correo">Correo electronico:</label>
-									<input type="email"
-									id="correo"
-									class="form-control input-group-sm"
-									name="correo"
-									placeholder="ejemplo@ejemplo.com"
-									required autocomplete="off" >
-									<div class="valid-feedback">
-									</div>
-									<div class="invalid-feedback">
-										Por favor ingrese un correo electronico valido.
-									</div>
-							</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="apellidos">Apellidos:</label>
+								<input type="text" id="apellidos" class="form-control " name="apellidos"
+									placeholder="Apellidos..." required autocomplete="off">
+								<div class="valid-feedback">
+								</div>
+								<div class="invalid-feedback">
+									Este campo es necesario.
+								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-sm-6">
-								<?php echo $this->data_perfiles;?>
-
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label for="correo">Correo electronico:</label>
+								<input type="email" id="correo" class="form-control input-group-sm" name="correo"
+									placeholder="ejemplo@ejemplo.com" required autocomplete="off">
+								<div class="valid-feedback">
+								</div>
+								<div class="invalid-feedback">
+									Por favor ingrese un correo electronico valido.
+								</div>
 							</div>
-							<div class="col-sm-6">
-								<?php echo $this->data_estado;?>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<?php echo $this->data_perfiles;?>
 
-							</div>
-						</div>   
-						<div id="clave_igual"></div>
-							
+						</div>
+						<div class="col-sm-6">
+							<?php echo $this->data_estado;?>
+
+						</div>
+					</div>
+					<div id="clave_igual"></div>
+
 					<div class="modal-footer d-flex justify-content-between ">
 						<button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
 						<div id="accionForm">
 
 						</div>
 					</div>
-					</div>
-				</form>
-				
-        </div>
-    </div>
-</div>
+				</div>
+			</form>
 
+		</div>
+	</div>
+</div>

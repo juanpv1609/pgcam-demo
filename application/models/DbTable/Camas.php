@@ -23,31 +23,34 @@ class Application_Model_DbTable_Camas extends Zend_Db_Table_Abstract
         on cama_estado.cama_estado_id=cama.cama_estado;";
         return $db->fetchAll($select);
     }
-    public function insertarcama($nombre,$habitacion,$cama_estado) {
+    public function insertarcama($nombre, $habitacion, $cama_estado)
+    {
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = "INSERT INTO cama(habitacion_id, cama_nombre,cama_estado)
-        VALUES (".$habitacion.",'".$nombre."',".$cama_estado."); ";
+        VALUES (" . $habitacion . ",'" . $nombre . "'," . $cama_estado . "); ";
         return $db->fetchRow($select);
         //$this->listar();
     }
-    public function actualizarcama($id,$nombre,$habitacion,$cama_estado) {
+    public function actualizarcama($id, $nombre, $habitacion, $cama_estado)
+    {
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = "UPDATE cama
-        SET habitacion_id=".$habitacion.",cama_nombre='".$nombre."',cama_estado=".$cama_estado."
-      WHERE cama_id=".$id."; ";
+        SET habitacion_id=" . $habitacion . ",cama_nombre='" . $nombre . "',cama_estado=" . $cama_estado . "
+      WHERE cama_id=" . $id . "; ";
         return $db->fetchRow($select);
         //$this->listar();
     }
-    public function eliminarcama($id) {
+    public function eliminarcama($id)
+    {
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = "DELETE FROM cama
-        WHERE cama_id=".$id.";";
+        WHERE cama_id=" . $id . ";";
         return $db->fetchRow($select);
         //$this->listar();
     }
@@ -62,4 +65,3 @@ class Application_Model_DbTable_Camas extends Zend_Db_Table_Abstract
     }
 
 }
-

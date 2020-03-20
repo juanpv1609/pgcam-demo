@@ -2,11 +2,11 @@
 
 // Define path to application directory
 defined('APPLICATION_PATH')
-    || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
+|| define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
 
 // Define application environment
 defined('APPLICATION_ENV')
-    || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
+|| define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
 // Ensure library/ is on include_path
 set_include_path(implode(PATH_SEPARATOR, array(
@@ -33,4 +33,4 @@ $pgdb = Zend_Db::factory('PDO_PGSQL', $config->resources->db->params);
 //guardo en el registro el objeto DB Factory() creado, para poder usarlo despues en cualquier parte
 Zend_Registry::set('pgdb', $pgdb);
 $application->bootstrap()
-            ->run();
+    ->run();

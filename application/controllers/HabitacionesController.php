@@ -2,12 +2,11 @@
 
 class HabitacionesController extends Zend_Controller_Action
 {
-
     public function init()
     {
         /* Initialize action controller here */
         $this->initView();
-       // $this->view->baseUrl = $this->_request->getBaseUrl();
+        // $this->view->baseUrl = $this->_request->getBaseUrl();
         $this->view->user = Zend_Auth::getInstance()->getIdentity();
         $this->view->controlador=Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
         $this->view->accion=Zend_Controller_Front::getInstance()->getRequest()->getActionName();
@@ -22,7 +21,6 @@ class HabitacionesController extends Zend_Controller_Action
         $this->view->data_especialidades = $this->select_piso();
         $this->view->titulo="Habitaciones Registradas";
         $this->view->icono = "fa-door-open";
-
     }
     public function crearAction()
     {
@@ -34,11 +32,9 @@ class HabitacionesController extends Zend_Controller_Action
             $especialidad = $this->getRequest()->getParam('especialidad');
 
             $table = new Application_Model_DbTable_Habitaciones();
-            $table->insertarhabitacion($habitacion_nombre,$especialidad);
+            $table->insertarhabitacion($habitacion_nombre, $especialidad);
             echo $this->tabla_habitaciones();
         }
-
-
     }
 
     public function editarAction()
@@ -51,10 +47,9 @@ class HabitacionesController extends Zend_Controller_Action
             $especialidad = $this->getRequest()->getParam('especialidad');
             $habitacion_nombre = $this->getRequest()->getParam('nombre');
             $table = new Application_Model_DbTable_Habitaciones();
-            $table->actualizarhabitacion($id,$habitacion_nombre,$especialidad);
+            $table->actualizarhabitacion($id, $habitacion_nombre, $especialidad);
             echo $this->tabla_habitaciones();
         }
-
     }
     public function eliminarAction()
     {
@@ -67,9 +62,9 @@ class HabitacionesController extends Zend_Controller_Action
             $table->eliminarhabitacion($id);
             echo $this->tabla_habitaciones();
         }
-
     }
-    public function select_piso(){
+    public function select_piso()
+    {
         $table_m = new Application_Model_DbTable_Especialidades();
         $datosarea = $table_m->listar();
         $Listaarea = '<div  class="form-group">';
@@ -105,7 +100,6 @@ class HabitacionesController extends Zend_Controller_Action
                     </button>
                 </div>';
         } else {
-
             $cadena .= '<table class="table table-sm dataTable" id="dataTableHabitaciones" width="100%">
                 <thead>
                 <tr>
@@ -122,13 +116,13 @@ class HabitacionesController extends Zend_Controller_Action
             foreach ($datos as $item):
 
                 $cadena .= "<tr>";
-                $cadena .= "<td>" . $item->habitacion_id . "</td>";
-                $cadena .= "<td>" . $item->habitacion_nombre . "</td>";
-                $cadena .= "<td>" . $item->especialidad_nombre . "</td>";
-                $cadena .= "<td>" . $item->piso_nombre . "</td>";
-                $cadena .= "<td>" . $item->area_nombre . "</td>";
+            $cadena .= "<td>" . $item->habitacion_id . "</td>";
+            $cadena .= "<td>" . $item->habitacion_nombre . "</td>";
+            $cadena .= "<td>" . $item->especialidad_nombre . "</td>";
+            $cadena .= "<td>" . $item->piso_nombre . "</td>";
+            $cadena .= "<td>" . $item->area_nombre . "</td>";
 
-                $cadena .= "<td>Activa</td>
+            $cadena .= "<td>Activa</td>
                     <td>
                     <div class='btn-group' role='group' aria-label='Basic example'>
                     
@@ -150,6 +144,4 @@ class HabitacionesController extends Zend_Controller_Action
 
         return $cadena;
     }
-
 }
-

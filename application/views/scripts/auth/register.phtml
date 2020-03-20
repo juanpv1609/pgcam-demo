@@ -1,83 +1,80 @@
-
-    
-          <div class="card-body py-2  ">
-            <!-- Nested Row within Card Body -->
-            <div class="row justify-content-center py-auto">
-              <div class="col-xl-5 col-lg-6 col-md-5 my-auto">
-				  		    <img class="img-fluid" src="<?php echo $this->baseUrl(); ?>/assets/img/registro.svg" alt="Registro">
-				      </div>
-              <div class="col-lg-7 p-2">
-                <div class="text-center">
-                  <h1 class="h2 text-gray-900 mb-3">Crear una cuenta!</h1>
-                </div>
-                          <form class="user needs-validation" method="post" id="register" name="register" novalidate >
-                            <div class="form-group row">
-									<div class="col-sm-6 mb-3 mb-sm-0">
-										<input type="text" autofocus class="form-control " name="nombre" id="nombre"
-                                               autocomplete="off" placeholder="Nombres" required>
-                                        <div class="valid-feedback">
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Este campo es necesario.
-                                        </div>
-									</div>
-									<div class="col-sm-6">
-										<input type="text" class="form-control " name="apellido" id="apellido"
-                                               autocomplete="off" placeholder="Apellidos" required>
-                                        <div class="valid-feedback">
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Este campo es necesario.
-                                        </div>
-									</div>
-								</div>
-								<div class="form-group">
-									<input type="email" class="form-control " name="email" id="email"
-                                           autocomplete="off" placeholder="Direccion de correo" required>
-                                    <div class="valid-feedback">
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        Por favor ingrese un correo electronico valido.
-                                    </div>
-								</div>
-								<div class="form-group row">
-									<div class="col-sm-6 mb-3 mb-sm-0">
-										<input type="password" class="form-control " name="clave1" id="clave1"
-                                               autocomplete="off" placeholder="Contraseña" required minlength="6">
-                                        <div class="valid-feedback">
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Debe ingresar al menos 6 caracteres.
-                                        </div>
-									</div>
-									<div class="col-sm-6 mb-3 mb-sm-0">
-										<input type="password" class="form-control " name="clave2" id="clave2"
-                                               autocomplete="off" placeholder="Repita su contraseña" required minlength="6">
-                                        <div class="valid-feedback">
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Debe ingresar al menos 6 caracteres.
-                                        </div>
-									</div>
-								</div>
-                                <div id="clave_igual"></div>
-                  <div class="form-group">
-						        <?php echo $this->getPerfil(); ?>
-                    
-                  </div>
-								<button type="submit" onclick="SendFormRegister();" class="btn btn-primary btn-block">
-								<strong>Registrar cuenta</strong>	
-								</button>
-                  </form>
-							<hr>
-							<div class="text-center">
-              <span class="text-secondary">Ya posee una cuenta?</span>
-              <a class="btn btn-link btn-sm" href="<?php echo $this->url(array('controller' => 'auth', 'action' => 'login')); ?>">
-                 Clic aqui!</a>
-							</div>
-            		</div>
-				</div>
-
+<div class="card-body py-2  ">
+  <!-- Nested Row within Card Body -->
+  <div class="row justify-content-center py-auto">
+    <div class="col-xl-5 col-lg-6 col-md-5 my-auto">
+      <img class="img-fluid" src="<?php echo $this->baseUrl(); ?>/assets/img/registro.svg" alt="Registro">
+    </div>
+    <div class="col-lg-7 p-2">
+      <div class="text-center">
+        <h1 class="h2 text-gray-900 mb-3">Crear una cuenta!</h1>
+      </div>
+      <form class="user needs-validation" method="post" id="register" name="register" novalidate>
+        <div class="form-group row">
+          <div class="col-sm-6 mb-3 mb-sm-0">
+            <input type="text" autofocus class="form-control " name="nombre" id="nombre" autocomplete="off"
+              placeholder="Nombres" required>
+            <div class="valid-feedback">
+            </div>
+            <div class="invalid-feedback">
+              Este campo es necesario.
+            </div>
           </div>
-        
-  
+          <div class="col-sm-6">
+            <input type="text" class="form-control " name="apellido" id="apellido" autocomplete="off"
+              placeholder="Apellidos" required>
+            <div class="valid-feedback">
+            </div>
+            <div class="invalid-feedback">
+              Este campo es necesario.
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control " name="email" id="email" autocomplete="off"
+            placeholder="Direccion de correo" required>
+          <div class="valid-feedback">
+          </div>
+          <div class="invalid-feedback">
+            Por favor ingrese un correo electronico valido.
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-6 mb-3 mb-sm-0">
+            <input type="password" class="form-control " name="clave1" id="clave1" autocomplete="off"
+              placeholder="Contraseña" required minlength="6">
+            <div class="valid-feedback">
+            </div>
+            <div class="invalid-feedback">
+              Debe ingresar al menos 6 caracteres.
+            </div>
+          </div>
+          <div class="col-sm-6 mb-3 mb-sm-0">
+            <input type="password" class="form-control " name="clave2" id="clave2" autocomplete="off"
+              placeholder="Repita su contraseña" required minlength="6">
+            <div class="valid-feedback">
+            </div>
+            <div class="invalid-feedback">
+              Debe ingresar al menos 6 caracteres.
+            </div>
+          </div>
+        </div>
+        <div id="clave_igual"></div>
+        <div class="form-group">
+          <?php echo $this->getPerfil(); ?>
+
+        </div>
+        <button type="submit" onclick="SendFormRegister();" class="btn btn-primary btn-block">
+          <strong>Registrar cuenta</strong>
+        </button>
+      </form>
+      <hr>
+      <div class="text-center">
+        <span class="text-secondary">Ya posee una cuenta?</span>
+        <a class="btn btn-link btn-sm"
+          href="<?php echo $this->url(array('controller' => 'auth', 'action' => 'login')); ?>">
+          Clic aqui!</a>
+      </div>
+    </div>
+  </div>
+
+</div>

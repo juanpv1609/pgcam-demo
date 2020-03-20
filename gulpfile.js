@@ -53,37 +53,37 @@ function modules() {
   // sweetAlert 2 JS
   var b4ToggleJS = gulp.src('./node_modules/bootstrap4-toggle/js/*.js')
     .pipe(gulp.dest('./public/vendor/bootstrap4-toggle/js'));
-    // sweetAlert 2 CSS
+  // sweetAlert 2 CSS
   var b4ToggleCSS = gulp.src('./node_modules/bootstrap4-toggle/css/*.css')
-  .pipe(gulp.dest('./public/vendor/bootstrap4-toggle/css'));
+    .pipe(gulp.dest('./public/vendor/bootstrap4-toggle/css'));
   // sweetAlert 2 JS
   var sweetAlertJS = gulp.src('./node_modules/sweetalert2/dist/*.js')
     .pipe(gulp.dest('./public/vendor/sweetalert2/js'));
-    // sweetAlert 2 CSS
+  // sweetAlert 2 CSS
   var sweetAlertCSS = gulp.src('./node_modules/sweetalert2/dist/*.css')
-  .pipe(gulp.dest('./public/vendor/sweetalert2/css'));
+    .pipe(gulp.dest('./public/vendor/sweetalert2/css'));
   // Bootstrap JS
   var bootstrapJS = gulp.src('./node_modules/bootstrap/dist/js/*')
     .pipe(gulp.dest('./public/vendor/bootstrap/js'));
   // Bootstrap SCSS
   var bootstrapSCSS = gulp.src('./node_modules/bootstrap/scss/**/*')
     .pipe(gulp.dest('./public/vendor/bootstrap/scss'));
-    
-    // Select2 JS
+
+  // Select2 JS
   var select2JS = gulp.src('./node_modules/select2/dist/js/*')
-  .pipe(gulp.dest('./public/vendor/select2/js'));
-// Select2 SCSS
-var select2CSS = gulp.src('./node_modules/select2/dist/css/*')
-  .pipe(gulp.dest('./public/vendor/select2/css'));
+    .pipe(gulp.dest('./public/vendor/select2/js'));
+  // Select2 SCSS
+  var select2CSS = gulp.src('./node_modules/select2/dist/css/*')
+    .pipe(gulp.dest('./public/vendor/select2/css'));
   // ChartJS
   var chartJS = gulp.src('./node_modules/chart.js/dist/*.js')
     .pipe(gulp.dest('./public/vendor/chart.js'));
   // dataTables
   var dataTables = gulp.src([
-      './node_modules/datatables.net/js/*.js',
-      './node_modules/datatables.net-bs4/js/*.js',
-      './node_modules/datatables.net-bs4/css/*.css'
-    ])
+    './node_modules/datatables.net/js/*.js',
+    './node_modules/datatables.net-bs4/js/*.js',
+    './node_modules/datatables.net-bs4/css/*.css'
+  ])
     .pipe(gulp.dest('./public/vendor/datatables'));
   // Font Awesome
   var fontAwesome = gulp.src('./node_modules/@fortawesome/**/*')
@@ -93,12 +93,12 @@ var select2CSS = gulp.src('./node_modules/select2/dist/css/*')
     .pipe(gulp.dest('./public/vendor/jquery-easing'));
   // jQuery
   var jquery = gulp.src([
-      './node_modules/jquery/dist/*',
-      '!./node_modules/jquery/dist/core.js'
-    ])
+    './node_modules/jquery/dist/*',
+    '!./node_modules/jquery/dist/core.js'
+  ])
     .pipe(gulp.dest('./public/vendor/jquery'));
-  return merge(b4ToggleJS,b4ToggleCSS,sweetAlertJS,sweetAlertCSS,bootstrapJS, bootstrapSCSS, chartJS, dataTables,
-     fontAwesome, jquery, jqueryEasing,select2JS,select2CSS);
+  return merge(b4ToggleJS, b4ToggleCSS, sweetAlertJS, sweetAlertCSS, bootstrapJS, bootstrapSCSS, chartJS, dataTables,
+    fontAwesome, jquery, jqueryEasing, select2JS, select2CSS);
 }
 
 // CSS task

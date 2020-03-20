@@ -2,7 +2,6 @@
 
 class AuthController extends Zend_Controller_Action
 {
-
     public function init()
     {
         /* Initialize action controller here */
@@ -12,7 +11,6 @@ class AuthController extends Zend_Controller_Action
         $this->view->controlador = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
         $this->view->accion = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
         //$this->_helper->layout()->disableLayout();
-
     }
 
     public function indexAction()
@@ -23,7 +21,7 @@ class AuthController extends Zend_Controller_Action
     public function loginAction()
     {
         // action body
-        $this->view->titulo="Iniciar Sesión"; 
+        $this->view->titulo="Iniciar Sesión";
         $usuario;
         $clave;
         $this->_helper->layout->setLayout('login');
@@ -58,8 +56,8 @@ class AuthController extends Zend_Controller_Action
                         $auth->getStorage()->write($data); //creamos la sesion para el usuario
                     //inserta la fecha de conexion
                 /* control de rutas */
-                    $this->ruta_usuario($data->usu_id);
-                    }else {// //Si las credenciales no son validas mostramos un error
+                        $this->ruta_usuario($data->usu_id);
+                    } else {// //Si las credenciales no son validas mostramos un error
 
                         $this->view->message = '<div class="alert alert-warning alert-dismissible">
                             <button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
@@ -67,10 +65,7 @@ class AuthController extends Zend_Controller_Action
                             <span>Comuniquese con el administrador!</span></div>';
                         //$this->view->usuario_value=$usuario;
                         //$this->view->clave_value=$clave;
-    
                     }
-                    
-
                 } else {// //Si las credenciales no son validas mostramos un error
                     switch ($result->getCode()) {
                         case Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:
@@ -86,7 +81,7 @@ class AuthController extends Zend_Controller_Action
                         <i class="fas fa-exclamation-circle"></i><strong> Error: </strong><span>"La contraseña ingresada es incorrecta!"</span></div>';
                         $this->view->usuario_value=$usuario; //para que no se borre el campo de usuario
                         $this->view->clave_value="";
-                            break; 
+                            break;
                         default:
                             /* otro error */
                             $this->view->message = '<div class="alert alert-danger alert-dismissible">
@@ -97,7 +92,6 @@ class AuthController extends Zend_Controller_Action
                     
                     //$this->view->usuario_value=$usuario;
                     //$this->view->clave_value=$clave;
-
                 }
             }
         } else { //Recibo un error por Gets
@@ -108,17 +102,17 @@ class AuthController extends Zend_Controller_Action
                     Las credenciales de autenticacion proporcionadas no tienen permiso para acceder a este modulo</div>';
             }
         }
-
     }
-    public function ultima_conexion($usu_id){
+    public function ultima_conexion($usu_id)
+    {
         $obj = new Application_Model_DbTable_Usuario();
         $obj->actualizar_ultima_conexion_usuario($usu_id);
-
     }
-    public function ruta_usuario($usu_id){
+    public function ruta_usuario($usu_id)
+    {
         /* controlar el perfil de usuario y de acuerdo a este direccionar la pagina */
         $obj = new Application_Model_DbTable_Usuario();
-            $perfil = $obj->obtienePerfil($usu_id);
+        $perfil = $obj->obtienePerfil($usu_id);
         switch ($perfil->perf_id) {
             case 1:
                 return $this->_helper->redirector($perfil->perf_accion, $perfil->perf_controlador); //direccionamos al menu de inicio
@@ -153,9 +147,7 @@ class AuthController extends Zend_Controller_Action
     {
         // action body
         $this->_helper->layout->setLayout('login');
-        $this->view->titulo="Registro"; 
-
-
+        $this->view->titulo="Registro";
     }
     public function agregarAction()
     {
@@ -173,7 +165,7 @@ class AuthController extends Zend_Controller_Action
             $response = array(); //Declaro un array para enviar los datos a la vista
 
             if (!$existe_correo) {
-                $datos = $obj->insertarusuario($nombre,$apellido, $email, $clave,$comboPerfil);
+                $datos = $obj->insertarusuario($nombre, $apellido, $email, $clave, $comboPerfil);
                 $asunto='Bienvenido al sistema';
                 $contenido='<html lang="en">
                 <head>
@@ -192,16 +184,13 @@ class AuthController extends Zend_Controller_Action
                 </body>
                 </html>';
                 //envio el email con los datos creados
-                $obj->enviaEmail($email,$contenido,$asunto);
-            }  
+                $obj->enviaEmail($email, $contenido, $asunto);
+            }
         }
 
         $response['data'] = $existe_correo;
         $json = json_encode($response);
         echo $json;
-
-         
-
     }
     public function recuperaAction()
     {
@@ -239,17 +228,9 @@ class AuthController extends Zend_Controller_Action
             </body>
             </html>';
             //envio el email con los datos creados
-            $obj->enviaEmail($correo_recuperacion,$contenido,$asunto);
+            $obj->enviaEmail($correo_recuperacion, $contenido, $asunto);
             //------------actualizar la clave
-            $obj->actualizarclave_recuperacion($correo_recuperacion,$clave_provisional);
+            $obj->actualizarclave_recuperacion($correo_recuperacion, $clave_provisional);
         }
-        
     }
-    
-    
 }
-
-
-
-
-

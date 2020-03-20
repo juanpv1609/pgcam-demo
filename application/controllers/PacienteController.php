@@ -1,7 +1,6 @@
 <?php
 class PacienteController extends Zend_Controller_Action
 {
-   
     public function init()
     {
         /* Initialize action controller here */
@@ -18,14 +17,12 @@ class PacienteController extends Zend_Controller_Action
     {
         // action body
         $this->_helper->redirector('listar', 'paciente'); //direccionamos al listar
-
     }
 
     public function listarAction()
     {
         $this->view->titulo = "Lista de pacientes";
         $this->view->data = $this->tabla_pacientes();
-
     }
 
     public function registrarAction()
@@ -33,8 +30,6 @@ class PacienteController extends Zend_Controller_Action
         $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/paciente.js');
         echo $this->view->headScript();
         $this->view->titulo = "Registro de admisión";
-        
-
     }
     public function admisionAction()
     {
@@ -48,7 +43,7 @@ class PacienteController extends Zend_Controller_Action
             //$segundo_nombre = $this->getRequest()->getParam('segundo_nombre');
             $cedula = $this->getRequest()->getParam('cedula');
             $telefono = $this->getRequest()->getParam('telefono');
-           // $comboParroq = $this->getRequest()->getParam('comboParroq');
+            // $comboParroq = $this->getRequest()->getParam('comboParroq');
             $barrio = $this->getRequest()->getParam('barrio');
             $direccion = $this->getRequest()->getParam('direccion');
             $fecha_n = $this->getRequest()->getParam('fecha_n');
@@ -70,19 +65,13 @@ class PacienteController extends Zend_Controller_Action
             $comboFormaLLeg = $this->getRequest()->getParam('comboForma');
             $fuente_info = $this->getRequest()->getParam('fuente_info');
             $institucion = $this->getRequest()->getParam('institucion');
-            $institucion_telefono = $this->getRequest()->getParam('institucion_telefono'); 
+            $institucion_telefono = $this->getRequest()->getParam('institucion_telefono');
             //$response = array();
             $obj = new Application_Model_DbTable_Admision();
-            $data_p = $obj->admisionpaciente($apellido_paterno,$apellido_materno,$primer_nombre,$segundo_nombre,$cedula
-            ,$telefono,$comboParroq,$barrio,$direccion,$fecha_n,$lugar_n,$comboNacionalidad
-            ,$comboGrupo,$comboEdad,$comboGenero,$comboEstado,$comboInstruccion,$ocupacion
-            ,$trabajo,$comboTipoSeguro,$referido,$contacto_nombre,$contacto_parentezco,$contacto_direccion
-            ,$contacto_telefono,$comboFormaLLeg,$fuente_info,$institucion,$institucion_telefono);
+            $data_p = $obj->admisionpaciente($apellido_paterno, $apellido_materno, $primer_nombre, $segundo_nombre, $cedula, $telefono, $comboParroq, $barrio, $direccion, $fecha_n, $lugar_n, $comboNacionalidad, $comboGrupo, $comboEdad, $comboGenero, $comboEstado, $comboInstruccion, $ocupacion, $trabajo, $comboTipoSeguro, $referido, $contacto_nombre, $contacto_parentezco, $contacto_direccion, $contacto_telefono, $comboFormaLLeg, $fuente_info, $institucion, $institucion_telefono);
             //echo $this->tabla_area();
            // $response = array();
         }
-        
-
     }
     public function buscaAction()
     {
@@ -100,20 +89,15 @@ class PacienteController extends Zend_Controller_Action
             $json = json_encode($response);
             echo $json;
         }
-            
-        
-        
     }
     public function asignarAction()
     {
         $this->view->titulo = "Formulario de asignacion de cama";
-        
     }
 
     public function cambioAction()
     {
         $this->view->titulo = "Cambio / Egreso de paciente";
-        
     }
     public function tabla_pacientes()
     {
@@ -128,7 +112,6 @@ class PacienteController extends Zend_Controller_Action
                     </button>
                 </div>';
         } else {
-
             $Listaarea .= '<table class="table table-sm dataTable" id="dataTableAreas" width="100%">
                 <thead>
                 <tr>
@@ -146,14 +129,14 @@ class PacienteController extends Zend_Controller_Action
             foreach ($datosarea as $item):
 
                 $Listaarea .= "<tr>";
-                $Listaarea .= "<td>" . $item->p_hc . "</td>";
-                $Listaarea .= "<td>" . $item->p_ci . "</td>";
-                $Listaarea .= "<td>" . $item->p_apellidos ." " . $item->p_nombres . "</td>";
-                $Listaarea .= "<td>" . $item->p_sexo . "</td>";
-                $Listaarea .= "<td>" . $item->p_edad . "</td>";
-                $Listaarea .= "<td>" . $item->p_fecha_n . "</td>";
-                $Listaarea .= "<td>" . $item->p_tipo_seguro . "</td>";
-                $Listaarea .= "<td>
+            $Listaarea .= "<td>" . $item->p_hc . "</td>";
+            $Listaarea .= "<td>" . $item->p_ci . "</td>";
+            $Listaarea .= "<td>" . $item->p_apellidos ." " . $item->p_nombres . "</td>";
+            $Listaarea .= "<td>" . $item->p_sexo . "</td>";
+            $Listaarea .= "<td>" . $item->p_edad . "</td>";
+            $Listaarea .= "<td>" . $item->p_fecha_n . "</td>";
+            $Listaarea .= "<td>" . $item->p_tipo_seguro . "</td>";
+            $Listaarea .= "<td>
                     <div class='btn-group' role='group' aria-label='Basic example'>
                         
                         <!--  debo enviar la busqueda por ajax -->
@@ -180,7 +163,6 @@ class PacienteController extends Zend_Controller_Action
     }
     public function cantonAction()
     {
-        
         $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
         $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
         if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
@@ -198,17 +180,14 @@ class PacienteController extends Zend_Controller_Action
                     </button>
                 </div>';
         } else {
-
             foreach ($datos as $item):
                 $Listaarea .= "<option value='". $item->id_canton ."'>" . $item->nombre_canton . "</option>";
             endforeach;
         }
         echo $Listaarea;
-        
-    }  
+    }
     public function parroquiaAction()
     {
-        
         $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
         $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
         if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
@@ -216,7 +195,7 @@ class PacienteController extends Zend_Controller_Action
             //echo $this->select_canton($prov);
         }
         $obj = new Application_Model_DbTable_Admision();
-            $datos = $obj->listarParroquias($canton);
+        $datos = $obj->listarParroquias($canton);
         $Listaarea = '';
         if (!$datos) {
             $Listaarea .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -226,27 +205,10 @@ class PacienteController extends Zend_Controller_Action
                     </button>
                 </div>';
         } else {
-
             foreach ($datos as $item):
                 $Listaarea .= "<option value='". $item->id_parroquia ."'>" . $item->nombre_parroquia . "</option>";
             endforeach;
         }
         echo $Listaarea;
-        
-    }  
-
-
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -2,7 +2,6 @@
 
 class Cie10Controller extends Zend_Controller_Action
 {
-
     public function init()
     {
         /* Initialize action controller here */
@@ -12,13 +11,11 @@ class Cie10Controller extends Zend_Controller_Action
         $this->view->controlador=Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
         $this->view->accion=Zend_Controller_Front::getInstance()->getRequest()->getActionName();
         $this->view->icono = "fa-heartbeat";
-
     }
 
     public function indexAction()
     {
         $this->_helper->redirector('descripcion', 'cie10'); //direccionamos al menu de inicio
-
     }
 
     public function descripcionAction()
@@ -27,8 +24,6 @@ class Cie10Controller extends Zend_Controller_Action
         $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/cie10.js');
         echo $this->view->headScript();
         $this->view->titulo = "Diagnosticos por descripcion";
-        
-
     }
 
     public function categoriaAction()
@@ -37,7 +32,6 @@ class Cie10Controller extends Zend_Controller_Action
         $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/cie10.js');
         echo $this->view->headScript();
         $this->view->titulo = "Diagnosticos por categoria";
-
     }
 
     public function capituloAction()
@@ -47,8 +41,6 @@ class Cie10Controller extends Zend_Controller_Action
         echo $this->view->headScript();
         $this->view->titulo = "Diagnosticos por capitulo";
         $this->view->data = $this->tabla_capitulo();
-
-
     }
     public function buscaAction()
     {
@@ -58,7 +50,6 @@ class Cie10Controller extends Zend_Controller_Action
         if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
             $dato = $this->getRequest()->getParam('dato');
             echo $this->tabla_cie10($dato);
-
         }
     }
     public function buscacategoriaAction()
@@ -69,7 +60,6 @@ class Cie10Controller extends Zend_Controller_Action
         if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
             $dato = $this->getRequest()->getParam('dato');
             echo $this->tabla_cie10_categoria($dato);
-
         }
     }
     public function tabla_cie10($dato)
@@ -85,7 +75,6 @@ class Cie10Controller extends Zend_Controller_Action
                     </button>
                 </div>';
         } else {
-
             $cadena .= '<table class="table table-sm" id="dataTableCie10" width="100%">
                 <thead>
                 <tr>
@@ -98,10 +87,10 @@ class Cie10Controller extends Zend_Controller_Action
             foreach ($datos as $item):
 
                 $cadena .= "<tr>";
-                $cadena .= "<td>" . $item->sub_cod . "</td>";
-                $cadena .= "<td>" . $item->descripcion_sub . "</td>";
+            $cadena .= "<td>" . $item->sub_cod . "</td>";
+            $cadena .= "<td>" . $item->descripcion_sub . "</td>";
 
-                $cadena .= '<td>
+            $cadena .= '<td>
                     <div class="btn-group" role="group" aria-label="Basic example">
                     
                     <!--  debo enviar la busqueda por ajax -->
@@ -134,7 +123,6 @@ class Cie10Controller extends Zend_Controller_Action
                     </button>
                 </div>';
         } else {
-
             $cadena .= '<table class="table table-sm" id="dataTableCie10" width="100%">
                 <thead>
                 <tr>
@@ -147,10 +135,10 @@ class Cie10Controller extends Zend_Controller_Action
             foreach ($datos as $item):
 
                 $cadena .= "<tr>";
-                $cadena .= "<td>" . $item->cod . "</td>";
-                $cadena .= "<td>" . $item->descripcion . "</td>";
+            $cadena .= "<td>" . $item->cod . "</td>";
+            $cadena .= "<td>" . $item->descripcion . "</td>";
 
-                $cadena .= '<td>
+            $cadena .= '<td>
                     <div class="btn-group" role="group" aria-label="Basic example">
                     
                     <!--  debo enviar la busqueda por ajax -->
@@ -183,7 +171,6 @@ class Cie10Controller extends Zend_Controller_Action
                     </button>
                 </div>';
         } else {
-
             $cadena .= '<table class="table table-sm" id="dataTableCie10Capitulo" width="100%">
                 <thead>
                 <tr>
@@ -196,10 +183,10 @@ class Cie10Controller extends Zend_Controller_Action
             foreach ($datos as $item):
 
                 $cadena .= "<tr>";
-                $cadena .= "<td>" . $item->cie10_capitulo_id . "</td>";
-                $cadena .= "<td>" . $item->descripcion . "</td>";
+            $cadena .= "<td>" . $item->cie10_capitulo_id . "</td>";
+            $cadena .= "<td>" . $item->descripcion . "</td>";
 
-                $cadena .= '<td>
+            $cadena .= '<td>
                     <div class="btn-group" role="group" aria-label="Basic example">
                     
                     <!--  debo enviar la busqueda por ajax -->
@@ -219,16 +206,4 @@ class Cie10Controller extends Zend_Controller_Action
 
         return $cadena;
     }
-    
-
-
 }
-
-
-
-
-
-
-
-
-

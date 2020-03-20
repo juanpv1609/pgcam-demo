@@ -8,18 +8,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->setEncoding('UTF-8');
         $view->doctype('XHTML1_STRICT');
         $view->headMeta()->appendHttpEquiv(
-                'Content-Type', 'text/html;charset=utf-8'
+            'Content-Type', 'text/html;charset=utf-8'
         );
         $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
 
-$view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
+        $view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
 
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper(
-                        'ViewRenderer'
+            'ViewRenderer'
         );
         $viewRenderer->setView($view);
         return $view;
     }
 
 }
-

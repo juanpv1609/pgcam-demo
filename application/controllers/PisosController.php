@@ -2,7 +2,6 @@
 
 class PisosController extends Zend_Controller_Action
 {
-
     public function init()
     {
         /* Initialize action controller here */
@@ -22,7 +21,6 @@ class PisosController extends Zend_Controller_Action
         $this->view->data_area = $this->select_area();
         $this->view->titulo="Pisos Registrados";
         $this->view->icono = "fa-layer-group";
-
     }
 
     public function crearAction()
@@ -35,11 +33,9 @@ class PisosController extends Zend_Controller_Action
             $area_id = $this->getRequest()->getParam('area');
 
             $table = new Application_Model_DbTable_Pisos();
-            $table->insertarpiso($piso_nombre,$area_id);
+            $table->insertarpiso($piso_nombre, $area_id);
             echo $this->tabla_piso();
         }
-
-
     }
 
     public function editarAction()
@@ -52,10 +48,9 @@ class PisosController extends Zend_Controller_Action
             $area_id = $this->getRequest()->getParam('area');
             $piso_nombre = $this->getRequest()->getParam('nombre');
             $table = new Application_Model_DbTable_Pisos();
-            $table->actualizarpiso($id,$piso_nombre,$area_id);
+            $table->actualizarpiso($id, $piso_nombre, $area_id);
             echo $this->tabla_piso();
         }
-
     }
     public function eliminarAction()
     {
@@ -68,9 +63,9 @@ class PisosController extends Zend_Controller_Action
             $table->eliminarpiso($id);
             echo $this->tabla_piso();
         }
-
     }
-    public function select_area(){
+    public function select_area()
+    {
         $table_m = new Application_Model_DbTable_Areas();
         $datosarea = $table_m->listar();
         $Listaarea = '<div  class="form-group">';
@@ -106,7 +101,6 @@ class PisosController extends Zend_Controller_Action
                     </button>
                 </div>';
         } else {
-
             $cadena .= '<table class="table table-sm dataTable" id="dataTablePisos" width="100%">
                 <thead>
                 <tr>
@@ -121,11 +115,11 @@ class PisosController extends Zend_Controller_Action
             foreach ($datos as $item):
 
                 $cadena .= "<tr>";
-                $cadena .= "<td>" . $item->piso_id . "</td>";
-                $cadena .= "<td>" . $item->piso_nombre . "</td>";
-                $cadena .= "<td>" . $item->area_nombre . "</td>";
+            $cadena .= "<td>" . $item->piso_id . "</td>";
+            $cadena .= "<td>" . $item->piso_nombre . "</td>";
+            $cadena .= "<td>" . $item->area_nombre . "</td>";
 
-                $cadena .= "<td>Activa</td>
+            $cadena .= "<td>Activa</td>
                     <td>
                     <div class='btn-group' role='group' aria-label='Basic example'>
                     
@@ -148,4 +142,3 @@ class PisosController extends Zend_Controller_Action
         return $cadena;
     }
 }
-

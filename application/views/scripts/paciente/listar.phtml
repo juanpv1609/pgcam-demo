@@ -1,14 +1,13 @@
 <div class="card  shadow ">
 	<div class="card-header d-flex justify-content-between">
-		 <h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
-		 <a type="button" href="<?php echo $this->baseUrl();?>/paciente/registrar" 
-		 class="btn btn-success btn-sm" >
-			  <i class="fa fa-plus"></i> Agregar
-		 </a>
+		<h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
+		<a type="button" href="<?php echo $this->baseUrl();?>/paciente/registrar" class="btn btn-success btn-sm">
+			<i class="fa fa-plus"></i> Agregar
+		</a>
 	</div>
 	<div class="card-body">
 		<div id="data_Table" class="table-responsive text-xs">
 			<?php echo $this->data; ?>
-	  </div>
+		</div>
 	</div>
 </div>

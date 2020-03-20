@@ -2,36 +2,34 @@
 <div class="card  shadow">
 	<div class="card-header d-flex justify-content-between">
 		<h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo;?></h5>
-		
+
 	</div>
-	<div class="card-body">	
+	<div class="card-body">
 		<div class="row">
 			<div class="col-sm-2"></div>
 			<div class="col-sm-8">
 				<div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
 					<a class="btn btn-outline-primary btn-sm"
-					href="<?php echo $this->url(array('controller' => 'cie10', 'action' => 'descripcion')); ?>">Descripcion</a>
+						href="<?php echo $this->url(array('controller' => 'cie10', 'action' => 'descripcion')); ?>">Descripcion</a>
 					<a class="btn btn-outline-dark btn-sm"
-					href="<?php echo $this->url(array('controller' => 'cie10', 'action' => 'categoria')); ?>">Categoria</a>
+						href="<?php echo $this->url(array('controller' => 'cie10', 'action' => 'categoria')); ?>">Categoria</a>
 					<a class="btn btn-outline-success btn-sm"
-					href="<?php echo $this->url(array('controller' => 'cie10', 'action' => 'capitulo')); ?>">Capitulo</a>
-				</div><hr>
-				
-				
+						href="<?php echo $this->url(array('controller' => 'cie10', 'action' => 'capitulo')); ?>">Capitulo</a>
+				</div>
+				<hr>
+
+
 			</div>
 			<div class="col-sm-2"></div>
 
-		</div>	
+		</div>
 		<div class="row">
 			<div class="col-sm-12">
 				<div id="data_Table" class="table-responsive text-xs">
 					<?php echo $this->data;?>
-			
+
 				</div>
 			</div>
-		</div>	
+		</div>
 	</div>
 </div>
-
-
-

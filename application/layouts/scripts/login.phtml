@@ -1,65 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-   <?php echo $this->render('_head.phtml'); ?>
+  <?php echo $this->render('_head.phtml'); ?>
 </head>
-<body class="bg-gradient-light d-flex justify-content-center" >
-    <div class="container animated--grow-in my-lg-5 ">
-      <div class="row justify-content-center my-lg-5 mx-lg-5">
-        <div class="col-xl-10 col-lg-12 col-md-9">  
-          <div class="card o-hidden border-0 shadow-lg">
-            <div class="card-header d-flex justify-content-center ">
-              <h6 class="font-weight-bold my-auto text-primary text-center">
-                HOSPITAL GINECO OBSTÉTRICO PEDIÁTRICO DE NUEVA AURORA LUZ ELENA ARISMENDI</h6>
-            </div>
-            <?php echo $this->layout()->content; ?> 
-                <div class="card-footer p-0">
-                <?php echo $this->render('_footer.phtml'); ?>
-              </div>
+
+<body class="bg-gradient-light d-flex justify-content-center">
+  <div class="container animated--grow-in my-lg-5 ">
+    <div class="row justify-content-center my-lg-5 mx-lg-5">
+      <div class="col-xl-10 col-lg-12 col-md-9">
+        <div class="card o-hidden border-0 shadow-lg">
+          <div class="card-header d-flex justify-content-center ">
+            <h6 class="font-weight-bold my-auto text-primary text-center">
+              HOSPITAL GINECO OBSTÉTRICO PEDIÁTRICO DE NUEVA AURORA LUZ ELENA ARISMENDI</h6>
+          </div>
+          <?php echo $this->layout()->content; ?>
+          <div class="card-footer p-0">
+            <?php echo $this->render('_footer.phtml'); ?>
           </div>
         </div>
-      </div>
-    </div>
-  <?php echo $this->render('_scripts.phtml'); ?>
-   
-  <input type="hidden" name="dir" id="dir" readonly="readonly"  value="<?php echo $this->baseUrl(); ?>">
-  <!-- Modal -->
-<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm " role="document">
-    <div class="modal-content ">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Recuperar contraseña</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col d-flex justify-content-center">
-            <img class="img-fluid" height="100" width="100" src="<?php echo $this->baseUrl(); ?>/assets/img/forgot.svg" alt="Forgot">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <div class="form-group">
-              <input type="email" autofocus class="form-control form-control-user" id="recuperar" name="recuperar"
-                aria-describedby="correoHelp" required placeholder="Ingrese su correo electronico..." 
-                autocomplete="off" onkeypress="validarCorreo()">
-                <small  id="correoHelp" ></small>
-            </div>
-            <div id="mensaje" >
-            </div>
-          </div>
-        </div>
-      
-      </div>
-      <div class="modal-footer d-flex justify-content-between">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" onclick="recuperarclave()">Aceptar</button>
       </div>
     </div>
   </div>
-</div>
+  <?php echo $this->render('_scripts.phtml'); ?>
+
+  <input type="hidden" name="dir" id="dir" readonly="readonly" value="<?php echo $this->baseUrl(); ?>">
+  <!-- Modal -->
+  <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm " role="document">
+      <div class="modal-content ">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Recuperar contraseña</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col d-flex justify-content-center">
+              <img class="img-fluid" height="100" width="100"
+                src="<?php echo $this->baseUrl(); ?>/assets/img/forgot.svg" alt="Forgot">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <input type="email" autofocus class="form-control form-control-user" id="recuperar" name="recuperar"
+                  aria-describedby="correoHelp" required placeholder="Ingrese su correo electronico..."
+                  autocomplete="off" onkeypress="validarCorreo()">
+                <small id="correoHelp"></small>
+              </div>
+              <div id="mensaje">
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer d-flex justify-content-between">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" onclick="recuperarclave()">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 

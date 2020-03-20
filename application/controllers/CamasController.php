@@ -2,7 +2,6 @@
 
 class CamasController extends Zend_Controller_Action
 {
-
     public function init()
     {
         /* Initialize action controller here */
@@ -12,7 +11,6 @@ class CamasController extends Zend_Controller_Action
         $this->view->controlador=Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
         $this->view->accion=Zend_Controller_Front::getInstance()->getRequest()->getActionName();
         $this->view->icono = "fa-bed";
-
     }
 
     public function indexAction()
@@ -23,7 +21,7 @@ class CamasController extends Zend_Controller_Action
         $this->view->data = $this->tabla_camas();
         $this->view->data_habitaciones = $this->select_habitacion();
         $this->view->data_estado_cama = $this->select_estado_cama();
-        $this->view->titulo="Camas Registradas"; 
+        $this->view->titulo="Camas Registradas";
     }
     public function crearAction()
     {
@@ -36,11 +34,9 @@ class CamasController extends Zend_Controller_Action
             $cama_estado = $this->getRequest()->getParam('cama_estado');
 
             $table = new Application_Model_DbTable_Camas();
-            $table->insertarcama($cama_nombre,$habitacion,$cama_estado);
+            $table->insertarcama($cama_nombre, $habitacion, $cama_estado);
             echo $this->tabla_camas();
         }
-
-
     }
 
     public function editarAction()
@@ -55,10 +51,9 @@ class CamasController extends Zend_Controller_Action
             $cama_estado = $this->getRequest()->getParam('cama_estado');
 
             $table = new Application_Model_DbTable_Camas();
-            $table->actualizarcama($id,$cama_nombre,$habitacion,$cama_estado);
+            $table->actualizarcama($id, $cama_nombre, $habitacion, $cama_estado);
             echo $this->tabla_camas();
         }
-
     }
     public function eliminarAction()
     {
@@ -71,9 +66,9 @@ class CamasController extends Zend_Controller_Action
             $table->eliminarcama($id);
             echo $this->tabla_camas();
         }
-
     }
-    public function select_habitacion(){
+    public function select_habitacion()
+    {
         $table_m = new Application_Model_DbTable_Habitaciones();
         $datosarea = $table_m->listar();
         $Listaarea = '<div  class="form-group">';
@@ -96,7 +91,8 @@ class CamasController extends Zend_Controller_Action
         }
         return $Listaarea;
     }
-    public function select_estado_cama(){
+    public function select_estado_cama()
+    {
         $table_m = new Application_Model_DbTable_Camas();
         $datosarea = $table_m->listar_estado_cama();
         $Listaarea = '<div  class="form-group">';
@@ -132,7 +128,6 @@ class CamasController extends Zend_Controller_Action
                     </button>
                 </div>';
         } else {
-
             $cadena .= '<table class="table table-sm dataTable" id="dataTableCamas" width="100%">
                 <thead>
                 <tr>
@@ -150,14 +145,14 @@ class CamasController extends Zend_Controller_Action
             foreach ($datos as $item):
 
                 $cadena .= "<tr>";
-                $cadena .= "<td>" . $item->cama_id . "</td>";
-                $cadena .= "<td>Cama " . $item->cama_nombre . "</td>";
-                $cadena .= "<td>" . $item->habitacion_nombre . "</td>";
-                $cadena .= "<td>" . $item->especialidad_nombre . "</td>";
-                $cadena .= "<td>" . $item->piso_nombre . "</td>";
-                $cadena .= "<td>" . $item->area_nombre . "</td>";
+            $cadena .= "<td>" . $item->cama_id . "</td>";
+            $cadena .= "<td>Cama " . $item->cama_nombre . "</td>";
+            $cadena .= "<td>" . $item->habitacion_nombre . "</td>";
+            $cadena .= "<td>" . $item->especialidad_nombre . "</td>";
+            $cadena .= "<td>" . $item->piso_nombre . "</td>";
+            $cadena .= "<td>" . $item->area_nombre . "</td>";
 
-                $cadena .= "<td>". $item->cama_estado_descripcion ."</td>
+            $cadena .= "<td>". $item->cama_estado_descripcion ."</td>
                 <td>
                 <div class='btn-group' role='group' aria-label='Basic example'>
                 
@@ -179,7 +174,4 @@ class CamasController extends Zend_Controller_Action
 
         return $cadena;
     }
-
-
 }
-

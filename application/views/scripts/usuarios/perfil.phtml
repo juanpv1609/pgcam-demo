@@ -1,8 +1,7 @@
-
 <div class="card  shadow ">
 	<div class="card-header d-flex justify-content-between">
-		 <h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
-		 
+		<h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
+
 	</div>
 	<div class="card-body">
 		<div class="row ">
@@ -10,173 +9,140 @@
 				<div class="row">
 					<div class="col-sm-12 d-flex justify-content-center">
 						<i class="far fa-user fa-7x text-<?php echo $this->data->perf_color; ?> mx-lg-5 my-lg-5"></i>
-					</div>					
+					</div>
 				</div>
 				<hr>
 				<div class="row">
 					<div class="col sm-12 d-flex justify-content-center">
 						<div class='btn-group' role='group' aria-label='Basic example'>
-							<button type="button"  onclick="activaPerfilForm()" 
-						  class="btn btn-outline-primary btn-sm" >
+							<button type="button" onclick="activaPerfilForm()" class="btn btn-outline-primary btn-sm">
 								<i class="fas fa-cogs"></i> Modificar informacion
-						  </button>  
-						  <button  class=" btn btn-outline-danger btn-sm" onclick="cambiarClaveU('<?php echo $this->user->usu_id; ?>')">
-							<i class="fas fa-key fa-fw"></i> <span>Cambiar contraseña</span>
-						 </button>
-						 </div>
+							</button>
+							<button class=" btn btn-outline-danger btn-sm"
+								onclick="cambiarClaveU('<?php echo $this->user->usu_id; ?>')">
+								<i class="fas fa-key fa-fw"></i> <span>Cambiar contraseña</span>
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
 
 			<div class="col-sm-6 ml-4">
-			<form class="user needs-validation" method="post" id="perfil_register" name="perfil_register" novalidate >
+				<form class="user needs-validation" method="post" id="perfil_register" name="perfil_register" novalidate>
 
-				<input type="hidden" id="perfil_usuario_id" name="perfil_usuario_id" value="<?php echo $this->data->usu_id; ?>">
-					 <div class="row">
-						 <div class="col-sm-6">
-							<div  class="form-group">
-                        <label for="perfil_nombres">Nombres:</label>
-                        <input type="text"
-                        id="perfil_nombres"
-                        class="form-control bg-white"
-								name="perfil_nombres"
-								placeholder="Nombres..."
-								required autocomplete="off" 
-								disabled
-								value="<?php echo $this->data->usu_nombres; ?>">
-                        <div class="valid-feedback">
-								</div>
-								<div class="invalid-feedback">
-									 Este campo es necesario.
-								</div>
-						  </div>
-						 </div>
-						 <div class="col-sm-6">
-							<div  class="form-group">
-                        <label for="perfil_apellidos">Apellidos:</label>
-                        <input type="text"
-                        id="perfil_apellidos"
-                        class="form-control bg-white"
-								name="perfil_apellidos"
-								placeholder="Apellidos..."
-								required autocomplete="off"
-								disabled
-								value="<?php echo $this->data->usu_apellidos; ?>" >
-                        <div class="valid-feedback">
-								</div>
-								<div class="invalid-feedback">
-									 Este campo es necesario.
-								</div>
-						  </div>
-						 </div>
-					 </div>
-					 <div class="row">
-						 <div class="col-sm-12">
-							<div  class="form-group">
-                        <label for="perfil_correo">Correo electronico:</label>
-                        <input type="email"
-                        id="perfil_correo"
-                        class="form-control bg-white"
-								name="perfil_correo"
-								placeholder="ejemplo@ejemplo.com"
-								required autocomplete="off" 
-								disabled
-								value="<?php echo $this->data->correo; ?>">
-                        <div class="valid-feedback">
-								</div>
-								<div class="invalid-feedback">
-									 Por favor ingrese un correo electronico valido.
-								</div>
-						  </div>
-						 </div>
-					 </div>
-					 <div class="row">
-						<div class="col-sm-4">
-							<div  class="form-group">
-                        <label for="perfil_perfil">Perfil:</label>
-                        <input type="text"
-                        id="perfil_perfil"
-                        class="form-control bg-white"
-								name="perfil_perfil"
-								placeholder="Perfil"
-								required autocomplete="off" 
-								disabled
-								value="<?php echo $this->data->perf_nombre; ?>"
-								data-toggle="tooltip" data-placement="bottom" title="Este campo no puede ser cambiado">
-                        <div class="valid-feedback">
+					<input type="hidden" id="perfil_usuario_id" name="perfil_usuario_id"
+						value="<?php echo $this->data->usu_id; ?>">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="perfil_nombres">Nombres:</label>
+								<input type="text" id="perfil_nombres" class="form-control bg-white" name="perfil_nombres"
+									placeholder="Nombres..." required autocomplete="off" disabled
+									value="<?php echo $this->data->usu_nombres; ?>">
+								<div class="valid-feedback">
 								</div>
 								<div class="invalid-feedback">
 									Este campo es necesario.
 								</div>
-						  </div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="perfil_apellidos">Apellidos:</label>
+								<input type="text" id="perfil_apellidos" class="form-control bg-white" name="perfil_apellidos"
+									placeholder="Apellidos..." required autocomplete="off" disabled
+									value="<?php echo $this->data->usu_apellidos; ?>">
+								<div class="valid-feedback">
+								</div>
+								<div class="invalid-feedback">
+									Este campo es necesario.
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label for="perfil_correo">Correo electronico:</label>
+								<input type="email" id="perfil_correo" class="form-control bg-white" name="perfil_correo"
+									placeholder="ejemplo@ejemplo.com" required autocomplete="off" disabled
+									value="<?php echo $this->data->correo; ?>">
+								<div class="valid-feedback">
+								</div>
+								<div class="invalid-feedback">
+									Por favor ingrese un correo electronico valido.
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label for="perfil_perfil">Perfil:</label>
+								<input type="text" id="perfil_perfil" class="form-control bg-white" name="perfil_perfil"
+									placeholder="Perfil" required autocomplete="off" disabled
+									value="<?php echo $this->data->perf_nombre; ?>" data-toggle="tooltip" data-placement="bottom"
+									title="Este campo no puede ser cambiado">
+								<div class="valid-feedback">
+								</div>
+								<div class="invalid-feedback">
+									Este campo es necesario.
+								</div>
+							</div>
 
 						</div>
 						<div class="col-sm-4">
-							<div  class="form-group">
-                        <label for="perfil_estado">Estado:</label>
-                        <input type="text"
-                        id="perfil_estado"
-                        class="form-control bg-white"
-								name="perfil_estado"
-								placeholder="estado"
-								required autocomplete="off" 
-								disabled
-								value="<?php echo $this->data->usu_estado_nombre; ?>"
-								data-toggle="tooltip" data-placement="bottom" title="Este campo no puede ser cambiado">
-                        <div class="valid-feedback">
+							<div class="form-group">
+								<label for="perfil_estado">Estado:</label>
+								<input type="text" id="perfil_estado" class="form-control bg-white" name="perfil_estado"
+									placeholder="estado" required autocomplete="off" disabled
+									value="<?php echo $this->data->usu_estado_nombre; ?>" data-toggle="tooltip"
+									data-placement="bottom" title="Este campo no puede ser cambiado">
+								<div class="valid-feedback">
 								</div>
 								<div class="invalid-feedback">
 									Este campo es necesario.
 								</div>
-						  </div>
+							</div>
 
 						</div>
 						<div class="col-sm-4">
-							<div  class="form-group">
-                        <label for="perfil_iniciales">Iniciales:</label>
-                        <input type="text"
-                        id="perfil_iniciales"
-                        class="form-control bg-white"
-								name="perfil_iniciales"
-								placeholder="Iniciales"
-								required autocomplete="off" 
-								disabled
-								value="<?php echo $this->data->usu_iniciales; ?>"
-								data-toggle="tooltip" data-placement="bottom" title="Este campo no puede ser cambiado">
-                        <div class="valid-feedback">
+							<div class="form-group">
+								<label for="perfil_iniciales">Iniciales:</label>
+								<input type="text" id="perfil_iniciales" class="form-control bg-white" name="perfil_iniciales"
+									placeholder="Iniciales" required autocomplete="off" disabled
+									value="<?php echo $this->data->usu_iniciales; ?>" data-toggle="tooltip"
+									data-placement="bottom" title="Este campo no puede ser cambiado">
+								<div class="valid-feedback">
 								</div>
 								<div class="invalid-feedback">
 									Este campo es necesario.
 								</div>
-						  </div>
+							</div>
 
 						</div>
 					</div>
-					<div id="formGroupPassword"  class="form-group" style="display: none;">
+					<div id="formGroupPassword" class="form-group" style="display: none;">
 						<label for="confirma_clave">A continuacion ingrese su contraseña para confirmar el cambio:</label>
-						<input type="password"
-						id="confirma_clave"
-						class="form-control bg-white border border-warning"
-						name="confirma_clave"
-						placeholder="Ingrese su contraseña"
-						required autocomplete="off" >
+						<input type="password" id="confirma_clave" class="form-control bg-white border border-warning"
+							name="confirma_clave" placeholder="Ingrese su contraseña" required autocomplete="off">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
 							Este campo es necesario.
 						</div>
-				  </div>
-					<div id="accionForm" class="d-flex justify-content-between">
-						
 					</div>
-			
-			
+					<div id="accionForm" class="d-flex justify-content-between">
+
+					</div>
+
+
 				</form>
-				</div>
+			</div>
 			<div class="col-sm-3">
-				
+
 			</div>
 		</div>
-				
+
 	</div>
 </div>

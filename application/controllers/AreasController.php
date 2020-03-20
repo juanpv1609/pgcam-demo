@@ -2,19 +2,16 @@
 
 class AreasController extends Zend_Controller_Action
 {
-
     public function init()
     {
         /* Initialize action controller here */
         $this->initView();
-       // $this->view->baseUrl = $this->_request->getBaseUrl();
+        // $this->view->baseUrl = $this->_request->getBaseUrl();
         $this->view->user = Zend_Auth::getInstance()->getIdentity();
         $this->view->controlador = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
         $this->view->accion = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
         $this->view->titulo_formulario = "Area";
         $this->view->icono = "fa-table";
-        
-        
     }
 
     public function indexAction()
@@ -23,7 +20,6 @@ class AreasController extends Zend_Controller_Action
         echo $this->view->headScript();
         $this->view->data = $this->tabla_area();
         $this->view->titulo = "Areas Registradas";
-        
     }
 
     public function crearAction()
@@ -38,8 +34,6 @@ class AreasController extends Zend_Controller_Action
             $table->insertararea($area_nombre);
             echo $this->tabla_area();
         }
-
-
     }
     
     public function editarAction()
@@ -51,10 +45,9 @@ class AreasController extends Zend_Controller_Action
             $area_id = $this->getRequest()->getParam('id');
             $area_nombre = $this->getRequest()->getParam('nombre');
             $table = new Application_Model_DbTable_Areas();
-            $table->actualizararea($area_id,$area_nombre);
+            $table->actualizararea($area_id, $area_nombre);
             echo $this->tabla_area();
         }
-
     }
     public function eliminarAction()
     {
@@ -67,7 +60,6 @@ class AreasController extends Zend_Controller_Action
             $table->eliminararea($area_id);
             echo $this->tabla_area();
         }
-
     }
 
     public function tabla_area()
@@ -83,7 +75,6 @@ class AreasController extends Zend_Controller_Action
                     </button>
                 </div>';
         } else {
-
             $Listaarea .= '<table class="table table-sm dataTable" id="dataTableAreas" width="100%">
                 <thead>
                 <tr>
@@ -97,10 +88,10 @@ class AreasController extends Zend_Controller_Action
             foreach ($datosarea as $item):
 
                 $Listaarea .= "<tr>";
-                $Listaarea .= "<td>" . $item->area_id . "</td>";
-                $Listaarea .= "<td>" . $item->area_nombre . "</td>";
-                $nombre="'". $item->area_nombre ."'";
-                $Listaarea .= "<td>Activa</td>
+            $Listaarea .= "<td>" . $item->area_id . "</td>";
+            $Listaarea .= "<td>" . $item->area_nombre . "</td>";
+            $nombre="'". $item->area_nombre ."'";
+            $Listaarea .= "<td>Activa</td>
                     <td>
                     <div class='btn-group' role='group' aria-label='Basic example'>
                         
@@ -123,8 +114,4 @@ class AreasController extends Zend_Controller_Action
 
         return $Listaarea;
     }
-
 }
-
-
-

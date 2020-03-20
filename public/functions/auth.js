@@ -8,15 +8,14 @@ function isValidEmail(mail) {
 }
 
 
-function SendFormLogin(e)
-{
+function SendFormLogin(e) {
 
     tecla = (document.all) ? e.keyCode : e.which;
-    if (tecla == 13){
+    if (tecla == 13) {
         e.preventDefault(); //prevent default action
-        
+
         document.login.submit();
-        
+
     }
 
 }
@@ -30,49 +29,49 @@ function SendFormRegister() {
     var clave2 = $("#clave2").val();
     var comboPerfil = $("#comboPerfil").val();
     var dir = $('#dir').val();
-    $("#register").submit(function(event){
+    $("#register").submit(function (event) {
         event.preventDefault(); //prevent default action
         //console.log(nombre);
-        if ((!nombre=="") && (!apellido=="") && (!email=="") && (!clave=="") && (!clave2=="") && (!comboPerfil=="")) {
+        if ((!nombre == "") && (!apellido == "") && (!email == "") && (!clave == "") && (!clave2 == "") && (!comboPerfil == "")) {
             if (clave == clave2) {
                 $.ajax(
                     {
                         dataType: "json",
                         type: "POST",
                         url: dir + "/auth/agregar", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
-                        data: "nombre=" + nombre + "&apellido=" + apellido + "&email=" + email 
-                        + "&clave=" + clave+"&comboPerfil="+comboPerfil, //Se añade el parametro de busqueda del medico
+                        data: "nombre=" + nombre + "&apellido=" + apellido + "&email=" + email
+                            + "&clave=" + clave + "&comboPerfil=" + comboPerfil, //Se añade el parametro de busqueda del medico
                         beforeSend: function (data) {
 
                         },
                         success: function (requestData) {//armar la tabla
-                           if (!requestData.data.correo=='') {
-                                $("#clave_igual").addClass('alert alert-danger').html('El correo <strong>'+requestData.data.correo+'</strong> ya existe!').show(100).delay(2500).hide(100);
-                            
-                           }else{
-                            Swal.fire({
-                                position: 'top',
-                                title: 'Correcto!',
-                                text: 'Cuenta creada exitosamente.',
-                                width: '22rem',
-                                icon: 'success',
-                                confirmButtonText: 'Aceptar'
-                            }).then((result)=>{
-                                window.location.href = dir + "/auth/login";
+                            if (!requestData.data.correo == '') {
+                                $("#clave_igual").addClass('alert alert-danger').html('El correo <strong>' + requestData.data.correo + '</strong> ya existe!').show(100).delay(2500).hide(100);
 
-                            })
+                            } else {
+                                Swal.fire({
+                                    position: 'top',
+                                    title: 'Correcto!',
+                                    text: 'Cuenta creada exitosamente.',
+                                    width: '22rem',
+                                    icon: 'success',
+                                    confirmButtonText: 'Aceptar'
+                                }).then((result) => {
+                                    window.location.href = dir + "/auth/login";
 
-                           }
+                                })
+
+                            }
                             //console.log(requestData.data);
 
                         },
                         error: function (requestData, strError, strTipoError) {
-                        //alert(strError+"\n"+strTipoError);
-                          //  $("#clave_igual").addClass('alert alert-danger').html('El correo ingresado ya existe').show(100).delay(2500).hide(100);
+                            //alert(strError+"\n"+strTipoError);
+                            //  $("#clave_igual").addClass('alert alert-danger').html('El correo ingresado ya existe').show(100).delay(2500).hide(100);
 
                         },
                         complete: function (requestData, exito) { //fin de la llamada ajax.
-                           // console.log(exito);
+                            // console.log(exito);
 
                         }
                     });
@@ -83,7 +82,7 @@ function SendFormRegister() {
     });
 }
 
-function logout(){
+function logout() {
     var dir = $('#dir').val();
     Swal.fire({
         position: 'top',
@@ -95,78 +94,78 @@ function logout(){
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Aceptar'
-      }).then((result) => {
+    }).then((result) => {
         if (result.value) {
-          Swal.fire({
-            position: 'top',
-            title: 'Correcto!',
-            text: 'Ah finalizado su sesion.',
-            width: '22rem',
-            icon: 'success',
-            confirmButtonText: 'Aceptar'
-        }).then((result)=>{
-            window.location.href = dir + "/auth/logout";
-        })
-        
+            Swal.fire({
+                position: 'top',
+                title: 'Correcto!',
+                text: 'Ah finalizado su sesion.',
+                width: '22rem',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                window.location.href = dir + "/auth/logout";
+            })
+
         }
-        
-      })
-      
+
+    })
+
 }
-function validarCorreo(){
+function validarCorreo() {
     $("#recuperar").removeClass('border border-danger').addClass('border border-success');
     $("#correoHelp").removeClass('badge badge-danger text-wrap').addClass('badge badge-success text-wrap').html('');
 }
 function recuperarclave() {
-   // const { value: email } = await 
-   var recuperar = $("#recuperar").val();
+    // const { value: email } = await 
+    var recuperar = $("#recuperar").val();
     var dir = $('#dir').val();
-        //console.log(nombre);
-        if ((!recuperar=="")&&(isValidEmail(recuperar))) {
-            $.ajax(
-                {
-                    dataType: "json",
-                    type: "POST",
-                    url: dir + "/auth/recupera", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
-                    data: "recuperar=" + recuperar, //Se añade el parametro de busqueda del medico
-                    beforeSend: function (data) {
-                        $("#mensaje").addClass('alert alert-info')
+    //console.log(nombre);
+    if ((!recuperar == "") && (isValidEmail(recuperar))) {
+        $.ajax(
+            {
+                dataType: "json",
+                type: "POST",
+                url: dir + "/auth/recupera", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
+                data: "recuperar=" + recuperar, //Se añade el parametro de busqueda del medico
+                beforeSend: function (data) {
+                    $("#mensaje").addClass('alert alert-info')
                         .html('<i class="fas fa-spinner fa-pulse"></i><span> Espere por favor, enviando correo electronico...</span>');
-                    },
-                    success: function (requestData) {//armar la tabla
-                        if (!requestData.data.correo=="") {
-                            Swal.fire({
-                                position: 'top',
-                                title: 'Correcto!',
-                                text: 'Correo electronico enviado.',
-                                width: '22rem',
-                                icon: 'success',
-                                confirmButtonText: 'Aceptar'
-                            }).then((result)=>{
-                                window.location.href = dir + "/auth/login";
-    
-                            })
-                        }else {
-                            $("#mensaje").addClass('alert alert-info')
-                        .html('<i class="fas fa-exclamation-circle"></i><span> El correo ingresado no existe en el sistema!</span>');
-                    
-                        }
+                },
+                success: function (requestData) {//armar la tabla
+                    if (!requestData.data.correo == "") {
+                        Swal.fire({
+                            position: 'top',
+                            title: 'Correcto!',
+                            text: 'Correo electronico enviado.',
+                            width: '22rem',
+                            icon: 'success',
+                            confirmButtonText: 'Aceptar'
+                        }).then((result) => {
+                            window.location.href = dir + "/auth/login";
 
-                    },
-                    error: function (requestData, strError, strTipoError) {
-                        //console.log(strError+"\n"+strTipoError);
-                        
-                    },
-                    complete: function (requestData, exito) { //fin de la llamada ajax.
-                       // console.log(exito);
+                        })
+                    } else {
+                        $("#mensaje").addClass('alert alert-info')
+                            .html('<i class="fas fa-exclamation-circle"></i><span> El correo ingresado no existe en el sistema!</span>');
 
                     }
-                });
-        }else{
-            $("#recuperar").removeClass('border border-success').addClass('border border-danger');
-            $("#correoHelp").removeClass('badge badge-success text-wrap').addClass('badge badge-danger text-wrap')
+
+                },
+                error: function (requestData, strError, strTipoError) {
+                    //console.log(strError+"\n"+strTipoError);
+
+                },
+                complete: function (requestData, exito) { //fin de la llamada ajax.
+                    // console.log(exito);
+
+                }
+            });
+    } else {
+        $("#recuperar").removeClass('border border-success').addClass('border border-danger');
+        $("#correoHelp").removeClass('badge badge-success text-wrap').addClass('badge badge-danger text-wrap')
             .html('<span>Ingrese un correo electronico valido!</span>');
-        }
-      
+    }
+
 }
 
