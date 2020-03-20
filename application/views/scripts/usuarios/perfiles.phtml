@@ -1,7 +1,7 @@
 <div class="card  shadow ">
 	<div class="card-header d-flex justify-content-between">
 		 <h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
-		 <button type="button"  onclick="agregarModal()" 
+		 <button type="button"  onclick="agregarModalUperfil()" 
 		 class="btn btn-success btn-sm" >
 			  <i class="fa fa-plus"></i> Agregar
 		 </button> 
@@ -30,4 +30,127 @@
 					</div>
 				</div>
 	</div>
+</div>
+<!-- formulario Modal-->
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-primary" id="exampleModalLabel"></h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+				</div>
+				<form class="needs-validation" method="post" id="agregaPerfil" name="agregaPerfil" novalidate >
+				
+					<div class="modal-body">
+						<input type="hidden" id="usuario_id" name="usuario_id">
+						<div class="row">
+							<div class="col-sm-12">
+								<div  class="form-group">
+									<label for="nombres">Nombre del perfil:</label>
+									<input type="text"
+									id="nombres"
+									class="form-control "
+									name="nombres"
+									placeholder="Ingrese el nombre del perfil"
+									required autocomplete="off" >
+									<div class="valid-feedback">
+									</div>
+									<div class="invalid-feedback">
+										Este campo es necesario.
+									</div>
+							</div>
+							</div>
+						</div>
+						<!-- <div class="row">
+							<div class="col-sm-12">
+								<div  class="form-group">
+									<label for="nombres">Seleccione un controlador:</label>
+									<select 
+									id="nombres"
+									class="form-control "
+									name="nombres"
+									required autocomplete="off" >
+									<option value="">Index</option>
+									<option value="">Usuarios</option>
+									<option value="">Paciente</option>
+									<option value="">Areas</option>
+									<option value="">Pisos</option>
+									<option value="">Especialidades</option>
+									<option value="">Habitaciones</option>
+									<option value="">Camas</option>
+									<option value="">Cie10</option>
+									</select>
+									<div class="valid-feedback">
+									</div>
+									<div class="invalid-feedback">
+										Este campo es necesario.
+									</div>
+							</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<div  class="form-group">
+									<label for="nombres">Seleccione una accion:</label>
+									<select 
+									id="nombres"
+									class="form-control "
+									name="nombres"
+									required autocomplete="off" >
+									<option value="">Index</option>
+									<option value="">Usuarios</option>
+									<option value="">Paciente</option>
+									<option value="">Areas</option>
+									<option value="">Pisos</option>
+									<option value="">Especialidades</option>
+									<option value="">Habitaciones</option>
+									<option value="">Camas</option>
+									<option value="">Cie10</option>
+									</select>
+									<div class="valid-feedback">
+									</div>
+									<div class="invalid-feedback">
+										Este campo es necesario.
+									</div>
+							</div>
+							</div>
+						</div> -->
+						<div class="row">
+							<div class="col-sm-12">
+								<div  class="form-group">
+									<label for="correo">Seleccione un color:</label>
+									<div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
+										<button type="button" class="btn btn-primary " title="Primary" >&nbsp;</button>
+										<button type="button" class="btn btn-secondary "title="Secondary"></button>
+										<button type="button" class="btn btn-success "title="Success"></button>
+										<button type="button" class="btn btn-danger "title="Danger"></button>
+										<button type="button" class="btn btn-warning "title="Warning"></button>
+										<button type="button" class="btn btn-info "title="Info"></button>
+										<button type="button" class="btn btn-dark "title="Dark"></button>
+										
+									 </div>
+
+									<div class="valid-feedback">
+									</div>
+									<div class="invalid-feedback">
+										Por favor ingrese un correo electronico valido.
+									</div>
+							</div>
+							</div>
+						</div>  
+							
+					<div class="modal-footer d-flex justify-content-between ">
+						<button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+						<div id="accionForm">
+
+						</div>
+					</div>
+					</div>
+				</form>
+				
+        </div>
+    </div>
 </div>

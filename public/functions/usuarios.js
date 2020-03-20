@@ -74,6 +74,30 @@ function editarModalU(id,nombre,apellido,correo,estado,perfil) {
        show:true
    });    
 }
+//-----------------Perfil
+function agregarModalUperfil() {
+  $("#exampleModalLabel").text("Agregar - Perfil");
+  $("#accionForm").html('<button class="btn btn-primary" type="submit"  onclick="InsertarPerfil();">Agregar</button>');
+
+  $('#formModal').modal({
+      show:true
+  });
+  
+}
+
+function editarModalUperfil(id,nombre,apellido,correo,estado,perfil) {
+  $("#exampleModalLabel").text("Editar - Usuario");
+  $("#usuario_id").val(id);
+  $("#nombres").val(nombre);
+   $("#apellidos").val(apellido);
+   $("#correo").val(correo);
+   $("#comboPerfil").val(perfil);
+   $("#comboEstado").val(estado);
+  $("#accionForm").html('<button class="btn btn-primary" type="submit"  onclick="ActualizarUsuario();">Actualizar</button>');
+  $('#formModal').modal({
+      show:true
+  });    
+}
 function cambiarClaveU(id) {
   $("#accionFormCambiaClave").show();
   $('#formModal_password').modal({
