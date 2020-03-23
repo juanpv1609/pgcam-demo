@@ -27,7 +27,7 @@
       position: absolute;
       left: calc(#{$sidebar-collapsed-width} + #{$grid-gutter-width} / 2);
       z-index: 1;
-      top: 2px;
+      top: 1px;
       // Grow In Animation
       @extend .animated--grow-in;
       .collapse-inner {
@@ -211,7 +211,7 @@
           position: absolute;
           left: calc(#{$sidebar-collapsed-width} + #{$grid-gutter-width} / 2);
           z-index: 1;
-          top: 2px;
+          top: 1px;
           // Grow In Animation for Toggled State
           animation-name: growIn;
           animation-duration: 200ms;
@@ -237,7 +237,7 @@
           padding: 0.5rem 0.75rem;
           width: $sidebar-collapsed-width;
           span {
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             display: block;
           }
           i {

@@ -13,7 +13,7 @@
 				<div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
 					<a class="btn btn-outline-primary btn-sm"
 						href="<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'index')); ?>">Usuarios</a>
-					<a class="btn btn-outline-dark btn-sm"
+					<a class="btn btn-dark btn-sm"
 						href="<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'perfiles')); ?>">Perfiles</a>
 
 				</div>
@@ -44,13 +44,16 @@
 			<form class="needs-validation" method="post" id="agregaPerfil" name="agregaPerfil" novalidate>
 
 				<div class="modal-body">
-					<input type="hidden" id="usuario_id" name="usuario_id">
+					<input type="hidden" id="perfil_id" name="perfil_id">
+					
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="form-group">
-								<label for="nombres">Nombre del perfil:</label>
-								<input type="text" id="nombres" class="form-control " name="nombres"
-									placeholder="Ingrese el nombre del perfil" required autocomplete="off">
+								<label for="nombre_perfil">Nombre del perfil:</label>
+								<input type="text" id="nombre_perfil" class="form-control" name="nombre_perfil"
+									placeholder="Ingrese el nombre del perfil" required autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();"
+									oninput="this.value=this.value.replace(/[^A-Za-z]/g, '')">
 								<div class="valid-feedback">
 								</div>
 								<div class="invalid-feedback">
@@ -115,35 +118,39 @@
 						</div> -->
 					<div class="row">
 						<div class="col-sm-12">
+							<input type="hidden" id="valorBoton" name="valorBoton">
 							<div class="form-group">
 								<label for="correo">Seleccione un color:</label>
 								<div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
-									<button type="button" class="btn btn-primary " title="Primary">&nbsp;</button>
-									<button type="button" class="btn btn-secondary " title="Secondary"></button>
-									<button type="button" class="btn btn-success " title="Success"></button>
-									<button type="button" class="btn btn-danger " title="Danger"></button>
-									<button type="button" class="btn btn-warning " title="Warning"></button>
-									<button type="button" class="btn btn-info " title="Info"></button>
-									<button type="button" class="btn btn-dark " title="Dark"></button>
+									<button type="button" class="btn btn-primary " id="primary" onclick="fnProcesaPaciente(this)"
+										title="Primary">&nbsp;</button>
+									<button type="button" class="btn btn-secondary " id="secondary"
+										onclick="fnProcesaPaciente(this)" title="Secondary"></button>
+									<button type="button" class="btn btn-success " id="success" onclick="fnProcesaPaciente(this)"
+										title="Success"></button>
+									<button type="button" class="btn btn-danger " id="danger" onclick="fnProcesaPaciente(this)"
+										title="Danger"></button>
+									<button type="button" class="btn btn-warning " id="warning" onclick="fnProcesaPaciente(this)"
+										title="Warning"></button>
+									<button type="button" class="btn btn-info " id="info" onclick="fnProcesaPaciente(this)"
+										title="Info"></button>
+									<button type="button" class="btn btn-dark " id="dark" onclick="fnProcesaPaciente(this)"
+										title="Dark"></button>
 
 								</div>
+								
 
-								<div class="valid-feedback">
-								</div>
-								<div class="invalid-feedback">
-									Por favor ingrese un correo electronico valido.
-								</div>
+							</div>
+							<div id="colorHelp"></div>
+						</div>
+					</div>
+						<div class="modal-footer d-flex justify-content-between ">
+							<button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+							<div id="accionForm">
+
 							</div>
 						</div>
 					</div>
-
-					<div class="modal-footer d-flex justify-content-between ">
-						<button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
-						<div id="accionForm">
-
-						</div>
-					</div>
-				</div>
 			</form>
 
 		</div>

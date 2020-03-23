@@ -88,6 +88,20 @@ class UsuariosController extends Zend_Controller_Action
             }
         }
     }
+    public function crearperfilAction()
+    {
+        // action body
+        $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
+        $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
+        if ($this->getRequest()->isXmlHttpRequest()) { //Detectamos si es una llamada AJAX
+            $nombre_perfil = $this->getRequest()->getParam('nombre_perfil');
+            $color = $this->getRequest()->getParam('color');
+            $obj = new Application_Model_DbTable_Usuario();
+            $obj->crearperfil($nombre_perfil, $color);
+
+            echo $this->tabla_perfiles();
+        }
+    }
     public function estadoAction()
     {
         // action body
@@ -119,6 +133,20 @@ class UsuariosController extends Zend_Controller_Action
         }
     }
     public function editarperfilAction()
+    {
+        // action body
+        $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
+        $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
+        if ($this->getRequest()->isXmlHttpRequest()) { //Detectamos si es una llamada AJAX
+            $id = $this->getRequest()->getParam('id');
+            $nombre_perfil = $this->getRequest()->getParam('nombre_perfil');
+            $color = $this->getRequest()->getParam('color');
+            $table = new Application_Model_DbTable_Usuario();
+            $table->actualizarPerfil($id, $nombre_perfil, $color);
+            echo $this->tabla_perfiles();
+        }
+    }
+    public function editarusuarioAction()
     {
         // action body
         $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
@@ -160,6 +188,18 @@ class UsuariosController extends Zend_Controller_Action
             echo $this->tabla_usuarios();
         }
     }
+    public function eliminarperfilAction()
+    {
+        // action body
+        $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
+        $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
+        if ($this->getRequest()->isXmlHttpRequest()) { //Detectamos si es una llamada AJAX
+            $id = $this->getRequest()->getParam('id');
+            $table = new Application_Model_DbTable_Usuario();
+            $table->eliminarpefil($id);
+            echo $this->tabla_perfiles();
+        }
+    }
 
     public function tabla_usuarios()
     {
@@ -199,25 +239,25 @@ class UsuariosController extends Zend_Controller_Action
                 $Listaarea .= "<td>" . $item->usu_iniciales . "</td>";
                 $Listaarea .= "<td>" . $item->perf_nombre . "</td>";
                 $Listaarea .= "<td><input class='toggle-event' type='checkbox' " . $estado . " data-toggle='toggle'
-		                data-onstyle='success' data-offstyle='danger' data-size='xs'
-		                value=" . $item->usu_id . "></td>";
+			                data-onstyle='success' data-offstyle='danger' data-size='xs'
+			                value=" . $item->usu_id . "></td>";
                 //$Listaarea .= "<td>" . $item->usu_estado_nombre . "</td>";
                 $Listaarea .= "<td >" . $item->ultima_conexion . "</td>";
                 //$data_array =array($item->usu_id.','.$item->usu_nombres.','.$item->usu_apellidos.','.$item->correo);
                 $Listaarea .= " <td>
-		                <div class='btn-group' role='group' aria-label='Basic example'>
+			                <div class='btn-group' role='group' aria-label='Basic example'>
 
-		                <!--  debo enviar la busqueda por ajax -->
-		                <button type='button' class='btn btn-outline-warning btn-sm '
-		                onclick='editarModalU(" . $item->usu_id . ",`" . $item->usu_nombres . "`,`" . $item->usu_apellidos . "`,`" . $item->correo . "`," . $item->usu_estado_id . "," . $item->perf_id . ")' >
-		                    <i class='fas fa-edit  '></i>
-		                </button>
-		                <button type='button' class='btn btn-outline-danger btn-sm' onclick='eliminarU(" . $item->usu_id . ")' >
-		                    <i class='fas fa-trash '></i>
-		                </button>
-		                </div>
-		                </td>
-		                </tr>";
+			                <!--  debo enviar la busqueda por ajax -->
+			                <button type='button' class='btn btn-outline-warning btn-sm '
+			                onclick='editarModalU(" . $item->usu_id . ",`" . $item->usu_nombres . "`,`" . $item->usu_apellidos . "`,`" . $item->correo . "`," . $item->usu_estado_id . "," . $item->perf_id . ")' >
+			                    <i class='fas fa-edit  '></i>
+			                </button>
+			                <button type='button' class='btn btn-outline-danger btn-sm' onclick='eliminarU(" . $item->usu_id . ")' >
+			                    <i class='fas fa-trash '></i>
+			                </button>
+			                </div>
+			                </td>
+			                </tr>";
             endforeach;
 
             $Listaarea .= "</tbody></table>";
@@ -247,7 +287,7 @@ class UsuariosController extends Zend_Controller_Action
                     <th class="text-primary">ID</th>
                     <th class="text-primary">DESCRIPCION</th>
                     <th class="text-primary">USUARIOS</th>
-                    <th class="text-primary">C</th>
+                    <th class="text-primary">COLOR</th>
                     <th class="text-primary">RUTA PREDETERMINADA</th>
                     <th class="text-primary">ESTADO</th>
                     <th class="text-primary ">ACCION</th>
@@ -261,25 +301,26 @@ class UsuariosController extends Zend_Controller_Action
                 $Listaarea .= "<td>" . $item->perf_id . "</td>";
                 $Listaarea .= "<td>" . $item->perf_nombre . "</td>";
                 $Listaarea .= "<td>" . count($cuenta) . "</td>";
-                $Listaarea .= "<td ><i class='fa fa-circle text-" . $item->perf_color . "'></i></td>";
+                $Listaarea .= "<td ><span class='badge badge-" . $item->perf_color . " '>" . $item->perf_color . "</span></td>";
                 $Listaarea .= "<td><a class='btn-link' href='" . $fc . "/" . $item->perf_controlador . "/" . $item->perf_accion . "'>
-		                " . $fc . "/" . $item->perf_controlador . "/" . $item->perf_accion . "</a></td>";
+			                " . $fc . "/" . $item->perf_controlador . "/" . $item->perf_accion . "</a></td>";
 
-                $Listaarea .= '<td>Activa</td>
-		                    <td>
-		                    <div class="btn-group" role="group" aria-label="Basic example">
+                $Listaarea .= "<td>Activa</td>
+			                    <td>
+			                    <div class='btn-group' role='group' aria-label='Basic example'>
 
-		                        <!--  debo enviar la busqueda por ajax -->
-		                        <button type="button" class="btn btn-outline-warning btn-sm " onclick="editarModal(' . $item->perf_id . ')" >
-		                            <i class="fa fa-edit  "></i>
-		                        </button>
-		                        <button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminar(' . $item->perf_id . ')" >
-		                            <i class="fa fa-trash "></i>
-		                        </button>
-		                        </div>
+			                        <!--  debo enviar la busqueda por ajax -->
+                                    <button type='button' class='btn btn-outline-warning btn-sm ' 
+                                    onclick='editarModalUperfil(" . $item->perf_id . ",`" . $item->perf_nombre . "`,`" . $item->perf_color ."`)' >
+			                            <i class='fa fa-edit  '></i>
+			                        </button>
+			                        <button type='button' class='btn btn-outline-danger btn-sm' onclick='eliminarPerfil(" . $item->perf_id . ")' >
+			                            <i class='fa fa-trash '></i>
+			                        </button>
+			                        </div>
 
-		                    </td>
-		                </tr>';
+			                    </td>
+			                </tr>";
             endforeach;
 
             $Listaarea .= "</tbody></table>";

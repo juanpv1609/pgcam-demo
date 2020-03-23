@@ -60,7 +60,7 @@ function modules() {
   var sweetAlertJS = gulp.src('./node_modules/sweetalert2/dist/*.js')
     .pipe(gulp.dest('./public/vendor/sweetalert2/js'));
   // sweetAlert 2 CSS
-  var sweetAlertCSS = gulp.src('./node_modules/sweetalert2/dist/*.css')
+  var sweetAlertCSS = gulp.src('./node_modules/@sweetalert2/themes/bootstrap-4/*.css')
     .pipe(gulp.dest('./public/vendor/sweetalert2/css'));
   // Bootstrap JS
   var bootstrapJS = gulp.src('./node_modules/bootstrap/dist/js/*')

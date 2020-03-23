@@ -29,7 +29,8 @@
 					<div class="form-group">
 						<label for="apellido_paterno">Apellido paterno:</label>
 						<input type="text" id="apellido_paterno" class="form-control form-control-sm" name="apellido_paterno"
-							required autocomplete="off">
+							required autocomplete="off" onkeyup="this.value = this.value.toUpperCase();"
+							oninput="this.value=this.value.replace(/[^A-Za-z]/g, '')">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -40,7 +41,8 @@
 					<div class="form-group">
 						<label for="apellido_materno">Apellido materno:</label>
 						<input type="text" id="apellido_materno" class="form-control form-control-sm" name="apellido_materno"
-							required autocomplete="off">
+							required autocomplete="off" onkeyup="this.value = this.value.toUpperCase();"
+							oninput="this.value=this.value.replace(/[^A-Za-z]/g, '')">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -51,7 +53,8 @@
 					<div class="form-group ">
 						<label for="primer_nombre">Primer nombre:</label>
 						<input type="text" id="primer_nombre" class="form-control form-control-sm" name="primer_nombre"
-							required autocomplete="off">
+							required autocomplete="off" onkeyup="this.value = this.value.toUpperCase();"
+							oninput="this.value=this.value.replace(/[^A-Za-z]/g, '')">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -62,7 +65,8 @@
 					<div class="form-group">
 						<label for="segundo_nombre">Segundo nombre:</label>
 						<input type="text" id="segundo_nombre" class="form-control form-control-sm" name="segundo_nombre"
-							required autocomplete="off">
+							required autocomplete="off" onkeyup="this.value = this.value.toUpperCase();"
+							oninput="this.value=this.value.replace(/[^A-Za-z]/g, '')">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -73,7 +77,8 @@
 					<div class="form-group">
 						<label for="cedula">N Cedula:</label>
 						<input type="text" id="cedula" class="form-control form-control-sm" name="cedula" maxlength="10"
-							minlength="10" required autocomplete="off">
+							minlength="10" required autocomplete="off"
+							oninput="this.value=this.value.replace(/[^0-9]/g, '')">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -83,8 +88,9 @@
 				<div class="col-sm-2">
 					<div class="form-group">
 						<label for="telefono">N Telefono:</label>
-						<input type="text" id="telefono" class="form-control form-control-sm" name="telefono" maxlength="10"
-							minlength="10" required autocomplete="off">
+						<input type="tel" id="telefono" class="form-control form-control-sm" name="telefono" maxlength="10"
+							minlength="10" required autocomplete="off"
+							oninput="this.value=this.value.replace(/[^0-9]/g, '')">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -124,7 +130,7 @@
 					<div class="form-group">
 						<label for="barrio">Barrio:</label>
 						<input type="text" id="barrio" class="form-control form-control-sm" name="barrio" required
-							autocomplete="off" maxlength="50">
+							autocomplete="off" maxlength="50" onkeyup="this.value = this.value.toUpperCase();">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -135,7 +141,7 @@
 					<div class="form-group">
 						<label for="direccion">Direccion domiciliaria:</label>
 						<input type="text" id="direccion" class="form-control form-control-sm" name="direccion" required
-							autocomplete="off" maxlength="120">
+							autocomplete="off" maxlength="120" onkeyup="this.value = this.value.toUpperCase();">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -159,7 +165,7 @@
 					<div class="form-group">
 						<label for="lugar_n">Lugar de nacimiento:</label>
 						<input type="text" id="lugar_n" class="form-control form-control-sm" name="lugar_n" required
-							autocomplete="off" maxlength="20">
+							autocomplete="off" maxlength="20" onkeyup="this.value = this.value.toUpperCase();">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -205,7 +211,7 @@
 					<div class="form-group">
 						<label for="ocupacion">Ocupacion:</label>
 						<input type="text" id="ocupacion" class="form-control form-control-sm" name="ocupacion" required
-							autocomplete="off" maxlength="50">
+							autocomplete="off" maxlength="50" onkeyup="this.value = this.value.toUpperCase();">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -216,7 +222,7 @@
 					<div class="form-group">
 						<label for="trabajo">Empresa donde trabaja:</label>
 						<input type="text" id="trabajo" class="form-control form-control-sm" name="trabajo" required
-							autocomplete="off" maxlength="50">
+							autocomplete="off" maxlength="50" onkeyup="this.value = this.value.toUpperCase();">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -230,7 +236,7 @@
 					<div class="form-group">
 						<label for="referido">Referido de:</label>
 						<input type="text" id="referido" class="form-control form-control-sm" name="referido" required
-							autocomplete="off" maxlength="50">
+							autocomplete="off" maxlength="50" onkeyup="this.value = this.value.toUpperCase();">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -243,7 +249,7 @@
 					<div class="form-group">
 						<label for="contacto_nombre">En caso necesario avisar a:</label>
 						<input type="text" id="contacto_nombre" class="form-control form-control-sm" name="contacto_nombre"
-							required autocomplete="off" maxlength="50">
+							required autocomplete="off" maxlength="50" onkeyup="this.value = this.value.toUpperCase();">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -254,7 +260,7 @@
 					<div class="form-group">
 						<label for="contacto_parentezco">Parentezco:</label>
 						<input type="text" id="contacto_parentezco" class="form-control form-control-sm"
-							name="contacto_parentezco" required autocomplete="off" maxlength="30">
+							name="contacto_parentezco" required autocomplete="off" maxlength="30" onkeyup="this.value = this.value.toUpperCase();">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -265,7 +271,7 @@
 					<div class="form-group">
 						<label for="contacto_direccion">Direccion:</label>
 						<input type="text" id="contacto_direccion" class="form-control form-control-sm"
-							name="contacto_direccion" required autocomplete="off" maxlength="50">
+							name="contacto_direccion" required autocomplete="off" maxlength="50" onkeyup="this.value = this.value.toUpperCase();">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -275,8 +281,9 @@
 				<div class="col-sm-2">
 					<div class="form-group">
 						<label for="contacto_telefono">N Telefono:</label>
-						<input type="text" id="contacto_telefono" class="form-control form-control-sm"
-							name="contacto_telefono" required autocomplete="off" maxlength="10" minlength="10">
+						<input type="tel" id="contacto_telefono" class="form-control form-control-sm"
+							name="contacto_telefono" required autocomplete="off" maxlength="10" minlength="10"
+							oninput="this.value=this.value.replace(/[^0-9]/g, '')">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -293,7 +300,7 @@
 					<div class="form-group">
 						<label for="fuente_info">Fuente de informacion:</label>
 						<input type="text" id="fuente_info" class="form-control form-control-sm" name="fuente_info" required
-							autocomplete="off" maxlength="50">
+							autocomplete="off" maxlength="50" onkeyup="this.value = this.value.toUpperCase();">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -304,7 +311,7 @@
 					<div class="form-group">
 						<label for="institucion">Institucion o persona que entrega al paciente:</label>
 						<input type="text" id="institucion" class="form-control form-control-sm" name="institucion" required
-							autocomplete="off" maxlength="50">
+							autocomplete="off" maxlength="50" onkeyup="this.value = this.value.toUpperCase();">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -314,8 +321,9 @@
 				<div class="col-sm-2">
 					<div class="form-group">
 						<label for="institucion_telefono">N Telefono:</label>
-						<input type="text" id="institucion_telefono" class="form-control form-control-sm "
-							name="institucion_telefono" required autocomplete="off" maxlength="10" minlength="10">
+						<input type="tel" id="institucion_telefono" class="form-control form-control-sm "
+							name="institucion_telefono" required autocomplete="off" maxlength="10" minlength="10"
+							oninput="this.value=this.value.replace(/[^0-9]/g, '')">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">

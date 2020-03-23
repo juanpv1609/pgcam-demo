@@ -62,7 +62,7 @@ $border-color: darken($gray-200, 2%);
 
 // Spacing Variables
 // Change below variable if the height of the navbar changes
-$topbar-base-height: 3.375rem;
+$topbar-base-height: 3.175rem;
 // Change below variable to change the width of the sidenav
 $sidebar-base-width: 12rem;
 // Change below variable to change the width of the sidenav when collapsed
@@ -73,7 +73,7 @@ $card-cap-bg: $gray-100;
 $card-border-color: $border-color;
 
 // Adjust column spacing for symmetry
-$spacer: 1rem;
+$spacer: 0.5rem;
 $grid-gutter-width: $spacer * 1.5;
 
 // Transitions

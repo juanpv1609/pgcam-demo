@@ -1,5 +1,5 @@
 <!-- Topbar -->
-<nav class="navbar  navbar-expand bg-white topbar navbar-white navbar-light text-sm shadow  border">
+<nav class="navbar  navbar-expand bg-white topbar navbar-light text-sm shadow  border">
   <!-- Sidebar Toggle (Topbar) -->
 
   <ul class="navbar-nav">
@@ -12,11 +12,11 @@
   <!-- Topbar Search -->
   <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-md-0 mw-100 navbar-search">
     <div class="input-group input-group-sm ">
-      <input type="text" class="form-control " placeholder="Buscar..." aria-label="Search"
+      <input type="text" class="form-control border-0" placeholder="Buscar..." aria-label="Search"
         aria-describedby="basic-addon2">
       <div class="input-group-append">
         <button class="btn btn-dark" type="button">
-          <i class="fas fa-search fa-sm text-white"></i>
+          <i class="fas fa-search fa-sm "></i>
         </button>
       </div>
     </div>
@@ -50,9 +50,9 @@
 
     </li>
     <li class="nav-item dropdown no-arrow">
-      <a class="nav-link dropdown-toggle" href="#" id="calendar" role="button" data-toggle="dropdown"
+      <a class="nav-link dropdown-toggle"  href="#" id="calendar" role="button" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-calendar-alt text-secondary mx-1"></i>
+        <i class="fas fa-calendar-alt  mx-1"></i>
 
       </a>
       <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="calendar">
@@ -74,7 +74,7 @@
     </li>
     <li class="nav-item " data-toggle="tooltip" data-placement="bottom" title="Manual de usuario">
       <a class="nav-link " href="#">
-        <i class="far fa-question-circle text-secondary"></i>
+        <i class="far fa-question-circle "></i>
         <!-- Counter - Alerts -->
       </a>
 
@@ -84,12 +84,12 @@
       <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
 
-        <i class="far fa-bell text-secondary"></i>
+        <i class="far fa-bell"></i>
         <span class="badge badge-danger badge-counter">3</span>
         <!-- Counter - Alerts -->
       </a>
       <!-- Dropdown - Alerts -->
-      <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+      <div class="dropdown-list dropdown-menu dropdown-menu-right shadow-lg animated--grow-in"
         aria-labelledby="alertsDropdown">
         <h6 class="dropdown-header">
           Alertas
@@ -131,15 +131,15 @@
       </div>
     </li>
     <!-- Nav Item - Messages -->
-    <li class="nav-item dropdown no-arrow mr-4" data-toggle="tooltip" data-placement="bottom" title="Mensajes">
+    <li class="nav-item dropdown no-arrow " data-toggle="tooltip" data-placement="bottom" title="Mensajes">
       <a class="nav-link dropdown-toggle" href="#" id="msgDropdown" role="button" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-        <i class="far fa-envelope text-secondary"></i>
+        <i class="far fa-envelope"></i>
         <span class="badge badge-warning badge-counter">7</span>
         <!-- Counter - Alerts -->
       </a>
       <!-- Dropdown - Alerts -->
-      <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+      <div class="dropdown-list dropdown-menu dropdown-menu-right shadow-lg animated--grow-in"
         aria-labelledby="msgDropdown">
         <h6 class="dropdown-header">
           Mensajes
@@ -168,8 +168,9 @@
         <a class="dropdown-item text-center small text-gray-500" href="#">Show All Messages</a>
       </div>
     </li>
+    <div class="topbar-divider d-none d-sm-block"></div>
     <!-- Nav Item - User Information -->
-    <li class="nav-item dropdown no-arrow my-auto mr-1" data-toggle="tooltip" data-placement="bottom" title="Perfil">
+    <li class="nav-item dropdown no-arrow my-auto" data-toggle="tooltip" data-placement="bottom" title="Perfil">
       <?php if($this->user) : 
             $obj = new Application_Model_DbTable_Usuario();
             $usuario= $obj->listar_usuario($this->user->usu_id);
@@ -191,16 +192,15 @@
 
 
       <!-- Dropdown - User Information -->
-      <div class=" dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+      <div class="dropdown-list dropdown-menu dropdown-menu-right shadow-lg animated--grow-in" aria-labelledby="userDropdown">
 
-        <h7 class="dropdown-header bg-primary rounded-top py-2 px-2 text-white">MI CUENTA</h7>
-        <div class="d-flex justify-content-between mt-2">
+        <h6 class="dropdown-header">MI CUENTA</h6>
+        <div class="dropdown-item d-flex justify-content-between mt-2">
           <a class=" btn btn-outline-<?php echo $this->escape($usuario->perf_color); ?>
-             btn-circle btn-lg ml-3" href="<?php echo $this->baseUrl();?>/usuarios/perfil">
+             btn-circle btn-lg" href="<?php echo $this->baseUrl();?>/usuarios/perfil">
             <span class="text-uppercase font-weight-bold"><?php echo $usuario->usu_iniciales; ?></span>
           </a>
-          <a class="dropdown-item" href="<?php echo $this->baseUrl();?>/usuarios/perfil" data-toggle="tooltip"
-            data-placement="bottom" title="Clic para ver el perfil">
+          <div >
             <i class="far fa-fw fa-user"></i>
             <strong><?php echo $this->escape($usuario->usu_nombres." ".$usuario->usu_apellidos); ?></strong>
             <br>
@@ -210,7 +210,7 @@
             <span class="text-primary"><?php  echo $this->escape($usuario->perf_nombre); ?> </span>
 
 
-          </a>
+            </div>
         </div>
         <span class="d-flex justify-content-center text-xxs">
           <strong>

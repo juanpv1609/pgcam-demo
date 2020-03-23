@@ -28,6 +28,27 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
                     VALUES ('" . $nombre . "','" . $apellido . "','" . $iniciales . "','" . $correo . "',MD5('" . $clave . "')," . $perfil . "," . $estado . ",(SELECT now())); ";
         return $db->fetchRow($select);
     }
+    public function crearperfil($nombre, $color)
+    {
+        
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "INSERT INTO perfiles(perf_nombre,perf_color,perf_controlador, perf_accion)
+                    VALUES ('" . $nombre . "','".$color."','index','dashboard'); ";
+        return $db->fetchRow($select);
+    }
+    public function actualizarPerfil($id,$nombre, $color)
+    {
+        
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "UPDATE perfiles
+        SET perf_nombre='".$nombre."', perf_color='".$color."', perf_controlador='index', perf_accion='dashboard'
+      WHERE perf_id=".$id." ;";
+        return $db->fetchRow($select);
+    }
     public function actualizarEstadoUsuario($id, $estado)
     {
 
@@ -121,6 +142,16 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = "DELETE FROM usuario
         WHERE usu_id=" . $id . ";";
+        return $db->fetchRow($select);
+        //$this->listar();
+    }
+    public function eliminarpefil($id)
+    {
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "DELETE FROM perfiles
+        WHERE perf_id=" . $id . ";";
         return $db->fetchRow($select);
         //$this->listar();
     }
