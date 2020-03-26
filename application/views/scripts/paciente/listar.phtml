@@ -11,3 +11,65 @@
 		</div>
 	</div>
 </div>
+<!-- formulario Modal-->
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog  " role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title text-primary" id="exampleModalLabel"></h5>
+				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+
+				<div class="modal-body">
+					<input type="hidden" id="paciente_id" name="paciente_id">
+					<table class="table table-borderless table-sm text-xs d-none" id="tablaDatosPaciente">
+						
+						<tbody>
+							<tr><td>N Archivo: </td><td><span class="text-uppercase"  id="paciente_hc"  ></span></td></tr>
+							<tr><td>Paciente:</td><td><span class="text-uppercase"  id="apellido_paterno"  ></span></td></tr>
+							<tr><td>N Cedula:</td><td><span  class="text-uppercase" id="cedula"  ></span></td></tr>
+							<tr><td>N Telefono:</td><td><span class="text-uppercase"  id="telefono"  ></span></td></tr>
+							<tr><td>Direccion:</td><td><span class="text-uppercase text-xxs"  id="Prov"  ></span><br>
+																<span class="text-uppercase text-xxs"  id="Cant"  ></span><br>
+																<span class="text-uppercase text-xxs"  id="Parroq"  ></span><br>
+																<span class="text-uppercase text-xxs"  id="barrio"  ></span><br>
+																<span class="text-uppercase text-xxs"  id="direccion"  ></span>
+							</td></tr>
+							<tr></tr><td>Fecha de nacimiento:</td><td><span class="text-uppercase"  id="fecha_n"  ></span></td></tr>
+							<tr></tr><td>Lugar de nacimiento:</td><td><span class="text-uppercase"  id="lugar_n"  ></span></td></tr>
+							<tr></tr><td>Nacionalidad:</td><td><span class="text-uppercase"  id="Nacionalidad"  ></span></td></tr>
+							<tr></tr><td>Grupo cultural:</td><td><span class="text-uppercase"  id="Grupo"  ></span></td></tr>
+							<tr></tr><td>Edad:</td><td><span class="text-uppercase"  id="Edad"  ></span></td></tr>
+							<tr><td>Genero:</td><td><span class="text-uppercase"  id="Genero"  ></span></td></tr>
+							<tr><td>Estado civil:</td><td><span class="text-uppercase"  id="Estado"  ></span></td></tr>
+							<tr><td>Instruccion:</td><td><span class="text-uppercase"  id="Instruccion"  ></span></td></tr>
+							<tr><td>Ocupacion:</td><td><span class="text-uppercase"  id="ocupacion"  ></span></td></tr>
+							<tr><td>Empresa donde trabaja:</td><td><span class="text-uppercase"  id="trabajo"  ></span></td></tr>
+							<tr><td>Tipo seguro:</td><td><span class="text-uppercase"  id="TipoSeguro"  ></span></td></tr>
+							<tr><td>Referido de:</td><td><span class="text-uppercase"  id="referido"  ></span></td></tr>
+							<tr><td>En caso necesario avisar a:</td><td><span class="text-uppercase"  id="contacto_nombre"  ></span></td></tr>
+							<tr><td>Parentezco:</td><td><span class="text-uppercase"  id="contacto_parentezco"  ></span></td></tr>
+							<tr><td>Direccion:</td><td><span class="text-uppercase"  id="contacto_direccion"  ></span></td></tr>
+							<tr><td>N Telefono:</td><td><span class="text-uppercase"  id="contacto_telefono"  ></span></td></tr>
+							<tr><td>Forma de llegada:</td><td><span class="text-uppercase"  id="Forma"  ></span></td></tr>
+							<tr><td>Fuente de informacion:</td><td><span class="text-uppercase"  id="fuente_info"  ></span></td></tr>
+							<tr><td>Institucion:</td><td><span class="text-uppercase"  id="institucion"  ></span></td></tr>
+							<tr><td>N Telefono:</td><td><span class="text-uppercase"  id="institucion_telefono"  ></span></td></tr>
+
+						</tbody>
+					</table>
+
+					<div class="modal-footer d-flex justify-content-between ">
+						<button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+						<div id="accionForm">
+
+						</div>
+					</div>
+				</div>
+
+		</div>
+	</div>
+</div>

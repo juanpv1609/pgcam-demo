@@ -42,13 +42,23 @@ class Application_Model_DbTable_Admision extends Zend_Db_Table_Abstract
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
-        $select = "select g.*, p.id_parroquia, c.id_canton,c.id_provincia
-                    from pg_paciente g
-                    join parroquia p
-                    on p.id_parroquia=g.p_parroq
-                    join canton c
-                    on c.id_canton=p.id_canton
-                    where g.p_hc=" . $paciente;
+        $select = "select g.*, p.*, c.*,r.*,l.*,u.*,e.*,i.*
+        from pg_paciente g
+        join parroquia p
+        on p.id_parroquia=g.p_parroq
+        join canton c
+        on c.id_canton=p.id_canton
+        join provincia r
+        on r.id_provincia=c.id_provincia
+        join listas l
+        on l.id_lista=g.p_nacionalidad
+        join grupo_cultural u
+        on u.id_grupcultural=g.p_grupo_c
+        join estado_civil e
+        on e.id_estcivil=g.p_est_civil
+        join instruccion_paciente i
+        on i.id_instruccion=g.p_instruccion
+        where g.p_hc=" . $paciente;
         return $db->fetchRow($select);
     }
 
@@ -132,6 +142,53 @@ class Application_Model_DbTable_Admision extends Zend_Db_Table_Abstract
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = "select * from paciente_forma_llegada;";
         return $db->fetchAll($select);
+    }
+    //---------busca camas
+    public function buscaHab($especialidad_id)
+    {
+        //devuelve todos los registros de la tabla
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "select * from habitacion h
+        join especialidad e
+        on e.especialidad_id=h.especialidad_id
+        where e.especialidad_id=".$especialidad_id;
+        return $db->fetchAll($select);
+    }
+    public function buscaHabCama($especialidad_id)
+    {
+        //devuelve todos los registros de la tabla
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "select c.cama_id,c.cama_nombre,h.habitacion_id,h.habitacion_nombre,e.especialidad_id,e.especialidad_nombre,d.cama_estado_color
+        from cama c
+           join habitacion h
+           on h.habitacion_id=c.habitacion_id
+           join especialidad e
+           on e.especialidad_id=h.especialidad_id
+           join cama_estado d
+           on d.cama_estado_id=c.cama_estado
+           where e.especialidad_id=".$especialidad_id."
+           ORDER BY 4;";
+        return $db->fetchAll($select);
+    }
+    public function buscaCamaEstado($habitacion_id,$cama_nombre)
+    {
+        //devuelve todos los registros de la tabla
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "select c.cama_id,c.cama_nombre,h.habitacion_id,h.habitacion_nombre,d.cama_estado_color
+        from cama c
+           join habitacion h
+           on h.habitacion_id=c.habitacion_id
+           join cama_estado d
+           on d.cama_estado_id=c.cama_estado
+           where h.habitacion_id=".$habitacion_id."
+           and c.cama_nombre='".$cama_nombre."';";
+        return $db->fetchRow($select);
     }
 
 }

@@ -106,7 +106,7 @@
 					<div class="form-group">
 						<label for="comboCant">Canton:</label>
 						<select class="form-control form-control-sm" name="comboCant" id="comboCant"
-							onchange="getParroquias();" required autocomplete="off">
+							onchange="getParroquias();"  required autocomplete="off">
 						</select>
 						<div class='valid-feedback'>
 						</div>
@@ -332,9 +332,16 @@
 				</div>
 			</div>
 		</div>
-		<div class="card-footer d-flex justify-content-center">
-			<button type="submit" class="btn btn-primary btn-block" onclick="AdmisionPaciente();">Registrar
-				paciente</button>
+		<div  class="card-footer d-flex justify-content-between">
+			<button  class="btn btn-danger " onclick="window.location.href='<?php echo $this->baseUrl(); ?>/paciente/registrar'">
+				<i class="fas fa-ban"></i> Cancelar</button>
+			<div id="accionForm">
+				<button type="submit" class="btn btn-primary " onclick="AdmisionPaciente();">
+					<i class="fas fa-paper-plane"></i> Registrar paciente</button>
+			</div>
+			
+			
+			
 		</div>
 	</form>
 

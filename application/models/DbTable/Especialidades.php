@@ -15,7 +15,8 @@ class Application_Model_DbTable_Especialidades extends Zend_Db_Table_Abstract
                     join piso
                     on piso.piso_id=especialidad.piso_id
                     join area
-                    on area.area_id=piso.area_id;";
+                    on area.area_id=piso.area_id
+                    order by 1;";
         return $db->fetchAll($select);
     }
     public function insertarespecialidad($nombre, $piso)

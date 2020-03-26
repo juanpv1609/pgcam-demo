@@ -2,30 +2,85 @@
 	<div class="card-header d-flex justify-content-between">
 		<h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
 		<div>
-			<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-md-0 mw-100 navbar-search">
-				<div class="input-group input-group-sm ">
-					<div class="input-group-prepend">
+			<div class="input-group input-group-sm ">
+				<div class="input-group-prepend">
+					<select name="opcionBusqueda" id="opcionBusqueda"
+						class="btn btn-block dropdown-toggle border-primary text-primary " type="button"
+						data-toggle="dropdown" aria-expanded="false" required autocomplete="off">
+						<option value="">OPCION</option>
+						<option value="1">EMERGENCIA</option>
+						<option value="2">C EXTERNA</option>
+					</select>
 
-						<select name="" id="" class="btn btn-block dropdown-toggle border-primary text-primary " type="button"
-							data-toggle="dropdown" aria-expanded="false">
-							<option value="">OPCION</option>
-							<option value="">EMERGENCIA</option>
-							<option value="">C EXTERNA</option>
-						</select>
-					</div>
-					<input type="text" class="form-control" placeholder="Buscar por hc o cedula..." aria-label="Search"
-						aria-describedby="buscar_paciente_hc">
-					<div class="input-group-append">
-
-						<button class="btn btn-primary" type="button">
-							<i class="fas fa-search fa-sm"></i>
-						</button>
-					</div>
 				</div>
-			</form>
+				<input type="text" class="form-control" id="paciente_id" name="paciente_id"
+					placeholder="Buscar por hc o cedula..." aria-label="Search" aria-describedby="buscar_paciente_hc"
+					required autocomplete="off">
+				<div class="input-group-append">
+
+					<button class="btn btn-primary" type="submit" onclick="DatosPaciente();">
+						<i class="fas fa-search fa-sm"></i>
+					</button>
+				</div>
+
+			</div>
 		</div>
 	</div>
 	<div class="card-body">
-
+		<div class="row d-flex justify-content-between">
+			<div class="col-sm-3">
+				<div class="card border-left-primary shadow d-none" >
+					<div class="card-header d-flex justify-content-start">
+						<h6 class="m-0 ">Datos del paciente</h6>						
+					</div>
+					<div class="card-body d-flex justify-content-start">
+						<table class="table table-borderless table-sm text-xxs " id="tablaDatosPaciente">
+							<tbody>
+								<tr>
+									<td>N Archivo: </td>
+									<td><span class="text-uppercase" id="paciente_hc"></span></td>
+								</tr>
+								<tr>
+									<td>Paciente:</td>
+									<td><span class="text-uppercase" id="apellido_paterno"></span></td>
+								</tr>
+								<tr>
+									<td>N Cedula:</td>
+									<td><span class="text-uppercase" id="cedula"></span></td>
+								</tr>
+		
+								<tr></tr>
+								<td>Fecha de nacimiento:</td>
+								<td><span class="text-uppercase" id="fecha_n"></span></td>
+								</tr>
+		
+								<tr></tr>
+								<td>Edad:</td>
+								<td><span class="text-uppercase" id="Edad"></span></td>
+								</tr>
+								<tr>
+									<td>Genero:</td>
+									<td><span class="text-uppercase" id="Genero"></span></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-9">
+				<div class="card border-left-primary shadow d-none text-xxs" >
+					<div class="card-header ">
+						<?php echo $this->getEspecialidades(); ?>
+					</div>
+					<div class="card-body ">
+					<div id="data_Table1" class="table-responsive text-center">
+						<span>Seleccione un tipo de servicio <i class="fa fa-level-up-alt"></i></span>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
+<br>
+

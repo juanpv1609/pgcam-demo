@@ -11,19 +11,31 @@
         <h1 class="h2 text-gray-900 mb-4">Iniciar Sesión!</h1>
       </div>
       <form class="user needs-validation" id="login" name="login" action="" method="post" novalidate>
-        <div class="form-group">
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text "><i class="far fa-envelope""></i></span>
+        </div>
           <input type="email" autofocus class="form-control " id="email" name="email" aria-describedby="emailHelp"
             required placeholder="Ingrese su correo electronico..." autocomplete="off"
+            onkeypress="this.value = this.value.toLowerCase();"
             value="<?php if (isset($this->usuario_value)) echo $this->usuario_value; ?>">
-          <div class="valid-feedback">
-          </div>
+            
+          <div class="valid-feedback"></div>
           <div class="invalid-feedback">
             Por favor ingrese un correo electronico valido.
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text "><i class="fas fa-key "></i></span>
+        </div>
           <input type="password" class="form-control " name="password" id="password" required
             placeholder="Ingrese su contraseña..." autocomplete="off">
+            <div class="input-group-append">
+                <span id="show_password" class="input-group-text " onclick="mostrarPassword()">
+                  <i class="far fa-eye-slash icon "></i>
+                </span>
+            </div>
           <div class="valid-feedback">
           </div>
           <div class="invalid-feedback">
@@ -37,7 +49,7 @@
                       </div>
                     </div> -->
         <?php if (!empty($this->message))
-                                echo $this->message; ?>
+             echo $this->message; ?>
 
         <button type="submit" onclick="SendFormLogin(event);" class="btn btn-primary btn-block">
           <strong>Ingresar</strong>

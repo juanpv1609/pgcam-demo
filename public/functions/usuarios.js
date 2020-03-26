@@ -374,6 +374,18 @@ function ActualizaClaveUsuario() {
     event.preventDefault(); //prevent default action
     if ((!nueva_clave == "") && (!nueva_clave_2 == "")) {
       if (nueva_clave == nueva_clave_2) {
+        Swal.fire({
+          position: 'top',
+          title: 'Está seguro?',
+          text: "¡Seleccione 'Aceptar' para confirmar el cambio de contraseña!",
+          icon: 'question',
+          width: '22rem',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Aceptar'
+        }).then((result) => {
+          if (result.value) {
         $.ajax(
           {
             dataType: "html",
@@ -383,19 +395,7 @@ function ActualizaClaveUsuario() {
             beforeSend: function (data) {
             },
             success: function (requestData) {//armar la tabla
-              //alert("Area creada exitosamente!");
-              Swal.fire({
-                position: 'top',
-                title: 'Está seguro?',
-                text: "¡Seleccione 'Aceptar' para confirmar el cambio de contraseña!",
-                icon: 'question',
-                width: '22rem',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Aceptar'
-              }).then((result) => {
-                if (result.value) {
+              //alert("Area creada exitosamente!");              
                   Swal.fire({
                     position: 'top',
                     title: 'Correcto!',
@@ -408,9 +408,6 @@ function ActualizaClaveUsuario() {
                     window.location.href = dir + "/auth/logout";
                   })
 
-                }
-
-              })
             },
             error: function (requestData, strError, strTipoError) {
               const Toast = Swal.mixin({
@@ -432,9 +429,23 @@ function ActualizaClaveUsuario() {
 
             }
           });
+        }
+      })
       } else {
-        $("#clave_igual").addClass('badge badge-danger text-wrap')
-          .html('Deben coincidir las contraseñas').show(100).delay(2500).hide(100);
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          onOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        });
+        Toast.fire({
+          icon: 'error',
+          title: 'Deden coincidir las contraseñas!'
+        });
       }
     }
   });

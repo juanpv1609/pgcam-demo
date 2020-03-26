@@ -2,7 +2,23 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+function mostrarPassword(){
+    var cambio = document.getElementById("password");
+    if(cambio.type == "password"){
+        cambio.type = "text";
+        $('.icon').removeClass('far fa-eye-slash').addClass('far fa-eye');
+    }else{
+        cambio.type = "password";
+        $('.icon').removeClass('far fa-eye').addClass('far fa-eye-slash');
+    }
+} 
 
+$(document).ready(function () {
+//CheckBox mostrar contraseña
+$('#ShowPassword').click(function () {
+    $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
+});
+});
 function isValidEmail(mail) {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(mail);
 }
@@ -15,7 +31,7 @@ function SendFormLogin(e) {
         e.preventDefault(); //prevent default action
 
         document.login.submit();
-
+        
     }
 
 }
@@ -46,8 +62,20 @@ function SendFormRegister() {
                         },
                         success: function (requestData) {//armar la tabla
                             if (!requestData.data.correo == '') {
-                                $("#clave_igual").addClass('alert alert-danger').html('El correo <strong>' + requestData.data.correo + '</strong> ya existe!').show(100).delay(2500).hide(100);
-
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    onOpen: (toast) => {
+                                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                  });
+                                  Toast.fire({
+                                    icon: 'error',
+                                    title: 'El correo ingresado ya existe!'
+                                  });
                             } else {
                                 Swal.fire({
                                     position: 'top',
@@ -76,8 +104,21 @@ function SendFormRegister() {
                         }
                     });
             } else {
-                $("#clave_igual").addClass('alert alert-danger').html('Deben coincidir las contraseñas').show(100).delay(2500).hide(100);
-            }
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    onOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                  });
+                  Toast.fire({
+                    icon: 'error',
+                    title: 'Deben coincidir las contraseñas!'
+                  });
+                }
         }
     });
 }

@@ -29,7 +29,7 @@
     <!-- Nav Item - Search Dropdown (Visible Only XS) -->
     <li class="nav-item dropdown no-arrow d-sm-none">
       <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
+        aria-haspopup="true" aria-expanded="false" >
         <i class="fas fa-search fa-fw text-secondary"></i>
       </a>
       <!-- Dropdown - search -->
@@ -176,21 +176,16 @@
             $usuario= $obj->listar_usuario($this->user->usu_id);
             $ultima_conexion = $obj->obtiene_ultima_conexion_usuario($this->user->usu_id);
       ?>
-      <a class=" dropdown-toggle btn btn-<?php echo $this->escape($usuario->perf_color); ?> btn-circle btn-sm" href="#"
-        id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-        data-toggle="tooltip" data-placement="bottom" title="Informacion de usuario">
-        <span class="text-uppercase font-weight-bold">
+      <a class="nav-link dropdown-toggle " href="#"
+        id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="far fa-user"></i>
           <?php 
-            echo $usuario->usu_iniciales; 
             else : ?>
           <a class=" btn btn-outline-primary btn-sm" href="<?php echo $this->baseUrl();?>/auth/login">
-            Login
+            <span class="font-weight-bold">Login</span>
           </a>
           <?php  endif; ?>
-        </span>
       </a>
-
-
       <!-- Dropdown - User Information -->
       <div class="dropdown-list dropdown-menu dropdown-menu-right shadow-lg animated--grow-in" aria-labelledby="userDropdown">
 
