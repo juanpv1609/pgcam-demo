@@ -1,5 +1,5 @@
 <!-- Topbar -->
-<nav class="navbar  navbar-expand bg-white topbar navbar-light text-sm shadow  border">
+<nav class="navbar  navbar-expand bg-white topbar navbar-light text-sm   border">
   <!-- Sidebar Toggle (Topbar) -->
 
   <ul class="navbar-nav">
@@ -12,8 +12,9 @@
   <!-- Topbar Search -->
   <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-md-0 mw-100 navbar-search">
     <div class="input-group input-group-sm ">
-      <input type="text" class="form-control border-0" placeholder="Buscar..." aria-label="Search"
-        aria-describedby="basic-addon2">
+      <input type="text" id="navBuscar" name="navBuscar"
+        class="form-control border-0" placeholder="Buscar..." aria-label="Search"aria-describedby="basic-addon2"
+        >
       <div class="input-group-append">
         <button class="btn btn-dark" type="button">
           <i class="fas fa-search fa-sm "></i>
@@ -199,7 +200,7 @@
             <i class="far fa-fw fa-user"></i>
             <strong><?php echo $this->escape($usuario->usu_nombres." ".$usuario->usu_apellidos); ?></strong>
             <br>
-            <i class="far fa-fw fa-envelope"></i> <span class="text-secondary font-italic">
+            <i class="far fa-fw fa-envelope"></i> <span class="text-gray-600 font-italic">
               <?php  echo $this->escape($usuario->correo); ?> </span>
             <br>
             <span class="text-primary"><?php  echo $this->escape($usuario->perf_nombre); ?> </span>

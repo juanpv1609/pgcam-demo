@@ -15,16 +15,16 @@ class Zend_View_Helper_GetEspecialidades extends Zend_View_Helper_Abstract
                     </button>
                 </div>';
         } else {
-            $Listaarea .= '<nav class="navbar  navbar-expand-lg navbar-light text-left">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            $Listaarea .= '<nav class="navbar  navbar-expand-lg navbar-light text-left  pl-0 ml-0">
+                        <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse " id="navbarNavDropdown">
-                    <ul class="navbar-nav nav nav-tabs">';
+                    <ul class="nav nav-tabs justify-content-left">';
 
             foreach ($datos as $item):
                 $Listaarea .= '<li class="nav-item ">
-                <a class="nav-link " id="'. $item->especialidad_id .'" href="#" onclick="getCamas('. $item->especialidad_id .')" >' . $item->especialidad_nombre . '</a></li>';
+                <a class="nav-link " id="'. $item->especialidad_id .'" href="#" onclick="getCamas('. $item->especialidad_id .')" ><strong>' . $item->especialidad_nombre . '</strong></a></li>';
             endforeach;
             $Listaarea .= "</ul></div></nav>";
         }

@@ -156,7 +156,7 @@ class Application_Model_DbTable_Admision extends Zend_Db_Table_Abstract
         where e.especialidad_id=".$especialidad_id;
         return $db->fetchAll($select);
     }
-    public function buscaHabCama($especialidad_id)
+   /*  public function buscaHabCama($especialidad_id)
     {
         //devuelve todos los registros de la tabla
         $db = Zend_Registry::get('pgdb');
@@ -173,14 +173,14 @@ class Application_Model_DbTable_Admision extends Zend_Db_Table_Abstract
            where e.especialidad_id=".$especialidad_id."
            ORDER BY 4;";
         return $db->fetchAll($select);
-    }
+    } */
     public function buscaCamaEstado($habitacion_id,$cama_nombre)
     {
         //devuelve todos los registros de la tabla
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
-        $select = "select c.cama_id,c.cama_nombre,h.habitacion_id,h.habitacion_nombre,d.cama_estado_color
+        $select = "select c.cama_id,c.cama_nombre,c.cama_estado,h.habitacion_id,h.habitacion_nombre,d.cama_estado_color
         from cama c
            join habitacion h
            on h.habitacion_id=c.habitacion_id

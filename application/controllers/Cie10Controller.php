@@ -42,6 +42,17 @@ class Cie10Controller extends Zend_Controller_Action
         $this->view->titulo = "Diagnosticos por capitulo";
         $this->view->data = $this->tabla_capitulo();
     }
+    public function listaAction()
+    {
+        // action body
+        $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
+        $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
+        if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
+            $dato = $this->getRequest()->getParam('dato');
+            $id = $this->getRequest()->getParam('id');
+            echo $this->lista_cie10($dato,$id);
+        }
+    }
     public function buscaAction()
     {
         // action body
@@ -61,6 +72,31 @@ class Cie10Controller extends Zend_Controller_Action
             $dato = $this->getRequest()->getParam('dato');
             echo $this->tabla_cie10_categoria($dato);
         }
+    }
+    public function lista_cie10($dato,$id)
+    {
+        $table_m = new Application_Model_DbTable_Cie10();
+        $datos = $table_m->listar($dato);
+        $cadena = '';
+        if (!$datos) {
+            $cadena .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error !</strong> No se encontraron resultados
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>';
+        } else {
+            $cadena .= '<div class="list-group list-btn-group-sm ">';
+            foreach ($datos as $item):
+
+                $cadena .= '<button type="button" id="elemento" class="list-group-item list-group-item-action list-group-item-light text-xxs p-2" title="Clic para seleccionar"
+                onclick="setDatosCie(`'.$id.'`,`'. $item->sub_cod .'`,`'. $item->descripcion_sub .'`);">'. $item->sub_cod .'-'. $item->descripcion_sub .'</button>';
+            endforeach;
+
+            $cadena .= "</div>";
+        }
+
+        return $cadena;
     }
     public function tabla_cie10($dato)
     {

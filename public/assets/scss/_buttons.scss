@@ -17,7 +17,13 @@
     font-size: 1.35rem;
   }
 }
-
+///-----------
+.btn-camas {
+  &:hover {
+    border-style: solid;
+    border-color: $success;
+  }
+}
 .btn-icon-split {
   padding: 0;
   overflow: hidden;
@@ -25,7 +31,7 @@
   align-items: stretch;
   justify-content: center;
   .icon {
-    background: fade-out($black, .85);
+    background: fade-out($black, 0.85);
     display: inline-block;
     padding: $btn-padding-y $btn-padding-x;
   }

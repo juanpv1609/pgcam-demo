@@ -1,4 +1,112 @@
 /////////
+function eligeCama(especialidad, habitacion, cama, cama_id, estado) {
+      //console.log(cama)
+      if ((estado == 0)) {
+            const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  showConfirmButton: false,
+                  timer: 2000,
+                  onOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                  }
+            });
+            Toast.fire({
+                  icon: 'success',
+                  title: 'Cama reservada correctamente!'
+            })
+            $('#servicio').text(especialidad);
+            $('#habitacion').text(habitacion);
+            $('#cama_id').val(cama_id);
+            $('#cama').text(cama);
+      } else {
+            const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  showConfirmButton: false,
+                  timer: 2000,
+                  onOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                  }
+            });
+            Toast.fire({
+                  icon: 'warning',
+                  title: 'Cama ocupada o en desinfeccion!'
+            })
+            $('#servicio').text('');
+            $('#habitacion').text('');
+            $('#cama_id').val('');
+            $('#cama').text('');
+      }
+
+}
+function setDatosCie(id, cod, descripcion) {
+      if (id == 'diagnostico1') {
+            $("#diagnostico1").val(descripcion);
+            $("#cod1").text(cod);
+            $("#lista1").html("");
+      } else if (id == 'diagnostico2') {
+            $("#diagnostico2").val(descripcion);
+            $("#cod2").text(cod);
+            $("#lista2").html("");
+      } else if (id == 'diagnostico3') {
+            $("#diagnostico3").val(descripcion);
+            $("#cod3").text(cod);
+            $("#lista3").html("");
+      }
+}
+//formulario diagnostico
+function getDiagnostico(diagnostico) {
+      var id = $(diagnostico).attr("id");
+      var dato = $(diagnostico).val();
+      var dir = $('#dir').val();
+      //alert(id);
+      if (dato.length) {
+            $.ajax(
+                  {
+                        dataType: "html",
+                        type: "POST",
+                        url: dir + "/cie10/lista", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
+                        data: "dato=" + dato + "&id=" + id, //Se añade el parametro de busqueda del medico
+                        beforeSend: function (data) {
+                        },
+                        success: function (requestData) {//armar la tabla
+                              if (id == 'diagnostico1') {
+                                    $("#lista1").html(requestData);
+                              } else if (id == 'diagnostico2') {
+                                    $("#lista2").html(requestData);
+                              } else if (id == 'diagnostico3') {
+                                    $("#lista3").html(requestData);
+                              }
+                        },
+                        error: function (requestData, strError, strTipoError) {
+                              //alert(requestData, strError, strTipoError)
+                        },
+                        complete: function (requestData, exito) { //fin de la llamada ajax.
+
+                        }
+                  });
+      } else {
+            const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  showConfirmButton: false,
+                  timer: 3000,
+                  onOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                  }
+            });
+            Toast.fire({
+                  icon: 'warning',
+                  title: 'Debe ingresar algun campo a buscar'
+            })
+      }
+
+}
+
 function getCantones() {
       //var nombre = $("#ci").val();
       var prov = $("#comboProv").val();
