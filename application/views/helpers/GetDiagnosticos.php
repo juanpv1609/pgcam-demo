@@ -29,7 +29,7 @@ class Zend_View_Helper_GetDiagnosticos extends Zend_View_Helper_Abstract
                <td>
                   <div class="custom-control custom-checkbox small text-center">
                      <input type="radio" class="custom-control-input" id="pre'.$i.'"
-                        name="tipo_diagnostico'.$i.'" value="1" checked >
+                        name="tipo_diagnostico'.$i.'" value="1" >
                      <label class="custom-control-label" for="pre'.$i.'"></label>
                   </div>
                </td>

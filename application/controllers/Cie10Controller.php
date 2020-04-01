@@ -90,7 +90,7 @@ class Cie10Controller extends Zend_Controller_Action
             foreach ($datos as $item):
 
                 $cadena .= '<button type="button" id="elemento" class="list-group-item list-group-item-action list-group-item-light text-xxs p-2" title="Clic para seleccionar"
-                onclick="setDatosCie(`'.$id.'`,`'. $item->sub_cod .'`,`'. $item->descripcion_sub .'`);">'. $item->sub_cod .'-'. $item->descripcion_sub .'</button>';
+                onclick="setDiagnostico(`'.$id.'`,`'. $item->sub_cod .'`,`'. $item->descripcion_sub .'`);">'. $item->sub_cod .'-'. $item->descripcion_sub .'</button>';
             endforeach;
 
             $cadena .= "</div>";

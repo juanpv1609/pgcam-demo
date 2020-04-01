@@ -44,6 +44,17 @@ class Application_Model_DbTable_Camas extends Zend_Db_Table_Abstract
         return $db->fetchRow($select);
         //$this->listar();
     }
+    public function actualizarEstadoCama($id, $cama_estado)
+    {
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "UPDATE cama
+        SET cama_estado=" . $cama_estado . "
+      WHERE cama_id=" . $id . "; ";
+        return $db->fetchRow($select);
+        //$this->listar();
+    }
     public function eliminarcama($id)
     {
         $db = Zend_Registry::get('pgdb');

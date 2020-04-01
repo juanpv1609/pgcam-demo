@@ -2,15 +2,10 @@
 
 class Application_Model_DbTable_Admision extends Zend_Db_Table_Abstract
 {
-
     protected $_name = 'admision';
 
-    public function admisionpaciente($apellido_paterno, $apellido_materno, $primer_nombre, $segundo_nombre, $cedula
-        , $telefono, $comboParroq, $barrio, $direccion, $fecha_n, $lugar_n, $comboNacionalidad
-        , $comboGrupo, $comboEdad, $comboGenero, $comboEstado, $comboInstruccion, $ocupacion
-        , $trabajo, $comboTipoSeguro, $referido, $contacto_nombre, $contacto_parentezco, $contacto_direccion
-        , $contacto_telefono, $comboFormaLLeg, $fuente_info, $institucion, $institucion_telefono) {
-
+    public function admisionpaciente($apellido_paterno, $apellido_materno, $primer_nombre, $segundo_nombre, $cedula, $telefono, $comboParroq, $barrio, $direccion, $fecha_n, $lugar_n, $comboNacionalidad, $comboGrupo, $comboEdad, $comboGenero, $comboEstado, $comboInstruccion, $ocupacion, $trabajo, $comboTipoSeguro, $referido, $contacto_nombre, $contacto_parentezco, $contacto_direccion, $contacto_telefono, $comboFormaLLeg, $fuente_info, $institucion, $institucion_telefono)
+    {
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
@@ -156,25 +151,25 @@ class Application_Model_DbTable_Admision extends Zend_Db_Table_Abstract
         where e.especialidad_id=".$especialidad_id;
         return $db->fetchAll($select);
     }
-   /*  public function buscaHabCama($especialidad_id)
-    {
-        //devuelve todos los registros de la tabla
-        $db = Zend_Registry::get('pgdb');
-        //opcional, esto es para que devuelva los resultados como objetos $row->campo
-        $db->setFetchMode(Zend_Db::FETCH_OBJ);
-        $select = "select c.cama_id,c.cama_nombre,h.habitacion_id,h.habitacion_nombre,e.especialidad_id,e.especialidad_nombre,d.cama_estado_color
-        from cama c
-           join habitacion h
-           on h.habitacion_id=c.habitacion_id
-           join especialidad e
-           on e.especialidad_id=h.especialidad_id
-           join cama_estado d
-           on d.cama_estado_id=c.cama_estado
-           where e.especialidad_id=".$especialidad_id."
-           ORDER BY 4;";
-        return $db->fetchAll($select);
-    } */
-    public function buscaCamaEstado($habitacion_id,$cama_nombre)
+    /*  public function buscaHabCama($especialidad_id)
+     {
+         //devuelve todos los registros de la tabla
+         $db = Zend_Registry::get('pgdb');
+         //opcional, esto es para que devuelva los resultados como objetos $row->campo
+         $db->setFetchMode(Zend_Db::FETCH_OBJ);
+         $select = "select c.cama_id,c.cama_nombre,h.habitacion_id,h.habitacion_nombre,e.especialidad_id,e.especialidad_nombre,d.cama_estado_color
+         from cama c
+            join habitacion h
+            on h.habitacion_id=c.habitacion_id
+            join especialidad e
+            on e.especialidad_id=h.especialidad_id
+            join cama_estado d
+            on d.cama_estado_id=c.cama_estado
+            where e.especialidad_id=".$especialidad_id."
+            ORDER BY 4;";
+         return $db->fetchAll($select);
+     } */
+    public function buscaCamaEstado($habitacion_id, $cama_nombre)
     {
         //devuelve todos los registros de la tabla
         $db = Zend_Registry::get('pgdb');
@@ -190,5 +185,15 @@ class Application_Model_DbTable_Admision extends Zend_Db_Table_Abstract
            and c.cama_nombre='".$cama_nombre."';";
         return $db->fetchRow($select);
     }
-
+    public function asignaCamaPaciente($paciente_hc, $cedula, $cama_id, $cie10_cod,$cie10_tipo)
+    {
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "INSERT INTO cama_paciente( paciente_id, paciente_ci, cama_id, diagnosticos, 
+        tipo_diagnosticos, fecha_cama_paciente, observacion)
+        VALUES (".$paciente_hc.", '".$cedula."', ".$cama_id.", ARRAY[".$cie10_cod."], 
+        ARRAY [ ".$cie10_tipo." ], current_timestamp(0), 'Primer ingreso');";
+        return $db->fetchRow($select);
+    }
 }

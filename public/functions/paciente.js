@@ -1,7 +1,8 @@
 /////////
-function eligeCama(especialidad, habitacion, cama, cama_id, estado) {
+
+function eligeCama(especialidad_id, especialidad, habitacion, cama, cama_id, estado) {
       //console.log(cama)
-      if ((estado == 0)) {
+      if ((estado == 0)) { //verifica si el estado de la cama es DISPONIBLE
             const Toast = Swal.mixin({
                   toast: true,
                   position: 'top-end',
@@ -19,6 +20,7 @@ function eligeCama(especialidad, habitacion, cama, cama_id, estado) {
             $('#servicio').text(especialidad);
             $('#habitacion').text(habitacion);
             $('#cama_id').val(cama_id);
+            $('#especialidad_id').val(especialidad_id);
             $('#cama').text(cama);
       } else {
             const Toast = Swal.mixin({
@@ -38,31 +40,28 @@ function eligeCama(especialidad, habitacion, cama, cama_id, estado) {
             $('#servicio').text('');
             $('#habitacion').text('');
             $('#cama_id').val('');
+            $('#especialidad_id').val('');
+
             $('#cama').text('');
+      }
+}
+function setDiagnostico(id, cod, descripcion) {
+      for (let i = 1; i <= 3; i++) {
+            if (id == 'diagnostico' + i) {
+                  $("#diagnostico" + i).val(descripcion);
+                  $("#cod" + i).text(cod);
+                  $("#lista" + i).html("");
+                  $("#pre" + i).prop("checked", true);
+            }
       }
 
 }
-function setDatosCie(id, cod, descripcion) {
-      if (id == 'diagnostico1') {
-            $("#diagnostico1").val(descripcion);
-            $("#cod1").text(cod);
-            $("#lista1").html("");
-      } else if (id == 'diagnostico2') {
-            $("#diagnostico2").val(descripcion);
-            $("#cod2").text(cod);
-            $("#lista2").html("");
-      } else if (id == 'diagnostico3') {
-            $("#diagnostico3").val(descripcion);
-            $("#cod3").text(cod);
-            $("#lista3").html("");
-      }
-}
+
 //formulario diagnostico
 function getDiagnostico(diagnostico) {
       var id = $(diagnostico).attr("id");
       var dato = $(diagnostico).val();
       var dir = $('#dir').val();
-      //alert(id);
       if (dato.length) {
             $.ajax(
                   {
@@ -73,12 +72,11 @@ function getDiagnostico(diagnostico) {
                         beforeSend: function (data) {
                         },
                         success: function (requestData) {//armar la tabla
-                              if (id == 'diagnostico1') {
-                                    $("#lista1").html(requestData);
-                              } else if (id == 'diagnostico2') {
-                                    $("#lista2").html(requestData);
-                              } else if (id == 'diagnostico3') {
-                                    $("#lista3").html(requestData);
+                              for (let i = 0; i <= 3; i++) {
+                                    if (id == 'diagnostico' + i) {
+                                          $("#lista" + i).html(requestData);
+                                    }
+
                               }
                         },
                         error: function (requestData, strError, strTipoError) {
@@ -88,6 +86,144 @@ function getDiagnostico(diagnostico) {
 
                         }
                   });
+      } else {
+            for (let i = 0; i <= 3; i++) {
+                  if ($('#diagnostico' + i).val() == "") {
+                        $("#cod" + i).text('');
+                        $("#set_diagnostico" + i).text('');
+                        $("#set_cod" + i).text("");
+                        $("#set_pre" + i).text("");
+                        $("#set_def" + i).text("");
+                        $("#pre" + i).prop("checked", false);
+                        $("#def" + i).prop("checked", false);
+                        const Toast = Swal.mixin({
+                              toast: true,
+                              position: 'top-end',
+                              showConfirmButton: false,
+                              timer: 3000,
+                              onOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                              }
+                        });
+                        Toast.fire({
+                              icon: 'warning',
+                              title: 'Debe ingresar algun campo a buscar'
+                        })
+                  }
+            }
+
+      }
+
+}
+function asignarCama() {
+      var dir = $('#dir').val();
+      var paciente_hc = $('#paciente_hc').text();
+      var cedula = $('#cedula').text();
+      var especialidad_id = $('#especialidad_id').val();
+      var cama_id = $('#cama_id').val();
+      var cie10_cod = [];
+      var cie10_tipo = [];
+      for (let i = 1; i <= 3; i++) {
+            cie10_cod[i - 1] = ["'" + $('#cod' + i).text() + "'"];
+
+            if (($("#pre"+i).is(':checked'))&&($('#cod' + i).text().length)) {
+                  cie10_tipo[i - 1] = ["'PRE'"];
+            } else if (($("#def"+i).is(':checked'))&&($('#cod' + i).text().length)) {
+                  cie10_tipo[i - 1] = ["'DEF'"];
+            } else {
+                  cie10_tipo[i - 1] = ["''"];
+            }
+      }
+      if (paciente_hc.length) {
+            if (cama_id.length) {
+                  if ((cie10_cod[0] == "''") && (cie10_cod[1] == "''") && (cie10_cod[2] == "''")) {
+                        const Toast = Swal.mixin({
+                              toast: true,
+                              position: 'top-end',
+                              showConfirmButton: false,
+                              timer: 3000,
+                              onOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                              }
+                        });
+                        Toast.fire({
+                              icon: 'warning',
+                              title: 'Debe ingresar al menos un diagnostico'
+                        })
+
+                  } else {
+                        Swal.fire({
+                              position: 'top',
+                              title: 'Está seguro?',
+                              text: "¡Seleccione 'Aceptar' para confirmar la asignacion de cama!",
+                              icon: 'question',
+                              width: '22rem',
+                              showCancelButton: true,
+                              confirmButtonColor: '#3085d6',
+                              cancelButtonColor: '#d33',
+                              confirmButtonText: 'Aceptar',
+                              cancelButtonText: 'Cancelar'
+                        }).then((result) => {
+                              if (result.value) {
+                                    $.ajax(
+                                          {
+                                                dataType: "html",
+                                                type: "POST",
+                                                url: dir + "/paciente/asignarcama", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
+                                                data: "paciente_hc=" + paciente_hc + "&cedula=" + cedula
+                                                      + "&cama_id=" + cama_id + "&cie10_cod=" + cie10_cod + "&cie10_tipo=" + cie10_tipo +
+                                                      "&especialidad_id=" + especialidad_id, //Se añade el parametro de busqueda del medico
+                                                beforeSend: function (data) {
+                                                },
+                                                success: function (requestData) {//armar la tabla
+                                                      const Toast = Swal.mixin({
+                                                            toast: true,
+                                                            position: 'top-end',
+                                                            showConfirmButton: false,
+                                                            timer: 3000,
+                                                            onOpen: (toast) => {
+                                                                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                            }
+                                                      });
+                                                      Toast.fire({
+                                                            icon: 'success',
+                                                            title: 'Cama asignada correctamente'
+                                                      })
+                                                      getCamas(especialidad_id);
+                                                      //limpiar el formulario
+                                                      limpiaFormAsignacion();
+
+
+                                                },
+                                                error: function (requestData, strError, strTipoError) {
+                                                      //alert(requestData, strError, strTipoError)
+                                                },
+                                                complete: function (requestData, exito) { //fin de la llamada ajax.
+
+                                                }
+                                          });
+                              }
+                        })
+                  }
+            } else {
+                  const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        onOpen: (toast) => {
+                              toast.addEventListener('mouseenter', Swal.stopTimer)
+                              toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                  });
+                  Toast.fire({
+                        icon: 'warning',
+                        title: 'Debe seleccionar una cama'
+                  })
+            }
       } else {
             const Toast = Swal.mixin({
                   toast: true,
@@ -101,12 +237,29 @@ function getDiagnostico(diagnostico) {
             });
             Toast.fire({
                   icon: 'warning',
-                  title: 'Debe ingresar algun campo a buscar'
+                  title: 'Debe ingresar un paciente'
             })
       }
 
-}
 
+}
+function limpiaFormAsignacion() {
+      $('#paciente_hc').text('');
+      $('#paciente_id').val('');
+      $('#cedula').text('');
+      $('#apellido_paterno').text('');
+      $('#servicio').text('');
+      $('#habitacion').text('');
+      $('#cama').text('');
+      $('#especialidad_id').val('');
+      $('#cama_id').val('');
+      for (let i = 1; i <= 3; i++) {
+            $('#diagnostico' + i).val('');
+            $('#cod' + i).text('');
+            $("#pre" + i).prop("checked", false);
+            $("#def" + i).prop("checked", false);
+      }
+}
 function getCantones() {
       //var nombre = $("#ci").val();
       var prov = $("#comboProv").val();
@@ -186,7 +339,7 @@ function DatosPaciente() {
                   },
                   success: function (requestData) {//armar la tabla                        
                         if (requestData.data) {
-                              $('.d-none').removeClass('d-none');
+                              $('#tablaDatosPaciente').removeClass('d-none');
                               $('#paciente_id').text(requestData.data.p_id);
                               $('#paciente_hc').text(requestData.data.p_hc);
                               $('#apellido_paterno').text(requestData.data.p_apellidos + " " + requestData.data.p_nombres);
@@ -281,6 +434,9 @@ function DatosPaciente() {
                   }
             });
       } else {
+            $('#paciente_hc').text('');
+            $('#apellido_paterno').text('');
+            $('#cedula').text('');
             const Toast = Swal.mixin({
                   toast: true,
                   position: 'top-end',
@@ -495,7 +651,7 @@ function getCamas(especialidad_id) {
                         //alert(dir + " " + especialidad_id);
                   },
                   success: function (requestData) {//armar la tabla
-                        $("#data_Table1").html(requestData);
+                        $("#data_TableCamas").html(requestData);
                   },
                   error: function (requestData, strError, strTipoError) {
                         alert(requestData, strError, strTipoError)

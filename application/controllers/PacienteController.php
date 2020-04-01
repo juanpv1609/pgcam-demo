@@ -94,14 +94,32 @@ class PacienteController extends Zend_Controller_Action
     }
     public function asignarAction()
     {
-        $this->view->titulo = "Formulario de asignacion de cama";
+        $this->view->titulo = "Asignacion de cama";
         $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/paciente.js');
         echo $this->view->headScript();
     }
-
+    public function asignarcamaAction()
+    {
+        $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
+        $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
+        if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
+            $paciente_hc = $this->getRequest()->getParam('paciente_hc');
+            $cedula = $this->getRequest()->getParam('cedula');
+            $cama_id = $this->getRequest()->getParam('cama_id');
+            $cie10_cod = $this->getRequest()->getParam('cie10_cod');
+            $cie10_tipo = $this->getRequest()->getParam('cie10_tipo');
+            $especialidad_id = $this->getRequest()->getParam('especialidad_id');
+            $obj = new Application_Model_DbTable_Admision();
+            $obj->asignaCamaPaciente($paciente_hc,$cedula,$cama_id,$cie10_cod,$cie10_tipo);
+            $cama = new Application_Model_DbTable_Camas();
+            $cama->actualizarEstadoCama($cama_id, 1);
+            echo $this->tabla_hab_cama($especialidad_id);
+            //$this->view->data_habitaciones = $this->tabla_hab_cama($especialidad_id);
+        }
+    }
     public function cambioAction()
     {
-        $this->view->titulo = "Cambio / Egiconoo de paciente";
+        $this->view->titulo = "Cambio / Egreso de paciente";
         $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/paciente.js');
         echo $this->view->headScript();
     }
@@ -190,7 +208,7 @@ class PacienteController extends Zend_Controller_Action
                     </button>
                 </div>';
         } else {
-            $Listaarea .= '<table class="table table-bordered  table-sm " >
+            $Listaarea .= '<table class="table  table-bordered  table-sm " >
             <caption class="text-xs">
             <small >Estado:</small>
                <span class="badge badge-danger text-wrap px-2">Ocupada</span>
@@ -222,7 +240,7 @@ class PacienteController extends Zend_Controller_Action
                     $Listaarea .= '<td class="p-0">
                     <button class="btn btn-'.$cama_estado->cama_estado_color. ' btn-block p-1" id="'.$cama_estado->cama_id.'" 
                     '.$estado.'
-                    onclick="eligeCama(`'.$datos_habitacion[0]->especialidad_nombre.'`,`'.$item->habitacion_nombre.'`,`'.$cama_estado->cama_nombre.'`,'.$cama_estado->cama_id.','.$cama_estado->cama_estado.');">
+                    onclick="eligeCama('.$datos_habitacion[0]->especialidad_id.',`'.$datos_habitacion[0]->especialidad_nombre.'`,`'.$item->habitacion_nombre.'`,`'.$cama_estado->cama_nombre.'`,'.$cama_estado->cama_id.','.$cama_estado->cama_estado.');">
                     '.$icono.'</button></td>';
                 
                 endforeach;
