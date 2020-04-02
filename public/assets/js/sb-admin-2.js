@@ -63,4 +63,20 @@
         });
     }, false);
     $(function(){ const newLocal = $('.toggle-event').bootstrapToggle(); }); //boton toggle
+    //--------TOOLTIP
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+    //------SELECT2
+    $(document).ready(function() {
+      $('.js-example-basic-single').select2({
+        theme: "bootstrap",
+        language: "es",
+        placeholder: 'Seleccione una opcion'
+      });
+      // ejemplo de popover
+      $('.example-popover').popover({
+        container: 'body'
+      })
+  });
 })(jQuery); // End of use strict

@@ -81,7 +81,7 @@ class CamasController extends Zend_Controller_Action
                 </div>
                 </div>';
         } else {
-            $Listaarea .= '<label for="comboArea">Seleccione una habitacion:</label>';
+            $Listaarea .= '<label for="comboHabitacion">Seleccione una habitacion:</label>';
 
             $Listaarea .= '<select class="custom-select" name="comboHabitacion" id="comboHabitacion">';
             foreach ($datosarea as $item):
@@ -157,11 +157,11 @@ class CamasController extends Zend_Controller_Action
                 <div class='btn-group' role='group' aria-label='Basic example'>
                 
                 <!--  debo enviar la busqueda por ajax -->
-                <button type='button' class='btn btn-outline-warning btn-sm ' 
+                <button type='button' class='btn btn-outline-dark btn-sm border-0 ' 
                 onclick='editarModal(". $item->cama_id .",". $item->habitacion_id .",". $item->cama_estado .",`". $item->cama_nombre ."`)' >
                     <i class='fas fa-edit  '></i>
                 </button>
-                <button type='button' class='btn btn-outline-danger btn-sm' onclick='eliminar(". $item->cama_id .")' >
+                <button type='button' class='btn btn-outline-danger btn-sm border-0' onclick='eliminar(". $item->cama_id .")' >
                     <i class='fas fa-trash '></i>
                 </button>
                 </div>

@@ -1,12 +1,12 @@
 <!-- Outer Row -->
 
-<div class="card-body py-2 ">
+<div class="card-body ">
   <!-- Nested Row within Card Body -->
-  <div class="row justify-content-center py-auto">
-    <div class="col-xl-5 col-lg-6 col-md-5 my-auto">
-      <img class="img-fluid py-5 " src="<?php echo $this->baseUrl(); ?>/assets/img/login.svg" alt="Login">
+  <div class="row ">
+    <div class="col-lg-6 d-none d-lg-block bg-login-image">
+      <img class="card-img-top" src="<?php echo $this->baseUrl(); ?>/assets/img/login.svg" alt="Login">
     </div>
-    <div class="col-lg-6 p-4">
+    <div class="col-lg-6 ">
       <div class="text-center">
         <h1 class="h2 text-gray-900 mb-4">Iniciar Sesión!</h1>
       </div>
@@ -17,6 +17,7 @@
         </div>
           <input type="email" autofocus class="form-control " id="email" name="email" aria-describedby="emailHelp"
             required placeholder="Ingrese su correo electronico..." autocomplete="off"
+            data-toggle="tooltip" data-placement="bottom" title="ejemplo@correo.com"
             onkeypress="this.value = this.value.toLowerCase();"
             value="<?php if (isset($this->usuario_value)) echo $this->usuario_value; ?>">
             
@@ -32,7 +33,9 @@
           <input type="password" class="form-control " name="password" id="password" required
             placeholder="Ingrese su contraseña..." autocomplete="off">
             <div class="input-group-append">
-                <span id="show_password" class="input-group-text " onclick="mostrarPassword()">
+                <span id="show_password" class="input-group-text "
+                data-toggle="tooltip" data-placement="right" title="Mostrar/Ocultar"
+                 onclick="mostrarPassword()">
                   <i class="far fa-eye-slash icon "></i>
                 </span>
             </div>
@@ -58,9 +61,10 @@
 
       <hr>
       <div class="d-flex justify-content-between text-center">
-        <button class="btn btn-link btn-sm" data-toggle="modal" data-target="#exampleModal">Olvido su
+        <button class="btn btn-link btn-sm"  title="Haga click si olvidó su contraseña"
+        data-toggle="modal" data-target="#exampleModal">Olvido su
           contraseña?</button>
-        <a class="btn btn-link btn-sm"
+        <a class="btn btn-link btn-sm" data-toggle="tooltip" data-placement="bottom" title="Haga click para crear una nueva cuenta"
           href="<?php echo $this->url(array('controller' => 'auth', 'action' => 'register')); ?>">Crear una cuenta!</a>
       </div>
 

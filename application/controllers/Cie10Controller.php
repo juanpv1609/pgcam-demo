@@ -130,10 +130,10 @@ class Cie10Controller extends Zend_Controller_Action
                     <div class="btn-group" role="group" aria-label="Basic example">
                     
                     <!--  debo enviar la busqueda por ajax -->
-                    <button type="button" class="btn btn-outline-warning btn-sm " onclick="editarModal('. $item->piso_id .')" >
+                    <button type="button" class="btn btn-outline-dark btn-sm border-0 " onclick="editarModal('. $item->piso_id .')" >
                         <i class="fa fa-edit  "></i>
                     </button>
-                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminar('. $item->piso_id .')" >
+                    <button type="button" class="btn btn-outline-danger btn-sm border-0 " onclick="eliminar('. $item->piso_id .')" >
                         <i class="fa fa-trash "></i>
                     </button>
                     </div>
@@ -178,10 +178,10 @@ class Cie10Controller extends Zend_Controller_Action
                     <div class="btn-group" role="group" aria-label="Basic example">
                     
                     <!--  debo enviar la busqueda por ajax -->
-                    <button type="button" class="btn btn-outline-warning btn-sm " onclick="editarModal('. $item->cod .')" >
+                    <button type="button" class="btn btn-outline-dark btn-sm  border-0 " onclick="editarModal('. $item->cod .')" >
                         <i class="fa fa-edit  "></i>
                     </button>
-                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminar('. $item->cod .')" >
+                    <button type="button" class="btn btn-outline-danger btn-sm border-0 " onclick="eliminar('. $item->cod .')" >
                         <i class="fa fa-trash "></i>
                     </button>
                     </div>
@@ -226,10 +226,10 @@ class Cie10Controller extends Zend_Controller_Action
                     <div class="btn-group" role="group" aria-label="Basic example">
                     
                     <!--  debo enviar la busqueda por ajax -->
-                    <button type="button" class="btn btn-outline-warning btn-sm " onclick="editarModal('. $item->cie10_capitulo_id .')" >
+                    <button type="button" class="btn btn-outline-dark btn-sm border-0 " onclick="editarModal('. $item->cie10_capitulo_id .')" >
                         <i class="fa fa-edit  "></i>
                     </button>
-                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminar('. $item->cie10_capitulo_id .')" >
+                    <button type="button" class="btn btn-outline-danger btn-sm border-0 " onclick="eliminar('. $item->cie10_capitulo_id .')" >
                         <i class="fa fa-trash "></i>
                     </button>
                     </div>

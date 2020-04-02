@@ -1,12 +1,12 @@
-<div class="card-body py-2  ">
+<div class="card-body">
   <!-- Nested Row within Card Body -->
-  <div class="row justify-content-center py-auto">
-    <div class="col-xl-5 col-lg-6 col-md-5 my-auto">
-      <img class="img-fluid" src="<?php echo $this->baseUrl(); ?>/assets/img/registro.svg" alt="Registro">
+  <div class="row ">
+    <div class="col-lg-6 d-none d-lg-block bg-register-image">
+      <img class="card-img-top" src="<?php echo $this->baseUrl(); ?>/assets/img/registro.svg" alt="Registro">
     </div>
-    <div class="col-lg-7 p-2">
+    <div class="col-lg-6 ">
       <div class="text-center">
-        <h1 class="h2 text-gray-900 mb-3">Crear una cuenta!</h1>
+        <h1 class="h2 text-gray-900 mb-4">Crear una cuenta!</h1>
       </div>
       <form class="user needs-validation" method="post" id="register" name="register" novalidate>
         <div class="form-group row">
@@ -71,7 +71,7 @@
       </form>
       <hr>
       <div class="text-center">
-        <span class="text-secondary">Ya posee una cuenta?</span>
+        <span class="text-gray-600">Ya posee una cuenta?</span>
         <a class="btn btn-link btn-sm"
           href="<?php echo $this->url(array('controller' => 'auth', 'action' => 'login')); ?>">
           Clic aqui!</a>

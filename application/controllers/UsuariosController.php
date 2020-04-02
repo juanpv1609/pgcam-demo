@@ -248,11 +248,11 @@ class UsuariosController extends Zend_Controller_Action
 			                <div class='btn-group' role='group' aria-label='Basic example'>
 
 			                <!--  debo enviar la busqueda por ajax -->
-			                <button type='button' class='btn btn-outline-warning btn-sm '
+			                <button type='button' class='btn btn-outline-dark btn-sm  border-0 '
 			                onclick='editarModalU(" . $item->usu_id . ",`" . $item->usu_nombres . "`,`" . $item->usu_apellidos . "`,`" . $item->correo . "`," . $item->usu_estado_id . "," . $item->perf_id . ")' >
 			                    <i class='fas fa-edit  '></i>
 			                </button>
-			                <button type='button' class='btn btn-outline-danger btn-sm' onclick='eliminarU(" . $item->usu_id . ")' >
+			                <button type='button' class='btn btn-outline-danger btn-sm border-0 ' onclick='eliminarU(" . $item->usu_id . ")' >
 			                    <i class='fas fa-trash '></i>
 			                </button>
 			                </div>
@@ -310,11 +310,11 @@ class UsuariosController extends Zend_Controller_Action
 			                    <div class='btn-group' role='group' aria-label='Basic example'>
 
 			                        <!--  debo enviar la busqueda por ajax -->
-                                    <button type='button' class='btn btn-outline-warning btn-sm ' 
+                                    <button type='button' class='btn btn-outline-dark btn-sm  border-0 ' 
                                     onclick='editarModalUperfil(" . $item->perf_id . ",`" . $item->perf_nombre . "`,`" . $item->perf_color ."`)' >
 			                            <i class='fa fa-edit  '></i>
 			                        </button>
-			                        <button type='button' class='btn btn-outline-danger btn-sm' onclick='eliminarPerfil(" . $item->perf_id . ")' >
+			                        <button type='button' class='btn btn-outline-danger btn-sm border-0 ' onclick='eliminarPerfil(" . $item->perf_id . ")' >
 			                            <i class='fa fa-trash '></i>
 			                        </button>
 			                        </div>

@@ -138,6 +138,8 @@ function asignarCama() {
       if (paciente_hc.length) {
             if (cama_id.length) {
                   if ((cie10_cod[0] == "''") && (cie10_cod[1] == "''") && (cie10_cod[2] == "''")) {
+                  $("#diagnostico1").focus();
+
                         const Toast = Swal.mixin({
                               toast: true,
                               position: 'top-end',
@@ -209,6 +211,7 @@ function asignarCama() {
                         })
                   }
             } else {
+                  getCamas(1);
                   const Toast = Swal.mixin({
                         toast: true,
                         position: 'top-end',
@@ -225,6 +228,7 @@ function asignarCama() {
                   })
             }
       } else {
+            $("#paciente_id").removeClass('border border-success').addClass('border border-danger').focus();
             const Toast = Swal.mixin({
                   toast: true,
                   position: 'top-end',
@@ -245,7 +249,8 @@ function asignarCama() {
 }
 function limpiaFormAsignacion() {
       $('#paciente_hc').text('');
-      $('#paciente_id').val('');
+      $('#paciente_id').val('').removeClass('border border-danger').focus();
+
       $('#cedula').text('');
       $('#apellido_paterno').text('');
       $('#servicio').text('');
@@ -340,7 +345,8 @@ function DatosPaciente() {
                   success: function (requestData) {//armar la tabla                        
                         if (requestData.data) {
                               $('#tablaDatosPaciente').removeClass('d-none');
-                              $('#paciente_id').text(requestData.data.p_id);
+
+                              $('#paciente_id').text(requestData.data.p_id).removeClass('border border-danger').addClass('border border-success');
                               $('#paciente_hc').text(requestData.data.p_hc);
                               $('#apellido_paterno').text(requestData.data.p_apellidos + " " + requestData.data.p_nombres);
                               $('#cedula').text(requestData.data.p_ci);
@@ -518,7 +524,7 @@ function BuscaPaciente() {
                         },
                         success: function (requestData) {//armar la tabla                        
                               if (requestData.data) {
-                                    $("#accionForm").html('<button type="submit" class="btn btn-secondary btn-block" onclick="EditarAdmisionPaciente();"><i class="fas fa-pen"></i> Actualizar datos</button>');
+                                    $("#accionForm").html('<button type="submit" class="btn btn-dark btn-icon-split " onclick="EditarAdmisionPaciente();"><span class="icon text-white-50"><i class="fas fa-pen"></i></span><span class="text">Actualizar datos</span></button>');
                                     var array_apellidos = requestData.data.p_apellidos.split(" ");
                                     var array_nombres = requestData.data.p_nombres.split(" ");
                                     $('#apellido_paterno').val(array_apellidos[0]);

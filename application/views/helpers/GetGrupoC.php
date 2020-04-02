@@ -18,7 +18,7 @@ class Zend_View_Helper_GetGrupoc extends Zend_View_Helper_Abstract
         } else {
             $Listaarea .= '<label for="comboGrupo">Grupo cultural:</label>';
 
-            $Listaarea .= '<select class="form-control form-control-sm" name="comboGrupo" id="comboGrupo" required autocomplete="off">
+            $Listaarea .= '<select class="form-control form-control-sm js-example-basic-single" name="comboGrupo" id="comboGrupo" required autocomplete="off">
              <option value="" ></option>';
             foreach ($datos as $item):
                 $Listaarea .= "<option value='" . $item->id_grupcultural . "' >" . strtoupper($item->nombre_grupcultural) . "</option>";

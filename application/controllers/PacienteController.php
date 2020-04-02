@@ -164,14 +164,14 @@ class PacienteController extends Zend_Controller_Action
                     <div class='btn-group' role='group' aria-label='Basic example'>
                         
                         <!--  debo enviar la busqueda por ajax -->
-                        <button type='button' class='btn btn-outline-dark btn-sm' onclick='mostrarModal(". $item->p_id .")' >
+                        <button type='button' class='btn btn-outline-dark btn-sm border-0 ' onclick='mostrarModal(". $item->p_id .")' >
                             <i class='fas fa-eye '></i>
                         </button>
-                        <button type='button' class='btn btn-outline-warning btn-sm ' 
+                        <button type='button' class='btn btn-outline-warning btn-sm  border-0 ' 
                         onclick='editarModal(". $item->p_id .",`". $item->p_ci ."`)' >
                             <i class='fas fa-edit  '></i>
                         </button>
-                        <button type='button' class='btn btn-outline-danger btn-sm' onclick='eliminar(". $item->p_id .")' >
+                        <button type='button' class='btn btn-outline-danger btn-sm border-0 ' onclick='eliminar(". $item->p_id .")' >
                             <i class='fas fa-trash '></i>
                         </button>
                         </div>
@@ -216,7 +216,7 @@ class PacienteController extends Zend_Controller_Action
                <span class="badge badge-warning text-wrap px-2">Desinfeccion</span></caption>
             <tbody>
                 <tr>
-                <th class="pt-5 mt-5 text-primary" colspan="2" rowspan="2">'.$datos_habitacion[0]->especialidad_nombre.'</th>
+                <th class="align-middle text-primary" colspan="2" rowspan="2">'.$datos_habitacion[0]->especialidad_nombre.'</th>
                 <th  colspan="'.count($datos_habitacion).'">HABITACION</th>
             </tr>';
             $Listaarea .= "<tr>";
@@ -227,7 +227,7 @@ class PacienteController extends Zend_Controller_Action
             $Listaarea .= "</tr>";
             ////-----FORMA LAS CAMAS
             $Listaarea .= '<tr>
-                            <th rowspan="4" class=" text-center  pt-5">CAMA</th>
+                            <th rowspan="4" class="align-middle text-center">CAMA</th>
                         </tr>';
             //-------------
             for ($i=1; $i <=3 ; $i++) { //forma las 3 filas
@@ -235,11 +235,11 @@ class PacienteController extends Zend_Controller_Action
                 foreach ($datos_habitacion as $item):
                     $cama_estado = $obj->buscaCamaEstado($item->habitacion_id, $i);
                     $icono = ($cama_estado) ? '<i class="fas fa-bed"></i>' : '';
-                    $estado = (($cama_estado)&&($cama_estado->cama_estado==0)) ? ' title="Clic para reservar esta cama"' : ' title="No es posible reservar esta cama"';
+                    $estado = (($cama_estado)&&($cama_estado->cama_estado==0)) ? ' title="Clic para reservar esta cama" ' : ' title="No es posible reservar esta cama"';
                     
                     $Listaarea .= '<td class="p-0">
                     <button class="btn btn-'.$cama_estado->cama_estado_color. ' btn-block p-1" id="'.$cama_estado->cama_id.'" 
-                    '.$estado.'
+                     '.$estado.'
                     onclick="eligeCama('.$datos_habitacion[0]->especialidad_id.',`'.$datos_habitacion[0]->especialidad_nombre.'`,`'.$item->habitacion_nombre.'`,`'.$cama_estado->cama_nombre.'`,'.$cama_estado->cama_id.','.$cama_estado->cama_estado.');">
                     '.$icono.'</button></td>';
                 

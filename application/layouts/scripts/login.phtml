@@ -5,17 +5,17 @@
   <?php echo $this->render('_head.phtml'); ?>
 </head>
 
-<body class="bg-gradient-light d-flex justify-content-center">
-  <div class="container animated--grow-in my-lg-5 ">
-    <div class="row justify-content-center my-lg-5 mx-lg-5">
-      <div class="col-xl-10 col-lg-12 col-md-9">
-        <div class="card  o-hidden shadow-lg">
-          <div class="card-header d-flex justify-content-center my-2">
+<body class="align-middle" style="background-image: url('<?php echo $this->baseUrl(); ?>/assets/img/interlaced.png');">
+  <div class="container animated--grow-in ">
+    <div class="row  justify-content-center ">
+      <div class="col-xl-9 col-lg-11 col-md-8 ">
+        <div class="card  o-hidden bg-light border  my-5">
+          <div class="card-header justify-content-center ">
             <h6 class="font-weight-bold my-auto text-primary text-center">
               HOSPITAL GINECO OBSTÉTRICO PEDIÁTRICO DE NUEVA AURORA LUZ ELENA ARISMENDI</h6>
           </div>
           <?php echo $this->layout()->content; ?>
-          <div class="card-footer p-2">
+          <div class="card-footer p-0">
             <?php echo $this->render('_footer.phtml'); ?>
           </div>
         </div>

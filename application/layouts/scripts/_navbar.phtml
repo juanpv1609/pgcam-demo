@@ -50,28 +50,14 @@
 
 
     </li>
-    <li class="nav-item dropdown no-arrow">
+    <?php setlocale(LC_TIME,"es_EC.UTF-8");
+              date_default_timezone_set('America/Guayaquil'); ?>
+    <li class="nav-item dropdown no-arrow " data-toggle="tooltip" data-placement="bottom" title='<?php echo strftime("%A, %d de %B de %Y"); ?>'>
       <a class="nav-link dropdown-toggle"  href="#" id="calendar" role="button" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
         <i class="fas fa-calendar-alt  "></i>
 
       </a>
-      <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="calendar">
-
-        <a class="dropdown-item d-flex align-items-center" href="#">
-          <div class="mr-1">
-            <div class="icon-circle bg-primary">
-              <i class="fas fa-calendar-alt text-white"></i>
-            </div>
-          </div>
-          <div>
-            <span class="font-weight-bold"><?php setlocale(LC_TIME,"es_EC.UTF-8");
-              date_default_timezone_set('America/Guayaquil'); ?>
-              <span class="text-xs"><?php echo strftime("%A, %d de %B de %Y"); ?></span></span>
-          </div>
-        </a>
-
-      </div>
     </li>
     <li class="nav-item " data-toggle="tooltip" data-placement="bottom" title="Manual de usuario">
       <a class="nav-link " href="#">
@@ -171,18 +157,19 @@
     </li>
     <div class="topbar-divider d-none d-sm-block"></div>
     <!-- Nav Item - User Information -->
-    <li class="nav-item dropdown no-arrow my-auto" data-toggle="tooltip" data-placement="bottom" title="Perfil">
+    <li class="nav-item dropdown no-arrow my-auto" >
       <?php if($this->user) : 
             $obj = new Application_Model_DbTable_Usuario();
             $usuario= $obj->listar_usuario($this->user->usu_id);
             $ultima_conexion = $obj->obtiene_ultima_conexion_usuario($this->user->usu_id);
       ?>
-      <a class="nav-link dropdown-toggle " href="#"
+      <a class="nav-link dropdown-toggle " href="#" data-toggle="tooltip" data-placement="bottom" title="Ver perfil"
         id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="far fa-user"></i>
           <?php 
             else : ?>
-          <a class=" btn btn-outline-primary btn-sm" href="<?php echo $this->baseUrl();?>/auth/login">
+          <a class=" btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Clic para iniciar sesion"
+           href="<?php echo $this->baseUrl();?>/auth/login">
             <span class="font-weight-bold">Login</span>
           </a>
           <?php  endif; ?>

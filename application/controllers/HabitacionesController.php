@@ -127,11 +127,11 @@ class HabitacionesController extends Zend_Controller_Action
                     <div class='btn-group' role='group' aria-label='Basic example'>
                     
                     <!--  debo enviar la busqueda por ajax -->
-                    <button type='button' class='btn btn-outline-warning btn-sm ' 
+                    <button type='button' class='btn btn-outline-dark btn-sm  border-0 ' 
                     onclick='editarModal(". $item->habitacion_id .",". $item->especialidad_id .",`". $item->habitacion_nombre ."`)' >
                         <i class='fas fa-edit  '></i>
                     </button>
-                    <button type='button' class='btn btn-outline-danger btn-sm' onclick='eliminar(". $item->habitacion_id .")' >
+                    <button type='button' class='btn btn-outline-danger btn-sm border-0 ' onclick='eliminar(". $item->habitacion_id .")' >
                         <i class='fas fa-trash '></i>
                     </button>
                     </div>

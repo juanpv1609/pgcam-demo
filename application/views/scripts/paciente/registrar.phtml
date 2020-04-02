@@ -105,7 +105,7 @@
 				<div class="col-sm-2">
 					<div class="form-group">
 						<label for="comboCant">Canton:</label>
-						<select class="form-control form-control-sm" name="comboCant" id="comboCant"
+						<select class="form-control form-control-sm js-example-basic-single" name="comboCant" id="comboCant"
 							onchange="getParroquias();"  required autocomplete="off">
 						</select>
 						<div class='valid-feedback'>
@@ -117,7 +117,7 @@
 				<div class="col-sm-2">
 					<div class="form-group">
 						<label for="comboParroq">Parroquia:</label>
-						<select class="form-control form-control-sm" name="comboParroq" id="comboParroq" required
+						<select class="form-control form-control-sm js-example-basic-single " name="comboParroq" id="comboParroq" required
 							autocomplete="off">
 						</select>
 						<div class='valid-feedback'>
@@ -186,7 +186,7 @@
 				<div class="col-sm-1">
 					<div class="form-group">
 						<label for="comboGenero">Genero:</label>
-						<select name="comboGenero" id="comboGenero" class="form-control form-control-sm" required
+						<select name="comboGenero" id="comboGenero" class="form-control form-control-sm js-example-basic-single text-xs" required
 							autocomplete="off">
 							<option value=""></option>
 							<option value="F">F</option>
@@ -333,11 +333,13 @@
 			</div>
 		</div>
 		<div  class="card-footer d-flex justify-content-between">
-			<button  class="btn btn-danger " onclick="window.location.href='<?php echo $this->baseUrl(); ?>/paciente/registrar'">
-				<i class="fas fa-ban"></i> Cancelar</button>
+			<button  class="btn btn-danger btn-icon-split " onclick="window.location.href='<?php echo $this->baseUrl(); ?>/paciente/registrar'">
+				<span class="icon text-white-50"><i class="fas fa-ban"></i></span><span class="text">Cancelar</span>
+			</button>
 			<div id="accionForm">
-				<button type="submit" class="btn btn-primary " onclick="AdmisionPaciente();">
-					<i class="fas fa-paper-plane"></i> Registrar paciente</button>
+				<button type="submit" class="btn btn-primary btn-icon-split " onclick="AdmisionPaciente();">
+					<span class="icon text-white-50"><i class="fas fa-paper-plane"></i></span><span class="text">Registrar paciente</span>
+					</button>
 			</div>
 			
 			

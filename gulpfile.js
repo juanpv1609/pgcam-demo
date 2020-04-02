@@ -50,10 +50,10 @@ function clean() {
 
 // Bring third party dependencies from node_modules into vendor directory
 function modules() {
-  // sweetAlert 2 JS
+  // bootstrap4-toggle JS
   var b4ToggleJS = gulp.src('./node_modules/bootstrap4-toggle/js/*.js')
     .pipe(gulp.dest('./public/vendor/bootstrap4-toggle/js'));
-  // sweetAlert 2 CSS
+  // bootstrap4-toggle CSS
   var b4ToggleCSS = gulp.src('./node_modules/bootstrap4-toggle/css/*.css')
     .pipe(gulp.dest('./public/vendor/bootstrap4-toggle/css'));
   // sweetAlert 2 JS
@@ -75,6 +75,9 @@ function modules() {
   // Select2 SCSS
   var select2CSS = gulp.src('./node_modules/select2/dist/css/*')
     .pipe(gulp.dest('./public/vendor/select2/css'));
+    // Select2 bootstrap-theme SCSS
+  var select2bthemeCSS = gulp.src('./node_modules/select2-bootstrap-theme/dist/*')
+  .pipe(gulp.dest('./public/vendor/select2/css'));
   // ChartJS
   var chartJS = gulp.src('./node_modules/chart.js/dist/*.js')
     .pipe(gulp.dest('./public/vendor/chart.js'));
@@ -91,14 +94,21 @@ function modules() {
   // jQuery Easing
   var jqueryEasing = gulp.src('./node_modules/jquery.easing/*.js')
     .pipe(gulp.dest('./public/vendor/jquery-easing'));
+     // Tooltip JS
+  var toolTipJS = gulp.src('./node_modules/tooltip.js/*.js')
+  .pipe(gulp.dest('./public/vendor/tooltip'));
+  // Popper JS
+  var popperJS = gulp.src('./node_modules/popper.js/*.js')
+  .pipe(gulp.dest('./public/vendor/popper'));
   // jQuery
   var jquery = gulp.src([
     './node_modules/jquery/dist/*',
     '!./node_modules/jquery/dist/core.js'
   ])
     .pipe(gulp.dest('./public/vendor/jquery'));
-  return merge(b4ToggleJS, b4ToggleCSS, sweetAlertJS, sweetAlertCSS, bootstrapJS, bootstrapSCSS, chartJS, dataTables,
-    fontAwesome, jquery, jqueryEasing, select2JS, select2CSS);
+    
+  return merge(b4ToggleJS, b4ToggleCSS, sweetAlertJS, sweetAlertCSS,select2bthemeCSS, bootstrapJS, bootstrapSCSS, chartJS, dataTables,
+    fontAwesome, jquery, jqueryEasing, select2JS, select2CSS,toolTipJS,popperJS);
 }
 
 // CSS task
