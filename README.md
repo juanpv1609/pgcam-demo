@@ -17,10 +17,10 @@
 [![dependencies Status](https://david-dm.org/BlackrockDigital/startbootstrap-sb-admin-2/status.svg)](https://david-dm.org/BlackrockDigital/startbootstrap-sb-admin-2)
 [![devDependencies Status](https://david-dm.org/BlackrockDigital/startbootstrap-sb-admin-2/dev-status.svg)](https://david-dm.org/BlackrockDigital/startbootstrap-sb-admin-2?type=dev)
 
-## Pre Requisitos
-Configuracion incial del ambiente de soporte para el sistema PG-CAM:
+## Pre Requisitos windows
+Configuracion incial del ambiente para el sistema PG-CAM:
 -  Contar con un servidor http (XAMPP, WAMP, Apache)
--  Descargar libreria [Zend Framework v1.12](https://framework.zend.com/downloads/archives)
+-  Descargar la libreria [Zend Framework v1.12](https://framework.zend.com/downloads/archives)
 -  Descomprimir la descarga y ubicar en C:
 -  Configurar el archivo php.ini ubicado en C:/xampp/php/php.ini
 -  Agregar la linea: `include_path = ".;c:\Zend\library"` "Agrega la libreria por defecto de Zend"
@@ -34,7 +34,7 @@ Para comenzar a usar esta aplicacion, elija una de las siguientes opciones para 
 
 -   Clonar el repositorio: `git clone https://github.com/juanpv1609/zend.git`
 -   [Fork, Clonar, o Descargar desde GitHub](https://github.com/juanpv1609/zend)
--   Ubicarlo dentro de sus servidos de aplicaciones por ejemplo: C:/xampp/htdocs/zend
+-   Ubicarlo dentro de sus servidor de aplicaciones por ejemplo: C:/xampp/htdocs/
 
 
 ## Uso
