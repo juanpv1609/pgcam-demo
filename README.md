@@ -19,11 +19,12 @@
 
 ## Pre Requisitos windows
 Configuracion incial del ambiente para el sistema PG-CAM:
+-  Instalar Git, NodeJS.
 -  Contar con un servidor http (XAMPP, WAMP, Apache)
 -  Descargar la libreria [Zend Framework v1.12](https://framework.zend.com/downloads/archives)
--  Descomprimir la descarga y ubicar en C:
+-  Descomprimir la libreria descargada y ubicar en C:
 -  Configurar el archivo php.ini ubicado en C:/xampp/php/php.ini
--  Agregar la linea: `include_path = ".;c:\Zend\library"` "Agrega la libreria por defecto de Zend"
+-  Agregar la linea: `include_path = ".;c:\Zend\library"` "Agrega la libreria por defecto de Zend para todos los proyectos"
 -  Descomentar la linea: `extension=php_pdo_pgsql.dll`    "Habilita las conecciones a bases de datos PostgreSQL"
 -  Configurar el archivo http.conf ubicado en C:/xampp/apache/conf/httpd.conf  
 -  Cambiar las lineas `AllowOverride none` por `AllowOverride All` "Habilita el acceso a las rutas"
@@ -51,7 +52,9 @@ Después de la instalación, y ubicado dentro del proyecto ejecute `npm install`
 
 Debe tener npm instalado globalmente para usar este entorno de compilación. Este tema se creó con node v11.6.0 y la CLI de Gulp v2.0.1. Si Gulp no se ejecuta correctamente después de ejecutar `npm install`, es posible que deba actualizar el nodo y / o la CLI de Gulp localmente.
 
-
+## Modulos incluidos
+### Modulo de registro e inicio de sesión
+Permite al usuario iniciar sesion con su correo electronico, o a su vez le permite crear una nueva cuenta. El sistema maneja perfiles de usuario para brindar seguridad y restricciones. Incluye la recuperacion de contraseña mediante el envio de correo electronico.
 ## About
 
 PG-CAM fue desarrollado bajo el uso de software libre, con la opcion de ser utilizado en multiplataforma, tiene una arquitectura MVC de la version 1.12 de Zend Framework. Incluye herramientas para el Front-End como [Bootstrap](http://getbootstrap.com/), JQUERY, POPPER, SASS.
