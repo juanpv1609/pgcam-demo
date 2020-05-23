@@ -1,7 +1,20 @@
 <!-- DataTales Example -->
-<div class="card">
-	<div class="card-header d-flex justify-content-between">
-		<h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo;?></h5>
+<div class="card border-left-primary">
+	<div class="card-header bg-light d-flex justify-content-between align-middle pb-0">
+		<h4 class="h4 text-capitalize text-dark"><?php echo $this->controlador; ?>
+			<i class="fas fa-fw <?php echo $this->icono; ?> text-dark"></i></h4>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb bg-transparent  text-xxs p-0 ">
+				<li class="breadcrumb-item"><a href="<?php echo $this->baseUrl(); ?>/panel_de_control">
+						<i class="fas fa-home "></i>Inicio</a></li>
+				<li class="breadcrumb-item text-capitalize">
+					<a href="<?php echo $this->baseUrl(); ?>/<?php echo $this->controlador; ?>">
+						<i class="fas fa-fw <?php echo $this->icono; ?>"></i>
+						<?php echo $this->controlador; ?></a></li>
+				<li class="breadcrumb-item active text-capitalize" aria-current="page">
+					<?php echo $this->accion; ?></li>
+			</ol>
+		</nav>
 
 	</div>
 	<div class="card-body">
@@ -9,32 +22,44 @@
 			<div class="col-sm-2"></div>
 			<div class="col-sm-8">
 				<div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
-					<a class="btn btn-outline-primary btn-sm"
+					<a class="btn btn-outline-primary <?php echo $this->setActive('cie10','descripcion'); ?> btn-sm"
 						href="<?php echo $this->url(array('controller' => 'cie10', 'action' => 'descripcion')); ?>">Descripcion</a>
-					<a class="btn btn-outline-dark btn-sm"
+					<a class="btn btn-outline-dark <?php echo $this->setActive('cie10','categoria'); ?> btn-sm"
 						href="<?php echo $this->url(array('controller' => 'cie10', 'action' => 'categoria')); ?>">Categoria</a>
-					<a class="btn btn-outline-success btn-sm"
+					<a class="btn btn-outline-success <?php echo $this->setActive('cie10','capitulo'); ?> btn-sm"
 						href="<?php echo $this->url(array('controller' => 'cie10', 'action' => 'capitulo')); ?>">Capitulo</a>
 				</div>
 				<hr>
-				<div class="input-group input-group">
-					<input type="text" class="form-control " id="buscaDescripcion" name="buscaDescripcion"
-						placeholder="Buscar por categoria..." aria-label="Search" aria-describedby="basic-addon2"
-						onkeypress="validar_entrada();">
-					<div class="input-group-append">
-						<button class="btn btn-primary" type="button" onclick="buscaPorCategoria();">
-							<i class="fas fa-search fa-sm"></i>
-						</button>
+				<form class="needs-validation" method="post" id="formCategoria" name="formCategoria" novalidate>
+					<div class="input-group input-group">
+						<input type="text" class="form-control " id="buscaDescripcion" name="buscaDescripcion"
+							placeholder="Buscar por categoria..." aria-label="Search" aria-describedby="basic-addon2"
+							required autofocus>
+						<div class="input-group-append">
+							<button class="btn btn-primary" type="submit" onclick="buscaPorCategoria();">
+								<i class="fas fa-search fa-sm"></i>
+							</button>
+						</div>
+						<div class="valid-feedback">
+						</div>
+						<div class="invalid-feedback">
+							Este campo es necesario.
+						</div>
 					</div>
-				</div>
-				<div id="nombreHelp"></div>
+				</form>
+
 				<hr>
 			</div>
-			<div class="col-sm-2"></div>
+			<div class="col-sm-2">
+			</div>
 
 		</div>
 		<div class="row">
 			<div class="col-sm-12">
+				<div class="d-flex justify-content-end pb-2">
+					<div class="text-center align-content-center " id="exportButtons"></div>
+
+				</div>
 				<div id="data_Table" class="table-responsive text-xs">
 					<?php echo $this->data;?>
 

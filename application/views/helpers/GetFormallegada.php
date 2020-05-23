@@ -18,7 +18,7 @@ class Zend_View_Helper_GetFormallegada extends Zend_View_Helper_Abstract
         } else {
             $Listaarea .= '<label for="comboForma">Forma de llegada:</label>';
 
-            $Listaarea .= '<select class="form-control form-control-sm js-example-basic-single" name="comboForma" id="comboForma" required autocomplete="off">
+            $Listaarea .= '<select class="form-control form-control-sm " name="comboForma" id="comboForma" required autocomplete="off">
              <option value="" ></option>';
             foreach ($datos as $item):
                 $Listaarea .= "<option value='" . $item->p_forma_lleg_id . "' >" . $item->p_forma_lleg_descripcion . "</option>";

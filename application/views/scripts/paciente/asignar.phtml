@@ -1,96 +1,102 @@
-<div class="card ">
-	<div class="card-header ">
-		<nav class="navbar  navbar-expand-lg navbar-light text-left d-flex justify-content-between p-0">
-			<span class="navbar-text">
-				<h5 class=" font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
-			 </span>
-			<button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavDropdown2"
-				aria-controls="navbarNavDropdown2" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon small"></span>
-			</button>
-			<div class="collapse navbar-collapse " id="navbarNavDropdown2">
-				<ul class="navbar-nav  ml-auto">
-					<li class="nav-item ">
-						<div class="input-group input-group-sm ">
-							<div class="input-group-prepend">
-								<select name="opcionBusqueda" id="opcionBusqueda" class="custom-select custom-select-sm " type="button"
-									data-toggle="dropdown" aria-expanded="false" required autocomplete="off">
-									<option value="">OPCION</option>
-									<option value="1">EMERGENCIA</option>
-									<option value="2">C EXTERNA</option>
-								</select>
-			
-							</div>
-							<input type="text" class="form-control " id="paciente_id" name="paciente_id"
-								placeholder="Buscar por hc o cedula..." aria-label="Search" aria-describedby="buscar_paciente_hc"
-								required autocomplete="off" onkeyup="if (event.keyCode == 13) DatosPaciente();">
-							<div class="input-group-append">
-			
-								<button class="btn btn-dark" type="submit" onclick="DatosPaciente();">
-									<i class="fas fa-search fa-sm"></i>
-								</button>
-							</div>
-			
-						</div>
-					</li>
-				</ul>
-			</div>
-		</nav>	
+<div class="card border-left-primary">
+	<div class="card-header bg-light d-flex justify-content-between align-middle pb-0">
+		<h4 class="h4  text-dark"><?php echo $this->titulo; ?>
+			<i class="fas fa-fw <?php echo $this->icono; ?> text-dark"></i></h4>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb bg-transparent  text-xxs p-0 ">
+				<li class="breadcrumb-item"><a href="<?php echo $this->baseUrl(); ?>/panel_de_control">
+						<i class="fas fa-home "></i>Inicio</a></li>
+				<li class="breadcrumb-item text-capitalize">
+					<a href="<?php echo $this->baseUrl(); ?>/<?php echo $this->controlador; ?>">
+						<i class="fas fa-fw fa-user-injured"></i>
+						<?php echo $this->controlador; ?></a></li>
+				<li class="breadcrumb-item active text-capitalize" aria-current="page">
+					<?php echo $this->accion; ?></li>
+			</ol>
+		</nav>
+
 	</div>
-	<div class="card-body">
-<div class="row ">
+	<div class="card-body">	
+
+		<div class="row ">
 			<div class="col-sm-12">
-				<div class="card border-left-primary shadow   text-xxs">
-					<div class="card-header py-1">
+				<div class="card shadow   text-xxs">
+					<div class="card-header  py-1">
 						<?php echo $this->getEspecialidades(); ?>
 					</div>
-					<div class="card-body ">
+					<div class="card-body pb-1">
 
 						<div id="data_TableCamas" class="table-responsive text-center">
-							<span class="text-danger"><i class="fas fa-arrow-up"></i> Seleccione un tipo de servicio <i
-									class="fas fa-arrow-up"></i></span>
+							<span class="text-danger"><i class="fas fa-arrow-up"></i> 
+								Seleccione un tipo de servicio <i class="fas fa-arrow-up"></i></span>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="row ">
-			<div class="col-sm-6 py-3 ">
-				<div class="card border-left-primary shadow  text-xxs ">
-					<div class="card-header d-flex justify-content-start">
-						<h6 class="m-0 ">Diagnostico de ingreso</h6>
-					</div>
-					<div class="card-body ">
-						<div class="row">
-							<div class="col-sm-12">
-								<div id="" class="table-responsive ">
-									<?php echo $this->getDiagnosticos();?>
+			<div class="col-lg-6 py-3">
+				<div class="card shadow h-100">
+					<a class="d-block card-header " 
+							href="#collapseCardExample" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample" >
+						<h6 class="m-0  text-gray-600">Diagnostico de ingreso </h6>
+					</a>
+					<div class="collapse show" id="collapseCardExample">
+						<div class="card-body text-xxs">
+							<div class="row">
+								<div class="col-sm-12">
+									<div id="" class="table-responsive ">
+										<?php echo $this->getDiagnosticos();?>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+					
 				</div>
 			</div>
-			<div class="col-sm-6 py-3 ">
-				<div class="card border-left-primary shadow  text-xxs ">
+			<div class="col-lg-6 py-3 ">
+				<div class="card  shadow  h-100">
 					<div class="card-header d-flex justify-content-between">
 						<h6 class="m-0 ">Detalle de asignacion de cama</h6>
 					</div>
-					<div class="card-body ">
-						<div class="row " >
+					<div class="card-body text-xxs">
+						<div class="d-flex justify-content-start pb-2">
+							<div class="input-group input-group-sm ">
+								<div class="input-group-prepend">
+									<select name="opcionBusquedaPaciente" id="opcionBusquedaPaciente" class="custom-select custom-select-sm " type="button"
+										data-toggle="dropdown" aria-expanded="false" required autocomplete="off">
+										<option value="1">EMERGENCIA</option>
+										<option value="2">C EXTERNA</option>
+									</select>
+				
+								</div>
+								<input type="text" class="form-control " id="paciente_id" name="paciente_id"
+								value="<?php if (isset($_GET['id'])) echo $_GET['id']; ?>"
+									placeholder="Buscar por hc o cedula..." aria-label="Search" aria-describedby="buscar_paciente_hc"
+									required autocomplete="off" onkeyup="if (event.keyCode == 13) DatosPaciente();" >
+								<div class="input-group-append">
+				
+									<button class="btn btn-dark" type="submit" onclick="DatosPaciente();">
+										<i class="fas fa-search fa-sm"></i>
+									</button>
+								</div>				
+							</div>				
+						</div>
+						<div class="row pt-4">
 							<div class="col-sm-7 table-responsive " id="tablaDatosPaciente1">
-								<table class="table table-borderless  " >
+								<table class="table table-borderless table-sm ">
 									<tbody>
 										<tr>
-											<td>N Archivo: </td>
+											<th>N Archivo: </th>
 											<td><span class="text-uppercase " id="paciente_hc"></span></td>
 										</tr>
 										<tr>
-											<td>Paciente:</td>
+											<th>Paciente:</th>
 											<td><span class="text-uppercase" id="apellido_paterno"></span></td>
 										</tr>
 										<tr>
-											<td>N Cedula:</td>
+											<th>N Cedula:</th>
 											<td><span class="text-uppercase" id="cedula"></span></td>
 										</tr>
 										<!-- <tr>
@@ -111,18 +117,18 @@
 							<div class="col-sm-5 table-responsive">
 								<input type="hidden" id="cama_id">
 								<input type="hidden" id="especialidad_id">
-								<table class="table table-borderless  " id="tablaDatosPacienteCama">
+								<table class="table table-borderless  table-sm" id="tablaDatosPacienteCama">
 									<tbody>
 										<tr>
-											<td>Servicio</td>
+											<th>Servicio:</th>
 											<td><span class="text-uppercase" id="servicio"></span></td>
 										</tr>
 										<tr>
-											<td>Habitacion:</td>
+											<th>Habitacion:</th>
 											<td><span class="text-uppercase" id="habitacion"></span></td>
 										</tr>
 										<tr>
-											<td>Cama:</td>
+											<th>Cama:</th>
 											<td><span class="text-uppercase" id="cama"></span></td>
 										</tr>
 
@@ -134,15 +140,15 @@
 					</div>
 				</div>
 			</div>
-			
-			
+
+
 		</div>
 	</div>
 	<div class="card-footer d-flex justify-content-between">
-		<button class="btn btn-danger btn-icon-split" type="button"
-		 onclick="limpiaFormAsignacion();">
+		<button class="btn btn-danger btn-icon-split" type="button" onclick="limpiaFormAsignacion();">
 			<span class="icon text-white-50"><i class="fas fa-ban"></i></span><span class="text">Cancelar</span></button>
 		<button class="btn btn-success btn-icon-split" type="button" onclick="asignarCama();">
-			<span class="icon text-white-50"><i class="fas fa-check"></i></span><span class="text">Finalizar</span></button>
+			<span class="icon text-white-50"><i class="fas fa-check"></i></span><span
+				class="text">Finalizar</span></button>
 	</div>
 </div>

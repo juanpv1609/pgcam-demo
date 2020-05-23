@@ -4,7 +4,7 @@ class Zend_View_Helper_GetDiagnosticos extends Zend_View_Helper_Abstract
     public function getDiagnosticos()
     {
         $cadena = '<table class="table table-sm table-bordered ">
-        <thead>
+        <thead class="table-dark">
            <tr>
               <th></th>
               <th>DIAGNOSTICO</th>
@@ -15,11 +15,11 @@ class Zend_View_Helper_GetDiagnosticos extends Zend_View_Helper_Abstract
         </thead>
         <tbody>';
         for ($i=1; $i <=3 ; $i++) { //forma las 3 filas para los 3 diagnosticos
-            $cadena .= '<tr><th>'.$i.'</th>
+            $cadena .= '<tr id="fila_cie10_"'.$i.'><th>'.$i.'</th>
                <td>
                   <input type="text" id="diagnostico'.$i.'" name="diagnostico'.$i.'"
                      class="form-control form-control-sm border-0 text-xxs "
-                     placeholder="Buscar por codigo o descripcion..." autocomplete="off"
+                     placeholder="Ingrese el codigo o descripcion y presione enter" autocomplete="off"
                      onkeyup="if (event.keyCode == 13) getDiagnostico(this);">
                   <div id="lista'.$i.'"></div>
                </td>

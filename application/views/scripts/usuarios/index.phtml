@@ -1,19 +1,32 @@
-<div class="card ">
-	<div class="card-header d-flex justify-content-between">
-		<h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
-		<button type="button" onclick="agregarModalU()" class="btn btn-success btn-icon-split btn-sm">
-			<span class="icon text-white-50"><i class="fas fa-plus"></i></span><span class="text">Agregar</span>
-	  </button>
-	</div>
+<div class="card border-left-primary">
+	<div class="card-header bg-light d-flex justify-content-between align-middle pb-0">
+		<h4 class="h4 text-capitalize text-dark"><?php echo $this->controlador; ?>
+			 <i class="fas fa-fw <?php echo $this->icono; ?> text-dark"></i></h4>
+			 <nav aria-label="breadcrumb">
+				  <ol class="breadcrumb bg-transparent  text-xxs p-0 ">
+						<li class="breadcrumb-item"><a href="<?php echo $this->baseUrl(); ?>/panel_de_control">
+							 <i class="fas fa-home "></i>Inicio</a></li>
+						<li class="breadcrumb-item text-capitalize">
+							 <a href="<?php echo $this->baseUrl(); ?>/<?php echo $this->controlador; ?>">
+								  <i class="fas fa-fw <?php echo $this->icono; ?>"></i>
+								  <?php echo $this->controlador; ?></a></li>
+						<li class="breadcrumb-item active text-capitalize" aria-current="page">
+							 <?php echo $this->accion; ?></li>
+				  </ol>
+			 </nav>      
+		
+  </div>
 	<div class="card-body">
-		<div class="row">
+		<div class="row pb-2">
 			<div class="col-sm-4"></div>
 			<div class="col-sm-4">
-				<div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
-					<a class="btn btn-primary btn-sm"
-						href="<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'index')); ?>">Usuarios</a>
-					<a class="btn btn-outline-dark btn-sm"
-						href="<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'perfiles')); ?>">Perfiles</a>
+				<div class="btn-group d-flex justify-content-start" role="group" aria-label="Basic example">
+					<a class="btn btn-outline-primary <?php echo $this->setActive('usuarios','index'); ?> btn-icon-split btn-sm"
+						href="<?php echo $this->baseUrl();?>/listar_usuarios">
+						<span class="text">Usuarios</span></a>
+					<a class="btn btn-outline-primary <?php echo $this->setActive('usuarios','perfiles'); ?> btn-icon-split btn-sm"
+						href="<?php echo $this->baseUrl();?>/listar_perfiles">
+						<span class="text">Perfiles</span></a>
 
 				</div>
 			</div>
@@ -21,6 +34,13 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-12">
+				<div class="d-flex justify-content-between pb-2">
+					<button type="button" onclick="agregarModalU()" class="btn btn-success btn-icon-split btn-sm">
+						<span class="icon text-white-50"><i class="fas fa-plus"></i></span><span class="text">Agregar</span>
+				  </button>
+					<div class="text-center align-content-center " id="exportButtons"></div> 
+					
+			  </div>
 				<div id="data_Table" class="table-responsive text-xs">
 					<?php echo $this->data_usuarios; ?>
 				</div>
@@ -95,11 +115,12 @@
 					</div>
 					<div id="clave_igual"></div>
 
-					<div class="modal-footer d-flex justify-content-between ">
-						<button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
-						<div id="accionForm">
+					
+				</div>
+				<div class="modal-footer d-flex justify-content-between ">
+					<button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+					<div id="accionForm">
 
-						</div>
 					</div>
 				</div>
 			</form>

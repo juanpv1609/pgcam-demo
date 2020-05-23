@@ -81,11 +81,28 @@ function modules() {
   // ChartJS
   var chartJS = gulp.src('./node_modules/chart.js/dist/*.js')
     .pipe(gulp.dest('./public/vendor/chart.js'));
+  // momentJS
+  var momentJS = gulp.src(['./node_modules/moment/min/moment.min.js',
+    './node_modules/moment/locale/es.js'])
+    .pipe(gulp.dest('./public/vendor/moment.js'));
   // dataTables
   var dataTables = gulp.src([
     './node_modules/datatables.net/js/*.js',
     './node_modules/datatables.net-bs4/js/*.js',
-    './node_modules/datatables.net-bs4/css/*.css'
+    './node_modules/datatables.net-bs4/css/*.css',
+    './node_modules/datatables.net-buttons/js/*.js',
+    './node_modules/datatables.net-buttons-bs4/js/*.js',
+    './node_modules/datatables.net-buttons-bs4/css/*.css',
+    './node_modules/datatables.net-fixedheader-bs4/css/*.css',
+    './node_modules/datatables.net-fixedheader-bs4/js/*.js',
+    './node_modules/datatables.net-fixedheader/js/*.js',
+    './node_modules/datatables.net-responsive-bs4/css/*.css',
+    './node_modules/datatables.net-responsive/js/*.js',
+    './node_modules/datatables.net-responsive-bs4/js/*.js',
+    './node_modules/jszip/dist/*.js',
+    './node_modules/pdfmake/build/*.js'
+
+
   ])
     .pipe(gulp.dest('./public/vendor/datatables'));
   // Font Awesome
@@ -108,7 +125,7 @@ function modules() {
     .pipe(gulp.dest('./public/vendor/jquery'));
     
   return merge(b4ToggleJS, b4ToggleCSS, sweetAlertJS, sweetAlertCSS,select2bthemeCSS, bootstrapJS, bootstrapSCSS, chartJS, dataTables,
-    fontAwesome, jquery, jqueryEasing, select2JS, select2CSS,toolTipJS,popperJS);
+    fontAwesome, jquery, jqueryEasing, select2JS, select2CSS, toolTipJS, popperJS, momentJS);
 }
 
 // CSS task

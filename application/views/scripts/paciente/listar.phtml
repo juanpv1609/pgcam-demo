@@ -1,12 +1,31 @@
-<div class="card ">
-	<div class="card-header d-flex justify-content-between">
-		<h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
+<div class="card border-left-primary">
+	<div class="card-header bg-light d-flex justify-content-between align-middle pb-0">
+		<h4 class="h4  text-dark"><?php echo $this->titulo; ?>
+			 <i class="fas fa-fw <?php echo $this->icono; ?> text-dark"></i></h4>
+			 <nav aria-label="breadcrumb">
+				  <ol class="breadcrumb bg-transparent  text-xxs p-0 ">
+						<li class="breadcrumb-item"><a href="<?php echo $this->baseUrl(); ?>/panel_de_control">
+							 <i class="fas fa-home "></i>Inicio</a></li>
+						<li class="breadcrumb-item text-capitalize">
+							 <a href="<?php echo $this->baseUrl(); ?>/<?php echo $this->controlador; ?>">
+								  <i class="fas fa-fw fa-user-injured"></i>
+								  <?php echo $this->controlador; ?></a></li>
+						<li class="breadcrumb-item active text-capitalize" aria-current="page">
+							 <?php echo $this->accion; ?></li>
+				  </ol>
+			 </nav>      
 		
-		<a type="button" href="<?php echo $this->baseUrl();?>/paciente/registrar" class="btn btn-success btn-icon-split btn-sm">
-			<span class="icon text-white-50"><i class="fas fa-plus"></i></span><span class="text">Agregar</span>
-		</a>
-	</div>
+  </div>
+	
 	<div class="card-body">
+		<input type="hidden" name="campoBusqueda" id="campoBusqueda" value="<?php if (isset($_GET['ci'])) echo $_GET['ci']; ?>">
+		<div class="d-flex justify-content-between pb-2">
+			<a type="button" class="btn btn-success btn-icon-split btn-sm" href="<?php echo $this->baseUrl();?>/registrar_paciente">
+				<span class="icon text-white-50"><i class="fas fa-plus"></i></span><span class="text">Agregar</span>
+		  </a>
+			<div class="text-center align-content-center" id="exportButtons"></div> 
+			
+	  </div>
 		<div id="data_Table" class="table-responsive text-xs">
 			<?php echo $this->data; ?>
 		</div>
@@ -15,7 +34,7 @@
 <!-- formulario Modal-->
 <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 	aria-hidden="true">
-	<div class="modal-dialog  " role="document">
+	<div class="modal-dialog " role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title text-primary" id="exampleModalLabel"></h5>
@@ -24,52 +43,160 @@
 				</button>
 			</div>
 
-				<div class="modal-body">
-					<input type="hidden" id="paciente_id" name="paciente_id">
-					<table class="table table-borderless table-sm text-xxs d-none" id="tablaDatosPaciente">
-						
-						<tbody>
-							<tr><td>N Archivo: </td><td><span class="text-uppercase"  id="paciente_hc"  ></span></td></tr>
-							<tr><td>Paciente:</td><td><span class="text-uppercase"  id="apellido_paterno"  ></span></td></tr>
-							<tr><td>N Cedula:</td><td><span  class="text-uppercase" id="cedula"  ></span></td></tr>
-							<tr><td>N Telefono:</td><td><span class="text-uppercase"  id="telefono"  ></span></td></tr>
-							<tr><td>Direccion:</td><td><span class="text-uppercase text-xxs"  id="Prov"  ></span><br>
-																<span class="text-uppercase text-xxs"  id="Cant"  ></span><br>
-																<span class="text-uppercase text-xxs"  id="Parroq"  ></span><br>
-																<span class="text-uppercase text-xxs"  id="barrio"  ></span><br>
-																<span class="text-uppercase text-xxs"  id="direccion"  ></span>
-							</td></tr>
-							<tr></tr><td>Fecha de nacimiento:</td><td><span class="text-uppercase"  id="fecha_n"  ></span></td></tr>
-							<tr></tr><td>Lugar de nacimiento:</td><td><span class="text-uppercase"  id="lugar_n"  ></span></td></tr>
-							<tr></tr><td>Nacionalidad:</td><td><span class="text-uppercase"  id="Nacionalidad"  ></span></td></tr>
-							<tr></tr><td>Grupo cultural:</td><td><span class="text-uppercase"  id="Grupo"  ></span></td></tr>
-							<tr></tr><td>Edad:</td><td><span class="text-uppercase"  id="Edad"  ></span></td></tr>
-							<tr><td>Genero:</td><td><span class="text-uppercase"  id="Genero"  ></span></td></tr>
-							<tr><td>Estado civil:</td><td><span class="text-uppercase"  id="Estado"  ></span></td></tr>
-							<tr><td>Instruccion:</td><td><span class="text-uppercase"  id="Instruccion"  ></span></td></tr>
-							<tr><td>Ocupacion:</td><td><span class="text-uppercase"  id="ocupacion"  ></span></td></tr>
-							<tr><td>Empresa donde trabaja:</td><td><span class="text-uppercase"  id="trabajo"  ></span></td></tr>
-							<tr><td>Tipo seguro:</td><td><span class="text-uppercase"  id="TipoSeguro"  ></span></td></tr>
-							<tr><td>Referido de:</td><td><span class="text-uppercase"  id="referido"  ></span></td></tr>
-							<tr><td>En caso necesario avisar a:</td><td><span class="text-uppercase"  id="contacto_nombre"  ></span></td></tr>
-							<tr><td>Parentezco:</td><td><span class="text-uppercase"  id="contacto_parentezco"  ></span></td></tr>
-							<tr><td>Direccion:</td><td><span class="text-uppercase"  id="contacto_direccion"  ></span></td></tr>
-							<tr><td>N Telefono:</td><td><span class="text-uppercase"  id="contacto_telefono"  ></span></td></tr>
-							<tr><td>Forma de llegada:</td><td><span class="text-uppercase"  id="Forma"  ></span></td></tr>
-							<tr><td>Fuente de informacion:</td><td><span class="text-uppercase"  id="fuente_info"  ></span></td></tr>
-							<tr><td>Institucion:</td><td><span class="text-uppercase"  id="institucion"  ></span></td></tr>
-							<tr><td>N Telefono:</td><td><span class="text-uppercase"  id="institucion_telefono"  ></span></td></tr>
+			<div class="modal-body">
+				<nav class="nav nav-pills flex-column flex-sm-row text-xs">
+					<a class="flex-sm-fill text-sm-center nav-link active py-1" id="info-tab" data-toggle="tab"
+						href="#datosPacienteMasInfo" role="tab" aria-controls="datosPacienteMasInfo" aria-selected="false">
+						<i class="fas fa-plus-circle px-2"></i>Mas Info</a>
+					<a class="flex-sm-fill text-sm-center nav-link  py-1" id="paciente-tab" data-toggle="tab"
+						href="#datosPacienteContacto" role="tab" aria-controls="datosPacienteContacto" aria-selected="true">
+						<i class="fas fa-address-book px-2"></i>Contacto</a>
+					<a class="flex-sm-fill text-sm-center nav-link py-1" id="cama-tab" data-toggle="tab"
+						href="#datosPacienteCama" role="tab" aria-controls="datosPacienteCama" aria-selected="false">
+						<i class="fas fa-bed px-2"></i>Cama</a>
+					<a class="flex-sm-fill text-sm-center nav-link py-1" id="diag-tab" data-toggle="tab"
+						href="#datosPacienteDiagnosticos" role="tab" aria-controls="datosPacienteDiagnosticos"
+						aria-selected="false">
+						<i class="fas fa-heartbeat px-2"></i>Diagnosticos</a>
+				</nav>
+				<hr>
+				<input type="hidden" id="paciente_id" name="paciente_id">
+				<div class="tab-content pt-4 text-xs" id="myTabContent">
+					<div id="mensaje"></div>
+					<div id="datosPacienteMasInfo" class="tab-pane fade show active" role="tabpanel"
+						aria-labelledby="info-tab">
+						<div class="table-responsive text-xxs">
+							<table class="table table-sm table-bordered ">
+								<thead class="table-dark">
+									<tr>
+										<th colspan="2" class="text-center text-uppercase">Datos personales del paciente</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>N Telefono: </td>
+										<td class="text-uppercase" id="telefono"></td>
+									</tr>
+									<tr>
+										<td>Provincia: </td>
+										<td class="text-uppercase " id="Prov"></td>
+									</tr>
+									<tr>
+										<td>Canton: </td>
+										<td class="text-uppercase" id="Cant"></td>
+									</tr>
+									<tr>
+										<td>Parroquia: </td>
+										<td class="text-uppercase" id="Parroq"></td>
+									</tr>
+									<tr>
+										<td>Barrio: </td>
+										<td class="text-uppercase" id="barrio"></td>
+									</tr>
+									<tr>
+										<td>Direccion: </td>
+										<td class="text-uppercase" id="direccion"></td>
+									</tr>
 
-						</tbody>
-					</table>
+									<tr>
+										<td>Fecha de nacimiento: </td>
+										<td class="text-uppercase" id="fecha_n"></td>
+									</tr>
+									<tr>
+										<td>Lugar de nacimiento: </td>
+										<td class="text-uppercase" id="lugar_n"></td>
+									</tr>
+									<tr>
+										<td>Seguro: </td>
+										<td class="text-uppercase" id="Nacionalidad"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 
-					<div class="modal-footer d-flex justify-content-between ">
-						<button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
-						<div id="accionForm">
+					</div>
+					<div id="datosPacienteContacto" class="tab-pane fade" role="tabpanel" aria-labelledby="paciente-tab">
+						<div class="table-responsive text-xxs">
+							<table class="table table-sm table-bordered">
+								<thead class="table-dark">
+									<tr>
+										<th colspan="2" class="text-center text-uppercase">Contacto de emergencia</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Nombre contacto: </td>
+										<td class="text-uppercase" id="contacto_nombre"></td>
+									</tr>
+									<tr>
+										<td>Parentezco: </td>
+										<td class="text-uppercase" id="contacto_parentezco"></td>
+									</tr>
+									<tr>
+										<td>Direccion: </td>
+										<td class="text-uppercase" id="contacto_direccion"></td>
+									</tr>
+									<tr>
+										<td>N Telefono: </td>
+										<td class="text-uppercase" id="contacto_telefono"></td>
+									</tr>
+								</tbody>
+							</table>
 
 						</div>
 					</div>
+					
+					
+					<div id="datosPacienteCama" class="tab-pane fade" role="tabpanel" aria-labelledby="cama-tab">
+						
+						<div class="table-responsive text-xxs" id="tableCama">
+							<table class="table table-sm table-bordered">
+								<thead class="table-dark">
+									<tr>
+										<th colspan="2" class="text-center text-uppercase">Cama asignada</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Especialidad: </td>
+										<td class="text-uppercase" id="p_especialidad"></td>
+									</tr>
+									<tr>
+										<td>Habitacion: </td>
+										<td class="text-uppercase" id="p_habitacion"></td>
+									</tr>
+									<tr>
+										<td>Cama: </td>
+										<td class="text-uppercase" id="p_cama"></td>
+									</tr>
+									<tr>
+										<td>Fecha ingreso: </td>
+										<td class="text-uppercase" id="p_fecha"></td>
+									</tr>
+									<tr>
+										<td>Causa ingreso: </td>
+										<td class="text-uppercase" id="p_causa"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+					<div id="datosPacienteDiagnosticos" class="tab-pane fade" role="tabpanel" aria-labelledby="diag-tab">
+
+						<div class="table-responsive text-xxs">
+							<?php echo $this->getDiagnosticos();?>
+						</div>
+
+
+					</div>
 				</div>
+			</div>
+			<div class="modal-footer d-flex justify-content-end">
+				<button class="btn btn-primary" type="button" data-dismiss="modal">Aceptar</button>
+
+			</div>
+
 
 		</div>
 	</div>

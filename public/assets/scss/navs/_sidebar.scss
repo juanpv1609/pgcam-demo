@@ -12,7 +12,7 @@
       padding: 0.75rem 1rem;
       width: $sidebar-collapsed-width;
       span {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
         display: block;
       }
     }
@@ -108,19 +108,19 @@
   .sidebar-brand {
     height: $topbar-base-height;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 0.85rem;
     font-weight: 800;
-    padding: 1.5rem 1rem;
+    padding: 1rem 0.75rem;
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 0.05rem;
     z-index: 1;
 
     .sidebar-brand-icon i {
-      font-size: 2rem;
+      font-size: 1rem;
     }
     .sidebar-brand-text {
-      display: none;
+      font-size: 2rem;
     }
   }
   hr.sidebar-divider {
@@ -336,6 +336,7 @@
       &:active,
       &:focus,
       &:hover {
+        
         color: $white;
         i {
           color: $white;

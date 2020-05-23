@@ -27,3 +27,4 @@ extras/documentation
 
 #node modules
 node_modules/
+.vscode/settings.json

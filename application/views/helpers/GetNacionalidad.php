@@ -18,10 +18,10 @@ class Zend_View_Helper_GetNacionalidad extends Zend_View_Helper_Abstract
         } else {
             $Listaarea .= '<label for="comboNacionalidad">Nacionalidad:</label>';
 
-            $Listaarea .= '<select class="form-control form-control-sm js-example-basic-single" name="comboNacionalidad" id="comboNacionalidad" required autocomplete="off">
+            $Listaarea .= '<select class="form-control form-control-sm " name="comboNacionalidad" id="comboNacionalidad" required autocomplete="off">
              <option value="" ></option>';
             foreach ($datos as $item):
-                $Listaarea .= "<option value='" . $item->id_lista . "' >" . $item->descrip_lista . "</option>";
+                $Listaarea .= "<option value='" . $item->nacionalidad_id . "' >" . $item->descripcion . "</option>";
             endforeach;
             $Listaarea .= "</select>
                         <div class='valid-feedback'></div>

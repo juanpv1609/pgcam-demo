@@ -1,111 +1,134 @@
 <!-- Sidebar -->
-<ul class="navbar-nav nav-pills bg-gray-900 sidebar toggled sidebar-dark accordion shadow " id="accordionSidebar">
+<ul class="navbar-nav bg-gray-900 sidebar toggled sidebar-dark accordion shadow " id="accordionSidebar">
   <!-- Sidebar - Brand -->
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo $this->baseUrl();?>/index">
+  <a class="sidebar-brand d-flex align-items-center justify-content-center"
+    href="<?php echo $this->baseUrl();?>/panel_de_control">
     <div class="sidebar-brand-icon">
-      <img class="img-fluid" src="<?php echo $this->baseUrl(); ?>/favico.png" alt="Logo" data-toggle="tooltip"
-        data-placement="bottom" title="Logo">
+      PG - CAM
     </div>
-    <div class="sidebar-brand-text mx-3" data-toggle="tooltip" data-placement="bottom"
-      title="Plataforma de Gestion de Camas">
-      PG - CAM <sup></sup></div>
-
   </a>
-
   <!-- Divider -->
   <hr class="sidebar-divider my-0">
   <!-- Nav Item - Dashboard -->
-  <li class='nav-item <?php echo $this->setActive("index"); ?>'>
-    <a class="nav-link" href="<?php echo $this->baseUrl();?>/index/dashboard">
-      <i class="fas fa-fw fa-chart-pie "></i>
+  <li class="nav-item <?php echo $this->setActive('index','dashboard'); ?>">
+    <a class="nav-link py-1" href="<?php echo $this->baseUrl();?>/panel_de_control">
+      <i class="fas fa-fw fa-tachometer-alt "></i>
       <span>Dashboard</span></a>
   </li>
-  <!-- Divider -->
-  <hr class="sidebar-divider">
-  <!-- Heading -->
-  <div class="sidebar-heading">
-    Proceso
+  <div>
+<!-- Divider -->
+<hr class="sidebar-divider">
+<!-- Heading -->
+<div class="sidebar-heading">
+  Paciente
+</div>
+<li class="nav-item <?php echo $this->setActive('paciente','listar'); ?>">
+  <a class="nav-link py-1" href="<?php echo $this->baseUrl();?>/listar_paciente">
+    <i class="fas fa-fw fa-list "></i>
+    <span>Listar</span></a>
+</li>
+<li class="nav-item <?php echo $this->setActive('paciente','registrar'); ?>">
+  <a class="nav-link py-1" href="<?php echo $this->baseUrl();?>/registrar_paciente">
+    <i class="fas fa-fw fa-file-signature"></i>
+    <span>Registrar</span></a>
+</li>
+<li class="nav-item <?php echo $this->setActive('paciente','asignar'); ?>">
+  <a class="nav-link py-1" href="<?php echo $this->baseUrl();?>/asignar_cama_paciente">
+    <i class="fas fa-fw fa-procedures "></i>
+    <span>Asignar cama</span></a>
+</li>
+<li class="nav-item <?php echo $this->setActive('paciente','cambio'); ?>">
+  <a class="nav-link py-1" href="<?php echo $this->baseUrl();?>/cambio_cama_paciente">
+    <i class="fas fa-fw fa-exchange-alt "></i>
+    <span>Cambio / Egreso</span></a>
+</li>
   </div>
-  <!-- Nav Item - Utilities Collapse Menu -->
-  <li class='nav-item <?php echo $this->setActive("paciente"); ?>'>
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true"
-      aria-controls="collapseUtilities">
-      <i class="fas fa-fw fa-procedures"></i>
-      <span>Paciente</span>
-    </a>
-    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-      <div class="bg-light  collapse-inner rounded">
-        <h6 class="collapse-header text-gray-800"><strong>Acciones:</strong></h6>
-        <a class="collapse-item" href="<?php echo $this->baseUrl();?>/paciente/listar">
-          <i class="fas fa-fw fa-list"></i> <span>Listar</span></a>
+  
+  
+  <!-------------------------IMPORTANTE PARA OCULTAR LOS ACCESOS -->
+  <?php if(isset($this->user) /*&&($this->user->perf_id==1)*/) : ?>
+  <div>
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+    <!-- Heading -->
+    <div class="sidebar-heading">Gestion</div>
+    <!-- Nav Item - Charts -->
+    <li class="nav-item <?php echo $this->setActive('usuarios','index'); echo $this->setActive('usuarios','perfiles');?> ">
+      <a class="nav-link collapsed py-1" data-toggle="collapse" data-target="#collapseUtilities2" aria-expanded="true"
+        aria-controls="collapseUtilities" href="">
+        <i class="fas fa-fw fa-users-cog"></i>
+        <span>Usuarios</span></a>
+      <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+        <div class="bg-light  collapse-inner rounded">
+          <h6 class="collapse-header text-gray-800"><strong>Acciones:</strong></h6>
+          <a class="collapse-item py-1" href="<?php echo $this->baseUrl();?>/listar_usuarios">
+            <i class="fas fa-fw fa-users"></i> <span>Usuarios</span></a>
 
-        <a class="collapse-item" href="<?php echo $this->baseUrl();?>/paciente/registrar">
-          <i class="fas fa-fw fa-file-signature"></i> <span>Registrar</span></a>
-        <a class="collapse-item" href="<?php echo $this->baseUrl();?>/paciente/asignar">
-          <i class="fas fa-fw fa-sign-in-alt"></i> <span>Asignar cama</span></a>
-        <a class="collapse-item" href="<?php echo $this->baseUrl();?>/paciente/cambio">
-          <i class="fas fa-fw fa-exchange-alt"></i> <span>Cambio / Egreso</span></a>
+          <a class="collapse-item py-1" href="<?php echo $this->baseUrl();?>/listar_perfiles">
+            <i class="fas fa-fw fa-user-tag"></i> <span>Perfiles</span></a>
+
+        </div>
       </div>
-    </div>
-  </li>
-  <!-- Divider -->
-  <hr class="sidebar-divider">
-  <!-- Heading -->
-  <div class="sidebar-heading">Gestion</div>
-  <!-- Nav Item - Charts -->
-  <li class='nav-item <?php echo $this->setActive("usuarios"); ?>'>
-    <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseUtilities2" aria-expanded="true"
-      aria-controls="collapseUtilities" href="">
-      <i class="fas fa-fw fa-users-cog"></i>
-      <span>Usuarios</span></a>
-    <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-      <div class="bg-light  collapse-inner rounded">
-        <h6 class="collapse-header text-gray-800"><strong>Acciones:</strong></h6>
-        <a class="collapse-item" href="<?php echo $this->baseUrl();?>/usuarios">
-          <i class="fas fa-fw fa-users"></i> <span>Usuarios</span></a>
-
-        <a class="collapse-item" href="<?php echo $this->baseUrl();?>/usuarios/perfiles">
-          <i class="fas fa-fw fa-user-tag"></i> <span>Perfiles</span></a>
-
+    </li>
+    <!-- Nav Item - Charts -->
+    <li class="nav-item <?php echo $this->setActive('areas','index'); ?>">
+      <a class="nav-link py-1" href="<?php echo $this->baseUrl();?>/areas">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Areas</span></a>
+    </li>
+    <!-- Nav Item - Tables -->
+    <li class="nav-item <?php echo $this->setActive('pisos','index'); ?>">
+      <a class="nav-link py-1" href="<?php echo $this->baseUrl();?>/pisos">
+        <i class="fas fa-fw fa-layer-group"></i>
+        <span>Pisos</span></a>
+    </li>
+    <li class="nav-item <?php echo $this->setActive('especialidades','index'); ?>">
+      <a class="nav-link py-1" href="<?php echo $this->baseUrl();?>/especialidades">
+        <i class="fas fa-fw fa-medkit"></i>
+        <span>Especialidades</span></a>
+    </li>
+    <!-- Nav Item - Tables -->
+    <li class="nav-item <?php echo $this->setActive('habitaciones','index'); ?>">
+      <a class="nav-link py-1" href="<?php echo $this->baseUrl();?>/habitaciones">
+        <i class="fas fa-fw fa-door-open"></i>
+        <span>Habitaciones</span></a>
+    </li>
+    <!-- Nav Item - Tables -->
+    <li class="nav-item <?php echo $this->setActive('camas','index'); ?>">
+      <a class="nav-link py-1" href="<?php echo $this->baseUrl();?>/camas">
+        <i class="fas fa-fw fa-bed"></i>
+        <span>Camas</span></a>
+    </li>
+    <li
+      class="nav-item <?php echo $this->setActive('cie10','descripcion'); echo $this->setActive('cie10','categoria'); echo $this->setActive('cie10','capitulo');?>">
+      <a class="nav-link collapsed py-1" data-toggle="collapse" data-target="#collapseUtilities3" aria-expanded="true"
+        aria-controls="collapseUtilities" href="#">
+        <i class="fas fa-fw fa-heartbeat"></i>
+        <span>CIE-10</span></a>
+      <div id="collapseUtilities3" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+        <div class="bg-light  collapse-inner rounded">
+          <h6 class="collapse-header text-gray-800"><strong>Buscar:</strong></h6>
+          <a class="collapse-item py-1" href="<?php echo $this->baseUrl();?>/cie10/descripcion">
+            <i class="fas fa-fw fa-chevron-right"></i> <span>Por descripcion</span></a>
+          <a class="collapse-item py-1" href="<?php echo $this->baseUrl();?>/cie10/categoria">
+            <i class="fas fa-fw fa-chevron-right"></i> <span>Por categoria</span></a>
+          <a class="collapse-item py-1" href="<?php echo $this->baseUrl();?>/cie10/capitulo">
+            <i class="fas fa-fw fa-chevron-right"></i> <span>Por capitulo</span></a>
+    
+        </div>
       </div>
-    </div>
-  </li>
-  <!-- Nav Item - Charts -->
-  <li class='nav-item <?php echo $this->setActive("areas"); ?>'>
-    <a class="nav-link" href="<?php echo $this->baseUrl();?>/areas">
-      <i class="fas fa-fw fa-table"></i>
-      <span>Areas</span></a>
-  </li>
-  <!-- Nav Item - Tables -->
-  <li class='nav-item <?php echo $this->setActive("pisos"); ?>'>
-    <a class="nav-link" href="<?php echo $this->baseUrl();?>/pisos">
-      <i class="fas fa-fw fa-layer-group"></i>
-      <span>Pisos</span></a>
-  </li>
-  <li class='nav-item <?php echo $this->setActive("especialidades"); ?>'>
-    <a class="nav-link" href="<?php echo $this->baseUrl();?>/especialidades">
-      <i class="fas fa-fw fa-medkit"></i>
-      <span>Especialidades</span></a>
-  </li>
-  <!-- Nav Item - Tables -->
-  <li class='nav-item <?php echo $this->setActive("habitaciones"); ?>'>
-    <a class="nav-link" href="<?php echo $this->baseUrl();?>/habitaciones">
-      <i class="fas fa-fw fa-door-open"></i>
-      <span>Habitaciones</span></a>
-  </li>
-  <!-- Nav Item - Tables -->
-  <li class='nav-item <?php echo $this->setActive("camas"); ?>'>
-    <a class="nav-link" href="<?php echo $this->baseUrl();?>/camas">
-      <i class="fas fa-fw fa-bed"></i>
-      <span>Camas</span><span class="badge badge-danger badge-counter">7</span></a>
-  </li>
+    </li>
+  </div>
+  <?php  endif ?> 
+
+
   <!-- Divider -->
   <hr class="sidebar-divider">
   <!-- Heading -->
   <div class="sidebar-heading">Reportes</div>
   <!-- Nav Item - Charts -->
   <li class="nav-item ">
-    <a class="nav-link" href="<?php echo $this->baseUrl();?>/pisos">
+    <a class="nav-link py-1" href="<?php echo $this->baseUrl();?>/reportes">
       <i class="fas fa-fw fa-chart-line"></i>
       <span>Reportes</span></a>
   </li>
@@ -113,24 +136,13 @@
   <!-- Divider -->
   <hr class="sidebar-divider">
   <!-- Heading -->
-  <div class="sidebar-heading">Buscador</div>
-  <li class='nav-item <?php echo $this->setActive("cie10"); ?>'>
-    <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseUtilities3" aria-expanded="true"
-      aria-controls="collapseUtilities" href="#">
-      <i class="fas fa-fw fa-heartbeat"></i>
-      <span>CIE-10</span></a>
-    <div id="collapseUtilities3" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-      <div class="bg-light  collapse-inner rounded">
-        <h6 class="collapse-header text-gray-800"><strong>Buscar:</strong></h6>
-        <a class="collapse-item" href="<?php echo $this->baseUrl();?>/cie10/descripcion">
-          <i class="fas fa-fw fa-chevron-right"></i> <span>Por descripcion</span></a>
-        <a class="collapse-item" href="<?php echo $this->baseUrl();?>/cie10/categoria">
-          <i class="fas fa-fw fa-chevron-right"></i> <span>Por categoria</span></a>
-        <a class="collapse-item" href="<?php echo $this->baseUrl();?>/cie10/capitulo">
-          <i class="fas fa-fw fa-chevron-right"></i> <span>Por capitulo</span></a>
-
-      </div>
-    </div>
+  <div class="sidebar-heading">config</div>
+  
+  <!-- Nav Item - Charts -->
+  <li class="nav-item <?php echo $this->setActive('database','index'); ?>">
+    <a class="nav-link py-1" href="<?php echo $this->baseUrl();?>/database">
+      <i class="fas fa-fw fa-server"></i>
+      <span>Base de datos</span></a>
   </li>
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">

@@ -2,49 +2,86 @@
 
 class Cie10Controller extends Zend_Controller_Action
 {
+    /**
+     * init()
+     * * Esta funcion se ejecuta antes de cualquier action
+     * ! Se pueden setear variables globales para verlas en las views
+     * ?
+     * TODO: ninguna
+     * @param user almacena los datos de sesion
+     * @param controlador,accion almacena el nombre del controlador y de la accion respectivamente
+     */
+
     public function init()
     {
-        /* Initialize action controller here */
         $this->initView();
-        //$this->view->baseUrl = $this->_request->getBaseUrl();
         $this->view->user = Zend_Auth::getInstance()->getIdentity();
         $this->view->controlador=Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
         $this->view->accion=Zend_Controller_Front::getInstance()->getRequest()->getActionName();
         $this->view->icono = "fa-heartbeat";
+        
     }
+    /**
+     * indexAction()
+     * * Esta accion no se encuentra en uso, redirecciona a descripcion view
+     */
 
     public function indexAction()
     {
-        $this->_helper->redirector('descripcion', 'cie10'); //direccionamos al menu de inicio
+        $this->_helper->redirector('descripcion', 'cie10'); //direccionamos al listar
+
     }
+    /**
+     * descripcionAction()
+     * * Esta accion muestra el formulario de busqueda 
+     * * de los diagnosticos CIE10 por descripcion o codigo
+     * ! importamos el archivo cie10.js
+     * */
 
     public function descripcionAction()
     {
-        // action body
         $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/cie10.js');
         echo $this->view->headScript();
         $this->view->titulo = "Diagnosticos por descripcion";
     }
-
+    /**
+     * categoriaAction()
+     * * Esta accion muestra el formulario de busqueda 
+     * * de los diagnosticos CIE10 por categoria
+     * ! importamos el archivo cie10.js
+     * */
     public function categoriaAction()
     {
-        // action body
         $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/cie10.js');
         echo $this->view->headScript();
         $this->view->titulo = "Diagnosticos por categoria";
     }
-
+    /**
+     * capituloAction()
+     * * Esta accion muestra el formulario de busqueda 
+     * * de los diagnosticos CIE10 por capitulo
+     * ! importamos el archivo cie10.js
+     * */
     public function capituloAction()
     {
-        // action body
         $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/cie10.js');
         echo $this->view->headScript();
         $this->view->titulo = "Diagnosticos por capitulo";
         $this->view->data = $this->tabla_capitulo();
     }
+     /**
+     * listaAction()
+     * * Esta accion muestra una lista de diagnosticos ingrsados por busqueda por el usuario
+     * * Usada en el formulario de asignacion de cama
+     * ! obtiene los datos mediante llamada ajax
+     * @param dato ontenido mediante ajax, es el campo que se pretende buscar
+     * @param id este campo es el input desde el cual se hace la busqueda, para que el resultado se muestre debajo de el
+     * ? finalmente llama al metodo lista_cie10 que imprime un template HTML
+    
+     */
+
     public function listaAction()
     {
-        // action body
         $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
         $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
         if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
@@ -53,9 +90,17 @@ class Cie10Controller extends Zend_Controller_Action
             echo $this->lista_cie10($dato,$id);
         }
     }
+    /**
+     * buscaAction()
+     * * Esta accion muestra una tabla de diagnosticos ingrsados por busqueda por el usuario
+     * * Usada en la vista descripcion
+     * ! obtiene los datos mediante llamada ajax
+     * @param dato ontenido mediante ajax, es el campo que se pretende buscar
+     * ? finalmente llama al metodo tabla_cie10 que imprime un template HTML
+     */
+
     public function buscaAction()
     {
-        // action body
         $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
         $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
         if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
@@ -63,9 +108,17 @@ class Cie10Controller extends Zend_Controller_Action
             echo $this->tabla_cie10($dato);
         }
     }
+    /**
+     * buscaAbuscacategoriaActionction()
+     * * Esta accion muestra una tabla de diagnosticos por categoria ingrsados por busqueda por el usuario
+     * * Usada en la vista categoria
+     * ! obtiene los datos mediante llamada ajax
+     * @param dato ontenido mediante ajax, es el campo que se pretende buscar
+     * ? finalmente llama al metodo tabla_cie10_categoria que imprime un template HTML
+     */
+
     public function buscacategoriaAction()
     {
-        // action body
         $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
         $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
         if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
@@ -73,10 +126,19 @@ class Cie10Controller extends Zend_Controller_Action
             echo $this->tabla_cie10_categoria($dato);
         }
     }
+    /**
+     * lista_cie10()
+     * * Esta funcion crea el template HTML que sera mostrado en el view
+     * @param dato ontenido mediante ajax, es el campo que se pretende buscar
+     * @param id este campo es el input desde el cual se hace la busqueda, para que el resultado se muestre debajo de el
+     
+     * @param obj Crea un objeto tipo DbTable y realiza el metodo listar
+     */
+
     public function lista_cie10($dato,$id)
     {
-        $table_m = new Application_Model_DbTable_Cie10();
-        $datos = $table_m->listar($dato);
+        $obj = new Application_Model_DbTable_Cie10();
+        $datos = $obj->listar($dato);
         $cadena = '';
         if (!$datos) {
             $cadena .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -98,10 +160,17 @@ class Cie10Controller extends Zend_Controller_Action
 
         return $cadena;
     }
+    /**
+     * tabla_cie10()
+     * * Esta funcion crea el template HTML que sera mostrado en el view
+     * @param dato ontenido mediante ajax, es el campo que se pretende buscar
+     * @param obj Crea un objeto tipo DbTable y realiza el metodo listar
+     */
+
     public function tabla_cie10($dato)
     {
-        $table_m = new Application_Model_DbTable_Cie10();
-        $datos = $table_m->listar($dato);
+        $obj = new Application_Model_DbTable_Cie10();
+        $datos = $obj->listar($dato);
         $cadena = '';
         if (!$datos) {
             $cadena .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -111,12 +180,11 @@ class Cie10Controller extends Zend_Controller_Action
                     </button>
                 </div>';
         } else {
-            $cadena .= '<table class="table table-sm" id="dataTableCie10" width="100%">
-                <thead>
+            $cadena .= '<table class="table  table-bordered table-sm dataTable" id="dataTableCie10" width="100%">
+                <thead class="table-dark" >
                 <tr>
-                    <th class="text-primary">COD</th>
-                    <th class="text-primary">DESCRIPCION SUB CATEGORIA</th>
-                    <th class="text-primary ">ACCION</th>
+                    <th >COD</th>
+                    <th >DESCRIPCION SUB CATEGORIA</th>
                 </tr>
                 </thead>
                 <tbody>';
@@ -126,19 +194,7 @@ class Cie10Controller extends Zend_Controller_Action
             $cadena .= "<td>" . $item->sub_cod . "</td>";
             $cadena .= "<td>" . $item->descripcion_sub . "</td>";
 
-            $cadena .= '<td>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                    
-                    <!--  debo enviar la busqueda por ajax -->
-                    <button type="button" class="btn btn-outline-dark btn-sm border-0 " onclick="editarModal('. $item->piso_id .')" >
-                        <i class="fa fa-edit  "></i>
-                    </button>
-                    <button type="button" class="btn btn-outline-danger btn-sm border-0 " onclick="eliminar('. $item->piso_id .')" >
-                        <i class="fa fa-trash "></i>
-                    </button>
-                    </div>
-                    </td>
-                </tr>';
+            $cadena .= '</tr>';
             endforeach;
 
             $cadena .= "</tbody></table>";
@@ -146,10 +202,17 @@ class Cie10Controller extends Zend_Controller_Action
 
         return $cadena;
     }
+    /**
+     * tabla_cie10_categoria()
+     * * Esta funcion crea el template HTML que sera mostrado en el view
+     * @param dato ontenido mediante ajax, es el campo que se pretende buscar
+     * @param obj Crea un objeto tipo DbTable y realiza el metodo listar_categoria
+     */
+
     public function tabla_cie10_categoria($dato)
     {
-        $table_m = new Application_Model_DbTable_Cie10();
-        $datos = $table_m->listar_categoria($dato);
+        $obj = new Application_Model_DbTable_Cie10();
+        $datos = $obj->listar_categoria($dato);
         $cadena = '';
         if (!$datos) {
             $cadena .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -159,34 +222,21 @@ class Cie10Controller extends Zend_Controller_Action
                     </button>
                 </div>';
         } else {
-            $cadena .= '<table class="table table-sm" id="dataTableCie10" width="100%">
-                <thead>
+            $cadena .= '<table class="table  table-bordered table-sm dataTable" id="dataTableCie10Cat" width="100%">
+                <thead class="table-dark" >
                 <tr>
-                    <th class="text-primary">COD</th>
-                    <th class="text-primary">DESCRIPCION CATEGORIA</th>
-                    <th class="text-primary ">ACCION</th>
+                    <th >COD</th>
+                    <th >DESCRIPCION CATEGORIA</th>
                 </tr>
                 </thead>
                 <tbody>';
             foreach ($datos as $item):
 
                 $cadena .= "<tr>";
-            $cadena .= "<td>" . $item->cod . "</td>";
+            $cadena .= "<td>" . $item->cie10_categoria_id . "</td>";
             $cadena .= "<td>" . $item->descripcion . "</td>";
 
-            $cadena .= '<td>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                    
-                    <!--  debo enviar la busqueda por ajax -->
-                    <button type="button" class="btn btn-outline-dark btn-sm  border-0 " onclick="editarModal('. $item->cod .')" >
-                        <i class="fa fa-edit  "></i>
-                    </button>
-                    <button type="button" class="btn btn-outline-danger btn-sm border-0 " onclick="eliminar('. $item->cod .')" >
-                        <i class="fa fa-trash "></i>
-                    </button>
-                    </div>
-                    </td>
-                </tr>';
+            $cadena .= '</tr>';
             endforeach;
 
             $cadena .= "</tbody></table>";
@@ -194,10 +244,18 @@ class Cie10Controller extends Zend_Controller_Action
 
         return $cadena;
     }
+    /**
+     * tabla_cie10_categoria()
+     * * Esta funcion crea el template HTML que sera mostrado en el view
+     * * para esta funcion no es necesario realizar una busqueda 
+     * @param dato ontenido mediante ajax, es el campo que se pretende buscar
+     * @param obj Crea un objeto tipo DbTable y realiza el metodo listar_capitulo
+     */
+
     public function tabla_capitulo()
     {
-        $table_m = new Application_Model_DbTable_Cie10();
-        $datos = $table_m->listar_capitulo();
+        $obj = new Application_Model_DbTable_Cie10();
+        $datos = $obj->listar_capitulo();
         $cadena = '';
         if (!$datos) {
             $cadena .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -207,12 +265,11 @@ class Cie10Controller extends Zend_Controller_Action
                     </button>
                 </div>';
         } else {
-            $cadena .= '<table class="table table-sm" id="dataTableCie10Capitulo" width="100%">
-                <thead>
+            $cadena .= '<table class="table  table-bordered table-sm dataTable" id="dataTableCie10Capitulo" width="100%">
+                <thead class="table-dark" >
                 <tr>
-                    <th class="text-primary">COD</th>
-                    <th class="text-primary">CAPITULO</th>
-                    <th class="text-primary ">ACCION</th>
+                    <th >COD</th>
+                    <th >CAPITULO</th>
                 </tr>
                 </thead>
                 <tbody>';
@@ -221,20 +278,13 @@ class Cie10Controller extends Zend_Controller_Action
                 $cadena .= "<tr>";
             $cadena .= "<td>" . $item->cie10_capitulo_id . "</td>";
             $cadena .= "<td>" . $item->descripcion . "</td>";
+            /* $subcapitulo = $table_m->listar_sub_capitulo($item->cie10_capitulo_id);
+            foreach ($subcapitulo as $sub):
+                $cadena .= "<td>" . $sub->descripcion_sub . "</td>";
 
-            $cadena .= '<td>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                    
-                    <!--  debo enviar la busqueda por ajax -->
-                    <button type="button" class="btn btn-outline-dark btn-sm border-0 " onclick="editarModal('. $item->cie10_capitulo_id .')" >
-                        <i class="fa fa-edit  "></i>
-                    </button>
-                    <button type="button" class="btn btn-outline-danger btn-sm border-0 " onclick="eliminar('. $item->cie10_capitulo_id .')" >
-                        <i class="fa fa-trash "></i>
-                    </button>
-                    </div>
-                    </td>
-                </tr>';
+            endforeach; */
+
+            $cadena .= '</tr>';
             endforeach;
 
             $cadena .= "</tbody></table>";

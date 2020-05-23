@@ -1,8 +1,21 @@
-<div class="card ">
-	<div class="card-header d-flex justify-content-between">
-		<h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
-
-	</div>
+<div class="card border-left-primary">
+	<div class="card-header bg-light d-flex justify-content-between align-middle pb-0">
+		<h4 class="h4 text-capitalize text-dark"><?php echo $this->controlador; ?>
+			 <i class="fas fa-fw <?php echo $this->icono; ?> text-dark"></i></h4>
+			 <nav aria-label="breadcrumb">
+				  <ol class="breadcrumb bg-transparent  text-xxs p-0 ">
+						<li class="breadcrumb-item"><a href="<?php echo $this->baseUrl(); ?>/panel_de_control">
+							 <i class="fas fa-home "></i>Inicio</a></li>
+						<li class="breadcrumb-item text-capitalize">
+							 <a href="<?php echo $this->baseUrl(); ?>/<?php echo $this->controlador; ?>">
+								  <i class="fas fa-fw <?php echo $this->icono; ?>"></i>
+								  <?php echo $this->controlador; ?></a></li>
+						<li class="breadcrumb-item active text-capitalize" aria-current="page">
+							 <?php echo $this->accion; ?></li>
+				  </ol>
+			 </nav>      
+		
+  </div>
 	<div class="card-body">
 		<div class="row ">
 			<div class="col-sm-3 ">
@@ -15,19 +28,22 @@
 				<div class="row">
 					<div class="col sm-12 d-flex justify-content-center">
 						<div class='btn-group' role='group' aria-label='Basic example'>
-							<button type="button" onclick="activaPerfilForm()" class="btn btn-outline-primary btn-sm">
-								<i class="fas fa-cogs"></i> Modificar informacion
+							
+							<button type="button" onclick="activaPerfilForm()" class="btn btn-primary btn-icon-split ">
+								<span class="icon text-white-50 "><i class="fas fa-cogs align-middle my-auto"></i></span><span class="text-xs">
+									Modificar informacion</span>
 							</button>
-							<button class=" btn btn-outline-danger btn-sm"
-								onclick="cambiarClaveU('<?php echo $this->user->usu_id; ?>')">
-								<i class="fas fa-key fa-fw"></i> <span>Cambiar contraseña</span>
+							<button class=" btn btn-danger btn-icon-split "
+								onclick="cambiarClaveU()">
+								<span class="icon text-white-50 "><i class="fas fa-key align-middle my-auto"></i></span><span class="text-xs">
+									Cambiar contraseña</span>
 							</button>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="col-sm-6 ml-4">
+			<div class="col-sm-5 ml-4 text-xs">
 				<form class="user needs-validation" method="post" id="perfil_register" name="perfil_register" novalidate>
 
 					<input type="hidden" id="perfil_usuario_id" name="perfil_usuario_id"
@@ -36,7 +52,8 @@
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label for="perfil_nombres">Nombres:</label>
-								<input type="text" id="perfil_nombres" class="form-control bg-white" name="perfil_nombres"
+								<input type="text" id="perfil_nombres" class="form-control form-control-sm bg-white " 
+								name="perfil_nombres"
 									placeholder="Nombres..." required autocomplete="off" disabled
 									value="<?php echo $this->data->usu_nombres; ?>">
 								<div class="valid-feedback">
@@ -49,7 +66,7 @@
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label for="perfil_apellidos">Apellidos:</label>
-								<input type="text" id="perfil_apellidos" class="form-control bg-white" name="perfil_apellidos"
+								<input type="text" id="perfil_apellidos" class="form-control form-control-sm bg-white" name="perfil_apellidos"
 									placeholder="Apellidos..." required autocomplete="off" disabled
 									value="<?php echo $this->data->usu_apellidos; ?>">
 								<div class="valid-feedback">
@@ -64,7 +81,7 @@
 						<div class="col-sm-12">
 							<div class="form-group">
 								<label for="perfil_correo">Correo electronico:</label>
-								<input type="email" id="perfil_correo" class="form-control bg-white" name="perfil_correo"
+								<input type="email" id="perfil_correo" class="form-control form-control-sm bg-white" name="perfil_correo"
 									placeholder="ejemplo@ejemplo.com" required autocomplete="off" disabled
 									value="<?php echo $this->data->correo; ?>">
 								<div class="valid-feedback">
@@ -79,7 +96,7 @@
 						<div class="col-sm-4">
 							<div class="form-group">
 								<label for="perfil_perfil">Perfil:</label>
-								<input type="text" id="perfil_perfil" class="form-control bg-white" name="perfil_perfil"
+								<input type="text" id="perfil_perfil" class="form-control form-control-sm bg-white" name="perfil_perfil"
 									placeholder="Perfil" required autocomplete="off" disabled
 									value="<?php echo $this->data->perf_nombre; ?>" data-toggle="tooltip" data-placement="bottom"
 									title="Este campo no puede ser cambiado">
@@ -94,7 +111,7 @@
 						<div class="col-sm-4">
 							<div class="form-group">
 								<label for="perfil_estado">Estado:</label>
-								<input type="text" id="perfil_estado" class="form-control bg-white" name="perfil_estado"
+								<input type="text" id="perfil_estado" class="form-control form-control-sm bg-white" name="perfil_estado"
 									placeholder="estado" required autocomplete="off" disabled
 									value="<?php echo $this->data->usu_estado_nombre; ?>" data-toggle="tooltip"
 									data-placement="bottom" title="Este campo no puede ser cambiado">
@@ -109,7 +126,7 @@
 						<div class="col-sm-4">
 							<div class="form-group">
 								<label for="perfil_iniciales">Iniciales:</label>
-								<input type="text" id="perfil_iniciales" class="form-control bg-white" name="perfil_iniciales"
+								<input type="text" id="perfil_iniciales" class="form-control form-control-sm bg-white" name="perfil_iniciales"
 									placeholder="Iniciales" required autocomplete="off" disabled
 									value="<?php echo $this->data->usu_iniciales; ?>" data-toggle="tooltip"
 									data-placement="bottom" title="Este campo no puede ser cambiado">
@@ -124,7 +141,7 @@
 					</div>
 					<div id="formGroupPassword" class="form-group" style="display: none;">
 						<label for="confirma_clave">A continuacion ingrese su contraseña para confirmar el cambio:</label>
-						<input type="password" id="confirma_clave" class="form-control bg-white border border-warning"
+						<input type="password" id="confirma_clave" class="form-control form-control-sm bg-white border border-warning"
 							name="confirma_clave" placeholder="Ingrese su contraseña" required autocomplete="off">
 						<div class="valid-feedback">
 						</div>

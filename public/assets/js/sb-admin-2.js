@@ -69,14 +69,36 @@
     })
     //------SELECT2
     $(document).ready(function() {
+      
+      $('#ShowPassword').click(function () {
+        $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
+      });
+      camasPorServicio();
+      camasEstado();
+      mapaDeCamas(0);
+      ultima_comexion();
+      $('#calendario').popover({
+        trigger: 'hover',
+        placement: 'auto',
+        title: 'Fecha',
+        content: moment().format("dddd, MMMM Do YYYY, h:mm a")
+      });
+      dataTables();
+      //-------------------------
+      $('.btn-icon-split').addClass('lift');
+      
+      //---------------------------
       $('.js-example-basic-single').select2({
         theme: "bootstrap",
         language: "es",
         placeholder: 'Seleccione una opcion'
       });
       // ejemplo de popover
-      $('.example-popover').popover({
-        container: 'body'
+      $('[data-toggle="popover"]').popover({
+        trigger: 'hover',
+        placement: 'auto'
       })
+    
   });
+  
 })(jQuery); // End of use strict

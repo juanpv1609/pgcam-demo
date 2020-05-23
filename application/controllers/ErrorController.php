@@ -5,33 +5,38 @@ class ErrorController extends Zend_Controller_Action
     public function errorAction()
     {
         $this->initView();
-        //$this->view->baseUrl = $this->_request->getBaseUrl();
         $this->_helper->layout()->disableLayout();
         $errors = $this->_getParam('error_handler');
         $this->view->titulo="Error";
+        $get_msg=(isset($_GET['msg'])) ? $_GET['msg'] : '';
         
         if (!$errors || !$errors instanceof ArrayObject) {
-            $this->view->message = 'Has llegado a la página de error.';
+            $this->view->codigo = 403;
+            $this->view->msg = $get_msg;
+            $this->view->message = 'Acceso Restringido';
             return;
+
         }
-        
-        switch ($errors->type) {
-            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
-            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
-            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
-                // 404 error -- controller or action not found
-                $this->getResponse()->setHttpResponseCode(404);
-                $priority = Zend_Log::NOTICE;
-                $this->view->message = 'Página no encontrada';
-                break;
-            default:
-                // application error
-                $this->getResponse()->setHttpResponseCode(500);
-                $priority = Zend_Log::CRIT;
-                $this->view->message = 'Error de la aplicación';
-                break;
-        }
-        
+            switch ($errors->type) {
+                case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
+                case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
+                case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
+                    // 404 error -- controller or action not found
+                    $this->getResponse()->setHttpResponseCode(404);
+                    $priority = Zend_Log::NOTICE;
+                    $this->view->codigo = 404;
+                    $this->view->msg = $get_msg;
+                    $this->view->message = 'Página no encontrada';
+                    break;
+                default:
+                    // application error
+                    $this->getResponse()->setHttpResponseCode(500);
+                    $priority = Zend_Log::CRIT;
+                    $this->view->codigo = 500;
+                    $this->view->msg = $get_msg;
+                    $this->view->message = 'Error de la aplicación';
+                    break;
+            }
         // Log exception, if logger available
         if ($log = $this->getLog()) {
             $log->log($this->view->message, $priority, $errors->exception);
@@ -45,7 +50,6 @@ class ErrorController extends Zend_Controller_Action
         
         $this->view->request   = $errors->request;
     }
-
     public function getLog()
     {
         $bootstrap = $this->getInvokeArg('bootstrap');

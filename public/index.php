@@ -32,5 +32,6 @@ $pgdb = Zend_Db::factory('PDO_PGSQL', $config->resources->db->params);
 
 //guardo en el registro el objeto DB Factory() creado, para poder usarlo despues en cualquier parte
 Zend_Registry::set('pgdb', $pgdb);
+
 $application->bootstrap()
     ->run();

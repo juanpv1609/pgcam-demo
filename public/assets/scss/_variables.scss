@@ -31,21 +31,37 @@ $cyan: #36b9cc !default;
 $brand-google: #ea4335;
 $brand-facebook: #3b5998;
 
-$primary:       $blue !default;
-$secondary:     $gray-400 !default;
-$success:       $green !default;
-$info:          $cyan !default;
-$warning:       $orange !default;
-$danger:        $red !default;
-$light:         $gray-100 !default;
-$dark:          $gray-800 !default;
+$primary: $blue !default;
+$secondary: $gray-600 !default;
+$purple: $purple !default;
+$orange: $orange !default;
+$success: $green !default;
+$info: $cyan !default;
+$warning: $yellow !default;
+$danger: $red !default;
+$light: $gray-100 !default;
+$dark: $gray-800 !default;
+
+$theme-colors: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$theme-colors: map-merge(("primary": $primary,
+      "secondary": $secondary,
+      "purple": $purple,
+      "orange": $orange,
+      "success": $success,
+      "info": $info,
+      "warning": $warning,
+      "danger": $danger,
+      "light": $light,
+      "dark": $dark),
+   $theme-colors);
 // Set Contrast Threshold
 $yiq-contrasted-threshold: 195 !default;
 
 // Typography
 $body-color: $gray-600 !default;
 
-$font-family-sans-serif: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", 'Noto Color Emoji' !default;
+$font-family-sans-serif: "Roboto" !default;
 
 $font-weight-light: 300 !default;
 // $font-weight-base: 400;
@@ -54,7 +70,7 @@ $headings-font-weight: 400 !default;
 // Shadows
 $box-shadow-sm: 0 0.125rem 0.25rem 0 rgba($gray-900, .2) !default;
 $box-shadow: 0 0.15rem 1.75rem 0 rgba($gray-900, .15) !default;
- $box-shadow-lg: 0 1rem 3rem rgba($black, .175) !default;
+$box-shadow-lg: 0 1rem 3rem rgba($black, .175) !default;
 
 // Borders Radius
 $border-radius: 0.35rem !default;
@@ -66,7 +82,7 @@ $topbar-base-height: 3.175rem;
 // Change below variable to change the width of the sidenav
 $sidebar-base-width: 12rem;
 // Change below variable to change the width of the sidenav when collapsed
-$sidebar-collapsed-width: 6.5rem;
+$sidebar-collapsed-width: 7.5rem;
 
 // Card
 $card-cap-bg: $gray-100;
@@ -82,4 +98,23 @@ $transition-collapse: height .15s ease !default;
 // Dropdowns
 $dropdown-font-size: 0.85rem;
 $dropdown-border-color: $border-color;
-$enable-responsive-font-sizes:                true !default;
+$enable-responsive-font-sizes: true !default;
+$breadcrumb-divider: quote("»");
+// RIBBON
+// --------------------------------------------------------
+$ribbon-border-size: 3px !default;
+$ribbon-line-height: 100% !default;
+$ribbon-padding: .375rem 0 !default;
+$ribbon-font-size: .8rem !default;
+$ribbon-width: 90px !default;
+$ribbon-wrapper-size: 70px !default;
+$ribbon-top: 10px !default;
+$ribbon-right: -2px !default;
+$ribbon-lg-wrapper-size: 120px !default;
+$ribbon-lg-width: 160px !default;
+$ribbon-lg-top: 26px !default;
+$ribbon-lg-right: 0px !default;
+$ribbon-xl-wrapper-size: 180px !default;
+$ribbon-xl-width: 240px !default;
+$ribbon-xl-top: 47px !default;
+$ribbon-xl-right: 4px !default;

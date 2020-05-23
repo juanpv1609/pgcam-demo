@@ -1,20 +1,32 @@
-<div class="card ">
-	<div class="card-header d-flex justify-content-between">
-		<h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
-		
-		<button type="button" onclick="agregarModalUperfil()" class="btn btn-success btn-icon-split btn-sm">
-			<span class="icon text-white-50"><i class="fas fa-plus"></i></span><span class="text">Agregar</span>
-	  </button>
+<div class="card border-left-primary">
+	<div class="card-header bg-light d-flex justify-content-between align-middle pb-0">
+		<h4 class="h4 text-capitalize text-dark"><?php echo $this->controlador; ?>
+			<i class="fas fa-fw <?php echo $this->icono; ?> text-dark"></i></h4>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb bg-transparent  text-xxs p-0 ">
+				<li class="breadcrumb-item"><a href="<?php echo $this->baseUrl(); ?>/panel_de_control">
+						<i class="fas fa-home "></i>Inicio</a></li>
+				<li class="breadcrumb-item text-capitalize">
+					<a href="<?php echo $this->baseUrl(); ?>/<?php echo $this->controlador; ?>">
+						<i class="fas fa-fw <?php echo $this->icono; ?>"></i>
+						<?php echo $this->controlador; ?></a></li>
+				<li class="breadcrumb-item active text-capitalize" aria-current="page">
+					<?php echo $this->accion; ?></li>
+			</ol>
+		</nav>
+
 	</div>
 	<div class="card-body">
 		<div class="row">
 			<div class="col-sm-4"></div>
 			<div class="col-sm-4">
-				<div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
-					<a class="btn btn-outline-primary btn-sm"
-						href="<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'index')); ?>">Usuarios</a>
-					<a class="btn btn-dark btn-sm"
-						href="<?php echo $this->url(array('controller' => 'usuarios', 'action' => 'perfiles')); ?>">Perfiles</a>
+				<div class="btn-group d-flex justify-content-start" role="group" aria-label="Basic example">
+					<a class="btn btn-outline-primary <?php echo $this->setActive('usuarios','index'); ?> btn-icon-split btn-sm"
+						href="<?php echo $this->baseUrl();?>/listar_usuarios">
+						<span class="text">Usuarios</span></a>
+					<a class="btn btn-outline-primary <?php echo $this->setActive('usuarios','perfiles'); ?> btn-icon-split btn-sm"
+						href="<?php echo $this->baseUrl();?>/listar_perfiles">
+						<span class="text">Perfiles</span></a>
 
 				</div>
 			</div>
@@ -22,6 +34,13 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-12">
+				<div class="d-flex justify-content-between pb-2">
+					<button type="button" onclick="agregarModalUperfil()" class="btn btn-success btn-icon-split btn-sm">
+						<span class="icon text-white-50"><i class="fas fa-plus"></i></span><span class="text">Agregar</span>
+					</button>
+					<div class="text-center align-content-center " id="exportButtons"></div>
+
+				</div>
 				<div id="data_Table" class="table-responsive text-xs">
 					<?php echo $this->data_perfiles; ?>
 
@@ -30,6 +49,7 @@
 		</div>
 	</div>
 </div>
+
 <!-- formulario Modal-->
 <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 	aria-hidden="true">
@@ -42,10 +62,8 @@
 				</button>
 			</div>
 			<form class="needs-validation" method="post" id="agregaPerfil" name="agregaPerfil" novalidate>
-
 				<div class="modal-body">
 					<input type="hidden" id="perfil_id" name="perfil_id">
-					
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="form-group">
@@ -62,95 +80,182 @@
 							</div>
 						</div>
 					</div>
-					<!-- <div class="row">
-							<div class="col-sm-12">
-								<div  class="form-group">
-									<label for="nombres">Seleccione un controlador:</label>
-									<select 
-									id="nombres"
-									class="form-control "
-									name="nombres"
-									required autocomplete="off" >
-									<option value="">Index</option>
-									<option value="">Usuarios</option>
-									<option value="">Paciente</option>
-									<option value="">Areas</option>
-									<option value="">Pisos</option>
-									<option value="">Especialidades</option>
-									<option value="">Habitaciones</option>
-									<option value="">Camas</option>
-									<option value="">Cie10</option>
-									</select>
-									<div class="valid-feedback">
-									</div>
-									<div class="invalid-feedback">
-										Este campo es necesario.
-									</div>
+					<div class="row" id="rutas">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="comboControladoresRutas">Controlador:</label>
+
+								<select class="form-control form-control-sm" name="comboControladoresRutas" id="comboControladoresRutas"
+									onchange="getAcciones(0);" required autocomplete="off">
+								</select>
+								<div class='valid-feedback'>
+								</div>
+								<div class='invalid-feedback'>
+								</div>
 							</div>
+
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="comboAccionesRutas">Accion:</label>
+								<select class="form-control form-control-sm" name="comboAccionesRutas" id="comboAccionesRutas" required
+									autocomplete="off">
+									<option value=''>Seleccione un controlador</option>
+
+								</select>
+								<div class='valid-feedback'>
+								</div>
+								<div class='invalid-feedback'>
+								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-sm-12">
-								<div  class="form-group">
-									<label for="nombres">Seleccione una accion:</label>
-									<select 
-									id="nombres"
-									class="form-control "
-									name="nombres"
-									required autocomplete="off" >
-									<option value="">Index</option>
-									<option value="">Usuarios</option>
-									<option value="">Paciente</option>
-									<option value="">Areas</option>
-									<option value="">Pisos</option>
-									<option value="">Especialidades</option>
-									<option value="">Habitaciones</option>
-									<option value="">Camas</option>
-									<option value="">Cie10</option>
-									</select>
-									<div class="valid-feedback">
-									</div>
-									<div class="invalid-feedback">
-										Este campo es necesario.
-									</div>
-							</div>
-							</div>
-						</div> -->
+					</div>
 					<div class="row">
 						<div class="col-sm-12">
 							<input type="hidden" id="valorBoton" name="valorBoton">
 							<div class="form-group">
-								<label for="correo">Seleccione un color:</label>
-								<div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
-									<button type="button" class="btn btn-primary " id="primary" onclick="fnProcesaPaciente(this)"
-										title="Primary">&nbsp;</button>
-									<button type="button" class="btn btn-secondary " id="secondary"
-										onclick="fnProcesaPaciente(this)" title="Secondary"></button>
-									<button type="button" class="btn btn-success " id="success" onclick="fnProcesaPaciente(this)"
-										title="Success"></button>
-									<button type="button" class="btn btn-danger " id="danger" onclick="fnProcesaPaciente(this)"
-										title="Danger"></button>
-									<button type="button" class="btn btn-warning " id="warning" onclick="fnProcesaPaciente(this)"
-										title="Warning"></button>
-									<button type="button" class="btn btn-info " id="info" onclick="fnProcesaPaciente(this)"
-										title="Info"></button>
-									<button type="button" class="btn btn-dark " id="dark" onclick="fnProcesaPaciente(this)"
-										title="Dark"></button>
+								<label for="correo">Seleccione un color: </label>
+								<div class="btn-group d-flex justify-content-center " role="group" aria-label="Basic example">
+									<button type="button" class="btn btn-primary btn-icon-split rounded-0 " id="primary"
+										onclick="colorPerfil(this)" title="Primary">&nbsp;</button>&nbsp;
+									<button type="button" class="btn btn-secondary btn-icon-split" id="secondary"
+										onclick="colorPerfil(this)" title="Secondary"></button>&nbsp;
+									<button type="button" class="btn btn-success btn-icon-split rounded-0" id="success"
+										onclick="colorPerfil(this)" title="Success"></button>&nbsp;
+									<button type="button" class="btn btn-danger btn-icon-split rounded-0" id="danger"
+										onclick="colorPerfil(this)" title="Danger"></button>&nbsp;
+										<button type="button" class="btn btn-orange btn-icon-split rounded-0" id="orange" 
+										onclick="colorPerfil(this)" title="Orange"></button>&nbsp;
+									<button type="button" class="btn btn-warning btn-icon-split rounded-0" id="warning"
+										onclick="colorPerfil(this)" title="Warning"></button>&nbsp;
+									<button type="button" class="btn btn-info btn-icon-split rounded-0" id="info"
+										onclick="colorPerfil(this)" title="Info"></button>&nbsp;
+									<button type="button" class="btn btn-dark btn-icon-split rounded-0" id="dark"
+										onclick="colorPerfil(this)" title="Dark"></button>&nbsp;
+										<button type="button" class="btn btn-purple btn-icon-split rounded-0" id="purple" 
+										onclick="colorPerfil(this)" title="Purple"></button>
 
 								</div>
-								
 
 							</div>
 							<div id="colorHelp"></div>
 						</div>
 					</div>
-						<div class="modal-footer d-flex justify-content-between ">
-							<button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
-							<div id="accionForm">
+					
+				</div>
+				<div class="modal-footer d-flex justify-content-between ">
+					<button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+					<div id="accionForm">
 
+					</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+<!-- formulario Modal Permisos-->
+<div class="modal fade" id="formModalPermisos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelPermisos"
+	aria-hidden="true">
+	<div class="modal-dialog " role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title text-primary" id="exampleModalLabelPermisos"></h5>
+				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<input type="hidden" id="perf_id" name="perf_id">
+				<div id="data_Table_permisos" class="table-responsive text-xxs">
+
+				</div>
+
+			</div>
+			<div class="modal-footer d-flex justify-content-end ">
+				<button class="btn btn-primary" type="button" data-dismiss="modal">Aceptar</button>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- formulario Modal Permisos-->
+<div class="modal fade" id="formModalPermisosAdd" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabelPermisos" aria-hidden="true">
+	<div class="modal-dialog " role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title text-primary" id="exampleModalLabelPermisosAdd">Agregar permiso</h5>
+				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<form class="needs-validation" method="post" id="agregaPermisos" name="agregaPermisos" novalidate>
+
+				<div class="modal-body text-xs">
+					<input type="hidden" id="perf_id" name="perf_id">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="comboControladores">Controladores disponibles:</label>
+
+								<select class="form-control form-control-sm" name="comboControladores" id="comboControladores"
+									onchange="getAcciones(1);" required autocomplete="off">
+								</select>
+								<div class='valid-feedback'>
+								</div>
+								<div class='invalid-feedback'>
+								</div>
+							</div>
+
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="comboAcciones">Acciones disponibles:</label>
+								<select class="form-control form-control-sm" name="comboAcciones" id="comboAcciones" required
+									autocomplete="off">
+									<option value=''>Seleccione un controlador</option>
+
+								</select>
+								<div class='valid-feedback'>
+								</div>
+								<div class='invalid-feedback'>
+								</div>
 							</div>
 						</div>
 					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="comboPermiso">Permiso:</label>
+								<select class="form-control form-control-sm" name="comboPermiso" id="comboPermiso" required
+									autocomplete="off">
+									<option value=''></option>
+									<option value='allow'>ALLOW</option>
+									<option value='deny'>DENY</option>
+								</select>
+								<div class='valid-feedback'>
+								</div>
+								<div class='invalid-feedback'>
+									Seleccione uno
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+				<div class="modal-footer d-flex justify-content-end">
+					<button class="btn btn-primary" type="submit" onclick="AgregarPermiso();">Aceptar</button>
+
+				</div>
 			</form>
 
 		</div>

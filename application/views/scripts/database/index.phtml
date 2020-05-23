@@ -1,0 +1,98 @@
+<div class="card border-left-primary">
+	<div class="card-header bg-light d-flex justify-content-between align-middle pb-0">
+		<h4 class="h4  text-dark"><?php echo $this->titulo; ?>
+			<i class="fas fa-fw <?php echo $this->icono; ?> text-dark"></i></h4>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb bg-transparent  text-xxs p-0 ">
+				<li class="breadcrumb-item"><a href="<?php echo $this->baseUrl(); ?>/panel_de_control">
+						<i class="fas fa-home "></i>Inicio</a></li>
+				<li class="breadcrumb-item text-capitalize">
+					<a href="<?php echo $this->baseUrl(); ?>/<?php echo $this->controlador; ?>">
+						<i class="fas fa-fw <?php echo $this->icono; ?>"></i>
+						<?php echo $this->controlador; ?></a></li>
+				<li class="breadcrumb-item active text-capitalize" aria-current="page">
+					<?php echo $this->accion; ?></li>
+			</ol>
+		</nav>
+
+	</div>
+	<div class="card-body">
+
+		<div class="card mb-4">
+			<a class="d-block card-header " href="#collapseCardExample" data-toggle="collapse" role="button"
+				aria-expanded="true" aria-controls="collapseCardExample">
+				<h6 class="h4  text-dark">Diagrama E-R
+					<i class="fas fa-fw fa-project-diagram text-black-50"></i>
+				</h6>
+			</a>
+			<div class="collapse " id="collapseCardExample">
+				<div class="card-body divBDD" style="max-width: 1400; overflow-y: auto; overflow-x: auto;">
+					
+					<img  id="imagenER" width="1400"  
+					 src="<?php echo $this->baseUrl(); ?>/assets/img/diagramaER.svg"  alt="DiagramaER">
+				</div>
+			</div>
+
+		</div>
+		<div class="card mb-4">
+			<a class="d-block card-header " href="#collapseCardExample2" data-toggle="collapse" role="button" aria-expanded="true"
+				aria-controls="collapseCardExample2">
+				<h6 class="h4  text-dark">Diccionario de datos
+					<i class="fas fa-fw fa-spell-check text-black-50"></i>
+				</h6>
+				</a>
+				<div class="collapse " id="collapseCardExample2">
+			<div class="card-body divBDD">
+				<div  class="table-responsive  text-xxs">
+					<?php echo $this->data_tablas; ?>
+				</div>
+			</div>
+			</div>
+		</div>
+		<!-- <div class="row">
+			<div class="col-sm-6">
+				<div class="card mb-4">
+					<a class="d-block card-header " href="#collapseCardExample3" data-toggle="collapse" role="button"
+						aria-expanded="true" aria-controls="collapseCardExample3">
+						<h6 class="h4  text-dark">Restaurar
+							<i class="fas fa-fw fa-upload text-black-50"></i>
+						</h6>
+					</a>
+					<div class="collapse show" id="collapseCardExample3">
+						<div class="card-body">
+								<div class="input-group">
+									<div class="custom-file">
+										<input type="file" class="custom-file-input" id="fileUpload" accept=".sql" >
+										<label class="custom-file-label" for="fileUpload">Elija un archivo</label>
+									</div>
+									<div class="input-group-append">
+										<button class="btn btn-primary" type="button" id="btnRestaurar" onclick="upload()">Restaurar</button>
+									</div>
+								</div>
+				
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="card mb-4">
+					<a class="d-block card-header " href="#collapseCardExample4" data-toggle="collapse" role="button"
+						aria-expanded="true" aria-controls="collapseCardExample4">
+						<h6 class="h4  text-dark">Respaldar
+							<i class="fas fa-fw fa-download text-black-50"></i>
+						</h6>
+					</a>
+					<div class="collapse show" id="collapseCardExample4">
+						<div class="card-body">
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium officiis similique expedita eos
+								nostrum error nobis, laboriosam aut molestias quo, perferendis assumenda ex. Voluptatum, suscipit dolore
+								laboriosam consectetur cumque impedit.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> -->
+		
+		
+	</div>
+</div>

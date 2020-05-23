@@ -4,7 +4,7 @@ class Zend_View_Helper_GetPerfil extends Zend_View_Helper_Abstract
 
     public function getPerfil()
     {
-        $obj = new Application_Model_DbTable_Usuario();
+        $obj = new Application_Model_DbTable_Perfiles();
         $datos = $obj->listar_perfiles();
         $Listaarea = '<div  class="form-group">';
         if (!$datos) {

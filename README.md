@@ -2,13 +2,10 @@
 
 [PG-CAM] es una plataforma para la gestion de camas e indicadores de calidad destinada a instituciones de salud, desarrollado como proyecto de titulacion de la carrera de ingenieria en sistemas en el periodo 56 de la [Universidad Politecnica Salesiana](https://www.ups.edu.ec/) EC.
 
-## Vista Previa
-
 ## Vista Previa 🚀
 
-[![SB Admin 2 Preview](https://startbootstrap.com/assets/img/screenshots/themes/sb-admin-2.png)](https://blackrockdigital.github.io/startbootstrap-sb-admin-2/)
 
-**[Launch Live Preview](https://blackrockdigital.github.io/startbootstrap-sb-admin-2/)**
+**[Ver demo](https://pg-cam.herokuapp.com/paciente/asignar)**
 
 ## Estado
 

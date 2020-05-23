@@ -55,6 +55,12 @@
           <actionMethod actionName="perfiles"/>
           <actionMethod actionName="perfil"/>
         </controllerFile>
+        <controllerFile controllerName="Notificaciones">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Database">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -72,6 +78,11 @@
           <dbTableFile dbTableName="Usuario"/>
           <dbTableFile dbTableName="Cie10"/>
           <dbTableFile dbTableName="Admision"/>
+          <dbTableFile dbTableName="Notificaciones"/>
+          <dbTableFile dbTableName="Estadistica"/>
+          <dbTableFile dbTableName="Perfiles"/>
+          <dbTableFile dbTableName="Permisos"/>
+          <dbTableFile dbTableName="Bdd"/>
         </dbTableDirectory>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
@@ -155,6 +166,12 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Index">
             <viewScriptFile forActionName="dashboard"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Notificaciones">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Database">
+            <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

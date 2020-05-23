@@ -2,6 +2,16 @@
 
 class CamasController extends Zend_Controller_Action
 {
+    /**
+     * init()
+     * * Esta funcion se ejecuta antes de cualquier action
+     * ! Se pueden setear variables globales para verlas en las views
+     * ?
+     * TODO: ninguna
+     * @param user almacena los datos de sesion
+     * @param controlador,accion almacena el nombre del controlador y de la accion respectivamente
+     */
+
     public function init()
     {
         /* Initialize action controller here */
@@ -12,10 +22,18 @@ class CamasController extends Zend_Controller_Action
         $this->view->accion=Zend_Controller_Front::getInstance()->getRequest()->getActionName();
         $this->view->icono = "fa-bed";
     }
+        /**
+     * indexAction()
+     * * Esta accion lista las especialidades de la bbd
+     * ! importamos el archivo camas.js
+     * @param data obtiene la data del metodo tabla_camas()
+     * @param data_habitaciones obtiene la data del metodo select_habitacion()
+     * @param data_estado_cama obtiene la data del metodo select_estado_cama()
+     * @param titulo almacena el nombre de la vista, se mostrara en el titulo de la pagina
+     */
 
     public function indexAction()
     {
-        // action body
         $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/camas.js');
         echo $this->view->headScript();
         $this->view->data = $this->tabla_camas();
@@ -23,25 +41,42 @@ class CamasController extends Zend_Controller_Action
         $this->view->data_estado_cama = $this->select_estado_cama();
         $this->view->titulo="Camas Registradas";
     }
+    /**
+     * crearAction()
+     * * Esta accion crea nuevas camas
+     * ! obtiene los datos mediante llamada ajax
+     * @param cama_nombre obtiene el valor enviado por ajax
+     * @param habitacion obtiene el valor enviado por ajax
+     * @param cama_estado obtiene el valor enviado por ajax
+     * @param obj Crea un objeto tipo DbTable py realiza el metodo insertararea
+     */
+
     public function crearAction()
     {
-        // action body
         $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
         $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
         if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
             $cama_nombre = $this->getRequest()->getParam('nombre');
             $habitacion = $this->getRequest()->getParam('habitacion');
             $cama_estado = $this->getRequest()->getParam('cama_estado');
-
-            $table = new Application_Model_DbTable_Camas();
-            $table->insertarcama($cama_nombre, $habitacion, $cama_estado);
+            $obj = new Application_Model_DbTable_Camas();
+            $obj->insertarcama($cama_nombre, $habitacion, $cama_estado);
             echo $this->tabla_camas();
         }
     }
+    /**
+     * editarAction()
+     * * Esta accion edita especialidades
+     * ! obtiene los datos mediante llamada ajax
+     * @param id obtiene el valor enviado por ajax
+     * @param cama_nombre obtiene el valor enviado por ajax
+     * @param habitacion obtiene el valor enviado por ajax
+     * @param cama_estado obtiene el valor enviado por ajax
+     * @param obj Crea un objeto tipo DbTable py realiza el metodo insertararea
+     */
 
     public function editarAction()
     {
-        // action body
         $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
         $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
         if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
@@ -49,28 +84,43 @@ class CamasController extends Zend_Controller_Action
             $habitacion = $this->getRequest()->getParam('habitacion');
             $cama_nombre = $this->getRequest()->getParam('nombre');
             $cama_estado = $this->getRequest()->getParam('cama_estado');
-
-            $table = new Application_Model_DbTable_Camas();
-            $table->actualizarcama($id, $cama_nombre, $habitacion, $cama_estado);
+            $obj = new Application_Model_DbTable_Camas();
+            $obj->actualizarcama($id, $cama_nombre, $habitacion, $cama_estado);
             echo $this->tabla_camas();
         }
     }
+    /**
+     * eliminarAction()
+     * * Esta accion elimina especialidades
+     * ! obtiene los datos mediante llamada ajax
+     * TODO: controlar que si tiene dependencia en la bdd NO ELIMINAR
+     * @param id obtiene el valor enviado por ajax
+     * @param obj Crea un objeto tipo DbTable py realiza el metodo eliminararea
+     */
+
     public function eliminarAction()
     {
-        // action body
         $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
         $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
         if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
             $id = $this->getRequest()->getParam('id');
-            $table = new Application_Model_DbTable_Camas();
-            $table->eliminarcama($id);
+            $obj = new Application_Model_DbTable_Camas();
+            $obj->eliminarcama($id);
             echo $this->tabla_camas();
         }
     }
+    /**
+     * select_habitacion()
+     * * Esta funcion crea el template SELECT HTML que sera mostrado en el view
+     * * Obtiene una lista de las habitaciones
+     * ! se ejecuta despues de: index, crear, editar, eliminar
+     * @param obj Crea un objeto tipo DbTable py realiza el metodo listar
+     */
+
     public function select_habitacion()
     {
-        $table_m = new Application_Model_DbTable_Habitaciones();
-        $datosarea = $table_m->listar();
+        $obj = new Application_Model_DbTable_Habitaciones();
+        $datosarea = $obj->listar();
         $Listaarea = '<div  class="form-group">';
         if (!$datosarea) {
             $Listaarea .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -91,10 +141,18 @@ class CamasController extends Zend_Controller_Action
         }
         return $Listaarea;
     }
+    /**
+     * select_estado_cama()
+     * * Esta funcion crea el template SELECT HTML que sera mostrado en el view
+     * * Obtiene una lista de los estados de las camas: disponible, ocupada, en desinfeccion
+     * ! se ejecuta despues de: index, crear, editar, eliminar
+     * @param obj Crea un objeto tipo DbTable py realiza el metodo listar
+     */
+
     public function select_estado_cama()
     {
-        $table_m = new Application_Model_DbTable_Camas();
-        $datosarea = $table_m->listar_estado_cama();
+        $obj = new Application_Model_DbTable_Camas();
+        $datosarea = $obj->listar_estado_cama();
         $Listaarea = '<div  class="form-group">';
         if (!$datosarea) {
             $Listaarea .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -115,10 +173,17 @@ class CamasController extends Zend_Controller_Action
         }
         return $Listaarea;
     }
+    /**
+     * tabla_camas()
+     * * Esta funcion crea el template HTML que sera mostrado en el view
+     * ! se ejecuta despues de: index, crear, editar, eliminar
+     * @param obj Crea un objeto tipo DbTable py realiza el metodo listar
+     */
+
     public function tabla_camas()
     {
-        $table_m = new Application_Model_DbTable_Camas();
-        $datos = $table_m->listar();
+        $obj = new Application_Model_DbTable_Camas();
+        $datos = $obj->listar();
         $cadena = '';
         if (!$datos) {
             $cadena .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -128,17 +193,17 @@ class CamasController extends Zend_Controller_Action
                     </button>
                 </div>';
         } else {
-            $cadena .= '<table class="table table-sm dataTable" id="dataTableCamas" width="100%">
-                <thead>
+            $cadena .= '<table class="table  table-bordered table-sm dataTable" id="dataTableCamas" width="100%" > 
+                <thead class="table-dark" >
                 <tr>
-                    <th class="text-primary">ID</th>
-                    <th class="text-primary">DESCRIPCION</th>
-                    <th class="text-primary">HABITACION</th>
-                    <th class="text-primary">ESPECIALIDAD</th>
-                    <th class="text-primary">PISO</th>
-                    <th class="text-primary">AREA</th>
-                    <th class="text-primary">ESTADO</th>
-                    <th class="text-primary ">ACCION</th>
+                    <th >ID</th>
+                    <th >DESCRIPCION</th>
+                    <th >HABITACION</th>
+                    <th >ESPECIALIDAD</th>
+                    <th >PISO</th>
+                    <th >AREA</th>
+                    <th >ESTADO</th>
+                    <th >ACCION</th>
                 </tr>
                 </thead>
                 <tbody>';
@@ -158,11 +223,11 @@ class CamasController extends Zend_Controller_Action
                 
                 <!--  debo enviar la busqueda por ajax -->
                 <button type='button' class='btn btn-outline-dark btn-sm border-0 ' 
-                onclick='editarModal(". $item->cama_id .",". $item->habitacion_id .",". $item->cama_estado .",`". $item->cama_nombre ."`)' >
-                    <i class='fas fa-edit  '></i>
+                onclick='editarModal(". $item->cama_id .",". $item->habitacion_id .",". $item->cama_estado_id .",`". $item->cama_nombre ."`)' >
+                    <i class='far fa-edit  '></i>
                 </button>
                 <button type='button' class='btn btn-outline-danger btn-sm border-0' onclick='eliminar(". $item->cama_id .")' >
-                    <i class='fas fa-trash '></i>
+                    <i class='far fa-trash-alt'></i>
                 </button>
                 </div>
                 </td>
@@ -173,5 +238,41 @@ class CamasController extends Zend_Controller_Action
         }
 
         return $cadena;
+    }
+    /**
+     * preDispatch()
+     * * Funcion para validacion de autenticacion
+     * * Controla tambien el permiso de usuario a las diferentes rutas
+     * ! se ejecuta antes de cualquier accion
+     * @param auth obtiene el usuario que esta autenticado
+     * @param controlador,accion almacena el nombre del controlador y de la accion respectivamente
+     * @param obj crea un objeto tipo usuario 
+     * @param permisos consulta los permisos de usuario desde la bdd
+     */
+
+    public function preDispatch()
+    {
+        $auth = Zend_Auth::getInstance();
+        $controlador=Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
+        $accion=Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+        if (!$auth->hasIdentity()) {                                /* Si no existe una sesion activa: redirige al login*/
+            $this->_redirect("iniciar_sesion");
+
+        } elseif ($auth->hasIdentity()) {
+            $user = $auth->getIdentity();
+            $obj = new Application_Model_DbTable_Permisos();
+            $permisos = $obj->listar_permisos_usuario($user->perf_id);
+            /**
+             * * compara los permisos del usuario de la base de datos
+             * * con la ruta actual, si no tiene acceso, envia a una pagina de error.
+             */
+            foreach ($permisos as $item) {                  
+                if ($item->ctrl_nombre == $controlador and
+                        $item->accion_nombre == $accion and
+                        $item->permiso == 'deny') {
+                            $this->_redirect('error/error?msg=sitio'); //--envia a una pagina de error de permiso
+                }
+            }
+        }
     }
 }

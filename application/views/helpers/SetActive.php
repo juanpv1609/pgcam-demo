@@ -2,11 +2,14 @@
 class Zend_View_Helper_SetActive extends Zend_View_Helper_Abstract
 {
 
-    public function setActive($controladorName)
+    public function setActive($controlador,$accion)
     {
-        $controlador = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
-        if ($controladorName == $controlador) {
-            return "active";
-        }
+        
+        $page = new Zend_Navigation_Page_Mvc(array(
+            'action' => $accion,
+            'controller' => $controlador
+            )); 
+        
+        return ($page->isActive()) ? "active" : " ";
     }
 }

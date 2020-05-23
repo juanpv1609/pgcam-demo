@@ -5,17 +5,18 @@
   <?php echo $this->render('_head.phtml'); ?>
 </head>
 
-<body class="align-middle" style="background-image: url('<?php echo $this->baseUrl(); ?>/assets/img/interlaced.png');">
-  <div class="container animated--grow-in ">
+<body  class="bg bg-gradient-light">
+  <div class="container">
+    <div class="d-none d-lg-block py-5"></div>
     <div class="row  justify-content-center ">
-      <div class="col-xl-9 col-lg-11 col-md-8 ">
-        <div class="card  o-hidden bg-light border  my-5">
-          <div class="card-header justify-content-center ">
-            <h6 class="font-weight-bold my-auto text-primary text-center">
+      <div class="col-xl-8 col-lg-12 col-md-8 ">
+        <div class="card bg-light border-0 rounded shadow-lg my-3">
+          <div class="card-header justify-content-center border-0">
+            <h6 class="font-weight-bold  text-primary text-center py-2">
               HOSPITAL GINECO OBSTÉTRICO PEDIÁTRICO DE NUEVA AURORA LUZ ELENA ARISMENDI</h6>
           </div>
           <?php echo $this->layout()->content; ?>
-          <div class="card-footer p-0">
+          <div class="card-footer  px-0   ">
             <?php echo $this->render('_footer.phtml'); ?>
           </div>
         </div>
@@ -53,13 +54,14 @@
               </div>
               <div id="mensaje">
               </div>
+              <p class="small text-justify text-gray-500 ">A continuacion se enviará una clave provisional al correo ingresado.</p>
             </div>
           </div>
 
         </div>
-        <div class="modal-footer d-flex justify-content-between">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary" onclick="recuperarclave()">Aceptar</button>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-primary btn-icon-split" onclick="recuperarclave()">
+            <span class="icon text-white-50"><i class="fas fa-key"></i></span><span class="text">Recuperar contraseña</span></button>
         </div>
       </div>
     </div>

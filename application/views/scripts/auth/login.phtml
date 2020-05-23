@@ -3,69 +3,71 @@
 <div class="card-body ">
   <!-- Nested Row within Card Body -->
   <div class="row ">
-    <div class="col-lg-6 d-none d-lg-block bg-login-image">
-      <img class="card-img-top" src="<?php echo $this->baseUrl(); ?>/assets/img/login.svg" alt="Login">
-    </div>
     <div class="col-lg-6 ">
-      <div class="text-center">
-        <h1 class="h2 text-gray-900 mb-4">Iniciar Sesión!</h1>
-      </div>
-      <form class="user needs-validation" id="login" name="login" action="" method="post" novalidate>
-        <div class="form-group input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text "><i class="far fa-envelope""></i></span>
+      <img class="card-img-top h-100" src="<?php echo $this->baseUrl(); ?>/assets/img/login.svg" alt="Login">
+    </div>
+    <div class="col-lg-6 h-100">
+      <div class="pt-5">
+        <div class="text-center">
+          <h1 class="h1 text-gray-900 mb-4">Iniciar Sesión!</h1>
         </div>
-          <input type="email" autofocus class="form-control " id="email" name="email" aria-describedby="emailHelp"
-            required placeholder="Ingrese su correo electronico..." autocomplete="off"
-            data-toggle="tooltip" data-placement="bottom" title="ejemplo@correo.com"
-            onkeypress="this.value = this.value.toLowerCase();"
-            value="<?php if (isset($this->usuario_value)) echo $this->usuario_value; ?>">
-            
-          <div class="valid-feedback"></div>
-          <div class="invalid-feedback">
-            Por favor ingrese un correo electronico valido.
-          </div>
-        </div>
-        <div class="form-group input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text "><i class="fas fa-key "></i></span>
-        </div>
-          <input type="password" class="form-control " name="password" id="password" required
-            placeholder="Ingrese su contraseña..." autocomplete="off">
-            <div class="input-group-append">
-                <span id="show_password" class="input-group-text "
-                data-toggle="tooltip" data-placement="right" title="Mostrar/Ocultar"
-                 onclick="mostrarPassword()">
-                  <i class="far fa-eye-slash icon "></i>
-                </span>
+        <form class="user needs-validation" id="login" name="login" action="" method="post" novalidate>
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text "><i class="far fa-envelope "></i></span>
+                </div>
+                  <input type=" email" autofocus class="form-control rounded-right " id="email" name="email" aria-describedby="emailHelp"
+                  required placeholder="Ingrese su correo electronico..." autocomplete="off" data-toggle="tooltip"
+                  data-placement="bottom" title="ejemplo@correo.com" onkeyup="this.value = this.value.toLowerCase();"
+                  value="<?php if (isset($_GET['correo'])) echo $_GET['correo']; ?>">
+        
+                  <div class="valid-feedback"></div>
+                  <div class="invalid-feedback">
+                    Por favor ingrese un correo electronico valido.
+                  </div>
             </div>
-          <div class="valid-feedback">
-          </div>
-          <div class="invalid-feedback">
-            Debe ingresar su contraseña.
-          </div>
+            <div class="form-group input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text "><i class="fas fa-key "></i></span>
+              </div>
+              <input type="password" class="form-control  border-right-0" name="password" id="password" required
+                placeholder="Ingrese su contraseña..." autocomplete="off">
+              <div class="input-group-append">
+                <span id="show_password" class="input-group-text  rounded-right  border-left-0" data-toggle="tooltip" data-placement="right"
+                  title="Mostrar/Ocultar" onclick="mostrarPassword()">
+                  <i class="far fa-eye-slash icon text-primary"></i>
+                </span>
+              </div>
+              <div class="valid-feedback">
+              </div>
+              <div class="invalid-feedback">
+                Debe ingresar su contraseña.
+              </div>
+            </div>
+            <!-- <div class="form-group">
+                              <div class="custom-control custom-checkbox small">
+                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                <label class="custom-control-label" for="customCheck">Recordarme</label>
+                              </div>
+                            </div> -->
+            
+            <?php if (!empty($this->message))
+                     echo $this->message; ?>
+        
+            <button type="submit" onclick="SendFormLogin(event);" class="btn btn-primary btn-block">
+              <strong>Ingresar</strong>
+            </button>
+        </form>
+        
+        <hr>
+        <div class="d-flex justify-content-between text-center">
+          <button class="btn btn-link btn-sm" title="Haga click si olvidó su contraseña" data-toggle="modal"
+            data-target="#exampleModal">Olvido su
+            contraseña?</button>
+          <a class="btn btn-link btn-sm" data-toggle="tooltip" data-placement="bottom"
+            title="Haga click para crear una nueva cuenta" href="<?php echo $this->baseUrl();?>/nueva_cuenta">Crear una
+            cuenta!</a>
         </div>
-        <!-- <div class="form-group">
-                      <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Recordarme</label>
-                      </div>
-                    </div> -->
-        <?php if (!empty($this->message))
-             echo $this->message; ?>
-
-        <button type="submit" onclick="SendFormLogin(event);" class="btn btn-primary btn-block">
-          <strong>Ingresar</strong>
-        </button>
-      </form>
-
-      <hr>
-      <div class="d-flex justify-content-between text-center">
-        <button class="btn btn-link btn-sm"  title="Haga click si olvidó su contraseña"
-        data-toggle="modal" data-target="#exampleModal">Olvido su
-          contraseña?</button>
-        <a class="btn btn-link btn-sm" data-toggle="tooltip" data-placement="bottom" title="Haga click para crear una nueva cuenta"
-          href="<?php echo $this->url(array('controller' => 'auth', 'action' => 'register')); ?>">Crear una cuenta!</a>
       </div>
 
     </div>

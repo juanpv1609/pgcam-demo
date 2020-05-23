@@ -2,23 +2,18 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-function mostrarPassword(){
+function mostrarPassword() {
     var cambio = document.getElementById("password");
-    if(cambio.type == "password"){
+    if (cambio.type == "password") {
         cambio.type = "text";
         $('.icon').removeClass('far fa-eye-slash').addClass('far fa-eye');
-    }else{
+    } else {
         cambio.type = "password";
         $('.icon').removeClass('far fa-eye').addClass('far fa-eye-slash');
     }
-} 
+}
 
-$(document).ready(function () {
-//CheckBox mostrar contraseña
-$('#ShowPassword').click(function () {
-    $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
-});
-});
+
 function isValidEmail(mail) {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(mail);
 }
@@ -29,15 +24,14 @@ function SendFormLogin(e) {
     tecla = (document.all) ? e.keyCode : e.which;
     if (tecla == 13) {
         e.preventDefault(); //prevent default action
-
         document.login.submit();
-        
     }
 
 }
 
 function SendFormRegister() {
     //var nombre = $("#ci").val();
+    var Toast;
     var nombre = $("#nombre").val();
     var apellido = $("#apellido").val();
     var email = $("#email").val();
@@ -52,40 +46,57 @@ function SendFormRegister() {
             if (clave == clave2) {
                 $.ajax(
                     {
-                        dataType: "json",
+                        dataType: "html",
                         type: "POST",
                         url: dir + "/auth/agregar", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
                         data: "nombre=" + nombre + "&apellido=" + apellido + "&email=" + email
                             + "&clave=" + clave + "&comboPerfil=" + comboPerfil, //Se añade el parametro de busqueda del medico
                         beforeSend: function (data) {
-
+                             Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000,
+                                onOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            });
+                            Toast.fire({
+                                icon: 'info',
+                                title: 'Procesando...'
+                            });
                         },
                         success: function (requestData) {//armar la tabla
-                            if (!requestData.data.correo == '') {
-                                const Toast = Swal.mixin({
+                            if (requestData == 0) {
+                                 Toast = Swal.mixin({
                                     toast: true,
                                     position: 'top-end',
                                     showConfirmButton: false,
                                     timer: 3000,
                                     onOpen: (toast) => {
-                                      toast.addEventListener('mouseenter', Swal.stopTimer)
-                                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
                                     }
-                                  });
-                                  Toast.fire({
+                                });
+                                Toast.fire({
                                     icon: 'error',
-                                    title: 'El correo ingresado ya existe!'
-                                  });
+                                    title: 'El correo: '+email+' ya existe!'
+                                });
+                                $("#email").val('').focus();
                             } else {
+                                
                                 Swal.fire({
                                     position: 'top',
                                     title: 'Correcto!',
                                     text: 'Cuenta creada exitosamente.',
                                     width: '22rem',
                                     icon: 'success',
-                                    confirmButtonText: 'Aceptar'
+                                    confirmButtonText: 'Aceptar',
+                                    timer: 1000,
+                                    timerProgressBar: true
                                 }).then((result) => {
-                                    window.location.href = dir + "/auth/login";
+                                    window.location.href = dir + "/auth/login?correo="+email;
 
                                 })
 
@@ -110,15 +121,15 @@ function SendFormRegister() {
                     showConfirmButton: false,
                     timer: 3000,
                     onOpen: (toast) => {
-                      toast.addEventListener('mouseenter', Swal.stopTimer)
-                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
                     }
-                  });
-                  Toast.fire({
+                });
+                Toast.fire({
                     icon: 'error',
                     title: 'Deben coincidir las contraseñas!'
-                  });
-                }
+                });
+            }
         }
     });
 }
@@ -140,10 +151,12 @@ function logout() {
             Swal.fire({
                 position: 'top',
                 title: 'Correcto!',
-                text: 'Ah finalizado su sesion.',
+                text: 'Ah finalizado su sesión.',
                 width: '22rem',
                 icon: 'success',
-                confirmButtonText: 'Aceptar'
+                confirmButtonText: 'Aceptar',
+                timer: 1500,
+                timerProgressBar: true,
             }).then((result) => {
                 window.location.href = dir + "/auth/logout";
             })
@@ -174,7 +187,7 @@ function recuperarclave() {
                         .html('<i class="fas fa-spinner fa-pulse"></i><span> Espere por favor, enviando correo electronico...</span>');
                 },
                 success: function (requestData) {//armar la tabla
-                    if (!requestData.data.correo == "") {
+                    if (requestData.existe) { // verifica si existe = true
                         Swal.fire({
                             position: 'top',
                             title: 'Correcto!',

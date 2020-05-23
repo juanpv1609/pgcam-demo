@@ -1,29 +1,42 @@
-<div class="card ">
-	<div class="card-header d-flex justify-content-between">
-		<h5 class="m-0 font-weight-bold text-primary"><?php echo $this->titulo; ?></h5>
-		<div>
-			<form class="needs-validation" method="post" id="paciente_busca" name="paciente_busca" novalidate>
-				<div class="input-group input-group-sm ">
-					<input type="text" class="form-control" id="busca-paciente" name="busca-paciente"
-						placeholder="Buscar por hc o cedula..." aria-label="Search" aria-describedby="buscar_paciente_hc"
-						required autocomplete="off">
-					<div class="input-group-append">
-						<button class="btn btn-primary" type="submit" onclick="BuscaPaciente();">
-							<i class="fas fa-search fa-sm"></i>
-						</button>
-					</div>
-					<div class="valid-feedback">
-					</div>
-					<div class="invalid-feedback">
-					</div>
-				</div>
-			</form>
-
+<div class="card border-left-primary">
+	<div class="card-header bg-light d-flex justify-content-between align-middle pb-0">
+		<h4 class="h4  text-dark"><?php echo $this->titulo; ?>
+			 <i class="fas fa-fw <?php echo $this->icono; ?> text-dark"></i></h4>
+			 <nav aria-label="breadcrumb">
+				  <ol class="breadcrumb bg-transparent  text-xxs p-0 ">
+						<li class="breadcrumb-item"><a href="<?php echo $this->baseUrl(); ?>/panel_de_control">
+							 <i class="fas fa-home "></i>Inicio</a></li>
+						<li class="breadcrumb-item text-capitalize">
+							 <a href="<?php echo $this->baseUrl(); ?>/<?php echo $this->controlador; ?>">
+								  <i class="fas fa-fw fa-user-injured"></i>
+								  <?php echo $this->controlador; ?></a></li>
+						<li class="breadcrumb-item active text-capitalize" aria-current="page">
+							 <?php echo $this->accion; ?></li>
+				  </ol>
+			 </nav>      
+		
+  </div>
+  <div class="card-body text-xs" id="contenido">
+  <div class="d-flex justify-content-end pb-4" >
+	<form class="needs-validation" method="post" id="form_paciente_busca" name="form_paciente_busca" novalidate>
+		<div class="input-group input-group-sm ">
+			<input type="text" class="form-control" id="busca_paciente" name="busca_paciente"
+			value="<?php if (isset($_GET['id'])) echo $_GET['id']; ?>"
+				placeholder="Buscar por hc o cedula..." aria-label="Search" aria-describedby="buscar_paciente_hc"
+				required autocomplete="off">
+			<div class="input-group-append">
+				<button class="btn btn-primary" type="submit" onclick="BuscaPaciente();">
+					<i class="fas fa-search fa-sm"></i>
+				</button>
+			</div>
+			<div class="valid-feedback">
+			</div>
+			<div class="invalid-feedback">
+			</div>
 		</div>
-	</div>
+	</form>
+</div>
 	<form class="needs-validation" method="post" id="paciente_admision" name="paciente_admision" novalidate>
-		<div class="card-body text-xs" id="contenido">
-
 			<div class="row">
 				<div class="col-sm-2">
 					<div class="form-group">
@@ -105,8 +118,8 @@
 				<div class="col-sm-2">
 					<div class="form-group">
 						<label for="comboCant">Canton:</label>
-						<select class="form-control form-control-sm js-example-basic-single" name="comboCant" id="comboCant"
-							onchange="getParroquias();"  required autocomplete="off">
+						<select class="form-control form-control-sm " name="comboCant" id="comboCant"
+							onchange="getParroquias();" onselect=""  required autocomplete="off">
 						</select>
 						<div class='valid-feedback'>
 						</div>
@@ -117,7 +130,7 @@
 				<div class="col-sm-2">
 					<div class="form-group">
 						<label for="comboParroq">Parroquia:</label>
-						<select class="form-control form-control-sm js-example-basic-single " name="comboParroq" id="comboParroq" required
+						<select class="form-control form-control-sm  " name="comboParroq" id="comboParroq" required
 							autocomplete="off">
 						</select>
 						<div class='valid-feedback'>
@@ -177,7 +190,7 @@
 
 				</div>
 				<div class="col-sm-2">
-					<?php echo $this->getGrupoc(); ?>
+					<?php echo $this->getGrupo(); ?>
 				</div>
 				<div class="col-sm-1">
 					<?php echo $this->getEdad(); ?>
@@ -186,7 +199,8 @@
 				<div class="col-sm-1">
 					<div class="form-group">
 						<label for="comboGenero">Genero:</label>
-						<select name="comboGenero" id="comboGenero" class="form-control form-control-sm js-example-basic-single text-xs" required
+						<select name="comboGenero" id="comboGenero" 
+						class="form-control form-control-sm  text-xs" required
 							autocomplete="off">
 							<option value=""></option>
 							<option value="F">F</option>
@@ -331,20 +345,19 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div  class="card-footer d-flex justify-content-between">
-			<button  class="btn btn-danger btn-icon-split " onclick="window.location.href='<?php echo $this->baseUrl(); ?>/paciente/registrar'">
+		
+		<div  class=" d-flex justify-content-between">
+			<button type="reset" class="btn btn-danger btn-icon-split " >
 				<span class="icon text-white-50"><i class="fas fa-ban"></i></span><span class="text">Cancelar</span>
 			</button>
-			<div id="accionForm">
-				<button type="submit" class="btn btn-primary btn-icon-split " onclick="AdmisionPaciente();">
+				<button type="submit" id="btn_admision" class="btn btn-primary btn-icon-split " onclick="AdmisionPaciente();">
 					<span class="icon text-white-50"><i class="fas fa-paper-plane"></i></span><span class="text">Registrar paciente</span>
 					</button>
-			</div>
-			
+					<button type="submit" id="btn_edicion" class="d-none btn btn-dark btn-icon-split " onclick="EditarAdmisionPaciente();"><span
+							class="icon text-white-50"><i class="fas fa-pen"></i></span><span class="text">Actualizar datos</span></button>
 			
 			
 		</div>
 	</form>
-
+</div>
 </div>
