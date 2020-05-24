@@ -74,17 +74,30 @@ class Application_Model_DbTable_Notificaciones extends Zend_Db_Table_Abstract
      * editarNotificacion()
      * * esta funcion edita notificaciones cambia su estado
      * ! inserta las notificaciones en la bdd
-     * TODO: esta accion debe realizarla un trigger desde postgres
      * ! consideraciones que deben generar una notificacion:
      */
-    public function editarNotificacion($id)
+    public function editarNotificacion($id,$estado)
     {
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = "UPDATE notificaciones
-        SET not_estado=1
+        SET not_estado=".$estado."
         WHERE not_id=".$id.";";
+        return $db->fetchRow($select);
+    }
+    /**
+     * eliminarNotificacion()
+     * * esta funcion elimina notificaciones 
+     * ! solo usuario administrador puede hacerlo
+     */
+    public function eliminarNotificacion($id)
+    {
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "DELETE FROM notificaciones
+                    WHERE not_id=".$id.";";
         return $db->fetchRow($select);
     }
 

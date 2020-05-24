@@ -40,8 +40,25 @@ class NotificacionesController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
         if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
             $id = $this->getRequest()->getParam('id');
+            $estado = $this->getRequest()->getParam('estado');
             $obj = new Application_Model_DbTable_Notificaciones();
-            $obj->editarNotificacion($id);
+            $obj->editarNotificacion($id,$estado);
+            $obj->listar();
+
+            echo $this->tabla_notificaciones();
+
+        }
+
+    }
+    public function eliminarAction()
+    {
+        $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
+        $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
+        if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
+            $id = $this->getRequest()->getParam('id');
+            $obj = new Application_Model_DbTable_Notificaciones();
+            $obj->eliminarNotificacion($id);
+            $obj->listar();
             echo $this->tabla_notificaciones();
 
         }
@@ -58,13 +75,15 @@ class NotificacionesController extends Zend_Controller_Action
     public function tabla_notificaciones()
     {
         $fc = Zend_Controller_Front::getInstance()->getRequest()->getBaseUrl();
+        $usuario = Zend_Auth::getInstance()->getIdentity();
+
         $estado ='';
         $obj = new Application_Model_DbTable_Notificaciones();
         $datosarea = $obj->listarTodo();
         $Listaarea = '';
         if (!$datosarea) {
             $Listaarea .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Error !</strong> No se encontraron result ados
+                    <strong>Error !</strong> No se encontraron resultados
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -84,8 +103,9 @@ class NotificacionesController extends Zend_Controller_Action
                 </thead>
                 <tbody>';
             foreach ($datosarea as $item):
+                //if(isset($this->user) /*&&($this->user->perf_id==1)*/)
             $estado = ($item->not_estado==0) ? 'Creada' : 'Leida';
-            $boton_eliminar=($item->not_estado==0) ? 'disabled' : '';
+            $boton_eliminar=(($item->not_estado==0) ) ? 'disabled' : '';
             $Listaarea .= "<tr>";
             $Listaarea .= "<td>" . $item->not_id . "</td>";
             $Listaarea .= "<td>" . $item->causa_descripcion . "</td>";
@@ -99,16 +119,27 @@ class NotificacionesController extends Zend_Controller_Action
                     <a type='button' class='btn btn-outline-primary btn-sm border-0 ' 
                         href='".$fc."/listar_paciente?ci=".$item->p_ci."' title='Ver'>
                             <i class='fas fa-search '></i>
-                        </a>
-                        <button type='button' class='btn btn-outline-success btn-sm border-0 ' 
-                        onclick='NotificacionEstado(". $item->not_id .")' title='Marcar como leida'>
-                            <i class='fas fa-check-double  '></i>
-                        </button>
-                        <button type='button' class='btn btn-outline-danger btn-sm border-0 ' $boton_eliminar
-                        onclick='eliminar(". $item->not_id .")' title='Eliminar'>
-                            <i class='far fa-trash-alt '></i>
-                        </button>
-                        </div>
+                        </a>";
+                        /**
+                         * ? el codigo a continuacion permite marcar o desmarcar una notificacion
+                         * ! LEIDA o NO LEIDA
+                         */
+                        $Listaarea .= ($item->not_estado==0) ? "<button type='button' class='btn btn-outline-success btn-sm border-0 ' 
+                                    onclick='NotificacionEstado(". $item->not_id .",1)' title='Marcar como leida'>
+                                        <i class='fas fa-eye  '></i>
+                                    </button>" : "<button type='button' class='btn btn-outline-danger btn-sm border-0 ' 
+                                    onclick='NotificacionEstado(". $item->not_id .",0)' title='Marcar como no leida'>
+                                        <i class='fas fa-eye-slash  '></i>
+                                    </button>" ;
+                        /**
+                         * ? El siguiente codigo permite visualizar el boton eliminar solo al perfil administrador
+                         */
+                        $Listaarea .= ($usuario->perf_id==1) ? "<button type='button' class='btn btn-outline-danger btn-sm border-0 ' $boton_eliminar
+                                    onclick='eliminarNotificacion(". $item->not_id .")' title='Eliminar'>
+                                        <i class='far fa-trash-alt '></i>
+                                    </button>" : "";               
+
+                $Listaarea .= "</div>
                         
                     </td>
                 </tr>";

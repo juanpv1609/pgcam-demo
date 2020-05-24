@@ -18,8 +18,10 @@ class Application_Model_DbTable_Cie10 extends Zend_Db_Table_Abstract
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
-        $select = "SELECT *
-        FROM cie10_sub_categoria
+        $select = "SELECT s.sub_cod,s.descripcion_sub,c.descripcion
+        FROM cie10_sub_categoria s
+        JOIN cie10_categoria c
+        ON c.cie10_categoria_id = s.cie10_categoria_id
         WHERE sub_cod LIKE '" . strtoupper($dato) . "%'
         OR descripcion_sub LIKE '" . strtoupper($dato) . "%';";
         return $db->fetchAll($select);
@@ -38,10 +40,14 @@ class Application_Model_DbTable_Cie10 extends Zend_Db_Table_Abstract
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
-        $select = "SELECT *
-        FROM cie10_categoria
-        WHERE cie10_categoria_id LIKE '" . strtoupper($dato) . "%'
-        OR descripcion LIKE '" . ucwords($dato) . "%';";
+        $select = "SELECT c.*, s.descripcion_sub,c_a.descripcion as des_capitulo
+        FROM cie10_categoria c
+        JOIN cie10_sub_capitulo s
+        ON s.cie10_sub_capitulo_id = c.cie10_sub_capitulo_id
+        JOIN cie10_capitulo c_a
+        ON c_a.cie10_capitulo_id = s.cie10_capitulo_id
+        WHERE c.cie10_categoria_id LIKE '" . strtoupper($dato) . "%'
+        OR c.descripcion LIKE '" . ucwords($dato) . "%';";
         return $db->fetchAll($select);
     }
     /**

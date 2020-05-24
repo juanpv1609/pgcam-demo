@@ -23,6 +23,7 @@ function buscaPorCodigo() {
                     },
                     success: function (requestData) {
                         $("#data_Table").html(requestData);
+                        dataTables();
                         toDataTable("#dataTableCie10");
                     },
                     error: function (requestData, strError, strTipoError) {
@@ -59,6 +60,7 @@ function buscaPorCategoria() {
                     success: function (requestData) {//armar la tabla
 
                         $("#data_Table").html(requestData);
+                        dataTables();
                         toDataTable("#dataTableCie10Cat");
                     },
                     error: function (requestData, strError, strTipoError) {

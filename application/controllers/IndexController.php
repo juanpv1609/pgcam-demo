@@ -145,7 +145,7 @@ class IndexController extends Zend_Controller_Action
         $Listaarea = '';
         if (!$data) {
             $Listaarea .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Error !</strong> No se encontraron iconoultados
+                    <strong>Error !</strong> No se encontraron resultados
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

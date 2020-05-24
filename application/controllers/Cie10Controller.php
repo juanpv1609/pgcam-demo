@@ -184,7 +184,9 @@ class Cie10Controller extends Zend_Controller_Action
                 <thead class="table-dark" >
                 <tr>
                     <th >COD</th>
-                    <th >DESCRIPCION SUB CATEGORIA</th>
+                    <th >SUB CATEGORIA</th>
+                    <th >CATEGORIA</th>
+                    <th ></th>
                 </tr>
                 </thead>
                 <tbody>';
@@ -193,6 +195,10 @@ class Cie10Controller extends Zend_Controller_Action
                 $cadena .= "<tr>";
             $cadena .= "<td>" . $item->sub_cod . "</td>";
             $cadena .= "<td>" . $item->descripcion_sub . "</td>";
+            $cadena .= "<td>" . $item->descripcion . "</td>";
+            $cadena .= "<td></td>";
+
+
 
             $cadena .= '</tr>';
             endforeach;
@@ -227,6 +233,9 @@ class Cie10Controller extends Zend_Controller_Action
                 <tr>
                     <th >COD</th>
                     <th >DESCRIPCION CATEGORIA</th>
+                    <th >SUBCAPITULO</th>
+                    <th >CAPITULO</th>
+                    <th ></th>
                 </tr>
                 </thead>
                 <tbody>';
@@ -235,6 +244,11 @@ class Cie10Controller extends Zend_Controller_Action
                 $cadena .= "<tr>";
             $cadena .= "<td>" . $item->cie10_categoria_id . "</td>";
             $cadena .= "<td>" . $item->descripcion . "</td>";
+            $cadena .= "<td>" . $item->descripcion_sub . "</td>";
+            $cadena .= "<td>" . $item->des_capitulo . "</td>";
+            $cadena .= "<td></td>";
+
+
 
             $cadena .= '</tr>';
             endforeach;
