@@ -357,11 +357,17 @@ function DatosCamaPaciente() {
             url: dir + "/paciente/buscacamapaciente", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
             data: "paciente=" + paciente_id, //Se añade el parametro de busqueda del medico
             beforeSend: function (data) {
-
+                  $('#mensaje').removeClass('d-none').html('Procesando...');
+                  $('#datosPacienteCama').addClass('d-none');
+                  $('#datosPacienteDiagnosticos').addClass('d-none');
+                  $('#datosPacienteMasInfo').addClass('d-none');
+                  $('#datosPacienteContacto').addClass('d-none');
             },
-            success: function (requestData) {//armar la tabla                       
+            success: function (requestData) {//armar la tabla
+                  $('#mensaje').addClass('d-none').html('');                        
                   if (requestData.data[0]) {
-
+                        $('#datosPacienteCama').removeClass('d-none');
+                        $('#datosPacienteDiagnosticos').removeClass('d-none');
                         $('#p_especialidad').text(requestData.data[0].especialidad_nombre);
                         $('#p_habitacion').text(requestData.data[0].habitacion_nombre);
                         $('#p_cama').text(requestData.data[0].cama_nombre);
@@ -414,6 +420,7 @@ function DatosPaciente(paciente_id,opcion) {
                         data: "paciente=" + paciente + "&opcion=" + op, //Se añade el parametro de busqueda del medico
                         beforeSend: function (data) {
                               $('#mensaje').removeClass('d-none').html('Procesando...');
+                              $('#navs-info').html('Procesando...');
                               $('#datosPacienteCama').addClass('d-none');
                               $('#datosPacienteDiagnosticos').addClass('d-none');
                               $('#datosPacienteMasInfo').addClass('d-none');
@@ -423,8 +430,22 @@ function DatosPaciente(paciente_id,opcion) {
                         success: function (requestData) {//armar la tabla 
                               $('#mensaje').addClass('d-none').html('');  
                               if (requestData.data) {
-                                    if (op == 1) {
-                                          
+                                    if (op == 1) { //emergencia
+                                          $('#navs-info').html(`<nav class="nav nav-pills flex-column flex-sm-row text-xs" >
+                                                      <a class="flex-sm-fill text-sm-center nav-link active py-1" id="info-tab" data-toggle="tab"
+                                                            href="#datosPacienteMasInfo" role="tab" aria-controls="datosPacienteMasInfo" aria-selected="false">
+                                                            <i class="fas fa-plus-circle px-2"></i>Mas Info</a>
+                                                      <a class="flex-sm-fill text-sm-center nav-link  py-1" id="paciente-tab" data-toggle="tab"
+                                                            href="#datosPacienteContacto" role="tab" aria-controls="datosPacienteContacto" aria-selected="true">
+                                                            <i class="fas fa-address-book px-2"></i>Contacto</a>
+                                                      <a class="flex-sm-fill text-sm-center nav-link py-1" id="cama-tab" data-toggle="tab"
+                                                            href="#datosPacienteCama" role="tab" aria-controls="datosPacienteCama" aria-selected="false">
+                                                            <i class="fas fa-bed px-2"></i>Cama</a>
+                                                      <a class="flex-sm-fill text-sm-center nav-link py-1" id="diag-tab" data-toggle="tab"
+                                                            href="#datosPacienteDiagnosticos" role="tab" aria-controls="datosPacienteDiagnosticos"
+                                                            aria-selected="false">
+                                                            <i class="fas fa-heartbeat px-2"></i>Diagnosticos</a>
+                                                </nav>`); 
                                           $('#datosPacienteCama').removeClass('d-none');
                                           $('#datosPacienteDiagnosticos').removeClass('d-none');
                                           $('#datosPacienteMasInfo').removeClass('d-none');
@@ -454,8 +475,19 @@ function DatosPaciente(paciente_id,opcion) {
                                           $('#apellido_paterno').text(requestData.data.p_apellidos + " " + requestData.data.p_nombres);
                                           $('#cedula').text(requestData.data.p_ci);
                                     } else if (op == 2){    
+                                          $('#navs-info').html(`<nav class="nav nav-pills flex-column flex-sm-row text-xs" >
+                                                      
+                                                      <a class="flex-sm-fill text-sm-center nav-link active py-1" id="cama-tab" data-toggle="tab"
+                                                            href="#datosPacienteCama" role="tab" aria-controls="datosPacienteCama" aria-selected="false">
+                                                            <i class="fas fa-bed px-2"></i>Cama</a>
+                                                      <a class="flex-sm-fill text-sm-center nav-link py-1" id="diag-tab" data-toggle="tab"
+                                                            href="#datosPacienteDiagnosticos" role="tab" aria-controls="datosPacienteDiagnosticos"
+                                                            aria-selected="false">
+                                                            <i class="fas fa-heartbeat px-2"></i>Diagnosticos</a>
+                                                </nav>`); 
                                           $('#datosPacienteCama').removeClass('d-none');
-                                          $('#datosPacienteDiagnosticos').removeClass('d-none');                          
+                                          $('#datosPacienteDiagnosticos').removeClass('d-none'); 
+                                                                   
                                           $('#paciente_hc').text(requestData.data.hc_digital);
                                           $('#paciente_id').text(requestData.data.hc_digital);
                                           $('#apellido_paterno').text(requestData.data.apellido_paterno + " "+

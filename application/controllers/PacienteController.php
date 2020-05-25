@@ -375,7 +375,7 @@ class PacienteController extends Zend_Controller_Action
         if (!$data_paciente_cama) {
             $cadena_paciente_cama .= '';
         } else {
-            $cadena_paciente_cama .= '<table class="table table-bordered table-sm dataTable" id="dataTablePacienteCama" width="100%" >
+            $cadena_paciente_cama .= '<table class="table table-bordered table-sm dataTable pb-4" id="dataTablePacienteCama" width="100%" >
             <caption>Pacientes con cama asignada</caption>
                 <thead class="thead-dark">
                 <tr >
@@ -412,7 +412,7 @@ class PacienteController extends Zend_Controller_Action
                     </td>
                 </tr>";
             endforeach;
-            $cadena_paciente_cama .= "</tbody></table>";
+            $cadena_paciente_cama .= "</tbody></table><hr>";
         }
         /**
              * ? pacientes sin cama asignada
