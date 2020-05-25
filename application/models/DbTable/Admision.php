@@ -142,7 +142,7 @@ class Application_Model_DbTable_Admision extends Zend_Db_Table_Abstract
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
-        $select = "select * from cama_paciente";
+        $select = "select * from cama_paciente;";
         return $db->fetchAll($select);
     }
     /**
@@ -159,7 +159,7 @@ class Application_Model_DbTable_Admision extends Zend_Db_Table_Abstract
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = "select * from paciente
 where p_id not in (select p_id from cama_paciente)
-and p_ci not in (select paciente_ci from cama_paciente)";
+and p_ci not in (select paciente_ci from cama_paciente);";
         return $db->fetchAll($select);
     }
     /**

@@ -369,16 +369,17 @@ class PacienteController extends Zend_Controller_Action
         $obj = new Application_Model_DbTable_Admision();
         $data_paciente_cama = $obj->listarPacientesCama();
         
-        $Listaarea = '';
+        $cadena_paciente_cama = '';
+        $cadena_paciente = '';
         if (!$data_paciente_cama) {
-            $Listaarea .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            $cadena_paciente_cama .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <strong>Error !</strong> No se encontraron resultados
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>';
         } else {
-            $Listaarea .= '<table class="table table-bordered table-sm dataTable" id="dataTablePacienteCama" width="100%" >
+            $cadena_paciente_cama .= '<table class="table table-bordered table-sm dataTable" id="dataTablePacienteCama" width="100%" >
             <caption>Pacientes con cama asignada</caption>
                 <thead class="thead-dark">
                 <tr >
@@ -395,13 +396,13 @@ class PacienteController extends Zend_Controller_Action
             $data = $obj->Paciente_info($item->p_id, $item->paciente_ci, $item->entrada);
             $origen_paciente= ($item->entrada==1) ? 'EMERGENCIA' : 'C EXTERNA';
             $boton_editar= ($item->entrada==2) ? 'd-none' : '';
-            $Listaarea .= "<tr>";
-            $Listaarea .= "<td>" . $item->p_id . "</td>";
-            $Listaarea .= "<td>" . $item->paciente_ci . "</td>";
-            $Listaarea .= "<td>". $data->nombre ."</td>";
-            $Listaarea .= "<td>" . $item->fecha_ingreso . "</td>";
-            $Listaarea .= "<td>" . $origen_paciente . "</td>";
-            $Listaarea .= "<td>
+            $cadena_paciente_cama .= "<tr>";
+            $cadena_paciente_cama .= "<td>" . $item->p_id . "</td>";
+            $cadena_paciente_cama .= "<td>" . $item->paciente_ci . "</td>";
+            $cadena_paciente_cama .= "<td>". $data->nombre ."</td>";
+            $cadena_paciente_cama .= "<td>" . $item->fecha_ingreso . "</td>";
+            $cadena_paciente_cama .= "<td>" . $origen_paciente . "</td>";
+            $cadena_paciente_cama .= "<td>
                     <div class='btn-group' role='group' aria-label='Basic example'>
                         <button type='button' class='btn btn-outline-info btn-sm border-0' title='Ver mas'
                         onclick='mostrarModalMasInfo(". $item->p_id .",". $item->entrada .")' ><i class='far fa-eye  '></i>
@@ -415,7 +416,7 @@ class PacienteController extends Zend_Controller_Action
                     </td>
                 </tr>";
             endforeach;
-            $Listaarea .= "</tbody></table>";
+            $cadena_paciente_cama .= "</tbody></table>";
             /**
              * ? pacientes sin cama asignada
              * ! evita duplicados en la consulta 
@@ -423,9 +424,9 @@ class PacienteController extends Zend_Controller_Action
             $data_paciente = $obj->listarPacientes();
 
             if (!$data_paciente) {
-                $Listaarea .= '';
+                $cadena_paciente .= '';
             } else {
-                $Listaarea .= '<table class="table table-bordered table-sm dataTable" id="dataTablePaciente" width="100%" >
+                $cadena_paciente .= '<table class="table table-bordered table-sm dataTable" id="dataTablePaciente" width="100%" >
                 <caption>Pacientes sin cama asignada</caption>
                 <thead class="thead-light">
                 <tr>
@@ -439,13 +440,13 @@ class PacienteController extends Zend_Controller_Action
                 </thead>
                 <tbody>';
                 foreach ($data_paciente as $d):
-            $Listaarea .= "<tr>";
-                $Listaarea .= "<td>" . $d->p_id . "</td>";
-                $Listaarea .= "<td>" . $d->p_ci . "</td>";
-                $Listaarea .= "<td>". $d->p_nombre ." ". $d->p_apellidos ."</td>";
-                $Listaarea .= "<td></td>";
-                $Listaarea .= "<td>EMERGENCIA</td>";
-                $Listaarea .= "<td>
+            $cadena_paciente .= "<tr>";
+                $cadena_paciente .= "<td>" . $d->p_id . "</td>";
+                $cadena_paciente .= "<td>" . $d->p_ci . "</td>";
+                $cadena_paciente .= "<td>". $d->p_nombre ." ". $d->p_apellidos ."</td>";
+                $cadena_paciente .= "<td></td>";
+                $cadena_paciente .= "<td>EMERGENCIA</td>";
+                $cadena_paciente .= "<td>
                     <div class='btn-group' role='group' aria-label='Basic example'>
                         <button type='button' class='btn btn-outline-info btn-sm border-0' title='Ver mas'
                         onclick='mostrarModalMasInfo(". $d->p_id .",1)' ><i class='far fa-eye  '></i>
@@ -462,7 +463,7 @@ class PacienteController extends Zend_Controller_Action
             }
         }
 
-        return $Listaarea;
+        return $cadena_paciente_cama." ".$cadena_paciente;
     }
     /**
      * getcamasAction()
