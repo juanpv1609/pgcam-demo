@@ -341,6 +341,11 @@ function mostrarModalMasInfo(id,opcion) {
 }
 
 function DatosCamaPaciente() {
+      $('#p_especialidad').text('');
+      $('#p_habitacion').text('');
+      $('#p_cama').text('');
+      $('#p_fecha').text('');
+      $('#p_causa').text('');
       for (let i = 1; i <= 3; i++) {
             $("#diagnostico" + i).val('');
             $("#cod" + i).text('');
