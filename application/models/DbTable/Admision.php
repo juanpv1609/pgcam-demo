@@ -67,7 +67,8 @@ class Application_Model_DbTable_Admision extends Zend_Db_Table_Abstract
         $comboFormaLLeg,
         $fuente_info,
         $institucion,
-        $institucion_telefono
+        $institucion_telefono,
+        $usuario
     ) {
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
@@ -75,12 +76,12 @@ class Application_Model_DbTable_Admision extends Zend_Db_Table_Abstract
         $select = "INSERT INTO paciente(p_ci, p_nombres, p_apellidos, p_telefono, id_parroquia,
         p_barrio, p_direccion, p_fecha_n, p_lugar_n, nacionalidad_id, id_grupocultural, p_edad,
         p_sexo, id_estcivil, id_instruccion, p_fecha_admi, p_ocupacion, p_trabajo, tipo_seguro_id,
-        p_referido, p_contacto,p_forma_lleg_id, p_fuente_inf, p_quien_entrega)
+        p_referido, p_contacto,p_forma_lleg_id, p_fuente_inf, p_quien_entrega,usu_id)
         VALUES ('" . $cedula . "', '" . strtoupper($primer_nombre) . " " . strtoupper($segundo_nombre) . "', '" . strtoupper($apellido_paterno) . " " . strtoupper($apellido_materno) . "', '" . $telefono . "', '" . $comboParroq . "',
         '" . $barrio . "', '" . $direccion . "', '" . $fecha_n . "', '" . $lugar_n . "', " . $comboNacionalidad . ", " . $comboGrupo . ", " . $comboEdad . ",
         '" . $comboGenero . "', " . $comboEstado . ", " . $comboInstruccion . ", (select current_timestamp(0)), '" . $ocupacion . "', '" . $trabajo . "', " . $comboTipoSeguro . ",
         '" . $referido . "', ARRAY['" . strtoupper($contacto_nombre) . "','" . strtoupper($contacto_parentezco) . "','" . $contacto_direccion . "','" . $contacto_telefono . "'], " . $comboFormaLLeg . ", '" . $fuente_info . "',
-        ARRAY['" . $institucion . "','" . $institucion_telefono . "']);";
+        ARRAY['" . $institucion . "','" . $institucion_telefono . "'],".$usuario.");";
         return $db->fetchRow($select);
     }
     public function edicionPaciente(
@@ -132,8 +133,21 @@ class Application_Model_DbTable_Admision extends Zend_Db_Table_Abstract
         return $db->fetchRow($select);
     }
     /**
+     * listarPacientesCama
+     * * esta funcion lista los pacientes que tienen una cama asignada de la bdd
+     */
+    public function listarPacientesCama()
+    {
+        //devuelve todos los registros de la tabla
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "select * from cama_paciente";
+        return $db->fetchAll($select);
+    }
+    /**
      * listarPacientes
-     * * esta funcion lista los pacientes de la bdd
+     * * esta funcion lista los pacientes que NO tienen una cama asignada de la bdd
      * TODO: conectar con la bdd HGONA para obtener ese listado de pacientes
      * ! muestra los pacientes ingresados por el formulario 008
      */
@@ -143,7 +157,9 @@ class Application_Model_DbTable_Admision extends Zend_Db_Table_Abstract
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
-        $select = "select * from cama_paciente";
+        $select = "select * from paciente
+where p_id not in (select p_id from cama_paciente)
+and p_ci not in (select paciente_ci from cama_paciente)";
         return $db->fetchAll($select);
     }
     /**
