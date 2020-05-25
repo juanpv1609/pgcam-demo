@@ -368,16 +368,12 @@ class PacienteController extends Zend_Controller_Action
     {
         $obj = new Application_Model_DbTable_Admision();
         $data_paciente_cama = $obj->listarPacientesCama();
+        $data_paciente = $obj->listarPacientes();
         
         $cadena_paciente_cama = '';
         $cadena_paciente = '';
         if (!$data_paciente_cama) {
-            $cadena_paciente_cama .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Error !</strong> No se encontraron resultados
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>';
+            $cadena_paciente_cama .= '';
         } else {
             $cadena_paciente_cama .= '<table class="table table-bordered table-sm dataTable" id="dataTablePacienteCama" width="100%" >
             <caption>Pacientes con cama asignada</caption>
@@ -417,36 +413,41 @@ class PacienteController extends Zend_Controller_Action
                 </tr>";
             endforeach;
             $cadena_paciente_cama .= "</tbody></table>";
-            /**
+        }
+        /**
              * ? pacientes sin cama asignada
-             * ! evita duplicados en la consulta 
+             * ! evita duplicados en la consulta
              */
-            $data_paciente = $obj->listarPacientes();
-
-            if (!$data_paciente) {
-                $cadena_paciente .= '';
-            } else {
-                $cadena_paciente .= '<table class="table table-bordered table-sm dataTable" id="dataTablePaciente" width="100%" >
+        
+        if (!$data_paciente) {
+            $cadena_paciente .= '';
+        } else {
+            $cadena_paciente .= '<table class="table table-bordered table-sm dataTable" id="dataTablePaciente" width="100%" >
                 <caption>Pacientes sin cama asignada</caption>
                 <thead class="thead-light">
                 <tr>
                     <th >HC</th>
                     <th >CEDULA</th>
                     <th >PACIENTE</th>
-                    <th >FECHA ASIG. DE CAMA</th>
                     <th >ORIGEN</th>
+                    <th >ASIG. DE CAMA</th>
                     <th >ACCION</th>
                 </tr>
                 </thead>
                 <tbody>';
-                foreach ($data_paciente as $d):
+            foreach ($data_paciente as $d):
             $cadena_paciente .= "<tr>";
-                $cadena_paciente .= "<td>" . $d->p_id . "</td>";
-                $cadena_paciente .= "<td>" . $d->p_ci . "</td>";
-                $cadena_paciente .= "<td>". $d->p_nombre ." ". $d->p_apellidos ."</td>";
-                $cadena_paciente .= "<td></td>";
-                $cadena_paciente .= "<td>EMERGENCIA</td>";
-                $cadena_paciente .= "<td>
+            $cadena_paciente .= "<td>" . $d->p_id . "</td>";
+            $cadena_paciente .= "<td>" . $d->p_ci . "</td>";
+            $cadena_paciente .= "<td>". $d->p_nombres ." ". $d->p_apellidos ."</td>";
+            
+            $cadena_paciente .= "<td>EMERGENCIA</td>";
+            $cadena_paciente .= "<td><a type='button' href='".$this->_request->getBaseUrl()."/asignar_cama_paciente?id=".$d->p_id."'
+                        class=' btn btn-purple btn-sm  '  >
+                            Asignar cama
+                        </a></td>";
+
+            $cadena_paciente .= "<td>
                     <div class='btn-group' role='group' aria-label='Basic example'>
                         <button type='button' class='btn btn-outline-info btn-sm border-0' title='Ver mas'
                         onclick='mostrarModalMasInfo(". $d->p_id .",1)' ><i class='far fa-eye  '></i>
@@ -459,9 +460,11 @@ class PacienteController extends Zend_Controller_Action
                         </div>                        
                     </td>
                 </tr>";
-                endforeach;
-            }
+            endforeach;
+            $cadena_paciente .= "</tbody></table>";
+
         }
+
 
         return $cadena_paciente_cama." ".$cadena_paciente;
     }
