@@ -417,7 +417,7 @@ function DatosPaciente(paciente_id,opcion) {
                         dataType: "json",
                         type: "POST",
                         url: dir + "/paciente/busca", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
-                        data: "paciente=" + paciente + "&opcion=" + op, //Se añade el parametro de busqueda del medico
+                        data: "paciente=" + paciente + "&opcion=" + op, 
                         beforeSend: function (data) {
                               $('#mensaje').removeClass('d-none').html('Procesando...');
                               $('#navs-info').html('Procesando...');
