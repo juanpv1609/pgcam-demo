@@ -375,8 +375,10 @@ class PacienteController extends Zend_Controller_Action
         if (!$data_paciente_cama) {
             $cadena_paciente_cama .= '';
         } else {
+            $cadena_paciente_cama .= '<div class="card mb-4">
+            <div class="card-header"><h6>Pacientes con cama asignada</h6> </div>
+            <div class="card-body">';
             $cadena_paciente_cama .= '<table class="table table-bordered table-sm dataTable pb-4" id="dataTablePacienteCama" width="100%" >
-            <caption>Pacientes con cama asignada</caption>
                 <thead class="thead-dark">
                 <tr >
                     <th >HC</th>
@@ -412,7 +414,7 @@ class PacienteController extends Zend_Controller_Action
                     </td>
                 </tr>";
             endforeach;
-            $cadena_paciente_cama .= "</tbody></table><hr>";
+            $cadena_paciente_cama .= "</tbody></table></div>";
         }
         /**
              * ? pacientes sin cama asignada
@@ -422,6 +424,9 @@ class PacienteController extends Zend_Controller_Action
         if (!$data_paciente) {
             $cadena_paciente .= '';
         } else {
+            $cadena_paciente .= '<div class="card mb-4">
+            <div class="card-header"><h6>Pacientes con cama asignada</h6> </div>
+            <div class="card-body">';
             $cadena_paciente .= '<table class="table table-bordered table-sm dataTable" id="dataTablePaciente" width="100%" >
                 <caption>Pacientes sin cama asignada</caption>
                 <thead class="thead-light">
@@ -461,7 +466,7 @@ class PacienteController extends Zend_Controller_Action
                     </td>
                 </tr>";
             endforeach;
-            $cadena_paciente .= "</tbody></table>";
+            $cadena_paciente .= "</tbody></table></div>";
 
         }
 
