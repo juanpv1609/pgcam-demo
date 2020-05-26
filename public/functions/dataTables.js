@@ -2,7 +2,7 @@ const esp = "../public/assets/lang/Spanish.json";
 var buttons_config =[
       {
             extend: 'collection',
-            text: '<i class="fas fa-download text-white-50 pr-4"></i><span class="text">Exportar</span>',
+            text: '<i class="fas fa-download  pr-4"></i>',
             className: 'btn btn-dark btn-sm px-4',
             titleAttr: 'Exportar',
             autoClose: true,
