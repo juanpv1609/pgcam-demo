@@ -50,8 +50,11 @@
                                 <label class="custom-control-label" for="customCheck">Recordarme</label>
                               </div>
                             </div> -->
+            
+            <?php if (!empty($this->message))
+                     echo $this->message; ?>
         
-            <button type="submit" onclick="SendFormLogin();" class="btn btn-primary btn-block">
+            <button type="submit" onclick="SendFormLogin(event);" class="btn btn-primary btn-block">
               <strong>Ingresar</strong>
             </button>
         </form>

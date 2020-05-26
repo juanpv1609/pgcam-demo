@@ -18,77 +18,14 @@ function isValidEmail(mail) {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(mail);
 }
 
-function SendFormLogin() {
-    var email = $("#email").val();
-    var password = $("#password").val();
-    var dir = $('#dir').val();
-    var Toast, isValid,mensaje,ruta,icon;
-    $("#login").submit(function (event) {
-        event.preventDefault(); //prevent default action
-        //console.log(nombre);
-        if ((!email == "") && (!password == "")) {
-            $.ajax(
-                {
-                    dataType: "json",
-                    type: "POST",
-                    url: dir + "/auth/ingresar", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
-                    data: "email=" + email
-                        + "&clave=" + password, //Se añade el parametro de busqueda del medico
-                    beforeSend: function (data) {
 
-                    },
-                    success: function (requestData) {//armar la tabla
-                        isValid = requestData.valid;
-                        mensaje = requestData.mensaje;
-                        ruta = requestData.ruta;
-                        icon = requestData.icon;
-                        if (!isValid) {
-                            if (mensaje == 'La contraseña ingresada es incorrecta!') {
-                                $("#password").val('');
-                            }
-                            Toast = Swal.mixin({
-                                toast: true,
-                                position: 'top-end',
-                                showConfirmButton: false,
-                                timer: 3000,
-                                onOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                }
-                            });
-                            Toast.fire({
-                                icon: icon,
-                                title: mensaje
-                            });
-                        } else {
-                            Swal.fire({
-                                position: 'top',
-                                title: 'Bienvenido!',
-                                text: mensaje,
-                                width: '22rem',
-                                icon: icon,
-                                confirmButtonText: 'Aceptar',
-                                timer: 1000,
-                                timerProgressBar: true
-                            }).then((result) => {
-                                window.location.href = dir + '/' + ruta;
+function SendFormLogin(e) {
 
-                            })
-                        }
-
-                    },
-                    error: function (requestData, strError, strTipoError) {
-
-                    },
-                    complete: function (requestData, exito) { //fin de la llamada ajax.
-                        // console.log(exito);
-
-                    }
-                });
-
-        }
-    });
-
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13) {
+        e.preventDefault(); //prevent default action
+        document.login.submit();
+    }
 
 }
 
@@ -115,7 +52,7 @@ function SendFormRegister() {
                         data: "nombre=" + nombre + "&apellido=" + apellido + "&email=" + email
                             + "&clave=" + clave + "&comboPerfil=" + comboPerfil, //Se añade el parametro de busqueda del medico
                         beforeSend: function (data) {
-                            Toast = Swal.mixin({
+                             Toast = Swal.mixin({
                                 toast: true,
                                 position: 'top-end',
                                 showConfirmButton: false,
@@ -132,7 +69,7 @@ function SendFormRegister() {
                         },
                         success: function (requestData) {//armar la tabla
                             if (requestData == 0) {
-                                Toast = Swal.mixin({
+                                 Toast = Swal.mixin({
                                     toast: true,
                                     position: 'top-end',
                                     showConfirmButton: false,
@@ -144,11 +81,11 @@ function SendFormRegister() {
                                 });
                                 Toast.fire({
                                     icon: 'error',
-                                    title: 'El correo: ' + email + ' ya existe!'
+                                    title: 'El correo: '+email+' ya existe!'
                                 });
                                 $("#email").val('').focus();
                             } else {
-
+                                
                                 Swal.fire({
                                     position: 'top',
                                     title: 'Correcto!',
@@ -159,7 +96,7 @@ function SendFormRegister() {
                                     timer: 1000,
                                     timerProgressBar: true
                                 }).then((result) => {
-                                    window.location.href = dir + "/auth/login?correo=" + email;
+                                    window.location.href = dir + "/auth/login?correo="+email;
 
                                 })
 
