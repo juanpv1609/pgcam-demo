@@ -43,7 +43,7 @@ class IndexController extends Zend_Controller_Action
          *  @param obj_paciente: Cuenta el # de pacientes en la BDD
          * */
         $obj_paciente = new Application_Model_DbTable_Admision();
-        $this->view->cuenta_pacientes = count($obj_paciente->listarPacientes());
+        $this->view->cuenta_pacientes = count($obj_paciente->listarPacientesCama());
         /**
          *  @param obj_usuarios: Cuenta el # de usuarios en la BDD
          * */
