@@ -9,9 +9,9 @@
     <div class="col-lg-6 h-100">
       <div class="pt-3">
         <div class="text-center">
-          <h1 class="h1 text-gray-900 mb-4">Iniciar Sesión!</h1>
+          <h1 class="h1 text-gray-900 mb-4 ">Iniciar Sesión!</h1>
         </div>
-        <form class="user needs-validation" id="login" name="login" action="" method="post" novalidate>
+        <form class="needs-validation" id="login" name="login"  method="post" novalidate>
           <div class="form-group input-group">
             <div class="input-group-prepend">
               <span class="input-group-text "><i class="far fa-envelope "></i></span>
@@ -50,11 +50,8 @@
                                 <label class="custom-control-label" for="customCheck">Recordarme</label>
                               </div>
                             </div> -->
-            
-            <?php if (!empty($this->message))
-                     echo $this->message; ?>
         
-            <button type="submit" onclick="SendFormLogin(event);" class="btn btn-primary btn-block">
+            <button type="submit" onclick="SendFormLogin();" class="btn btn-primary btn-block">
               <strong>Ingresar</strong>
             </button>
         </form>
