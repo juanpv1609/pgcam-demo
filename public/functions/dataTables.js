@@ -1,4 +1,4 @@
-const esp = "../public/assets/lang/Spanish.json";
+const esp = "http://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json";
 var buttons_config =[
       {
             extend: 'collection',
