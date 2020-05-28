@@ -90,8 +90,7 @@
 					<div class="form-group">
 						<label for="cedula">N Cedula:</label>
 						<input type="text" id="cedula" class="form-control form-control-sm" name="cedula" maxlength="10"
-							minlength="10" required autocomplete="off"
-							oninput="this.value=this.value.replace(/[^0-9]/g, '')">
+							minlength="10" required autocomplete="off" pattern="[0-9]{10}">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -102,8 +101,7 @@
 					<div class="form-group">
 						<label for="telefono">N Telefono:</label>
 						<input type="tel" id="telefono" class="form-control form-control-sm" name="telefono" maxlength="10"
-							minlength="10" required autocomplete="off"
-							oninput="this.value=this.value.replace(/[^0-9]/g, '')">
+							minlength="10" required autocomplete="off" pattern="[0-9]{10}">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -296,8 +294,7 @@
 					<div class="form-group">
 						<label for="contacto_telefono">N Telefono:</label>
 						<input type="tel" id="contacto_telefono" class="form-control form-control-sm"
-							name="contacto_telefono" required autocomplete="off" maxlength="10" minlength="10"
-							oninput="this.value=this.value.replace(/[^0-9]/g, '')">
+							name="contacto_telefono" required autocomplete="off" maxlength="10" minlength="10" pattern="[0-9]{10}">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -336,8 +333,7 @@
 					<div class="form-group">
 						<label for="institucion_telefono">N Telefono:</label>
 						<input type="tel" id="institucion_telefono" class="form-control form-control-sm "
-							name="institucion_telefono" required autocomplete="off" maxlength="10" minlength="10"
-							oninput="this.value=this.value.replace(/[^0-9]/g, '')">
+							name="institucion_telefono" required autocomplete="off" maxlength="10" minlength="10" pattern="[0-9]{10}">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
