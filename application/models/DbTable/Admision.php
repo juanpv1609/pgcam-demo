@@ -142,9 +142,10 @@ class Application_Model_DbTable_Admision extends Zend_Db_Table_Abstract
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
-        $select = "select * from cama_paciente;";
+        $select = "select * from cama_paciente";
         return $db->fetchAll($select);
     }
+    
     /**
      * listarPacientes
      * * esta funcion lista los pacientes que NO tienen una cama asignada de la bdd
@@ -159,7 +160,7 @@ class Application_Model_DbTable_Admision extends Zend_Db_Table_Abstract
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = "select * from paciente
 where p_id not in (select p_id from cama_paciente)
-and p_ci not in (select paciente_ci from cama_paciente);";
+and p_ci not in (select paciente_ci from cama_paciente)";
         return $db->fetchAll($select);
     }
     /**
@@ -213,7 +214,8 @@ and p_ci not in (select paciente_ci from cama_paciente);";
             $db2= Zend_Db::factory('PDO_PGSQL', $configDb);
             $db2->setFetchMode(Zend_Db::FETCH_OBJ);
             $select = "select * FROM paciente
-            where hc_digital=" . $paciente;
+            where hc_digital=" . $paciente."
+            OR ci='".$paciente."';";
             return $db2->fetchRow($select);
         } else if ($opcion==1) {
             //devuelve todos los registros de la tabla
@@ -238,7 +240,8 @@ and p_ci not in (select paciente_ci from cama_paciente);";
                 on e.id_estcivil=g.id_estcivil
                 join instruccion_paciente i
                 on i.id_instruccion=g.id_instruccion
-                where g.p_id=" . $paciente;
+                where g.p_id=" . $paciente."
+                OR g.p_ci='". $paciente."'";
             return $db->fetchRow($select);
         }
     }
@@ -270,7 +273,7 @@ and p_ci not in (select paciente_ci from cama_paciente);";
         on s.sub_cod=c.diagnosticos[1]
         or s.sub_cod=c.diagnosticos[2]
         or s.sub_cod=c.diagnosticos[3]
-        where c.p_id=".$paciente.";";
+        where c.cama_paciente_id=".$paciente.";";
         return $db->fetchAll($select);
     }
     /**
@@ -533,5 +536,27 @@ and p_ci not in (select paciente_ci from cama_paciente);";
         where p_id=".$paciente_id."
         and causa_id=".$causa_id.";";
         return $db->fetchRow($select);
+    }
+    /**
+     * listarCausa
+     * * esta funcion lista las causas de movimiento de pacientes
+     * ! importante
+     * @param paciente_id: paciente_id que se pretende buscar
+     * @param causa_id: causa_id dato a verificar
+     * ? si ya tiene asignada una cama no hace nada
+     * ! se verifica lo siguiente:
+     * * si la fecha de egreso es null quiere decir que tiene una cama y es primer ingreso
+     */
+
+    public function listarCausa()
+    {
+        //devuelve todos los registros de la tabla
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "select * from causa
+        where causa_estado=1
+        order by 1 desc;";
+        return $db->fetchAll($select);
     }
 }
