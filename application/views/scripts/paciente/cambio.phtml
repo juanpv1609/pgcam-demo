@@ -1,23 +1,129 @@
 <div class="card ">
 	<div class="card-header bg-light d-flex justify-content-between align-middle pb-0">
 		<h4 class="h4  text-dark"><?php echo $this->titulo; ?>
-			 <i class="fas fa-fw <?php echo $this->icono; ?> text-dark"></i></h4>
-			 <nav aria-label="breadcrumb">
-				  <ol class="breadcrumb bg-transparent  text-xxs p-0 ">
-						<li class="breadcrumb-item"><a href="<?php echo $this->baseUrl(); ?>/panel_de_control">
-							 <i class="fas fa-home "></i>Inicio</a></li>
-						<li class="breadcrumb-item text-capitalize">
-							 <a href="<?php echo $this->baseUrl(); ?>/<?php echo $this->controlador; ?>">
-								  <i class="fas fa-fw fa-user-injured"></i>
-								  <?php echo $this->controlador; ?></a></li>
-						<li class="breadcrumb-item active text-capitalize" aria-current="page">
-							 <?php echo $this->accion; ?></li>
-				  </ol>
-			 </nav>      
-		
-  </div>
-	<div class="card-body pb-4">
-	<img class="card-img-top h-50" src="<?php echo $this->baseUrl(); ?>/assets/img/construction.svg" alt="Login">
-	<h4 class="display-4 text-center">En construcción</h4>
+			<i class="fas fa-fw <?php echo $this->icono; ?> text-dark"></i></h4>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb bg-transparent  text-xxs p-0 ">
+				<li class="breadcrumb-item"><a href="<?php echo $this->baseUrl(); ?>/panel_de_control">
+						<i class="fas fa-home "></i>Inicio</a></li>
+				<li class="breadcrumb-item text-capitalize">
+					<a href="<?php echo $this->baseUrl(); ?>/<?php echo $this->controlador; ?>">
+						<i class="fas fa-fw fa-user-injured"></i>
+						<?php echo $this->controlador; ?></a></li>
+				<li class="breadcrumb-item active text-capitalize" aria-current="page">
+					<?php echo $this->accion; ?></li>
+			</ol>
+		</nav>
+
+	</div>
+	<div class="card-body ">
+		<div class="row pb-4">
+			<div class="col-lg-7  ">
+				<div class="card  shadow  h-100">
+					<div class="card-header d-flex justify-content-between">
+						<h6 class="m-0 ">Seleccione un paciente y la causa de egreso</h6>
+					</div>
+					<div class="card-body text-xxs">
+						<div class="row">
+							<div class="col-sm-6">
+								<?php echo $this->getPacientesCama(); ?>
+							</div>
+							<div class="col-sm-6">
+								<?php echo $this->getCausa(); ?>
+							</div>
+
+						</div>
+						<div class="row d-none dataPacienteCama" >
+							<div class="col-sm-12 table-responsive">
+								<input type="hidden" id="cama_paciente_id">
+								<input type="hidden" id="cama_id_origen">
+								<input type="hidden" id="especialidad_id_origen">
+								<input type="hidden" id="cama_id">
+								<input type="hidden" id="especialidad_id">
+								<table class="table table-bordered  table-sm" id="tablaDatosPacienteCama">
+									<thead class="thead-dark text-center">
+										<tr>
+											<th colspan="2">PACIENTE</th>
+											<th >ORIGEN</th>
+											<th >DESTINO</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th>N Archivo: </th>
+											<td><span class="text-uppercase " id="paciente_hc"></span></td>
+											<td><span class="text-uppercase" id="servicio_origen"></span></td>
+											<td><span class="text-uppercase" id="servicio"></span></td>
+										</tr>
+										<tr>
+											<th>N Cedula:</th>
+											<td><span class="text-uppercase" id="cedula"></span></td>
+											<td>Hab: <span class="text-uppercase" id="habitacion_origen"></span></td>
+											<td>Hab: <span class="text-uppercase" id="habitacion"></span></td>
+										</tr>
+										<tr>
+											<th>Paciente:</th>
+											<td><span class="text-uppercase" id="paciente_nombre"></span></td>
+											<td>Cama: <span class="text-uppercase" id="cama_origen"></span></td>
+											<td>Cama: <span class="text-uppercase" id="cama"></span></td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-5 ">
+				<div class="card shadow h-100">
+					<a class="d-block card-header " href="#collapseCardExample" data-toggle="collapse" role="button"
+						aria-expanded="true" aria-controls="collapseCardExample">
+						<h6 class="m-0  text-gray-600">Diagnosticos </h6>
+					</a>
+					<div class="collapse show" id="collapseCardExample">
+						<div class="card-body text-xxs">
+							<div class="row d-none dataPacienteCama">
+								<div class="col-sm-12">
+									<div id="" class="table-responsive ">
+										<?php echo $this->getDiagnosticos();?>
+									</div>
+									<small  class="form-text text-muted">NOTA: Puede editar o mantener los diagnosticos de ingreso</small>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+
+
+		</div>
+		<div class="row ">
+			<div class="col-sm-12">
+				<div class="card shadow  text-xxs d-none" id="cardEspecialidades">
+					<div class="card-header ">
+					<h6 class="m-0" id="TituloCambioDeCama"> </h6>
+					</div>
+					<div class="card-body pb-3 pt-1">
+						<div id="dataEspecialidades" class="  card-header bg-white pt-1">
+							<?php echo $this->getEspecialidades(); ?>
+						</div>
+						<div id="data_TableCamas" class="table-responsive text-center pt-2">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="card-footer d-flex justify-content-between">
+		<button class="btn btn-danger btn-icon-split" type="button" onclick="limpiaFormAsignacion();">
+			<span class="icon text-white-50"><i class="fas fa-ban"></i></span><span class="text">Cancelar</span></button>
+		<button class="btn btn-success btn-icon-split" type="button" onclick="cambioCama();">
+			<span class="icon text-white-50"><i class="fas fa-check"></i></span><span
+				class="text">Finalizar</span></button>
 	</div>
 </div>
+

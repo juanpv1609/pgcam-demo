@@ -17,125 +17,72 @@
 </div>
 
 <div class="row">
-  <!-- Earnings (Monthly) Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
-    <div class="card lift border-left-primary shadow h-100 py-2">
-      <div class="card-body">
-        <div class="row no-gutters align-items-center">
-          <div class="col mr-2">
-            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Pacientes internos</div>
-            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $this->cuenta_pacientes; ?></div>
-          </div>
-          <div class="col-auto">
-            <i class="fas fa-user-tag fa-2x text-primary"></i>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer bg-white text-center text-xs py-0">
-        <a href="<?php echo $this->baseUrl();?>/listar_paciente" class="btn btn-link btn-sm py-0 text-decoration-none"
-          data-toggle="tooltip" data-placement="right" title="Clic para visualizar">Ver Pacientes</a>
-      </div>
-    </div>
-  </div>
-  <!-- Earnings (Monthly) Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
-    <div class="card lift border-left-secondary shadow h-100 py-2">
-      <div class="card-body">
-        <div class="row no-gutters align-items-center">
-          <div class="col mr-2">
-            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Camas disponibles</div>
-            <div class="row no-gutters align-items-center">
-              <div class="col-auto">
-                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                  <span id="cuentaCamasDisponibles"><?php echo $this->cuenta_camas_disp; ?></span>%</div>
-              </div>
-              <div class="col">
-                <div class="progress progress-sm mr-2">
-                  <div class="progress-bar bg-secondary" role="progressbar"
-                    style='width: <?php echo $this->cuenta_camas_disp."%"; ?>'
-                    aria-valuenow='<?php echo $this->cuenta_camas_disp; ?>' aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-auto">
-            <i class="fas fa-bed fa-2x text-secondary"></i>
+  <div class="col-md-3 col-sm-6 col-12">
+    <!-- small box -->
+    <div class="small-box bg-primary text-white ">
+      <div class="inner">
+        <h3><?php echo $this->cuenta_pacientes; ?></h3>
 
-          </div>
-        </div>
-      </div>
-      <div class="card-footer bg-white text-center text-xs py-0">
-        <a href="<?php echo $this->baseUrl();?>/camas?op=Disponible"
-          class="btn btn-link btn-sm py-0 text-decoration-none" data-toggle="tooltip" data-placement="right"
-          title="Clic para visualizar">Ver Camas Disponibles</a>
-      </div>
-    </div>
-  </div>
-  <!-- Earnings (Monthly) Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
-    <div class="card lift border-left-danger shadow h-100 py-2">
-      <div class="card-body">
-        <div class="row no-gutters align-items-center">
-          <div class="col mr-2">
-            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Camas Ocupadas</div>
-            <div class="row no-gutters align-items-center">
-              <div class="col-auto">
-                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                  <span id="cuentaCamasOcupadas"><?php echo $this->cuenta_camas_ocup; ?></span>%</div>
-              </div>
-              <div class="col">
-                <div class="progress progress-sm mr-2">
-                  <div class="progress-bar bg-danger" role="progressbar"
-                    style='width: <?php echo $this->cuenta_camas_ocup."%"; ?>'
-                    aria-valuenow='<?php echo $this->cuenta_camas_ocup; ?>' aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-auto">
-            <i class="fas fa-bed fa-2x text-danger"></i>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer bg-white text-center text-xs py-0">
-        <a href="<?php echo $this->baseUrl();?>/camas?op=Ocupada" class="btn btn-link btn-sm py-0 text-decoration-none"
-          data-toggle="tooltip" data-placement="right" title="Clic para visualizar">Ver Camas Ocupadas</a>
-      </div>
-    </div>
-  </div>
-  <div class="col-xl-3 col-md-6 mb-4">
-    <div class="card lift border-left-warning shadow h-100 py-2">
-      <div class="card-body">
-        <div class="row no-gutters align-items-center">
-          <div class="col mr-2">
-            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">En desinfeccion</div>
-            <div class="row no-gutters align-items-center">
-              <div class="col-auto">
-                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                  <span id="cuentaCamasDesinfeccion"><?php echo $this->cuenta_camas_desinf; ?></span>%
-                </div>
-              </div>
-              <div class="col">
-                <div class="progress progress-sm mr-2">
-                  <div class="progress-bar bg-warning" role="progressbar"
-                    style='width: <?php echo $this->cuenta_camas_desinf."%"; ?>'
-                    aria-valuenow='<?php echo $this->cuenta_camas_desinf; ?>' aria-valuemin="0" aria-valuemax="100">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-auto">
-            <i class="fas fa-bed fa-2x text-warning"></i>
+        <p>Pacientes internos</p>
 
-          </div>
-        </div>
       </div>
-      <div class="card-footer bg-white text-center text-xs py-0">
-        <a href="<?php echo $this->baseUrl();?>/camas?op=Desinfeccion"
-          class="btn btn-link btn-sm py-0 text-decoration-none" data-toggle="tooltip" data-placement="right"
-          title="Clic para visualizar">Ver Camas en Desinfeccion</a>
+      <div class="icon">
+        <i class="fas fa-user-tag "></i>
       </div>
+
+      <a href="<?php echo $this->baseUrl();?>/listar_paciente" class="small-box-footer">Mas info <i
+          class="fas fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-6 col-12">
+    <!-- small box -->
+    <div class="small-box bg-secondary text-white ">
+      <div class="inner">
+        <h3><?php echo $this->cuenta_camas_disp; ?><sup style="font-size: 20px">%</sup></h3>
+
+        <p>Camas disponibles</p>
+
+      </div>
+      <div class="icon">
+        <i class="fas fa-bed "></i>
+      </div>
+
+      <a href="<?php echo $this->baseUrl();?>/camas?op=Disponible" class="small-box-footer">Mas info <i
+          class="fas fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-6 col-12">
+    <!-- small box -->
+    <div class="small-box bg-danger text-white ">
+      <div class="inner">
+        <h3><?php echo $this->cuenta_camas_ocup; ?><sup style="font-size: 20px">%</sup></h3>
+
+        <p>Camas ocupadas</p>
+
+      </div>
+      <div class="icon">
+        <i class="fas fa-bed "></i>
+      </div>
+
+      <a href="<?php echo $this->baseUrl();?>/camas?op=Ocupada" class="small-box-footer">Mas info <i
+          class="fas fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-6 col-12">
+    <!-- small box -->
+    <div class="small-box bg-warning text-dark ">
+      <div class="inner">
+        <h3><?php echo $this->cuenta_camas_desinf; ?><sup style="font-size: 20px">%</sup></h3>
+
+        <p>En desinfeccion</p>
+
+      </div>
+      <div class="icon">
+        <i class="fas fa-bed "></i>
+      </div>
+
+      <a href="<?php echo $this->baseUrl();?>/camas?op=Desinfeccion" class="small-box-footer">Mas info <i
+          class="fas fa-arrow-circle-right"></i></a>
     </div>
   </div>
 
@@ -143,7 +90,7 @@
 
 <div class="row">
   <div class="col-lg-9 ">
-    <div class="card lift shadow mb-4  ">
+    <div class="card  shadow mb-4  ">
       <!-- Card Header - Dropdown -->
       <div class="card-header d-flex flex-row align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">Camas por especialidad</h6>
@@ -167,41 +114,38 @@
         </div>
       </div>
       <div class="card-body pt-0">
-        <canvas id="myChart" width="130" height="50"></canvas>
+        <canvas id="myChart" width="120" height="50"></canvas>
 
       </div>
     </div>
 
 
   </div>
-  <!-- Pie Chart -->
+  
   <div class="col-lg-3">
     <div class="row">
-      <div class="col-sm-12 mb-4">
-        <div class="card lift border-left-success text-success shadow h-100 py-2">
-          <div class="card-body">
-            <div class="row no-gutters align-items-center">
-              <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Usuarios</div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $this->cuenta_usuarios ?></div>
-              </div>
-              <div class="col-auto">
-                <i class="fas fa-users fa-2x text-success"></i>
-              </div>
-            </div>
+      <div class="col-12">
+        <!-- small box -->
+        <div class="small-box bg-success text-white ">
+          <div class="inner">
+            <h3><?php echo $this->cuenta_usuarios ?></h3>
+      
+            <p>Usuarios</p>
+      
           </div>
-          <div class="card-footer bg-white text-center text-xs py-0">
-            <a href="<?php echo $this->baseUrl();?>/listar_usuarios"
-              class="btn btn-link btn-sm py-0 text-decoration-none" data-toggle="tooltip" data-placement="right"
-              title="Clic para visualizar">Ver Usuarios</a>
+          <div class="icon">
+            <i class="fas fa-users "></i>
           </div>
+      
+          <a href="<?php echo $this->baseUrl();?>/listar_usuarios" class="small-box-footer">Mas info <i
+              class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
 
     </div>
     <div class="row">
       <div class="col-sm-12 mb-4">
-        <div class="card lift shadow  ">
+        <div class="card  shadow  ">
           <!-- Card Header - Dropdown -->
           <div class="card-header d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Camas</h6>
@@ -279,3 +223,4 @@
 
   </div>
 </div>
+

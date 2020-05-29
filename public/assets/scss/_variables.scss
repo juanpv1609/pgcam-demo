@@ -118,3 +118,11 @@ $ribbon-xl-wrapper-size: 180px !default;
 $ribbon-xl-width: 240px !default;
 $ribbon-xl-top: 47px !default;
 $ribbon-xl-right: 4px !default;
+//-----------------
+$card-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2) !default;
+// TRANSITIONS SETTINGS
+// --------------------------------------------------------
+
+// Transition global options
+$transition-speed: 0.3s !default;
+$transition-fn: ease-in-out !default;

@@ -179,7 +179,7 @@ and p_ci not in (select paciente_ci from cama_paciente)";
             $configDb['dbname'] = 'hgona';
             $db2= Zend_Db::factory('PDO_PGSQL', $configDb);
             $db2->setFetchMode(Zend_Db::FETCH_OBJ);
-            $select = "select concat(primer_nombre,' ',segundo_nombre,' ',apellido_paterno,' ',apellido_materno) as nombre
+            $select = "select concat(apellido_paterno,' ',apellido_materno,' ',primer_nombre,' ',segundo_nombre) as nombre
                 from paciente
                 where ci='".$paciente."'
                 OR hc_digital=".$id;
@@ -189,7 +189,7 @@ and p_ci not in (select paciente_ci from cama_paciente)";
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
-        $select = "select concat(p_nombres,' ',p_apellidos) as nombre from paciente
+        $select = "select concat(p_apellidos,' ',p_nombres) as nombre from paciente
         where p_ci='".$paciente."'
         OR p_id=".$id;
         return $db->fetchRow($select);
@@ -513,6 +513,36 @@ and p_ci not in (select paciente_ci from cama_paciente)";
         tipo_diagnosticos, fecha_ingreso, observacion,usu_id,entrada)
         VALUES (".$paciente_hc.", '".$cedula."', ".$cama_id.", ".$causa_id." , ARRAY[".$cie10_cod."], 
         ARRAY [ ".$cie10_tipo." ], current_timestamp(0), 'Primer ingreso',".$usuario.",".$opcion.");";
+        return $db->fetchRow($select);
+    }
+    /**
+     * updateCamaPaciente
+     * * esta funcion realiza el cambio de cama de un paciente
+     * ! importante
+     * @param paciente_hc: paciente_hc que se pretende asignar una cama
+     * @param cedula: cedula que se pretende asignar una cama
+     * @param cama_id: cama_id que sera asignada
+     * @param causa_id: causa_id la causa por la asignacion
+     * @param cie10_cod: cie10_cod diagnosticos de ingreso tipo array
+     * @param cie10_tipo: cie10_tipo tipo diagnosticos de ingreso tipo array
+     * ? el tipo de diagnostico puede ser: presuntivo o definitivo
+     */
+
+    public function updateCamaPaciente($cama_paciente_id,
+                $opcionCausa,
+                $cama_id,
+                $cie10_cod,
+                $cie10_tipo,
+                $usuario)
+    {
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "UPDATE public.cama_paciente
+                    SET cama_id=".$cama_id.", causa_id=".$opcionCausa.",  
+                        diagnosticos=ARRAY[".$cie10_cod."], tipo_diagnosticos=ARRAY[".$cie10_tipo."], fecha_ingreso=current_timestamp(0), observacion='Cambio de cama', 
+                        usu_id=".$usuario."
+                    WHERE cama_paciente_id=".$cama_paciente_id.";";
         return $db->fetchRow($select);
     }
     /**

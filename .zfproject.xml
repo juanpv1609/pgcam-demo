@@ -49,6 +49,7 @@
           <actionMethod actionName="cambioEgreso"/>
           <actionMethod actionName="asignar"/>
           <actionMethod actionName="cambio"/>
+          <actionMethod actionName="historial"/>
         </controllerFile>
         <controllerFile controllerName="Usuarios">
           <actionMethod actionName="index"/>
@@ -178,6 +179,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Reportes">
             <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Paciente">
+            <viewScriptFile forActionName="historial"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

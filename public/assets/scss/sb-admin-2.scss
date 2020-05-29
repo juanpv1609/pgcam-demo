@@ -5,6 +5,9 @@
 @import "../public/vendor/bootstrap/scss/bootstrap.scss";
 
 // Import Custom SB Admin 2 Mixins and Components
+@import "timeline.scss";
+@import "small-box.scss";
+@import "info-box.scss";
 @import "mixins.scss";
 @import "global.scss";
 @import "utilities.scss";

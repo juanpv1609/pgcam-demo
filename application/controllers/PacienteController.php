@@ -57,6 +57,19 @@ class PacienteController extends Zend_Controller_Action
         $this->view->icono = "fa-file-signature";
     }
     /**
+     * historialAction()
+     * * Esta accion muestra el formulario 008 de registro por emergencia
+     * ! importamos el archivo paciente.js
+     */
+
+    public function historialAction()
+    {
+        $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/paciente.js');
+        echo $this->view->headScript();
+        $this->view->titulo = "Historial del paciente";
+        $this->view->icono = "fa-history";
+    }
+    /**
      * admisionAction()
      * * Esta accion recibe los datos del formulario 008
      * ! obtiene los datos mediante llamada ajax
@@ -277,11 +290,9 @@ class PacienteController extends Zend_Controller_Action
             $data = $obj->buscaCamaPaciente($paciente);
             $response = array(); //Declaro un array para enviar los datos a la vista
         }
-        if ($data) {
-            $response['data'] = $data;
-            $json = json_encode($response);
-            echo $json;
-        }
+        $response['data'] = $data;
+        $json = json_encode($response);
+        echo $json;
     }
     /**
      * asignarAction()
@@ -344,6 +355,56 @@ class PacienteController extends Zend_Controller_Action
         }
     }
     /**
+     * updatecamaAction()
+     * * Esta accion realiza el cambio de cama de un paciente
+     * * y que no tenga una cama asignada
+     * ! obtiene los datos mediante llamada ajax
+     * * PROCESO O LOGICA
+     * @param causa_id: igual a 1 yaa que 1:'Asignacion de cama'
+     * ? 1. Obtiene los datos via AJAX
+     * ? 2. Crea el objeto tipo DBTable_Admision
+     * ? 3. Verifica si el paciente ya tiene una cama (Evita duplicados)
+     * ? 4. Si no tiene una cama asignada, SE LE ASIGNA UNA
+     * ? 5. Se actualiza el estado de la cama a OCUPADA
+     * ? 6. Crea una notificacion al sistema
+     * ! los pasos 5 y 6 son provisionales
+     * TODO: se debe crear un trigger para las notificaciones y para cambiar el estado de la cama
+     */
+
+    public function updatecamaAction()
+    {
+        $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
+        $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
+        if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
+            $cama_paciente_id = $this->getRequest()->getParam('cama_paciente_id');
+            $opcionCausa = $this->getRequest()->getParam('opcionCausa');
+            $cama_id = $this->getRequest()->getParam('cama_id');
+            $cie10_cod = $this->getRequest()->getParam('cie10_cod');
+            $cie10_tipo = $this->getRequest()->getParam('cie10_tipo');
+            $especialidad_id = $this->getRequest()->getParam('especialidad_id');
+            $obj = new Application_Model_DbTable_Admision();
+            $causa_id=1; // 1: asignacion de cama
+            //-------- verificar si ya tiene una cama asignada----------
+            
+            $usuario = Zend_Auth::getInstance()->getIdentity();
+            $obj->updateCamaPaciente(
+                $cama_paciente_id,
+                $opcionCausa,
+                $cama_id,
+                $cie10_cod,
+                $cie10_tipo,
+                $usuario->usu_id
+            );
+            echo $this->tabla_hab_cama($especialidad_id);
+
+            $notificacion = new Application_Model_DbTable_Notificaciones();
+            //$notificacion->insertarNotificacion($mensaje, $usuario->usu_id, $causa_id,$cedula);
+            $notificacion->listar();
+
+            //echo $this->tabla_hab_cama($especialidad_id);
+        }
+    }
+    /**
      * cambioAction()
      * * Esta accion muestra la vista cambio
      * ! importamos el archivo paciente.js
@@ -352,7 +413,7 @@ class PacienteController extends Zend_Controller_Action
 
     public function cambioAction()
     {
-        $this->view->titulo = "Cambio / Egreso de paciente";
+        $this->view->titulo = "Cambio o egreso de paciente";
         $this->view->headScript()->appendFile($this->_request->getBaseUrl().'/functions/paciente.js');
         echo $this->view->headScript();
         $this->view->icono = "fa-exchange-alt";
@@ -381,7 +442,7 @@ class PacienteController extends Zend_Controller_Action
             $cadena_paciente_cama .= '<table class="table table-bordered table-sm dataTable pb-4" id="dataTablePacienteCama" width="100%" >
                 <thead class="thead-dark">
                 <tr >
-                    <th >HC</th>
+                    <th >ID</th>
                     <th >CEDULA</th>
                     <th >PACIENTE</th>
                     <th >FECHA ASIG. DE CAMA</th>
@@ -395,7 +456,7 @@ class PacienteController extends Zend_Controller_Action
             $origen_paciente= ($item->entrada==1) ? 'EMERGENCIA' : 'C EXTERNA';
             $boton_editar= ($item->entrada==2) ? 'd-none' : '';
             $cadena_paciente_cama .= "<tr>";
-            $cadena_paciente_cama .= "<td>" . $item->p_id . "</td>";
+            $cadena_paciente_cama .= "<td>" . $item->cama_paciente_id . "</td>";
             $cadena_paciente_cama .= "<td>" . $item->paciente_ci . "</td>";
             $cadena_paciente_cama .= "<td>". $data->nombre ."</td>";
             $cadena_paciente_cama .= "<td>" . $item->fecha_ingreso . "</td>";
@@ -403,7 +464,7 @@ class PacienteController extends Zend_Controller_Action
             $cadena_paciente_cama .= "<td>
                     <div class='btn-group' role='group' aria-label='Basic example'>
                         <button type='button' class='btn btn-outline-info btn-sm border-0' title='Ver mas'
-                        onclick='mostrarModalMasInfo(". $item->p_id .",". $item->entrada .")' ><i class='far fa-eye  '></i>
+                        onclick='mostrarModalMasInfo(". $item->cama_paciente_id .",". $item->p_id .",". $item->entrada .")' ><i class='far fa-eye  '></i>
                         </button>
                         <a type='button' href='".$this->_request->getBaseUrl()."/registrar_paciente?id=".$item->p_id."'
                         class='".$boton_editar." btn btn-outline-dark btn-sm  border-0 ' 
@@ -467,7 +528,6 @@ class PacienteController extends Zend_Controller_Action
                 </tr>";
             endforeach;
             $cadena_paciente .= "</tbody></table></div></div>";
-
         }
 
 
@@ -506,7 +566,7 @@ class PacienteController extends Zend_Controller_Action
         $Listaarea = '';
         if (!$datos_habitacion) {
             $Listaarea .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Error !</strong> No se encontraron iconoultados
+                    <strong>Error !</strong> No se encontraron resultados
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -520,7 +580,7 @@ class PacienteController extends Zend_Controller_Action
                <span class="badge badge-warning text-wrap px-2">Desinfeccion</span></caption>
             <tbody >
                 <tr>
-                <th class="align-middle text-primary bg-gray-200" colspan="2" rowspan="2">'.$datos_habitacion[0]->especialidad_nombre.'</th>
+                <th class="align-middle text-primary bg-gray-100" colspan="2" rowspan="2">'.$datos_habitacion[0]->especialidad_nombre.'</th>
                 <th  colspan="'.count($datos_habitacion).'" class="bg-gray-100 align-middle text-center" >HABITACION</th>
             </tr>';
             $Listaarea .= "<tr>";
