@@ -62,6 +62,10 @@
     })
     //------SELECT2
     $(document).ready(function() {
+      $('.js-example-basic-single').select2({
+        theme: "bootstrap",
+        language: "es"
+      });
       // Toggle the side navigation
       $("#sidebarToggle, #sidebarToggleTop").on('click', function (e) {
         $("body").toggleClass("sidebar-toggled");
