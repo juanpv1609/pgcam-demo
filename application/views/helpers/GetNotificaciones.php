@@ -34,15 +34,18 @@ class Zend_View_Helper_GetNotificaciones extends Zend_View_Helper_Abstract
                      <i class="far fa-bell pr-2"></i>Notificaciones
                      </h6>';
             foreach ($datos as $item):
-            $Listaarea .= '<a class="dropdown-item dropdown-notifications-item text-left small  p-4 " 
-               href="'. $fc.'/listar_paciente?ci='.$item->p_ci.'"> 
-                                               
-                                 <div class="dropdown-notifications-item-content text-xxs">
-                                    <div class="dropdown-notifications-item-content-details ">
-                                    <i class="fas fa-calendar-alt  pr-2"></i>'. $item->not_fecha_creacion .'</div>
-                                    <div class="text-wrap">'. $item->not_mensaje .'</div >
-                                 </div>
-                           </a>';
+                $fecha = explode(" ", $item->not_fecha_creacion);
+
+                $Listaarea .= '<a class="dropdown-item dropdown-notifications-item text-left small  p-4 " 
+                href="'. $fc.'/listar_paciente?ci='.$item->p_ci.'"> 
+                                                
+                                    <div class="dropdown-notifications-item-content text-xxs">
+                                        <div class="dropdown-notifications-item-content-details d-flex justify-content-between">
+                                        <div><i class="fas fa-calendar-alt  pr-2"></i>'. $fecha[0] .'</div>
+                                        <div><i class="fas fa-clock  pr-2"></i>'. $fecha[1] .'</div></div>
+                                        <div class="text-wrap">'. $item->not_mensaje .'</div >
+                                    </div>
+                            </a>';
             endforeach;
             $Listaarea .= "<a class='dropdown-item dropdown-notifications-footer text-center text-xs ' 
             href='". $fc."/notificaciones'>Mostrar todo</a>

@@ -68,6 +68,11 @@ class PacienteController extends Zend_Controller_Action
         echo $this->view->headScript();
         $this->view->titulo = "Historial del paciente";
         $this->view->icono = "fa-history";
+        if (isset($_GET['id'])) {
+            $paciente = $_GET['id'];
+            $this->view->tabla_historial = $this->tabla_historial_paciente($paciente);
+            $this->view->time_line_paciente = $this->time_line_paciente($paciente);
+        }
     }
     /**
      * admisionAction()
@@ -381,10 +386,7 @@ class PacienteController extends Zend_Controller_Action
             $cama_id = $this->getRequest()->getParam('cama_id');
             $cie10_cod = $this->getRequest()->getParam('cie10_cod');
             $cie10_tipo = $this->getRequest()->getParam('cie10_tipo');
-            $especialidad_id = $this->getRequest()->getParam('especialidad_id');
             $obj = new Application_Model_DbTable_Admision();
-            $causa_id=1; // 1: asignacion de cama
-            //-------- verificar si ya tiene una cama asignada----------
             
             $usuario = Zend_Auth::getInstance()->getIdentity();
             $obj->updateCamaPaciente(
@@ -395,13 +397,9 @@ class PacienteController extends Zend_Controller_Action
                 $cie10_tipo,
                 $usuario->usu_id
             );
-            echo $this->tabla_hab_cama($especialidad_id);
 
             $notificacion = new Application_Model_DbTable_Notificaciones();
-            //$notificacion->insertarNotificacion($mensaje, $usuario->usu_id, $causa_id,$cedula);
             $notificacion->listar();
-
-            //echo $this->tabla_hab_cama($especialidad_id);
         }
     }
     /**
@@ -430,6 +428,8 @@ class PacienteController extends Zend_Controller_Action
         $obj = new Application_Model_DbTable_Admision();
         $data_paciente_cama = $obj->listarPacientesCama();
         $data_paciente = $obj->listarPacientes();
+        $cie10 = new Application_Model_DbTable_Cie10(); //para obtener la descripcion del diagnostico
+
         
         $cadena_paciente_cama = '';
         $cadena_paciente = '';
@@ -442,11 +442,12 @@ class PacienteController extends Zend_Controller_Action
             $cadena_paciente_cama .= '<table class="table table-bordered table-sm dataTable pb-4" id="dataTablePacienteCama" width="100%" >
                 <thead class="thead-dark">
                 <tr >
-                    <th >ID</th>
                     <th >CEDULA</th>
                     <th >PACIENTE</th>
                     <th >FECHA ASIG. DE CAMA</th>
-                    <th >ORIGEN</th>
+                    <th >ENTRADA</th>
+                    <th >CAMA</th>
+                    <th >DIAGNOSTICOS</th>
                     <th >ACCION</th>
                 </tr>
                 </thead>
@@ -455,21 +456,44 @@ class PacienteController extends Zend_Controller_Action
             $data = $obj->Paciente_info($item->p_id, $item->paciente_ci, $item->entrada);
             $origen_paciente= ($item->entrada==1) ? 'EMERGENCIA' : 'C EXTERNA';
             $boton_editar= ($item->entrada==2) ? 'd-none' : '';
+
+            $diagnosticos = array();
+            $diagnosticos = explode(",", substr($item->diagnosticos, 1, -1)); //divide el array de diagnosticos ej: {Z35.2,B12.1,""}
+
+            $tipo_diagnosticos = array();
+            $tipo_diagnosticos = explode(",", substr($item->tipo_diagnosticos, 1, -1)); //divide el array del tipo de diagnosticos ej: {PRE,DEF,""}
+
             $cadena_paciente_cama .= "<tr>";
-            $cadena_paciente_cama .= "<td>" . $item->cama_paciente_id . "</td>";
             $cadena_paciente_cama .= "<td>" . $item->paciente_ci . "</td>";
             $cadena_paciente_cama .= "<td>". $data->nombre ."</td>";
             $cadena_paciente_cama .= "<td>" . $item->fecha_ingreso . "</td>";
             $cadena_paciente_cama .= "<td>" . $origen_paciente . "</td>";
+            $cadena_paciente_cama .= '<td><button type="button" class="btn btn-outline-info btn-sm border-0" data-html="true" data-toggle="popover" 
+                                        title="'. $item->especialidad_nombre.'"
+                                        data-content="Habitacion ' . $item->habitacion_nombre . '<br>Cama ' . $item->cama_nombre . '">
+                                        <i class="fas fa-search "></i></button> </td>';
+            $cadena_paciente_cama .= "<td>";
+            for ($i=0,$j=0; $i < count($diagnosticos),$j < count($tipo_diagnosticos); $i++,$j++) {
+                $d = ($diagnosticos[$i]=='""') ? '' : $diagnosticos[$i];
+                $t = ($tipo_diagnosticos[$j]=='""') ? '' : $tipo_diagnosticos[$j];
+                $color = ($t=='PRE') ? 'primary' : 'danger';
+                $data_cie10 = $cie10->listar_descripcion($d);
+
+                $cadena_paciente_cama .= '<span class="badge badge-'.$color.' mx-2" data-html="true" data-toggle="popover" 
+                title="'.$d.'<small>  ('.$t.')</small>" data-content="'.$data_cie10->descripcion_sub.' ">'. $d.'</span>';
+            }
+            $cadena_paciente_cama .= "</td>";
+
             $cadena_paciente_cama .= "<td>
                     <div class='btn-group' role='group' aria-label='Basic example'>
-                        <button type='button' class='btn btn-outline-info btn-sm border-0' title='Ver mas'
-                        onclick='mostrarModalMasInfo(". $item->cama_paciente_id .",". $item->p_id .",". $item->entrada .")' ><i class='far fa-eye  '></i>
-                        </button>
+                        
                         <a type='button' href='".$this->_request->getBaseUrl()."/registrar_paciente?id=".$item->p_id."'
-                        class='".$boton_editar." btn btn-outline-dark btn-sm  border-0 ' 
-                        onclick='editarModal(". $item->p_id .",`". $item->paciente_ci ."`)' >
+                        class='".$boton_editar." btn btn-outline-dark btn-sm  border-0 '  >
                             <i class='far fa-edit  '></i>
+                        </a>
+                        <a type='button' href='".$this->_request->getBaseUrl()."/paciente/historial?id=".$item->p_id."'
+                        class=' btn btn-outline-purple btn-sm  border-0 ' title='Ver historial' >
+                            <i class='fas fa-history  '></i>
                         </a>
                         </div>                        
                     </td>
@@ -496,7 +520,6 @@ class PacienteController extends Zend_Controller_Action
                     <th >CEDULA</th>
                     <th >PACIENTE</th>
                     <th >ORIGEN</th>
-                    <th >ASIG. DE CAMA</th>
                     <th >ACCION</th>
                 </tr>
                 </thead>
@@ -508,19 +531,14 @@ class PacienteController extends Zend_Controller_Action
             $cadena_paciente .= "<td>". $d->p_nombres ." ". $d->p_apellidos ."</td>";
             
             $cadena_paciente .= "<td>EMERGENCIA</td>";
-            $cadena_paciente .= "<td><a type='button' href='".$this->_request->getBaseUrl()."/asignar_cama_paciente?id=".$d->p_id."'
-                        class=' btn btn-purple btn-sm  '  >
-                            Asignar cama
-                        </a></td>";
 
             $cadena_paciente .= "<td>
                     <div class='btn-group' role='group' aria-label='Basic example'>
-                        <button type='button' class='btn btn-outline-info btn-sm border-0' title='Ver mas'
-                        onclick='mostrarModalMasInfo(". $d->p_id .",1)' ><i class='far fa-eye  '></i>
-                        </button>
-                        <a type='button' href='".$this->_request->getBaseUrl()."/registrar_paciente?id=".$d->p_id."'
-                        class=' btn btn-outline-dark btn-sm  border-0 ' 
-                        onclick='editarModal(". $d->p_id .",`". $d->p_ci ."`)' >
+                        <a type='button' data-toggle='popover' data-content='Asignar una cama' href='".$this->_request->getBaseUrl()."/asignar_cama_paciente?id=".$d->p_id."'
+                        class=' btn btn-outline-dark btn-sm border-0 '  ><i class='fas fa-bed  '></i>
+                        </a>
+                        <a type='button' data-toggle='popover' data-content='Editar' href='".$this->_request->getBaseUrl()."/registrar_paciente?id=".$d->p_id."'
+                        class=' btn btn-outline-dark btn-sm  border-0 '  >
                             <i class='far fa-edit  '></i>
                         </a>
                         </div>                        
@@ -532,6 +550,176 @@ class PacienteController extends Zend_Controller_Action
 
 
         return $cadena_paciente_cama." ".$cadena_paciente;
+    }
+    /**
+     * tabla_historial_paciente()
+     * * Esta funcion crea la tabla del historial del paciente
+     * @param obj Crea un objeto tipo DbTable py realiza el metodo listar
+     */
+
+    public function tabla_historial_paciente($paciente)
+    {
+        $obj = new Application_Model_DbTable_Admision();
+        $datos = $obj->historialPaciente($paciente);
+        $cie10 = new Application_Model_DbTable_Cie10(); //para obtener la descripcion del diagnostico
+        $cadena = '';
+        if (!$datos) {
+            $cadena .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error !</strong> No se encontraron resultados
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>';
+        } else {
+            $paciente = $obj->Paciente_info($datos[0]->p_id, $datos[0]->paciente_ci, $datos[0]->tipo_paciente);
+
+            $cadena .= '<div class="d-flex justify-content-between pb-2 text-primary"><h5>'.$paciente->nombre.'</h5><h6>CI: '.$datos[0]->paciente_ci.'</h6></div>';
+            $cadena .= '<div class="d-flex justify-content-start pb-2" id="exportButtons"></div>';
+            $cadena .= '<table class="table  table-bordered table-sm dataTable" id="dataTableHistorial" width="100%" > 
+                <thead class="table-dark" >
+                <tr>
+                    <th >SERVICIO</th>
+                    <th >HAB</th>
+                    <th >CAMA</th>
+                    <th >CAUSA</th>
+                    <th >INGRESO</th>
+                    <th >EGRESO</th>
+                    <th >DIAGNOSTICOS</th>
+                </tr>
+                </thead>
+                <tbody>';
+            foreach ($datos as $item):
+                $diagnosticos = array();
+            $diagnosticos = explode(",", substr($item->diagnosticos, 1, -1)); //divide el array de diagnosticos ej: {Z35.2,B12.1,""}
+            $tipo_diagnosticos = array();
+            $tipo_diagnosticos = explode(",", substr($item->tipo_diagnosticos, 1, -1)); //divide el array del tipo de diagnosticos ej: {PRE,DEF,""}
+            $cadena .= "<tr>";
+            $cadena .= "<td>" . $item->especialidad_nombre . "</td>";
+            $cadena .= "<td>" . $item->habitacion_nombre . "</td>";
+            $cadena .= "<td>" . $item->cama_nombre . "</td>";
+            $cadena .= "<td>" . $item->causa_descripcion . "</td>";
+            $cadena .= "<td>" . $item->fecha_ingreso . "</td>";
+            $cadena .= "<td>" . $item->fecha_egreso . "</td>";
+
+            $cadena .= "<td>";
+            for ($i=0,$j=0; $i < count($diagnosticos),$j < count($tipo_diagnosticos); $i++,$j++) {
+                $d = ($diagnosticos[$i]=='""') ? '' : $diagnosticos[$i];
+                $t = ($tipo_diagnosticos[$j]=='""') ? '' : $tipo_diagnosticos[$j];
+                $color = ($t=='PRE') ? 'primary' : 'danger';
+                $data_cie10 = $cie10->listar_descripcion($d);
+
+                $cadena .= '<span class="badge badge-'.$color.' mx-2" data-html="true" data-toggle="popover" 
+                title="'.$d.'<small>  ('.$t.')</small>" data-content="'.$data_cie10->descripcion_sub.' ">'. $d.'</span>';
+            }
+            $cadena .= "</td></tr>";
+
+            endforeach;
+
+            $cadena .= "</tbody></table>";
+        }
+
+        return $cadena;
+    }
+    /**
+     * time_line_paciente()
+     * * Esta funcion crea una linea de tiempo del paciente
+     * @param obj Crea un objeto tipo DbTable py realiza el metodo listar
+     */
+
+    public function time_line_paciente($paciente)
+    {
+        $obj = new Application_Model_DbTable_Admision();
+        $cie10 = new Application_Model_DbTable_Cie10(); //para obtener la descripcion del diagnostico
+        date_default_timezone_set('America/Guayaquil');
+        $datos = $obj->historialPaciente($paciente);
+        $cadena = '';
+        if (!$datos) {
+            $cadena .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error !</strong> No se encontraron resultados
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>';
+        } else {
+            $cadena .= '<div class="timeline text-white  ">';
+            foreach ($datos as $item):
+                $fecha = explode(" ", $item->fecha_ingreso);
+            $diagnosticos = array();
+            $diagnosticos = explode(",", substr($item->diagnosticos, 1, -1));
+            $tipo_diagnosticos = array();
+            $tipo_diagnosticos = explode(",", substr($item->tipo_diagnosticos, 1, -1)); //divide el array del tipo de diagnosticos ej: {PRE,DEF,""}
+            $causaArray = array();
+            switch ($item->causa_id) {
+                    case 1:
+                        $causaArray['icon'] = 'fas fa-procedures';
+                        $causaArray['color'] ='bg-success';
+                        break;
+                    case 2:
+                        $causaArray['icon'] = 'fas fa-random';
+                        $causaArray['color'] ='bg-warning';
+                        break;
+                    case 3:
+                        $causaArray['icon'] = 'fas fa-skull-crossbones';
+                        $causaArray['color'] ='bg-purple';
+                        break;
+                    case 4:
+                        $causaArray['icon'] = 'fas fa-arrow-alt-circle-right';
+                        $causaArray['color'] ='bg-danger';
+                        break;
+                    case 5:
+                        $causaArray['icon'] = 'fas fa-share';
+                        $causaArray['color'] ='bg-info';
+                        break;
+                    case 6:
+                        $causaArray['icon'] = 'fas fa-external-link-alt';
+                        $causaArray['color'] ='bg-orange';
+                        break;
+                    case 7:
+                        $causaArray['icon'] = 'fas fa-retweet';
+                        $causaArray['color'] ='bg-primary';
+                        break;
+                    default:
+                        break;
+                }
+
+            $paciente = $obj->Paciente_info($datos[0]->p_id, $datos[0]->paciente_ci, $datos[0]->tipo_paciente);
+
+            $locale = new Zend_Locale('es_EC');
+            Zend_Date::setOptions(array('format_type' => 'php'));
+            $date = new Zend_Date($fecha[0], false, $locale);
+
+            $cadena .= '<div class="time-label ">
+                            <span   class="bg '.$causaArray['color'].'  ">'.$date->toString('F j, Y').'</span>
+                        </div>';
+            $cadena .= '<div><i class="'.$causaArray['icon'].' bg-gray-500"></i>
+                            <div class="timeline-item bg-gray-100 shadow-sm">
+                                <span class="time"><i class="fas fa-clock"></i> '.$fecha[1].'</span>
+                                <h3 class="timeline-header text-primary ">'.$item->causa_descripcion.'</h3>';
+            $cadena .= '<div class="timeline-body">
+                                    <p>Se realizo un/a <strong>'.$item->causa_descripcion.'</strong> al paciente <span>"'.$paciente->nombre.'"</span></p>
+                                    <div class="d-flex justify-content-between"><p>Ultima ubicación: '. $item->especialidad_nombre .' HAB: '. $item->habitacion_nombre .' CAMA: '. $item->cama_nombre .'</p>
+                                    <p>';
+           
+            for ($i=0,$j=0; $i < count($diagnosticos),$j < count($tipo_diagnosticos); $i++,$j++) { 
+                $d = ($diagnosticos[$i]=='""') ? '' : $diagnosticos[$i];
+                $t = ($tipo_diagnosticos[$j]=='""') ? '' : $tipo_diagnosticos[$j];
+                $color = ($t=='PRE') ? 'primary' : 'danger';
+                $data_cie10 = $cie10->listar_descripcion($d);
+
+                $cadena .= '<span class="badge badge-'.$color.' mx-2" data-html="true" data-toggle="popover" 
+                title="'.$d.'<small>  ('.$t.')</small>" data-content="'.$data_cie10->descripcion_sub.' ">'. $d.'</span>';
+
+
+            }
+            $cadena .= '</p></div></div>';
+            $cadena .= '</div></div>';
+            endforeach;
+            $cadena .= '<div>
+                <i class="fas fa-clock bg-gray-500"></i>
+              </div></div>';
+        }
+
+        return $cadena;
     }
     /**
      * getcamasAction()

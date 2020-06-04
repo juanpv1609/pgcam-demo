@@ -142,10 +142,31 @@ class Application_Model_DbTable_Admision extends Zend_Db_Table_Abstract
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
-        $select = "select * from cama_paciente";
+        $select = "select c.*, a.cama_nombre,h.habitacion_nombre,e.especialidad_alias,e.especialidad_nombre,e.especialidad_color
+	from cama_paciente c
+	join cama a
+        on a.cama_id=c.cama_id
+        join habitacion h
+        on h.habitacion_id=a.habitacion_id
+        join especialidad e
+        on e.especialidad_id=h.especialidad_id;";
         return $db->fetchAll($select);
     }
-    
+    /**
+     * listarPacientesCamaCambio
+     * * esta funcion lista los pacientes que tienen una cama asignada de la bdd
+     * * para realizar un cambio o egreso
+     */
+    public function listarPacientesCamaCambio()
+    {
+        //devuelve todos los registros de la tabla
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "select * from cama_paciente
+        where causa_id=6 or causa_id=7;";
+        return $db->fetchAll($select);
+    }
     /**
      * listarPacientes
      * * esta funcion lista los pacientes que NO tienen una cama asignada de la bdd
@@ -244,6 +265,34 @@ and p_ci not in (select paciente_ci from cama_paciente)";
                 OR g.p_ci='". $paciente."'";
             return $db->fetchRow($select);
         }
+    }
+    /**
+     * historialPaciente
+     * * esta funcion busca la cama actual asiganada a un paciente
+     * @param paciente: id del paciente que se desea buscar
+     * ? realiza un join con CIE10, causa, cama
+     * ! diagnosticos son de tipo array
+     */
+
+    public function historialPaciente($paciente)
+    {
+        //devuelve todos los registros de la tabla
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "SELECT h.*,c.cama_nombre,h_a.habitacion_nombre,e.especialidad_nombre,c_a.causa_descripcion
+                    FROM historial_cp h
+                    JOIN cama c
+                    ON c.cama_id = h.cama_id
+                    JOIN habitacion h_a
+                    ON h_a.habitacion_id = c.habitacion_id
+                    JOIN especialidad e
+                    ON e.especialidad_id = h_a.especialidad_id
+                    JOIN causa c_a
+                    ON c_a.causa_id = h.causa_id
+                    WHERE p_id=".$paciente."
+                    ORDER BY h.fecha_ingreso ;";
+        return $db->fetchAll($select);
     }
     /**
      * buscaCamaPaciente
@@ -440,20 +489,9 @@ and p_ci not in (select paciente_ci from cama_paciente)";
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select='';
         if ($especialidad_id==0) {
-            $select = "SELECT  e.especialidad_nombre, e.especialidad_color,
+            $select = "SELECT  e.especialidad_nombre, e.especialidad_color, e.especialidad_alias,
                     h.habitacion_nombre,c.cama_nombre, 
-                    c_p.p_id,c_p.paciente_ci,c_p.fecha_ingreso,c_p.entrada
-                    FROM cama_paciente c_p
-                    JOIN cama c
-                    ON c.cama_id=c_p.cama_id
-                    JOIN habitacion h
-                    ON h.habitacion_id=c.habitacion_id
-                    JOIN especialidad e
-                    ON e.especialidad_id=h.especialidad_id";
-        } else {
-            $select = "SELECT  e.especialidad_nombre, e.especialidad_color,
-                    h.habitacion_nombre,c.cama_nombre, 
-                    c_p.p_id,c_p.paciente_ci,c_p.fecha_ingreso,c_p.entrada
+                    c_p.p_id,c_p.paciente_ci,c_p.fecha_ingreso,c_p.entrada,c_p.diagnosticos
                     FROM cama_paciente c_p
                     JOIN cama c
                     ON c.cama_id=c_p.cama_id
@@ -461,7 +499,20 @@ and p_ci not in (select paciente_ci from cama_paciente)";
                     ON h.habitacion_id=c.habitacion_id
                     JOIN especialidad e
                     ON e.especialidad_id=h.especialidad_id
-                    WHERE e.especialidad_id=".$especialidad_id;
+                    where (c_p.causa_id=1 or c_p.causa_id=6 or c_p.causa_id=7);";
+        } else {
+            $select = "SELECT  e.especialidad_nombre, e.especialidad_color, e.especialidad_alias,
+                    h.habitacion_nombre,c.cama_nombre, 
+                    c_p.p_id,c_p.paciente_ci,c_p.fecha_ingreso,c_p.entrada,c_p.diagnosticos
+                    FROM cama_paciente c_p
+                    JOIN cama c
+                    ON c.cama_id=c_p.cama_id
+                    JOIN habitacion h
+                    ON h.habitacion_id=c.habitacion_id
+                    JOIN especialidad e
+                    ON e.especialidad_id=h.especialidad_id
+                    WHERE (c_p.causa_id=1 or c_p.causa_id=6 or c_p.causa_id=7)
+                    and e.especialidad_id=".$especialidad_id;
         }
         
         return $db->fetchAll($select);
@@ -538,9 +589,33 @@ and p_ci not in (select paciente_ci from cama_paciente)";
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $observacion='';
+        switch ($opcionCausa) {
+            case 2:
+                $observacion='Contrareferencia';
+                break;
+            case 3:
+                $observacion='Defuncion';
+                break;
+            case 4:
+                $observacion='Egreso / Alta';
+                break;
+            case 5:
+                $observacion='Referencia';
+                break;
+            case 6:
+                $observacion='Transferencia a otro servicio';
+                break;
+            case 7:
+                $observacion='Cambio de cama';
+                break;            
+            default:
+                $observacion='-----';
+                break;
+        }
         $select = "UPDATE public.cama_paciente
                     SET cama_id=".$cama_id.", causa_id=".$opcionCausa.",  
-                        diagnosticos=ARRAY[".$cie10_cod."], tipo_diagnosticos=ARRAY[".$cie10_tipo."], fecha_ingreso=current_timestamp(0), observacion='Cambio de cama', 
+                        diagnosticos=ARRAY[".$cie10_cod."], tipo_diagnosticos=ARRAY[".$cie10_tipo."], fecha_ingreso=current_timestamp(0), observacion='".$observacion."', 
                         usu_id=".$usuario."
                     WHERE cama_paciente_id=".$cama_paciente_id.";";
         return $db->fetchRow($select);

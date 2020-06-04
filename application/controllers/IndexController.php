@@ -1,5 +1,5 @@
-<?php
 
+<?php
 class IndexController extends Zend_Controller_Action
 {
     /**
@@ -18,7 +18,7 @@ class IndexController extends Zend_Controller_Action
         $this->view->user = Zend_Auth::getInstance()->getIdentity();
         $this->view->controlador=Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
         $this->view->accion=Zend_Controller_Front::getInstance()->getRequest()->getActionName();
-        $this->view->icono = "fa-tachometer-alt";
+        $this->view->icono = "fa-chart-pie";
     }
     /**
      * indexAction()
@@ -60,9 +60,9 @@ class IndexController extends Zend_Controller_Action
         $obj = new Application_Model_DbTable_Estadistica();
         $data = $obj->camasEstado();
         $total=($data[0]->cuenta_camas)+($data[1]->cuenta_camas)+($data[2]->cuenta_camas);
-        $this->view->cuenta_camas_disp = number_format((($data[0]->cuenta_camas)*100/$total),1);
-        $this->view->cuenta_camas_ocup = number_format((($data[1]->cuenta_camas)*100/$total),1);
-        $this->view->cuenta_camas_desinf = number_format((($data[2]->cuenta_camas)*100/$total),1);
+        $this->view->cuenta_camas_disp = number_format((($data[0]->cuenta_camas)*100/$total), 1);
+        $this->view->cuenta_camas_ocup = number_format((($data[1]->cuenta_camas)*100/$total), 1);
+        $this->view->cuenta_camas_desinf = number_format((($data[2]->cuenta_camas)*100/$total), 1);
     }
     /**
      * camasporservicioAction()
@@ -141,6 +141,7 @@ class IndexController extends Zend_Controller_Action
     public function tabla_mapa_camas($especialidad_id)
     {
         $obj = new Application_Model_DbTable_Admision();
+
         $data = $obj->mapaCamas($especialidad_id);
         $Listaarea = '';
         if (!$data) {
@@ -154,28 +155,33 @@ class IndexController extends Zend_Controller_Action
             $Listaarea .= '<div class="row row-cols-1  row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">';
             foreach ($data as $item):
                 $paciente = $obj->Paciente_info($item->p_id, $item->paciente_ci, $item->entrada);
+                $fecha = explode(" ", $item->fecha_ingreso);
 
-                $Listaarea .= '<div class="col mb-4 tarjeta">
-                            
-                                    <div class="card lift h-100 rounded shadow-sm  px-0 ">
-                                    <div class="ribbon-wrapper ">
-                                <div class="ribbon bg-'.$item->especialidad_color.'"></div>
-                            </div>
-                                        <div class="card-header h-25 pl-3 py-2">';
-            $Listaarea .= '             <span class="card-title font-weight-bold ">'.$paciente->nombre.'</span>';
-            $Listaarea .= '             </div>
-                                    <div class="card-body pb-0 px-3">';
-            $Listaarea .= '             <div class="row no-gutters align-items-center">
-                                    
-                                        <div class="col mr-2">
-                                        <p class="text ">'.$item->especialidad_nombre.'<br>';
-            $Listaarea .= '                     Hab: '.$item->habitacion_nombre.'<br>';
-            $Listaarea .= '                     Cama: '.$item->cama_nombre.'</p></div>
-                                    <div class="col-auto "><i class="fas fa-user-tag fa-3x text-gray-500 "></i></div>';
-            $Listaarea .= '         </div>
-                                </div>
-                                    <div class="card-footer pl-3 py-2">
-                                        <small class="text-muted ">Fecha de ingreso: '.$item->fecha_ingreso.'</small>
+                $Listaarea .= '<div class="col mb-4 tarjeta">                            
+                                        <div class="card  h-100 rounded shadow-sm  px-0 ">
+                                            <div class="ribbon-wrapper ">
+                                                <div class="ribbon bg-'.$item->especialidad_color.' text-white ">'.$item->especialidad_alias.'</div>
+                                            </div>
+                                            <div class="card-header h-25 pl-3 py-2">';
+                $Listaarea .= '              <a href="'.$this->_request->getBaseUrl().'/listar_paciente?ci='.$item->paciente_ci.'"  title="Clic para ver">
+                                                <span class="card-title font-weight-bold ">'.$paciente->nombre.'</span></a>';
+                $Listaarea .= '             </div>
+                                            <div class="card-body pb-0 px-3">';
+                $Listaarea .= '                 <div class="row no-gutters align-items-center">                                    
+                                                    <div class="col mr-2">
+                                                    <p class="text ">'.$item->especialidad_nombre.'<br>';
+                $Listaarea .= '                     Hab: '.$item->habitacion_nombre.'<br>';
+                $Listaarea .= '                     Cama: '.$item->cama_nombre.'</p>
+                                                    </div>
+                                                    <div class="col-auto ">
+                                                        <i class="fas fa-user-tag fa-3x text-gray-500 "></i>
+                                                    </div>
+                                                </div>';
+
+            $Listaarea .= '      </div>
+                                    <div class="card-footer d-flex justify-content-between p-3">
+                                        <small class="text-muted "><i class="fas fa-calendar-alt  pr-2"></i>'. $fecha[0] .'</small>
+                                        <small class="text-muted "><i class="fas fa-clock  pr-2"></i>'. $fecha[1] .'</small>
                                     </div>
                                 </div>
                             </div>';

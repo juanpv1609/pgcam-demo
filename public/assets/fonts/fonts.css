@@ -64,3 +64,6 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
+.select2-results__options {
+  font-size: 14px !important;
+}

@@ -26,27 +26,23 @@ function editarModalUperfil(id, nombre, color) {
 
 }
 function activaPerfilForm() {
+   $("#form_editar_usuario").removeClass('d-none');
    if ($("#perfil_nombres").prop("disabled") == true)
       $("#perfil_nombres").prop("disabled", false).addClass('border border-warning');
    if ($("#perfil_apellidos").prop("disabled") == true)
       $("#perfil_apellidos").prop("disabled", false).addClass('border border-warning');
    if ($("#perfil_correo").prop("disabled") == true)
       $("#perfil_correo").prop("disabled", false).addClass('border border-warning');
-   $("#formGroupPassword").show();
-
-   $("#accionForm").html('<button class="btn btn-danger" type="button"  onclick="descativarPerfilForm();">Cancelar</button><button class="btn btn-primary" type="submit"  onclick="ActualizarInformacionUsuario();">Actualizar</button>');
 
 }
 function descativarPerfilForm() {
+   $("#form_editar_usuario").addClass('d-none');
    if ($("#perfil_nombres").prop("disabled") == false)
       $("#perfil_nombres").prop("disabled", true).removeClass('border border-warning');
    if ($("#perfil_apellidos").prop("disabled") == false)
       $("#perfil_apellidos").prop("disabled", true).removeClass('border border-warning');
    if ($("#perfil_correo").prop("disabled") == false)
       $("#perfil_correo").prop("disabled", true).removeClass('border border-warning');
-   $("#formGroupPassword").hide();
-
-   $("#accionForm").html('');
 
 }
 //------------PERFIL----------

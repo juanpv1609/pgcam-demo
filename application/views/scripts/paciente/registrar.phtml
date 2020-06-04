@@ -168,7 +168,7 @@
 					<div class="form-group">
 						<label for="fecha_n">Fecha de nacimiento:</label>
 						<input type="date" id="fecha_n" class="form-control form-control-sm" name="fecha_n" required
-							autocomplete="off">
+							autocomplete="off" oninput="calculaEdad();">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -180,7 +180,7 @@
 						<label for="lugar_n">Lugar de nacimiento:</label>
 						<input type="text" id="lugar_n" class="form-control form-control-sm" name="lugar_n" required maxlength="20"
 							autocomplete="off" maxlength="20" onkeyup="this.value = this.value.toUpperCase();"
-							pattern="[[:alnum:]]{1,20}">
+							pattern="[[:alnum:]]{1,20}" >
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -195,7 +195,15 @@
 					<?php echo $this->getGrupo(); ?>
 				</div>
 				<div class="col-sm-1">
-					<?php echo $this->getEdad(); ?>
+					<div class="form-group">
+						<label for="comboEdad">Edad:</label>
+						<input type="text" id="comboEdad"  class="form-control form-control-sm bg-white" name="comboEdad"  
+						autocomplete="off" required>
+						<div class="valid-feedback">
+						</div>
+						<div class="invalid-feedback">
+						</div>
+					</div>
 
 				</div>
 				<div class="col-sm-1">

@@ -92,7 +92,6 @@ class NotificacionesController extends Zend_Controller_Action
             $Listaarea .= '<table class="table table-bordered  table-sm   dataTable" id="dataTableNotificaciones" width="100%" >
                 <thead class="table-dark">
                 <tr>
-                    <th >ID</th>
                     <th >CAUSA</th>
                     <th >DETALLE</th>
                     <th >USUARIO</th>
@@ -107,7 +106,6 @@ class NotificacionesController extends Zend_Controller_Action
             $estado = ($item->not_estado==0) ? 'Creada' : 'Leida';
             $boton_eliminar=(($item->not_estado==0) ) ? 'disabled' : '';
             $Listaarea .= "<tr>";
-            $Listaarea .= "<td>" . $item->not_id . "</td>";
             $Listaarea .= "<td>" . $item->causa_descripcion . "</td>";
             $Listaarea .= "<td>" . strtoupper($item->not_mensaje) . "</td>";
             $Listaarea .= "<td>" . $item->usu_nombres . " " . $item->usu_apellidos . "</td>";

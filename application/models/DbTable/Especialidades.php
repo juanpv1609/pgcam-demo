@@ -34,13 +34,13 @@ class Application_Model_DbTable_Especialidades extends Zend_Db_Table_Abstract
      * ? si la especialidad ya existe omite la transaccion
      */
 
-    public function insertarespecialidad($nombre, $piso,$color)
+    public function insertarespecialidad($nombre, $piso,$color,$alias)
     {
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
-        $select = "INSERT INTO especialidad(piso_id, especialidad_nombre,especialidad_color)
-        VALUES (" . $piso . ",'" . strtoupper($nombre) . "','".$color."')
+        $select = "INSERT INTO especialidad(piso_id, especialidad_nombre,especialidad_color,especialidad_alias)
+        VALUES (" . $piso . ",'" . strtoupper($nombre) . "','".$color."','".$alias."')
         ON CONFLICT (especialidad_nombre)
 	    DO NOTHING; ";
         return $db->fetchRow($select);
@@ -54,14 +54,14 @@ class Application_Model_DbTable_Especialidades extends Zend_Db_Table_Abstract
      * ? devuelve los resultados como objetos $row->campo
      */
 
-    public function actualizarespecialidad($id, $nombre, $piso,$color)
+    public function actualizarespecialidad($id, $nombre, $piso,$color,$alias)
     {
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = "UPDATE especialidad
-        SET piso_id=" . $piso . ",especialidad_nombre='" . strtoupper($nombre) . "',especialidad_color='".$color."'
-      WHERE especialidad_id=" . $id . "; ";
+        SET piso_id=" . $piso . ",especialidad_nombre='" . strtoupper($nombre) . "',especialidad_color='".$color."',especialidad_alias='".$alias."'
+        WHERE especialidad_id=" . $id . "; ";
         return $db->fetchRow($select);
     }
     /**

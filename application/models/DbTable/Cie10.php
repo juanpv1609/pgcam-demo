@@ -86,4 +86,23 @@ class Application_Model_DbTable_Cie10 extends Zend_Db_Table_Abstract
         WHERE c.cie10_capitulo_id=".$capitulo_id.";";
         return $db->fetchAll($select);
     }
+     /**
+     * listar_descripcion()
+     * * Esta funcion lista los diagnosticos de acuerdo a una busqueda tipo LIKE
+     * ? devuelve los resultados como objetos $row->campo
+     * @param dato: campo que se desea buscar
+     * ! es necesario un filtro ya que son demasiados datos
+     */
+
+    public function listar_descripcion($sub_cod)
+    {
+        //devuelve todos los registros de la tabla
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "SELECT descripcion_sub
+        FROM cie10_sub_categoria
+        WHERE sub_cod ='".strtoupper($sub_cod)."';";
+        return $db->fetchRow($select);
+    }
 }

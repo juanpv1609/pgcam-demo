@@ -10,7 +10,7 @@ let DANGER = 'rgba(231, 74, 59, 0.5)';
 let PURPLE = 'rgba(102, 16, 242, 0.5)';
 let INFO = 'rgba(54, 185, 204, 0.5)';
 let ORANGE = 'rgba(253, 126, 20, 0.5)';
-function ultima_comexion(){
+function ultima_conexion(){
    var fecha = $('#ultima_conexion_dias').val();
    //console.log(moment(fecha, "YYYY-MM-DD HH:mm:ss").fromNow())
    $('#ultima_conexion').text(moment(fecha, "YYYY-MM-DD h:m:s").fromNow());

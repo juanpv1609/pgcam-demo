@@ -53,10 +53,11 @@ class EspecialidadesController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
         if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
             $especialidad_nombre = $this->getRequest()->getParam('nombre');
+            $alias = $this->getRequest()->getParam('alias');
             $piso_id = $this->getRequest()->getParam('piso');
             $color = $this->getRequest()->getParam('color');
             $obj = new Application_Model_DbTable_Especialidades();
-            $obj->insertarespecialidad($especialidad_nombre, $piso_id,$color);
+            $obj->insertarespecialidad($especialidad_nombre, $piso_id,$color,$alias);
             echo $this->tabla_especialidad();
         }
     }
@@ -78,9 +79,10 @@ class EspecialidadesController extends Zend_Controller_Action
             $id = $this->getRequest()->getParam('id');
             $piso_id = $this->getRequest()->getParam('piso');
             $especialidad_nombre = $this->getRequest()->getParam('nombre');
+            $alias = $this->getRequest()->getParam('alias');
             $color = $this->getRequest()->getParam('color');
             $obj = new Application_Model_DbTable_Especialidades();
-            $obj->actualizarespecialidad($id, $especialidad_nombre, $piso_id,$color);
+            $obj->actualizarespecialidad($id, $especialidad_nombre, $piso_id,$color,$alias);
             echo $this->tabla_especialidad();
         }
     }
@@ -161,6 +163,7 @@ class EspecialidadesController extends Zend_Controller_Action
                 <tr>
                     <th >ID</th>
                     <th >DESCRIPCION</th>
+                    <th >ALIAS</th>
                     <th >COlOR</th>
                     <th >PISO</th>
                     <th >AREA</th>
@@ -174,6 +177,7 @@ class EspecialidadesController extends Zend_Controller_Action
                 $cadena .= "<tr>";
             $cadena .= "<td>" . $item->especialidad_id . "</td>";
             $cadena .= "<td >" . $item->especialidad_nombre . "</td>";
+            $cadena .= "<td >" . $item->especialidad_alias . "</td>";
             $cadena .= "<td><span class='badge badge-" . $item->especialidad_color . " '>" . $item->especialidad_color . "</span></td>";
             $cadena .= "<td>" . $item->piso_nombre . "</td>";
             $cadena .= "<td>" . $item->area_nombre . "</td>";
@@ -184,7 +188,7 @@ class EspecialidadesController extends Zend_Controller_Action
                     
                     <!--  debo enviar la busqueda por ajax -->
                     <button type='button' class='btn btn-outline-dark btn-sm  border-0 ' 
-                    onclick='editarModal(". $item->especialidad_id .",". $item->piso_id .",`". $item->especialidad_nombre ."`,`". $item->especialidad_color ."`)' >
+                    onclick='editarModal(". $item->especialidad_id .",". $item->piso_id .",`". $item->especialidad_nombre ."`,`". $item->especialidad_color ."`,`". $item->especialidad_alias ."`)' >
                         <i class='far fa-edit  '></i>
                     </button>
                     <button type='button' class='btn btn-outline-danger btn-sm border-0 ' onclick='eliminar(". $item->especialidad_id .")' >

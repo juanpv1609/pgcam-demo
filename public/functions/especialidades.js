@@ -21,10 +21,11 @@ function agregarModal() {
  * @param piso_id se guarda el piso_id de la especialidad a editar
  * @param nombre se muestra el nombre de la especialidad a editar
  */
-function editarModal(id, piso_id, nombre,color) {
+function editarModal(id, piso_id, nombre,color,alias) {
   $("#exampleModalLabel").text("Editar - Especialidad");
   $("#especialidad_id").val(id);
   $("#nombre_especialidad").val(nombre);
+  $("#alias_especialidad").val(alias);
   $("#comboPiso").val(piso_id);
   $("#valorBoton").val(color);
   $("#accionForm").html('<button class="btn btn-primary" type="submit"  onclick="ActualizarEspecialidad();">Actualizar</button>');
@@ -42,6 +43,7 @@ function editarModal(id, piso_id, nombre,color) {
  */
 function InsertarEspecialidad() {
   var nombre = $("#nombre_especialidad").val();
+  var alias = $("#alias_especialidad").val();
   var piso = $("#comboPiso").val();
   var color = $("#valorBoton").val();
   var dir = $('#dir').val();
@@ -54,7 +56,7 @@ function InsertarEspecialidad() {
           dataType: "html",
           type: "POST",
           url: dir + "/especialidades/crear", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
-          data: "nombre=" + nombre + "&piso=" + piso + "&color=" + color, //Se añade el parametro de busqueda del medico
+          data: "nombre=" + nombre + "&alias="+alias+"&piso=" + piso + "&color=" + color, //Se añade el parametro de busqueda del medico
           beforeSend: function (data) {
             $("#data_Table").html("Procesando...");
           },
@@ -105,6 +107,8 @@ function ActualizarEspecialidad() {
   var id = $("#especialidad_id").val();
   var piso = $("#comboPiso").val();
   var nombre = $("#nombre_especialidad").val();
+  var alias = $("#alias_especialidad").val();
+
   var color = $("#valorBoton").val();
   var dir = $('#dir').val();
   $("#formEspecialidades").submit(function (event) {
@@ -116,7 +120,7 @@ function ActualizarEspecialidad() {
           dataType: "html",
           type: "POST",
           url: dir + "/especialidades/editar", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
-          data: "id=" + id + "&nombre=" + nombre + "&piso=" + piso + "&color=" + color, //Se añade el parametro de busqueda del medico
+          data: "id=" + id + "&nombre=" + nombre + "&alias="+alias+"&piso=" + piso + "&color=" + color, //Se añade el parametro de busqueda del medico
           beforeSend: function (data) {
             $("#data_Table").html("Procesando...");
           },

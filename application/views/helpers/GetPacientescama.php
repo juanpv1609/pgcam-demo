@@ -4,7 +4,7 @@ class Zend_View_Helper_GetPacientescama extends Zend_View_Helper_Abstract
     public function getPacientescama()
     {
         $obj = new Application_Model_DbTable_Admision();
-        $data_paciente_cama = $obj->listarPacientesCama();
+        $data_paciente_cama = $obj->listarPacientesCamaCambio();
         $Listaarea = '<div  class="form-group">';
         if (!$data_paciente_cama) {
             $Listaarea .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">

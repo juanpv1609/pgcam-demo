@@ -15,12 +15,12 @@ class Zend_View_Helper_GetEspecialidades extends Zend_View_Helper_Abstract
                     </button>
                 </div>';
         } else {
-            $Listaarea .= '<nav class="navbar  navbar-expand-lg navbar-light text-left  pl-0 ml-0">
+            $Listaarea .= '<nav class="navbar  navbar-expand-lg navbar-light ">
                         <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon small"></span>
                     </button>
                     <div class="collapse navbar-collapse " id="navbarNavDropdown">
-                    <ul class="nav nav-tabs justify-content-left">';
+                    <ul class="nav nav-tabs card-header-tabs">';
 
             foreach ($datos as $item):
                 $Listaarea .= '<li class="nav-item ">

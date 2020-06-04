@@ -1,7 +1,5 @@
 (function($) {
-  "use strict"; // Start of use strict
-
-  
+  "use strict"; // Start of use strict 
 
   // Close any open menu accordions when window is resized below 768px
   $(window).resize(function() {
@@ -55,6 +53,7 @@
             }, false);
         });
     }, false);
+    
     $(function(){ const newLocal = $('.toggle-event').bootstrapToggle(); }); //boton toggle
     //--------TOOLTIP
     $(function () {
@@ -62,11 +61,17 @@
     })
     //------SELECT2
     $(document).ready(function() {
+      // ejemplo de popover
+      $('[data-toggle="popover"]').popover({
+        trigger: 'hover',
+        placement: 'auto'
+      })
+      // Toggle the side navigation
+      //---------------------------
       $('.js-example-basic-single').select2({
         theme: "bootstrap",
         language: "es"
       });
-      // Toggle the side navigation
       $("#sidebarToggle, #sidebarToggleTop").on('click', function (e) {
         $("body").toggleClass("sidebar-toggled");
         $(".sidebar").toggleClass("toggled");
@@ -77,10 +82,11 @@
       $('#ShowPassword').click(function () {
         $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
       });
+      //getCamas(1);
       camasPorServicio();
       camasEstado();
       mapaDeCamas(0);
-      ultima_comexion();
+      ultima_conexion();
       $('#calendario').popover({
         trigger: 'hover',
         placement: 'auto',
@@ -91,17 +97,8 @@
       //-------------------------
       $('.btn-icon-split').addClass('lift');
       
-      //---------------------------
-      $('.js-example-basic-single').select2({
-        theme: "bootstrap",
-        language: "es",
-        placeholder: 'Seleccione una opcion'
-      });
-      // ejemplo de popover
-      $('[data-toggle="popover"]').popover({
-        trigger: 'hover',
-        placement: 'auto'
-      })
+      
+      
     
   });
   

@@ -183,7 +183,7 @@
     <div class="card shadow mb-4  ">
       <!-- Card Header - Dropdown -->
       <div class="card-header d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Mapa de pacientes y camas</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Pacientes internos</h6>
         <div class="dropdown no-arrow">
           <a class="dropdown-toggle px-4" href="#" onclick="mapaDeCamas(0);">
             <i class="fas fa-sync-alt fa-sm fa-fw text-gray-400"></i>
@@ -210,13 +210,16 @@
               $datos = $obj->listar();
               if(isset($datos)): 
                 foreach ($datos as $item): ?>
-        <button type="button" class="btn btn-<?php echo $item->especialidad_color ?> btn-xs "
+        <button type="button" class="btn btn-<?php echo $item->especialidad_color ?> btn-xs " data-toggle="popover"
+          data-content="<?php echo $item->especialidad_nombre ?>"
           onclick="mapaDeCamas('<?php echo $item->especialidad_id ?>');">
-          <small><?php echo $item->especialidad_nombre ?></small>
+          <small><?php echo $item->especialidad_alias ?></small>
         </button>
         <?php   endforeach;
                endif; ?>
-        <button type="button" class="btn btn-light btn-xs" onclick="mapaDeCamas(0);">
+        <button type="button" class="btn btn-light btn-xs" onclick="mapaDeCamas(0);"
+        data-toggle="popover"
+          data-content="Todos los servicios">
           <small>TODOS</small></button>
       </div>
     </div>
