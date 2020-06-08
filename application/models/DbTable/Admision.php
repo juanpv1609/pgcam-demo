@@ -143,13 +143,14 @@ class Application_Model_DbTable_Admision extends Zend_Db_Table_Abstract
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = "select c.*, a.cama_nombre,h.habitacion_nombre,e.especialidad_alias,e.especialidad_nombre,e.especialidad_color
-	from cama_paciente c
-	join cama a
+        from cama_paciente c
+        join cama a
         on a.cama_id=c.cama_id
         join habitacion h
         on h.habitacion_id=a.habitacion_id
         join especialidad e
-        on e.especialidad_id=h.especialidad_id;";
+        on e.especialidad_id=h.especialidad_id
+        where c.causa_id=6 or c.causa_id=7 or c.causa_id=1;";
         return $db->fetchAll($select);
     }
     /**
