@@ -15,20 +15,7 @@ function activaDesactivaPermisos(id, opcion) {
          beforeSend: function (data) {
          },
          success: function (requestData) {//armar la tabla
-            const Toast = Swal.mixin({
-               toast: true,
-               position: 'top-end',
-               showConfirmButton: false,
-               timer: 1000,
-               onOpen: (toast) => {
-                  toast.addEventListener('mouseenter', Swal.stopTimer)
-                  toast.addEventListener('mouseleave', Swal.resumeTimer)
-               }
-            });
-            Toast.fire({
-               icon: 'success',
-               title: 'Permiso actualizado correctamente!'
-            });
+            
             $("#data_Table_permisos").html(requestData);
             //--------- toggle buttons inside modal--------
             $('#formModalPermisos').find(".toggle-event-permisos").bootstrapToggle();
@@ -42,6 +29,23 @@ function activaDesactivaPermisos(id, opcion) {
 
          }
       });
+}
+function confirmaEdicionPermisos(){
+   $('#formModalPermisos').modal('hide');
+   const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 1000,
+      onOpen: (toast) => {
+         toast.addEventListener('mouseenter', Swal.stopTimer)
+         toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+   });
+   Toast.fire({
+      icon: 'success',
+      title: 'Permisos actualizados correctamente!'
+   });
 }
 function editarModalUpermisos(id, nombre) {
    $("#exampleModalLabelPermisos").text("Permisos - " + nombre);
@@ -76,16 +80,6 @@ function editarModalUpermisos(id, nombre) {
 
          }
       });
-}
-function ModalPermisosAdd(id) {
-   $("#perfil_id").val(id);
-   $('#formModalPermisosAdd').modal({
-      show: true
-   });
-   //-------- para gestionar los permisos  
-
-   getControladores(1);
-
 }
 //------------------------
 function getControladores(op) {
@@ -151,55 +145,5 @@ function getAcciones(op) {
 
          }
       });
-
-}
-function AgregarPermiso() {
-   var perf_id = $("#perf_id").val();
-   var comboAcciones = $("#comboAcciones").val();
-   var comboPermiso = $("#comboPermiso").val();
-   var dir = $('#dir').val();
-   $("#agregaPermisos").submit(function (event) {
-      event.preventDefault(); //prevent default action
-      if ((!perf_id == "") && (!comboAcciones == "") && (!comboPermiso == "")) {
-         $.ajax(
-            {
-               dataType: "html",
-               type: "POST",
-               url: dir + "/usuarios/crearpermiso", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
-               data: "perf_id=" + perf_id + "&comboAcciones=" + comboAcciones + "&comboPermiso=" + comboPermiso, //Se añade el parametro de busqueda del medico
-               beforeSend: function (data) {
-
-               },
-               success: function (requestData) {//armar la tabla
-
-                  const Toast = Swal.mixin({
-                     toast: true,
-                     position: 'top-end',
-                     showConfirmButton: false,
-                     timer: 1000,
-                     onOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                     }
-                  });
-                  Toast.fire({
-                     icon: 'success',
-                     title: 'Dato creado correctamente!'
-                  });
-
-               },
-               error: function (requestData, strError, strTipoError) {
-
-
-               },
-               complete: function (requestData, exito) { //fin de la llamada ajax.
-                  // console.log(exito);
-                  getControladores(1);
-                  getAcciones(1);
-                  $("#comboPermiso").val('');
-               }
-            });
-      }
-   });
 
 }

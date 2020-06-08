@@ -69,7 +69,9 @@
 							<div class="form-group">
 								<label for="nombres">Nombres:</label>
 								<input type="text" id="nombres" class="form-control " name="nombres" placeholder="Nombres..."
-									required autocomplete="off">
+									required autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();"
+									pattern="\D{1,50}">
 								<div class="valid-feedback">
 								</div>
 								<div class="invalid-feedback">
@@ -81,7 +83,9 @@
 							<div class="form-group">
 								<label for="apellidos">Apellidos:</label>
 								<input type="text" id="apellidos" class="form-control " name="apellidos"
-									placeholder="Apellidos..." required autocomplete="off">
+									placeholder="Apellidos..." required autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();"
+									pattern="\D{1,50}">
 								<div class="valid-feedback">
 								</div>
 								<div class="invalid-feedback">
@@ -95,7 +99,9 @@
 							<div class="form-group">
 								<label for="correo">Correo electronico:</label>
 								<input type="email" id="correo" class="form-control input-group-sm" name="correo"
-									placeholder="ejemplo@ejemplo.com" required autocomplete="off">
+									placeholder="ejemplo@ejemplo.com" required autocomplete="off"
+									onkeyup="this.value = this.value.toLowerCase();"
+									pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
 								<div class="valid-feedback">
 								</div>
 								<div class="invalid-feedback">
@@ -114,6 +120,7 @@
 
 						</div>
 					</div>
+					<small id="claveHelp" class="form-text text-muted">Contraseña por defecto para nuevos usuarios: HGOPNA2020</small>
 					<div id="clave_igual"></div>
 
 					

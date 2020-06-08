@@ -66,9 +66,9 @@ function InsertarArea() {
                 icon: 'success',
                 title: 'Dato creado correctamente!'
               });
+            $('#formModal').modal('hide');
               $("#data_Table").html(requestData);
               toDataTable("#dataTableAreas");
-              $("#nombre_area").val('').focus();
               nombre = '';      
           },
           error: function (requestData, strError, strTipoError) {

@@ -75,9 +75,9 @@ function InsertarEspecialidad() {
               icon: 'success',
               title: 'Dato creado correctamente!'
             });
+            $('#formModal').modal('hide');
             $("#data_Table").html(requestData);
             toDataTable("#dataTableEspecialidad");
-            $("#nombre_especialidad").val("");
             nombre = '';      
           },
           error: function (requestData, strError, strTipoError) {

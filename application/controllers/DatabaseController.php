@@ -80,7 +80,7 @@ class DatabaseController extends Zend_Controller_Action
 
             foreach ($dicc as $d):
                     foreach ($llaves as $l):
-                        $pk = (($d->columna_nombre==$l->column_name) and ($l->constraint_type=='PRIMARY KEY')) ? '<i class="fas fa-key" ></i>' : '';
+                        $pk = (($d->columna_nombre==$l->column_name) and ($l->constraint_type=='PRIMARY KEY')) ? '<i class="fas fa-key text-orange" ></i>' : '';
             endforeach;
             $Listaarea .= "<tr>";
             $Listaarea .= "<td class='text-center'>" . $pk . "</td>";

@@ -436,10 +436,8 @@ class PacienteController extends Zend_Controller_Action
         if (!$data_paciente_cama) {
             $cadena_paciente_cama .= '';
         } else {
-            $cadena_paciente_cama .= '<div class="card mb-4">
-            <div class="card-header"><h6>Pacientes con cama asignada</h6> </div>
-            <div class="card-body">';
-            $cadena_paciente_cama .= '<table class="table table-bordered table-sm dataTable pb-4" id="dataTablePacienteCama" width="100%" >
+            
+            $cadena_paciente_cama .= '<table class="table table-bordered table-sm dataTable " id="dataTablePacienteCama" width="100%" >
                 <thead class="thead-dark">
                 <tr >
                     <th >CEDULA</th>
@@ -471,7 +469,7 @@ class PacienteController extends Zend_Controller_Action
             $cadena_paciente_cama .= '<td><button type="button" class="btn btn-outline-info btn-sm border-0" data-html="true" data-toggle="popover" 
                                         title="'. $item->especialidad_nombre.'"
                                         data-content="Habitacion ' . $item->habitacion_nombre . '<br>Cama ' . $item->cama_nombre . '">
-                                        <i class="fas fa-search "></i></button> </td>';
+                                        <i class="fas fa-eye "></i></button> </td>';
             $cadena_paciente_cama .= "<td>";
             for ($i=0,$j=0; $i < count($diagnosticos),$j < count($tipo_diagnosticos); $i++,$j++) {
                 $d = ($diagnosticos[$i]=='""') ? '' : $diagnosticos[$i];
@@ -491,7 +489,7 @@ class PacienteController extends Zend_Controller_Action
                         class='".$boton_editar." btn btn-outline-dark btn-sm  border-0 '  >
                             <i class='far fa-edit  '></i>
                         </a>
-                        <a type='button' href='".$this->_request->getBaseUrl()."/paciente/historial?id=".$item->p_id."'
+                        <a type='button' href='".$this->_request->getBaseUrl()."/paciente/historial?id=".$item->paciente_ci."'
                         class=' btn btn-outline-purple btn-sm  border-0 ' title='Ver historial' >
                             <i class='fas fa-history  '></i>
                         </a>
@@ -499,57 +497,43 @@ class PacienteController extends Zend_Controller_Action
                     </td>
                 </tr>";
             endforeach;
-            $cadena_paciente_cama .= "</tbody></table></div></div>";
-        }
-        /**
-             * ? pacientes sin cama asignada
-             * ! evita duplicados en la consulta
-             */
-        
-        if (!$data_paciente) {
+            if (!$data_paciente) {
             $cadena_paciente .= '';
-        } else {
-            $cadena_paciente .= '<div class="card mb-4">
-            <div class="card-header"><h6>Pacientes sin cama asignada</h6> </div>
-            <div class="card-body">';
-            $cadena_paciente .= '<table class="table table-bordered table-sm dataTable" id="dataTablePaciente" width="100%" >
-                <caption>Pacientes sin cama asignada</caption>
-                <thead class="thead-light">
-                <tr>
-                    <th >HC</th>
-                    <th >CEDULA</th>
-                    <th >PACIENTE</th>
-                    <th >ORIGEN</th>
-                    <th >ACCION</th>
-                </tr>
-                </thead>
-                <tbody>';
-            foreach ($data_paciente as $d):
-            $cadena_paciente .= "<tr>";
-            $cadena_paciente .= "<td>" . $d->p_id . "</td>";
-            $cadena_paciente .= "<td>" . $d->p_ci . "</td>";
-            $cadena_paciente .= "<td>". $d->p_nombres ." ". $d->p_apellidos ."</td>";
+            } else {
+                foreach ($data_paciente as $d):
+                $cadena_paciente .= "<tr>";
+                $cadena_paciente .= "<td>" . $d->p_ci . "</td>";
+                $cadena_paciente .= "<td>". $d->p_nombres ." ". $d->p_apellidos ."</td>";
+                
+                $cadena_paciente .= "<td></td>";
+                $cadena_paciente .= "<td>EMERGENCIA</td>";
+                $cadena_paciente .= "<td><a type='button' data-toggle='popover' data-content='Asignar una cama' href='".$this->_request->getBaseUrl()."/asignar_cama_paciente?id=".$d->p_id."'
+                            class=' btn btn-info btn-sm border-0 '  >Asignar
+                            </a></td>";
+                $cadena_paciente .= "<td></td>";
+
+
+                $cadena_paciente .= "<td>
+                        <div class='btn-group' role='group' aria-label='Basic example'>
+                            
+                            <a type='button' data-toggle='popover' data-content='Editar' href='".$this->_request->getBaseUrl()."/registrar_paciente?id=".$d->p_id."'
+                            class=' btn btn-outline-dark btn-sm  border-0 '  >
+                                <i class='far fa-edit  '></i>
+                            </a>
+                            </div>                        
+                        </td>
+                    </tr>";
+                endforeach;
+
+            }
             
-            $cadena_paciente .= "<td>EMERGENCIA</td>";
 
-            $cadena_paciente .= "<td>
-                    <div class='btn-group' role='group' aria-label='Basic example'>
-                        <a type='button' data-toggle='popover' data-content='Asignar una cama' href='".$this->_request->getBaseUrl()."/asignar_cama_paciente?id=".$d->p_id."'
-                        class=' btn btn-outline-dark btn-sm border-0 '  ><i class='fas fa-bed  '></i>
-                        </a>
-                        <a type='button' data-toggle='popover' data-content='Editar' href='".$this->_request->getBaseUrl()."/registrar_paciente?id=".$d->p_id."'
-                        class=' btn btn-outline-dark btn-sm  border-0 '  >
-                            <i class='far fa-edit  '></i>
-                        </a>
-                        </div>                        
-                    </td>
-                </tr>";
-            endforeach;
-            $cadena_paciente .= "</tbody></table></div></div>";
+            $cadena_paciente_cama .= $cadena_paciente."</tbody></table>";
         }
+        
 
 
-        return $cadena_paciente_cama." ".$cadena_paciente;
+        return $cadena_paciente_cama;
     }
     /**
      * tabla_historial_paciente()
@@ -590,28 +574,28 @@ class PacienteController extends Zend_Controller_Action
                 <tbody>';
             foreach ($datos as $item):
                 $diagnosticos = array();
-            $diagnosticos = explode(",", substr($item->diagnosticos, 1, -1)); //divide el array de diagnosticos ej: {Z35.2,B12.1,""}
-            $tipo_diagnosticos = array();
-            $tipo_diagnosticos = explode(",", substr($item->tipo_diagnosticos, 1, -1)); //divide el array del tipo de diagnosticos ej: {PRE,DEF,""}
-            $cadena .= "<tr>";
-            $cadena .= "<td>" . $item->especialidad_nombre . "</td>";
-            $cadena .= "<td>" . $item->habitacion_nombre . "</td>";
-            $cadena .= "<td>" . $item->cama_nombre . "</td>";
-            $cadena .= "<td>" . $item->causa_descripcion . "</td>";
-            $cadena .= "<td>" . $item->fecha_ingreso . "</td>";
-            $cadena .= "<td>" . $item->fecha_egreso . "</td>";
+                $diagnosticos = explode(",", substr($item->diagnosticos, 1, -1)); //divide el array de diagnosticos ej: {Z35.2,B12.1,""}
+                $tipo_diagnosticos = array();
+                $tipo_diagnosticos = explode(",", substr($item->tipo_diagnosticos, 1, -1)); //divide el array del tipo de diagnosticos ej: {PRE,DEF,""}
+                $cadena .= "<tr>";
+                $cadena .= "<td>" . $item->especialidad_nombre . "</td>";
+                $cadena .= "<td>" . $item->habitacion_nombre . "</td>";
+                $cadena .= "<td>" . $item->cama_nombre . "</td>";
+                $cadena .= "<td>" . $item->causa_descripcion . "</td>";
+                $cadena .= "<td>" . $item->fecha_ingreso . "</td>";
+                $cadena .= "<td>" . $item->fecha_egreso . "</td>";
 
-            $cadena .= "<td>";
-            for ($i=0,$j=0; $i < count($diagnosticos),$j < count($tipo_diagnosticos); $i++,$j++) {
-                $d = ($diagnosticos[$i]=='""') ? '' : $diagnosticos[$i];
-                $t = ($tipo_diagnosticos[$j]=='""') ? '' : $tipo_diagnosticos[$j];
-                $color = ($t=='PRE') ? 'primary' : 'danger';
-                $data_cie10 = $cie10->listar_descripcion($d);
+                $cadena .= "<td>";
+                for ($i=0,$j=0; $i < count($diagnosticos),$j < count($tipo_diagnosticos); $i++,$j++) {
+                    $d = ($diagnosticos[$i]=='""') ? '' : $diagnosticos[$i];
+                    $t = ($tipo_diagnosticos[$j]=='""') ? '' : $tipo_diagnosticos[$j];
+                    $color = ($t=='PRE') ? 'primary' : 'danger';
+                    $data_cie10 = $cie10->listar_descripcion($d);
 
-                $cadena .= '<span class="badge badge-'.$color.' mx-2" data-html="true" data-toggle="popover" 
-                title="'.$d.'<small>  ('.$t.')</small>" data-content="'.$data_cie10->descripcion_sub.' ">'. $d.'</span>';
-            }
-            $cadena .= "</td></tr>";
+                    $cadena .= '<span class="badge badge-'.$color.' mx-2" data-html="true" data-toggle="popover" 
+                    title="'.$d.'<small>  ('.$t.')</small>" data-content="'.$data_cie10->descripcion_sub.' ">'. $d.'</span>';
+                }
+                $cadena .= "</td></tr>";
 
             endforeach;
 

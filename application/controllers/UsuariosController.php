@@ -245,9 +245,13 @@ class UsuariosController extends Zend_Controller_Action
             $nombre_perfil = $this->getRequest()->getParam('nombre_perfil');
             $color = $this->getRequest()->getParam('color');
             $obj = new Application_Model_DbTable_Perfiles();
-            $obj->crearperfil($nombre_perfil, $color);
+            $obj_permiso = new Application_Model_DbTable_Permisos();
+            $data = $obj->crearperfil($nombre_perfil, $color);
+            // CREAR PERMISOS AUTOMATICAMENTE            
+            $obj_permiso->crear_permiso($data->perf_id);
             echo $this->tabla_perfiles();
-        }
+        }       
+
     }
     /**
      * editarperfilAction()
@@ -288,8 +292,10 @@ class UsuariosController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
         if ($this->getRequest()->isXmlHttpRequest()) { //Detectamos si es una llamada AJAX
             $id = $this->getRequest()->getParam('id');
-            $table = new Application_Model_DbTable_Perfiles();
-            $table->eliminarpefil($id);
+            $perfil = new Application_Model_DbTable_Perfiles();
+            $permiso = new Application_Model_DbTable_Permisos();
+            //$permiso->eliminar_permisos($id);
+            $perfil->eliminarpefil($id);
             echo $this->tabla_perfiles();
         }
     }
@@ -309,28 +315,6 @@ class UsuariosController extends Zend_Controller_Action
         }
     }
     
-    /**
-     * crearpermisoAction()
-     * * Esta accion crea nuevos permisos para los diferentes perfiles desde vista perfiles
-     * ! obtiene los datos mediante llamada ajax
-     * @param perf_id dato enviado method POST via ajax (perfil_id)
-     * @param comboAcciones dato enviado method POST via ajax (ejemplo: areas/insertar)
-     * @param comboPermiso dato enviado method POST via ajax (allow/deny)
-     * @param obj Crea un objeto tipo DbTable y realiza el metodo crear_permiso
-     */
-    public function crearpermisoAction()
-    {
-        $this->_helper->viewRenderer->setNoRender(); //No necesitamos el render de la vista en una llamada ajax.
-        $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
-        if ($this->getRequest()->isXmlHttpRequest()) { //Detectamos si es una llamada AJAX
-            $perf_id = $this->getRequest()->getParam('perf_id');
-            $comboAcciones = $this->getRequest()->getParam('comboAcciones');
-            $comboPermiso = $this->getRequest()->getParam('comboPermiso');
-            $obj = new Application_Model_DbTable_Permisos();
-            $obj->crear_permiso($perf_id, $comboAcciones, $comboPermiso);
-            echo $this->tabla_perfiles();
-        }
-    }
     /**
      * editapermisosAction()
      * * Esta accion permite editar los permisos de cada perfil
@@ -419,7 +403,7 @@ class UsuariosController extends Zend_Controller_Action
             $Listaarea .= "<td>" . $item->correo . "</td>";
             $Listaarea .= "<td>" . $item->usu_iniciales . "</td>";
             $Listaarea .= "<td>" . strtoupper($item->perf_nombre) . "</td>";
-            $Listaarea .= '<td class="text-center"><input class="toggle-event" type="checkbox" ' . $estado .  ' onchange="activaDesactivaUsuario('. $item->usu_id .','.$item->usu_estado_id.');"
+            $Listaarea .= '<td class="text-center"><input class="toggle-event" type="checkbox" ' . $estado .  ' onchange="activaDesactivaUsuario('. $item->usu_id .','. $item->perf_id .','.$item->usu_estado_id.');"
                 data-toggle="toggle" data-on="<i class=\'fas fa-check-circle\' ></i>" data-off="<i class=\'fas fa-ban\' ></i>"
 			                data-onstyle="success" data-offstyle="danger" data-size="xs"
 			                value=' . $item->usu_id . '></td>';
@@ -430,7 +414,7 @@ class UsuariosController extends Zend_Controller_Action
 			                onclick='editarModalU(" . $item->usu_id . ",`" . $item->usu_nombres . "`,`" . $item->usu_apellidos . "`,`" . $item->correo . "`," . $item->usu_estado_id . "," . $item->perf_id . ")' >
 			                    <i class='far fa-edit  '></i>
 			                </button>
-			                <button type='button' class='btn btn-outline-danger btn-sm border-0 ' onclick='eliminarU(" . $item->usu_id . ")' >
+			                <button type='button' class='btn btn-outline-danger btn-sm border-0 ' onclick='eliminarU(" . $item->usu_id . ",". $item->perf_id .")' >
 			                    <i class='far fa-trash-alt'></i>
 			                </button>
 			                </div>
@@ -478,13 +462,16 @@ class UsuariosController extends Zend_Controller_Action
  
                           
             foreach ($datos as $i):
-                    $estado = ($i->permiso=='allow') ? "checked" : "";
-            $Listaarea .= '<td  ><div class="d-flex justify-content-between align-middle"><span>' . strtoupper($i->accion_nombre) . '</span>
-                    <input class="toggle-event-permisos" onchange="activaDesactivaPermisos('. $i->usu_perm_id .',`'.$i->permiso.'`);"  
-                    type="checkbox" '.$estado.' data-toggle="toggle" 
-                    data-onstyle="success" data-offstyle="danger" data-size="xs"
-                    value=' . $i->usu_perm_id . '></div>
-                    </td>';
+                $estado = ($i->permiso=='allow') ? "checked" : "";
+                $accion_nombre = ($i->accion_nombre=='index') ? 'listar' : $i->accion_nombre;
+                $Listaarea .= '<td  ><div class="d-flex justify-content-between align-middle"><strong>' . strtoupper($accion_nombre) . '</strong>
+                        <div class="custom-control custom-checkbox small">
+                        <input class="custom-control-input" onchange="activaDesactivaPermisos('. $i->usu_perm_id .',`'.$i->permiso.'`);"  
+                        type="checkbox" '.$estado.'  value=' . $i->usu_perm_id . ' id="'.$i->usu_perm_id.'">
+                        <label class="custom-control-label" for="'.$i->usu_perm_id.'"></label>
+                        </div>
+                        </div>
+                        </td>';
             endforeach;
             $Listaarea .= "</tr>";
             $Listaarea .= "</tbody></table>";
@@ -521,8 +508,7 @@ class UsuariosController extends Zend_Controller_Action
                 <tr>
                     <th>ID</th>
                     <th>DESCRIPCION</th>
-                    <th class="text-center" ><i class="fas fa-users"></i></th>
-                    <th >COLOR</th>
+                    <th class="text-center" title="Usuarios" ><i class="fas fa-users"></i></th>
                     <th>RUTA PREDETERMINADA</th>
                     <th>ESTADO</th>
                     <th>PERMISOS</th>
@@ -535,19 +521,18 @@ class UsuariosController extends Zend_Controller_Action
             $estado= $obj->listar_controladores($item->perf_id, 1);
             $boton = (!$estado) ? 'disabled Title="Ya estan todos los permisos"' : '';
             $Listaarea .= "<tr>";
-            $Listaarea .= "<td>" . $item->perf_id . "</td>";
+            $Listaarea .= "<td class='d-flex justify-content-between'>" . $item->perf_id . "<span class='badge badge-" . $item->perf_color . " '>&nbsp;</span></td>";
             $Listaarea .= "<td>" . strtoupper($item->perf_nombre) . "</td>";
             $Listaarea .= "<td class='text-center'>" . count($cuenta) . "</td>";
-            $Listaarea .= "<td ><span class='badge badge-" . $item->perf_color . " '>" . $item->perf_color . "</span></td>";
             $Listaarea .= "<td><a class='btn-link' href='" . $fc . "/" . $item->perf_controlador . "/" . $item->perf_accion . "'>
 			                " . $fc . "/" . $item->perf_controlador . "/" . $item->perf_accion . "</a></td>";
 
             $Listaarea .= "<td>Activa</td>";
             $Listaarea .= '<td><div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button"  class="btn btn-outline-dark btn-sm border-0" 
-                                onclick="editarModalUpermisos(' . $item->perf_id . ',`' . $item->perf_nombre . '`)"><i class="far fa-edit  "></i></button>
-                                <button class="btn btn-outline-success btn-sm border-0" type="button" '.$boton.'
-                                onclick="ModalPermisosAdd(' . $item->perf_id . ')" ><i class="fas fa-plus  "></i></button></div></td>';
+                <button type="button"  class="btn btn-dark btn-sm border-0" 
+                                onclick="editarModalUpermisos(' . $item->perf_id . ',`' . $item->perf_nombre . '`)">
+                                <i class="fas fa-user-lock  mr-2"></i><span class="text">Editar</span></button>
+                                </div></td>';
             $Listaarea .= "<td>
 			                    <div class='btn-group' role='group' aria-label='Basic example'>
 
@@ -594,7 +579,7 @@ class UsuariosController extends Zend_Controller_Action
 
             $Listaarea .= '<select class="custom-select" name="comboPerfil" id="comboPerfil">';
             foreach ($datosarea as $item):
-                $Listaarea .= "<option value='" . $item->perf_id . "'>" . $item->perf_nombre . "</option>";
+                $Listaarea .= "<option value='" . $item->perf_id . "'>" . strtoupper($item->perf_nombre) . "</option>";
             endforeach;
             $Listaarea .= "</select></div>";
         }
@@ -624,7 +609,7 @@ class UsuariosController extends Zend_Controller_Action
 
             $Listaarea .= '<select class="custom-select" name="comboEstado" id="comboEstado">';
             foreach ($datosarea as $item):
-                $Listaarea .= "<option value='" . $item->usu_estado_id . "'>" . $item->usu_estado_nombre . "</option>";
+                $Listaarea .= "<option value='" . $item->usu_estado_id . "'>" . strtoupper($item->usu_estado_nombre) . "</option>";
             endforeach;
             $Listaarea .= "</select></div>";
         }

@@ -13,7 +13,7 @@
           <div class="col-sm-6 mb-3 mb-sm-0">
             <input type="text" autofocus class="form-control " name="nombre" id="nombre" autocomplete="off"
               placeholder="Nombre" required onkeyup="this.value = this.value.toUpperCase();"
-              oninput="this.value=this.value.replace(/[^A-Za-z]/g, '')">
+              pattern="\D{1,50}">
             <div class="valid-feedback">
             </div>
             <div class="invalid-feedback">
@@ -23,7 +23,7 @@
           <div class="col-sm-6">
             <input type="text" class="form-control " name="apellido" id="apellido" autocomplete="off"
               placeholder="Apellido" required onkeyup="this.value = this.value.toUpperCase();"
-              oninput="this.value=this.value.replace(/[^A-Za-z]/g, '')">
+              pattern="\D{1,50}">
             <div class="valid-feedback">
             </div>
             <div class="invalid-feedback">

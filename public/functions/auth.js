@@ -42,7 +42,7 @@ function SendFormRegister() {
     $("#register").submit(function (event) {
         event.preventDefault(); //prevent default action
         //console.log(nombre);
-        if ((!nombre == "") && (!apellido == "") && (!email == "") && (!clave == "") && (!clave2 == "") && (!comboPerfil == "")) {
+        if ((!nombre == "") && (!apellido == "") && (!email == "") && (!clave == "") && (!clave2 == "") && (!comboPerfil == "") && (isValidEmail(email))) {
             if (clave == clave2) {
                 $.ajax(
                     {

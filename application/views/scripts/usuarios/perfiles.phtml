@@ -50,7 +50,6 @@
 		</div>
 	</div>
 </div>
-
 <!-- formulario Modal-->
 <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 	aria-hidden="true">
@@ -72,7 +71,7 @@
 								<input type="text" id="nombre_perfil" class="form-control" name="nombre_perfil"
 									placeholder="Ingrese el nombre del perfil" required autocomplete="off"
 									onkeyup="this.value = this.value.toUpperCase();"
-									oninput="this.value=this.value.replace(/[^A-Za-z]/g, '')">
+									pattern="\D{1,20}">
 								<div class="valid-feedback">
 								</div>
 								<div class="invalid-feedback">
@@ -180,85 +179,11 @@
 
 			</div>
 			<div class="modal-footer d-flex justify-content-end ">
-				<button class="btn btn-primary" type="button" data-dismiss="modal">Aceptar</button>
+				<button class="btn btn-primary" type="button" onclick="confirmaEdicionPermisos();">Aceptar</button>
 
 			</div>
 
 		</div>
 	</div>
 </div>
-<!-- formulario Modal Permisos-->
-<div class="modal fade" id="formModalPermisosAdd" tabindex="-1" role="dialog"
-	aria-labelledby="exampleModalLabelPermisos" aria-hidden="true">
-	<div class="modal-dialog " role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title text-primary" id="exampleModalLabelPermisosAdd">Agregar permiso</h5>
-				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">×</span>
-				</button>
-			</div>
-			<form class="needs-validation" method="post" id="agregaPermisos" name="agregaPermisos" novalidate>
 
-				<div class="modal-body text-xs">
-					<input type="hidden" id="perf_id" name="perf_id">
-					<div class="row">
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label for="comboControladores">Controladores disponibles:</label>
-
-								<select class="form-control form-control-sm" name="comboControladores" id="comboControladores"
-									onchange="getAcciones(1);" required autocomplete="off">
-								</select>
-								<div class='valid-feedback'>
-								</div>
-								<div class='invalid-feedback'>
-								</div>
-							</div>
-
-						</div>
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label for="comboAcciones">Acciones disponibles:</label>
-								<select class="form-control form-control-sm" name="comboAcciones" id="comboAcciones" required
-									autocomplete="off">
-									<option value=''>Seleccione un controlador</option>
-
-								</select>
-								<div class='valid-feedback'>
-								</div>
-								<div class='invalid-feedback'>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label for="comboPermiso">Permiso:</label>
-								<select class="form-control form-control-sm" name="comboPermiso" id="comboPermiso" required
-									autocomplete="off">
-									<option value=''></option>
-									<option value='allow'>ALLOW</option>
-									<option value='deny'>DENY</option>
-								</select>
-								<div class='valid-feedback'>
-								</div>
-								<div class='invalid-feedback'>
-									Seleccione uno
-								</div>
-							</div>
-						</div>
-					</div>
-
-
-				</div>
-				<div class="modal-footer d-flex justify-content-end">
-					<button class="btn btn-primary" type="submit" onclick="AgregarPermiso();">Aceptar</button>
-
-				</div>
-			</form>
-
-		</div>
-	</div>
-</div>

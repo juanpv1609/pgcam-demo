@@ -31,7 +31,8 @@ class Application_Model_DbTable_Perfiles extends Zend_Db_Table_Abstract
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = "INSERT INTO perfiles(perf_nombre,perf_color,perf_controlador, perf_accion)
-                    VALUES ('" . $nombre . "','".$color."','index','dashboard'); ";
+                    VALUES ('" . $nombre . "','".$color."','index','dashboard')
+                    RETURNING perf_id; ";
         return $db->fetchRow($select);
     }
     /**
@@ -39,14 +40,14 @@ class Application_Model_DbTable_Perfiles extends Zend_Db_Table_Abstract
      * * esta funcion actualiza la informacionde un perfil
      * @param id: id del perfil (debe ser unico)
      * @param nombre: nombre del perfil (debe ser unico)
-     * @param color: color del perfil 
-     * @param controlador: controlador del perfil 
-     * @param accion: accion del perfil 
+     * @param color: color del perfil
+     * @param controlador: controlador del perfil
+     * @param accion: accion del perfil
      * ! para establecer una ruta por defecto esta debe tener los pernisos
      * ? ejemplo: perfil INVITADO: permiso = 'allow' en ruta areas/index => se puede establecer la ruta por defecto = areas/index
      */
 
-    public function actualizarPerfil($id, $nombre, $color,$controlador,$accion)
+    public function actualizarPerfil($id, $nombre, $color, $controlador, $accion)
     {
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
@@ -68,9 +69,9 @@ class Application_Model_DbTable_Perfiles extends Zend_Db_Table_Abstract
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
-        $select = "DELETE FROM perfiles
+        $select = " DELETE FROM perfiles
         WHERE perf_id=" . $id . ";";
-        return $db->fetchRow($select);
+        return $db->fetchAll($select);
     }
     /**
      * cuenta_usuarios_perfil()
@@ -88,6 +89,56 @@ class Application_Model_DbTable_Perfiles extends Zend_Db_Table_Abstract
         join usuario u
         on p.perf_id=u.perf_id
         where p.perf_id=" . $perfil_id;
+        return $db->fetchAll($select);
+    }
+    /**
+     * listar_controladores_permisos()
+     * * esta funcion lista los controladores desde la bdd
+     * @param perfil_id: perfil_id del perfil
+     * @param op: op del perfil
+     * * se recibe una op como parametro para saber si vamos a asignar una ruta o un permiso
+     * ? op=0 'se asignara una ruta'
+     * ? op=1 'se asignara un permiso'
+     * ! la variable op nos sirve para reutilizar el formulario
+     */
+    public function listar_controladores_permisos()
+    {
+        //devuelve todos los registros de la tabla
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        
+        $select = "SELECT c.*
+        FROM controladores c, acciones a                
+        WHERE c.ctrl_id=a.ctrl_id
+        GROUP BY c.ctrl_id,c.ctrl_nombre
+        ORDER BY 1";
+        
+        return $db->fetchAll($select);
+    }
+    /**
+     * listar_acciones_permisos()
+     * * esta funcion lista los controladores desde la bdd
+     * @param perfil_id: perfil_id del perfil
+     * @param ctrl_id: id del controlador
+     * @param op: op del perfil
+     * * se recibe una op como parametro para saber si vamos a asignar una ruta o un permiso
+     * ? op=0 'se asignara una ruta'
+     * ? op=1 'se asignara un permiso'
+     * ! la variable op nos sirve para reutilizar el formulario
+     */
+
+    public function listar_acciones_permisos()
+    {
+        //devuelve todos los registros de la tabla
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);        
+            $select = "SELECT a.accion_id
+            FROM controladores c, acciones a        
+            WHERE c.ctrl_id=a.ctrl_id
+            ORDER BY 1;";        
+        
         return $db->fetchAll($select);
     }
     /**
@@ -116,7 +167,7 @@ class Application_Model_DbTable_Perfiles extends Zend_Db_Table_Abstract
                     AND u.permiso='allow')
                     GROUP BY c.ctrl_id,c.ctrl_nombre
                     ORDER BY 1;";
-        } else if ($op==1) { // CONTROL DE PERMISOS
+        } elseif ($op==1) { // CONTROL DE PERMISOS
             $select = "SELECT c.*
                 FROM controladores c, acciones a                
                 WHERE c.ctrl_id=a.ctrl_id
@@ -131,7 +182,7 @@ class Application_Model_DbTable_Perfiles extends Zend_Db_Table_Abstract
      * listar_acciones()
      * * esta funcion lista los controladores desde la bdd
      * @param perfil_id: perfil_id del perfil
-     * @param ctrl_id: id del controlador 
+     * @param ctrl_id: id del controlador
      * @param op: op del perfil
      * * se recibe una op como parametro para saber si vamos a asignar una ruta o un permiso
      * ? op=0 'se asignara una ruta'
@@ -155,7 +206,7 @@ class Application_Model_DbTable_Perfiles extends Zend_Db_Table_Abstract
                     WHERE u.perf_id=".$perfil."
                     AND u.permiso='allow')
                     ORDER BY 1;";
-        } else if ($op==1) { // CONTROL DE PERMISOS
+        } elseif ($op==1) { // CONTROL DE PERMISOS
             $select = "SELECT a.*
                 FROM controladores c, acciones a                
                 WHERE c.ctrl_id=a.ctrl_id

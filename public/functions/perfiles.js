@@ -86,15 +86,10 @@ function InsertarPerfil() {
                      $('#formModal').modal('hide');
                      $("#data_Table").html(requestData);
                      toDataTable("#dataTablePerfiles");
-                     //$('.toggle-event').bootstrapToggle();
-
-
-                     //console.log(requestData.data);
 
                   },
                   error: function (requestData, strError, strTipoError) {
-                     //console.log(strError+"\n"+strTipoError);
-                     // $("#color").addClass('alert alert-danger').html("").show(100).delay(2500).hide(100);
+                     //alert(strError+"\n"+strTipoError);
 
                   },
                   complete: function (requestData, exito) { //fin de la llamada ajax.

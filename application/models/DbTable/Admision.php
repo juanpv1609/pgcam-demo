@@ -164,7 +164,7 @@ class Application_Model_DbTable_Admision extends Zend_Db_Table_Abstract
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = "select * from cama_paciente
-        where causa_id=6 or causa_id=7;";
+        where causa_id=6 or causa_id=7 or causa_id=1;";
         return $db->fetchAll($select);
     }
     /**
@@ -290,7 +290,7 @@ and p_ci not in (select paciente_ci from cama_paciente)";
                     ON e.especialidad_id = h_a.especialidad_id
                     JOIN causa c_a
                     ON c_a.causa_id = h.causa_id
-                    WHERE p_id=".$paciente."
+                    WHERE h.paciente_ci='".$paciente."'
                     ORDER BY h.fecha_ingreso ;";
         return $db->fetchAll($select);
     }

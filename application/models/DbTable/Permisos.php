@@ -2,20 +2,19 @@
 
 class Application_Model_DbTable_Permisos extends Zend_Db_Table_Abstract
 {
-
     protected $_name = 'permisos';
 
-/* public function permisos_perfil($perfil_id)
-    {
-        //devuelve todos los registros de la tabla
-        $db = Zend_Registry::get('pgdb');
-        //opcional, esto es para que devuelva los resultados como objetos $row->campo
-        $db->setFetchMode(Zend_Db::FETCH_OBJ);
-        $select = "SELECT controller_name as controlador,action_name as accion,permission as permiso
-        FROM usu_permisos
-        WHERE perf_id=" . $perfil_id;
-        return $db->fetchAll($select);
-    } */
+    /* public function permisos_perfil($perfil_id)
+        {
+            //devuelve todos los registros de la tabla
+            $db = Zend_Registry::get('pgdb');
+            //opcional, esto es para que devuelva los resultados como objetos $row->campo
+            $db->setFetchMode(Zend_Db::FETCH_OBJ);
+            $select = "SELECT controller_name as controlador,action_name as accion,permission as permiso
+            FROM usu_permisos
+            WHERE perf_id=" . $perfil_id;
+            return $db->fetchAll($select);
+        } */
     /**
      * actualizarPermisosPerfil
      * * esta funcion actualiza los permisos de un perfil
@@ -23,7 +22,7 @@ class Application_Model_DbTable_Permisos extends Zend_Db_Table_Abstract
      * @param op: op puede ser ALLOW o DENY
      * ? ALLOW= permitir
      * ? DENy= denegar
-     * 
+     *
      */
     public function actualizarPermisosPerfil($id, $opcion)
     {
@@ -43,7 +42,7 @@ class Application_Model_DbTable_Permisos extends Zend_Db_Table_Abstract
      * ! usado en el PreDispatch
      * @param perfil: perfil del usuario
      * ? se compara el controlador y la accion de la bdd con la ubicacion actual del usuario
-     * 
+     *
      */
     public function listar_permisos_usuario($perfil)
     {
@@ -131,16 +130,18 @@ class Application_Model_DbTable_Permisos extends Zend_Db_Table_Abstract
      *
      */
 
-    public function crear_permiso($perf_id, $accion_id, $permiso)
+    public function crear_permiso($perf_id)
     {
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
-        $select = "INSERT INTO usu_permisos(perf_id, accion_id, permiso)
-        VALUES (".$perf_id.", ".$accion_id.", '".$permiso."')
-        ON CONFLICT (perf_id, accion_id)
-        DO UPDATE SET perf_id=".$perf_id.",accion_id=".$accion_id.",permiso='".$permiso."';";
-        return $db->fetchRow($select);
+        $perfil = new Application_Model_DbTable_Perfiles();
+        $acciones = $perfil->listar_acciones_permisos(); //array con todas las acciones de la bdd
+        $select ="INSERT INTO usu_permisos(perf_id, accion_id, permiso) VALUES ";
+        foreach ($acciones as $accion) {
+            $select .="(".$perf_id.",".$accion->accion_id.",'deny'), ";
+        }
+        $select = substr($select, 0, (strlen($select)-2));
+        return $db->fetchAll($select);
     }
 }
-

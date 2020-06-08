@@ -70,9 +70,9 @@ function InsertarPiso() {
               icon: 'success',
               title: 'Dato creado correctamente!'
             });
+            $('#formModal').modal('hide');
             $("#data_Table").html(requestData);
             toDataTable("#dataTablePisos");
-            $("#nombre_piso").val("").focus();
             nombre = '';
           },
           error: function (requestData, strError, strTipoError) {

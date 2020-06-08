@@ -164,7 +164,6 @@ class EspecialidadesController extends Zend_Controller_Action
                     <th >ID</th>
                     <th >DESCRIPCION</th>
                     <th >ALIAS</th>
-                    <th >COlOR</th>
                     <th >PISO</th>
                     <th >AREA</th>
                     <th >ESTADO</th>
@@ -176,9 +175,8 @@ class EspecialidadesController extends Zend_Controller_Action
 
                 $cadena .= "<tr>";
             $cadena .= "<td>" . $item->especialidad_id . "</td>";
-            $cadena .= "<td >" . $item->especialidad_nombre . "</td>";
-            $cadena .= "<td >" . $item->especialidad_alias . "</td>";
-            $cadena .= "<td><span class='badge badge-" . $item->especialidad_color . " '>" . $item->especialidad_color . "</span></td>";
+            $cadena .= "<td  >" . $item->especialidad_nombre . "</td>";
+            $cadena .= "<td class='d-flex justify-content-between'>" . $item->especialidad_alias . "<span class='badge badge-" . $item->especialidad_color . " ' >&nbsp;</span></td>";
             $cadena .= "<td>" . $item->piso_nombre . "</td>";
             $cadena .= "<td>" . $item->area_nombre . "</td>";
 

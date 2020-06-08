@@ -73,9 +73,9 @@ function InsertarCama() {
               icon: 'success',
               title: 'Dato creado correctamente!'
             });
+            $('#formModal').modal('hide');
             $("#data_Table").html(requestData);
             toDataTable("#dataTableCamas");
-            $("#nombre_cama").val("");
             nombre = '';
           },
           error: function (requestData, strError, strTipoError) {

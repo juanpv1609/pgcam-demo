@@ -69,9 +69,9 @@ function InsertarHabitacion() {
               icon: 'success',
               title: 'Dato creado correctamente!'
             });
+            $('#formModal').modal('hide');
             $("#data_Table").html(requestData);
             toDataTable("#dataTableHabitaciones");
-            $("#nombre_habitacion").val("");
             nombre = '';
           },
           error: function (requestData, strError, strTipoError) {

@@ -101,11 +101,11 @@
 					<div class="form-group">
 						<label for="telefono">N Telefono:</label>
 						<input type="tel" id="telefono" class="form-control form-control-sm" name="telefono" maxlength="10"
-						 required autocomplete="off" pattern="^0+\d{9}">
+						 placeholder="Ej:0987654321" required autocomplete="off" pattern="^0+\d{9}">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
-							Formato: 0XXXXXXXXX 
+							Formato: 0999999999
 						</div>
 					</div>
 				</div>
@@ -313,11 +313,11 @@
 					<div class="form-group">
 						<label for="contacto_telefono">N Telefono:</label>
 						<input type="tel" id="contacto_telefono" class="form-control form-control-sm" name="contacto_telefono"
-							required autocomplete="off" maxlength="10"  pattern="^0+\d{9}">
+							placeholder="Ej:0987654321" required autocomplete="off" maxlength="10"  pattern="^0+\d{9}">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
-							Formato: 0XXXXXXXXX
+							Formato: 0999999999
 						</div>
 					</div>
 				</div>
@@ -355,12 +355,12 @@
 					<div class="form-group">
 						<label for="institucion_telefono">N Telefono:</label>
 						<input type="tel" id="institucion_telefono" class="form-control form-control-sm "
-							name="institucion_telefono" required autocomplete="off" maxlength="10"
+							placeholder="Ej:0987654321" name="institucion_telefono" required autocomplete="off" maxlength="10"
 							pattern="^0+\d{9}">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
-							Formato: 0XXXXXXXXX
+							Formato: 0999999999
 						</div>
 					</div>
 				</div>
@@ -368,7 +368,7 @@
 
 			<div class=" d-flex justify-content-between">
 				<button type="reset" class="btn btn-danger btn-icon-split ">
-					<span class="icon text-white-50"><i class="fas fa-ban"></i></span><span class="text">Cancelar</span>
+					<span class="icon text-white-50"><i class="fas fa-broom"></i></span><span class="text">Limpiar</span>
 				</button>
 				<button type="submit" id="btn_admision" class="btn btn-primary btn-icon-split "
 					onclick="AdmisionPaciente();">
