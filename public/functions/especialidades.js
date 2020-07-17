@@ -27,7 +27,7 @@ function editarModal(id, piso_id, nombre,color,alias) {
   $("#nombre_especialidad").val(nombre);
   $("#alias_especialidad").val(alias);
   $("#comboPiso").val(piso_id);
-  $("#valorBoton").val(color);
+  $("#color").val(color);
   $("#accionForm").html('<button class="btn btn-primary" type="submit"  onclick="ActualizarEspecialidad();">Actualizar</button>');
   $('#formModal').modal({
     show: true
@@ -45,12 +45,13 @@ function InsertarEspecialidad() {
   var nombre = $("#nombre_especialidad").val();
   var alias = $("#alias_especialidad").val();
   var piso = $("#comboPiso").val();
-  var color = $("#valorBoton").val();
+  var color = $("#color").val();
   var dir = $('#dir').val();
+  console.log(color);
+
   $("#formEspecialidades").submit(function (event) {
     event.preventDefault(); //prevent default action
     if ((!nombre == "")) {
-      if ((!color == "")) {
       $.ajax(
         {
           dataType: "html",
@@ -85,10 +86,7 @@ function InsertarEspecialidad() {
           complete: function (requestData, exito) { //fin de la llamada ajax.
           }
         });
-      } else {
-        $("#colorHelp").removeClass('badge badge-success text-wrap').addClass('badge badge-danger text-wrap')
-          .html('<span>Debe elegir un color!</span>');
-      }
+      
     } 
   });
   
@@ -109,12 +107,12 @@ function ActualizarEspecialidad() {
   var nombre = $("#nombre_especialidad").val();
   var alias = $("#alias_especialidad").val();
 
-  var color = $("#valorBoton").val();
+  var color = $("#color").val();
   var dir = $('#dir').val();
+  console.log(color);
   $("#formEspecialidades").submit(function (event) {
     event.preventDefault(); //prevent default action
     if ((!nombre == "")) {
-      if ((!color == "")) {
       $.ajax(
         {
           dataType: "html",
@@ -150,10 +148,6 @@ function ActualizarEspecialidad() {
 
           }
         });
-      } else {
-          $("#colorHelp").removeClass('badge badge-success text-wrap').addClass('badge badge-danger text-wrap')
-            .html('<span>Debe elegir un color!</span>');
-        }
     } 
   });
   
@@ -230,8 +224,4 @@ function eliminar(id) {
         });
     }
   })
-}
-function colorEspecialidad(comp) {
-  let id = comp.id;
-  $("#valorBoton").val(id);
 }

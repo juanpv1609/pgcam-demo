@@ -1,3 +1,14 @@
+
+function setNacidos() {
+      var nacidos = $('input:radio[name=recienNacidoRadio]:checked').val();
+      console.log(nacidos)
+      if (nacidos == 'SI') {
+            $("#divNacidos").removeClass('d-none');
+      } else {
+            $("#numNacidosVivos").val("");
+            $("#divNacidos").addClass('d-none');
+      }
+}
 function calculaEdad(){
       var fecha_nac = $('#fecha_n').val();
    $('#comboEdad').val(moment().diff(fecha_nac,'years',false));
@@ -144,10 +155,9 @@ function asignarCama() {
       var cama_id = $('#cama_id').val();
       var cie10_cod = [];
       var cie10_tipo = [];
-      //console.log(paciente_hc + ' ' + opcionBusquedaPaciente + ' ' + cedula + ' ' + especialidad_id + ' ' + cama_id)
+      console.log(paciente_hc + ' ' + opcionBusquedaPaciente + ' ' + cedula + ' ' + especialidad_id + ' ' + cama_id)
       for (let i = 1; i <= 3; i++) {
             cie10_cod[i - 1] = ["'" + $('#cod' + i).text() + "'"];
-
             if (($("#pre" + i).is(':checked')) && ($('#cod' + i).text().length)) {
                   cie10_tipo[i - 1] = ["'PRE'"];
             } else if (($("#def" + i).is(':checked')) && ($('#cod' + i).text().length)) {
@@ -558,7 +568,7 @@ function DatosPaciente(paciente_id, opcion) {
                                           $('#paciente_hc').text(requestData.data.p_id);
                                           $('#paciente_id').text(requestData.data.p_id);
                                           $('#apellido_paterno').text(requestData.data.p_apellidos + " " + requestData.data.p_nombres);
-                                          $('#cedula').text(requestData.data.p_ci);
+                                          $('#cedula').text(requestData.data.nuhc);
                                     } else if (op == 2) {
                                           $('#navs-info').html(`<nav class="nav nav-pills flex-column flex-sm-row text-xs" >
                                                       
@@ -682,11 +692,13 @@ function DatosPaciente(paciente_id, opcion) {
 }
 function AdmisionPaciente() {
       var dir = $('#dir').val();
+      $('#numNac').val($('#numNacidosVivos').val());
       var dataString = $('#paciente_admision').serialize(); //recorre todo el formulario
+      console.log(dataString)
       $("#paciente_admision").submit(function (event) {
             event.preventDefault(); //prevent default action  
-            if (($('#cedula').val().length == 10) && ($('#telefono').val().length == 10)
-                  && ($('#contacto_telefono').val().length == 10) && ($('#institucion_telefono').val().length == 10)) {
+            //if (($('#cedula').val().length == 10) && ($('#telefono').val().length == 10)
+                  //&& ($('#contacto_telefono').val().length == 10) && ($('#institucion_telefono').val().length == 10)) {
                   $.ajax({
                         dataType: "html",
                         type: "POST",
@@ -725,18 +737,20 @@ function AdmisionPaciente() {
 
                         }
                   });
-            }
+            //}
 
       });
 
 }
+
 function EditarAdmisionPaciente() {
       var dir = $('#dir').val();
+      $('#numNac').val($('#numNacidosVivos').val());
       var dataString = $('#paciente_admision').serialize(); //recorre todo el formulario
       $("#paciente_admision").submit(function (event) {
             event.preventDefault(); //prevent default action  
-            if (($('#cedula').val().length == 10) && ($('#telefono').val().length == 10)
-                  && ($('#contacto_telefono').val().length == 10) && ($('#institucion_telefono').val().length == 10)) {
+          //  if (($('#cedula').val().length == 10) && ($('#telefono').val().length == 10)
+                //  && ($('#contacto_telefono').val().length == 10) && ($('#institucion_telefono').val().length == 10)) {
                   $.ajax({
                         dataType: "html",
                         type: "POST",
@@ -771,7 +785,7 @@ function EditarAdmisionPaciente() {
 
                         }
                   });
-            }
+           // }
 
       });
 
@@ -1065,8 +1079,8 @@ function cambioCama() {
                                                             + "&cama_id=" + cama_id + "&cie10_cod=" + cie10_cod + "&cie10_tipo=" + cie10_tipo , //Se añade el parametro de busqueda del medico
                                                       beforeSend: function (data) {
                                                       },
-                                                      success: function (requestData) {//armar la tabla
-                                                            
+                                                      success: function (requestData) {
+                                                            //localStorage.setItem(cama_origen, cama_origen);
                                                                   Toast = Swal.mixin({
                                                                         toast: true,
                                                                         position: 'top-end',
@@ -1146,5 +1160,36 @@ function cambioCama() {
             })
       }
 
+
+}
+function porEspecialidad(especialidad_id) {
+      var dir = $('#dir').val();
+      $.ajax(
+            {
+                  dataType: "html",
+                  type: "POST",
+                  url: dir + "/paciente/especialidad", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
+                  data: "especialidad_id=" + especialidad_id, //Se añade el parametro de busqueda del medico
+                  beforeSend: function (data) {
+                        //$("#data_Table").html('<div class="d-flex justify-content-center  text-primary"><i class="fas fa-spinner fa-pulse fa-5x "></i></div>');
+                  },
+                  success: function (requestData) {//armar la tabla
+                        
+                        $("#exportButtons").html('');
+                        $("#data_Table").html(requestData);
+                        dataTables();
+                        //toDataTable("#dataTablePacienteCamaEspecialidad");
+                        $('[data-toggle="popover"]').popover({
+                              trigger: 'hover',
+                              placement: 'auto'
+                        })
+                  },
+                  error: function (requestData, strError, strTipoError) {
+                        //alert(requestData, strError, strTipoError)
+                  },
+                  complete: function (requestData, exito) { //fin de la llamada ajax.
+
+                  }
+            });
 
 }

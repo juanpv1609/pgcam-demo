@@ -26,7 +26,9 @@ class Application_Model_DbTable_Camas extends Zend_Db_Table_Abstract
         join area
         on area.area_id=piso.area_id
         join cama_estado
-        on cama_estado.cama_estado_id=cama.cama_estado_id;";
+        on cama_estado.cama_estado_id=cama.cama_estado_id
+        join cama_tipo
+        on cama_tipo.cama_tipo_id=cama.cama_tipo_id;";
         return $db->fetchAll($select);
     }
     /**
@@ -39,13 +41,13 @@ class Application_Model_DbTable_Camas extends Zend_Db_Table_Abstract
      * ? si la especialidad ya existe omite la transaccion
      */
 
-    public function insertarcama($nombre, $habitacion, $cama_estado)
+    public function insertarcama($nombre, $habitacion, $cama_estado,$tipo_cama)
     {
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
-        $select = "INSERT INTO cama(habitacion_id, cama_nombre,cama_estado_id)
-        VALUES (" . $habitacion . ",'" . $nombre . "'," . $cama_estado . "); ";
+        $select = "INSERT INTO cama(habitacion_id, cama_nombre,cama_estado_id,cama_tipo_id)
+        VALUES (" . $habitacion . ",'" . $nombre . "'," . $cama_estado . "," . $tipo_cama . "); ";
         return $db->fetchRow($select);
     }
     /**
@@ -58,13 +60,13 @@ class Application_Model_DbTable_Camas extends Zend_Db_Table_Abstract
      * ? devuelve los resultados como objetos $row->campo
      */
 
-    public function actualizarcama($id, $nombre, $habitacion, $cama_estado)
+    public function actualizarcama($id, $nombre, $habitacion, $cama_estado,$tipo_cama)
     {
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = "UPDATE cama
-        SET habitacion_id=" . $habitacion . ",cama_nombre='" . $nombre . "',cama_estado_id=" . $cama_estado . "
+        SET habitacion_id=" . $habitacion . ",cama_nombre='" . $nombre . "',cama_estado_id=" . $cama_estado . ",cama_tipo_id=".$tipo_cama."
       WHERE cama_id=" . $id . "; ";
         return $db->fetchRow($select);
     }
@@ -115,7 +117,57 @@ class Application_Model_DbTable_Camas extends Zend_Db_Table_Abstract
         $db = Zend_Registry::get('pgdb');
         //opcional, esto es para que devuelva los resultados como objetos $row->campo
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
-        $select = "select * from cama_estado";
+        $select = "select * from cama_estado order by 1";
+        return $db->fetchAll($select);
+    }
+    /**
+     * listar_tipo_cama()
+     * * Esta funcion lista los registros de la tabla estado_cama
+     * ? devuelve los resultados como objetos $row->campo
+     */
+
+    public function listar_tipo_cama()
+    {
+        //devuelve todos los registros de la tabla
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "select * from cama_tipo";
+        return $db->fetchAll($select);
+    }
+    /**
+     * listar_tipo_cama_servicio()
+     * * Esta funcion lista los registros de la tabla estado_cama
+     * ? devuelve los resultados como objetos $row->campo
+     */
+
+    public function listar_tipo_cama_servicio($especialidad)
+    {
+        //devuelve todos los registros de la tabla
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "select * from cama_tipo
+        where especialidad_id=".$especialidad;
+        return $db->fetchAll($select);
+    }
+    /**
+     * busca_especialidad()
+     * * Esta funcion lista los registros de la tabla estado_cama
+     * ? devuelve los resultados como objetos $row->campo
+     */
+
+    public function busca_especialidad($especialidad,$sala)
+    {
+        //devuelve todos los registros de la tabla
+        $db = Zend_Registry::get('pgdb');
+        //opcional, esto es para que devuelva los resultados como objetos $row->campo
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = "select * from cama_tipo c
+join especialidad e
+ON e.especialidad_id=c.especialidad_id
+where c.especialidad_id=".$especialidad."
+and c.cama_tipo_id=".$sala;
         return $db->fetchAll($select);
     }
     /**

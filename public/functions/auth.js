@@ -84,7 +84,7 @@ function SendFormRegister() {
                                     title: 'El correo: '+email+' ya existe!'
                                 });
                                 $("#email").val('').focus();
-                            } else {
+                            } else if (requestData == 1) {
                                 
                                 Swal.fire({
                                     position: 'top',
@@ -93,7 +93,7 @@ function SendFormRegister() {
                                     width: '22rem',
                                     icon: 'success',
                                     confirmButtonText: 'Aceptar',
-                                    timer: 1000,
+                                    timer: 5000,
                                     timerProgressBar: true
                                 }).then((result) => {
                                     window.location.href = dir + "/auth/login?correo="+email;

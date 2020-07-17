@@ -18,10 +18,10 @@ class Zend_View_Helper_GetInstruccion extends Zend_View_Helper_Abstract
         } else {
             $Listaarea .= '<label for="comboInstruccion">Instruccion:</label>';
 
-            $Listaarea .= '<select class="form-control form-control-sm " name="comboInstruccion" id="comboInstruccion" required autocomplete="off">
+            $Listaarea .= '<select class="form-control form-control-sm " name="comboInstruccion" id="comboInstruccion"  autocomplete="off">
              <option value="" ></option>';
             foreach ($datos as $item):
-                $Listaarea .= "<option value='" . $item->id_instruccion . "' >" . $item->descripcion_inst . "</option>";
+                $Listaarea .= "<option value='" . $item->id_instruccion . "' >" . strtoupper($item->descripcion_inst) . "</option>";
             endforeach;
             $Listaarea .= "</select>
                         <div class='valid-feedback'></div>

@@ -160,11 +160,11 @@ class IndexController extends Zend_Controller_Action
                 $Listaarea .= '<div class="col mb-4 tarjeta">                            
                                         <div class="card  h-100 rounded shadow-sm  px-0 ">
                                             <div class="ribbon-wrapper ">
-                                                <div class="ribbon bg-'.$item->especialidad_color.' text-white ">'.$item->especialidad_alias.'</div>
+                                                <div class="ribbon text-white " style="background: '.$item->especialidad_color.'">'.$item->especialidad_alias.'</div>
                                             </div>
                                             <div class="card-header h-25 pl-3 py-2">';
                 $Listaarea .= '              <a href="'.$this->_request->getBaseUrl().'/listar_paciente?ci='.$item->paciente_ci.'"  title="Clic para ver">
-                                                <span class="card-title font-weight-bold ">'.$paciente->nombre.'</span></a>';
+                                                <span class="card-title font-weight-bold text-dark">'.$paciente->nombre.'</span></a>';
                 $Listaarea .= '             </div>
                                             <div class="card-body pb-0 px-3">';
                 $Listaarea .= '                 <div class="row no-gutters align-items-center">                                    

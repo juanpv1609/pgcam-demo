@@ -14,7 +14,7 @@ function editarModalUperfil(id, nombre, color) {
    $("#exampleModalLabel").text("Editar - Perfil");
    $("#perfil_id").val(id);
    $("#nombre_perfil").val(nombre);
-   $("#valorBoton").val(color);
+   $("#color").val(color);
    $("#rutas").removeClass('d-none');
 
    $("#accionForm").html('<button class="btn btn-primary" type="submit"  onclick="ActualizarPerfil();">Actualizar</button>');
@@ -46,13 +46,10 @@ function descativarPerfilForm() {
 
 }
 //------------PERFIL----------
-function colorPerfil(comp) {
-   let id = comp.id;
-   $("#valorBoton").val(id);
-}
+
 function InsertarPerfil() {
    var nombre_perfil = $("#nombre_perfil").val();
-   var color = $("#valorBoton").val();
+   var color = $("#color").val();
    var dir = $('#dir').val();
    $("#agregaPerfil").submit(function (event) {
       event.preventDefault(); //prevent default action
@@ -108,14 +105,13 @@ function InsertarPerfil() {
 function ActualizarPerfil() {
    var id = $("#perfil_id").val();
    var nombre_perfil = $("#nombre_perfil").val();
-   var color = $("#valorBoton").val();
+   var color = $("#color").val();
    var controlador = $("#comboControladoresRutas option:selected").text();
    var accion = $("#comboAccionesRutas option:selected").text();
    var dir = $('#dir').val();
    //console.log(nombre);
    $("#agregaPerfil").submit(function (event) {
       event.preventDefault(); //prevent default action
-      if ((!color == "")) {
          if ((!nombre_perfil == "")) {
             $.ajax(
                {
@@ -152,10 +148,6 @@ function ActualizarPerfil() {
                   }
                });
          }
-      } else {
-         $("#colorHelp").removeClass('badge badge-success text-wrap').addClass('badge badge-danger text-wrap')
-            .html('<span>Debe elegir un color!</span>');
-      }
    });
 
 }

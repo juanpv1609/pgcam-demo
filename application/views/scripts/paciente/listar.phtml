@@ -19,17 +19,34 @@
 	
 	<div class="card-body">
 		<input type="hidden" name="campoBusqueda" id="campoBusqueda" value="<?php if (isset($_GET['ci'])) echo $_GET['ci']; ?>">
-		<div class="d-flex justify-content-between pb-2">
+		<div class="d-flex justify-content-between align-middle pb-2">
 			<div class="text-center align-content-center" id="exportButtons"></div>
+		
 			<a type="button" class="btn btn-success btn-icon-split btn-sm" href="<?php echo $this->baseUrl();?>/registrar_paciente">
 				<span class="icon text-white-50"><i class="fas fa-plus"></i></span><span class="text">Agregar</span>
 		  </a>
-			 
+			
 			
 	  </div>
 		<div id="data_Table" class="table-responsive text-xs">
 			<?php echo $this->data; ?>
 		</div>
+	</div>
+	<div class="card-footer">Filtro: 
+		<?php $obj = new Application_Model_DbTable_Especialidades();
+	              $datos = $obj->listar();
+	              if(isset($datos)): 
+	                foreach ($datos as $item): ?>
+		<button type="button" class="btn btn-xs text-white" style="background: <?php echo $item->especialidad_color ?>;"
+			data-toggle="popover" data-content="<?php echo $item->especialidad_nombre ?>"
+			onclick="porEspecialidad('<?php echo $item->especialidad_id ?>');">
+			<small><?php echo $item->especialidad_alias ?></small>
+		</button>
+		<?php   endforeach;
+	               endif; ?>
+		<button type="button" class="btn btn-light btn-xs" onclick="location.reload();" data-toggle="popover"
+			data-content="Todos los servicios">
+			<small>TODOS</small></button>
 	</div>
 </div>
 <!-- formulario Modal-->

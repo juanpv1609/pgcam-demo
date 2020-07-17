@@ -68,7 +68,7 @@ class AuthController extends Zend_Controller_Action
                     $auth->getStorage()->write($data);                  //creamos la sesion para el usuario
                     $this->ruta_usuario($data->usu_id);                 // funcion que controla las rutas segun el perfil
                 } else {                                                //Si el ussuario no esta activo mostramos un error
-                    $this->view->message = '<div class="alert alert-info alert-dismissible animated shake">
+                    $this->view->message = '<div class="alert alert-success alert-dismissible animated shake">
                         <button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
                         <i class="fas fa-exclamation-circle"></i><strong> Error: </strong><span>"El usuario no esta habilitado!"</span>
                         <span>Comuniquese con el administrador!</span></div>';
@@ -165,7 +165,7 @@ class AuthController extends Zend_Controller_Action
                                                             ));
                                                             
             if ($validator->isValid($email)) {              //verifica si el correo no existe
-                $datos = $obj->crearusuario($nombre, $apellido, $email, $clave, 2, $comboPerfil);
+                $datos = $obj->crearusuario($nombre, $apellido, $email, $clave, $comboPerfil,2);
                 /**
                  * ? El codigo a continuacion envia un email al usuario creado mediante SMTP
                  * */
@@ -187,7 +187,7 @@ class AuthController extends Zend_Controller_Action
                 </body>
                 </html>';
                 //envio el email con los datos creados
-                $obj->enviaEmail($email, $contenido, $asunto);
+                //$obj->enviaEmail($email, $contenido, $asunto);
                 
                 echo 1; //retorna 1
             } else { //si el correo ya existe retorna 0

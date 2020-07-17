@@ -176,7 +176,7 @@ class EspecialidadesController extends Zend_Controller_Action
                 $cadena .= "<tr>";
             $cadena .= "<td>" . $item->especialidad_id . "</td>";
             $cadena .= "<td  >" . $item->especialidad_nombre . "</td>";
-            $cadena .= "<td class='d-flex justify-content-between'>" . $item->especialidad_alias . "<span class='badge badge-" . $item->especialidad_color . " ' >&nbsp;</span></td>";
+            $cadena .= "<td class='d-flex justify-content-between'>" . $item->especialidad_alias . "<span class='badge  ' style='background:" . $item->especialidad_color . "' >&nbsp;</span></td>";
             $cadena .= "<td>" . $item->piso_nombre . "</td>";
             $cadena .= "<td>" . $item->area_nombre . "</td>";
 

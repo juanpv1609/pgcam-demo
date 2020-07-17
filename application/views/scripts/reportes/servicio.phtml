@@ -1,0 +1,69 @@
+<div class="card border-left-primary">
+	<div class="card-header bg-light d-flex justify-content-between align-middle pb-0">
+		<h4 class="h4  text-dark"><?php echo $this->titulo_formulario; ?>
+			<i class="fas fa-fw <?php echo $this->icono; ?> text-dark"></i></h4>
+
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb bg-transparent  text-xxs p-0 ">
+				<li class="breadcrumb-item"><a href="<?php echo $this->baseUrl(); ?>/panel_de_control">
+						<i class="fas fa-home "></i>Inicio</a></li>
+				<li class="breadcrumb-item text-capitalize">
+					<a href="<?php echo $this->baseUrl(); ?>/<?php echo $this->controlador; ?>">
+						<i class="fas fa-fw <?php echo $this->icono; ?>"></i>
+						<?php echo $this->controlador; ?></a></li>
+				<li class="breadcrumb-item active text-capitalize" aria-current="page">
+					<?php echo $this->accion; ?></li>
+			</ol>
+		</nav>
+
+
+	</div>
+	<div class="card-body">
+		<div class="row text-xs">
+			<div class="col-sm-3">
+				<?php echo $this->data_especialidades;?>
+			</div>
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label for="comboSala" class="text-dark mb-0">Sala:</label>
+					<select class="form-control js-example-basic-single" name="comboSala" id="comboSala"
+						data-placeholder="Seleccione una Sala">
+						<option value=""></option>
+					</select>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<label for="fecha" class="text-dark mb-0">Fecha:</label>
+				<div class="form-group input-group">
+
+					<input type="date" class="form-control form-control-sm" id="fecha" name="fecha"
+						placeholder="Seleccione una fecha">
+					<div class="input-group-append">
+						<span id="show_password" class="input-group-text  rounded-right  border-left-0" data-toggle="tooltip"
+							data-placement="right" title="Hoy" onclick="setNowDate()">
+							<i class="fas fa-calendar-alt icon text-dark"></i>
+						</span>
+					</div>
+				</div>
+
+			</div>
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label for="fecha" class="text-dark mb-0"></label>
+					<button type="button" class="btn btn-purple btn-block btn-sm " onclick="getDatos();">APLICAR</button>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-lg-12">
+				<div id="data_Table" class="table-responsive text-xxs text-dark p-4">
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="card-footer">
+		<button class="btn btn-primary" onclick="generatePDF()" id="btnSave" disabled ><i class="fa fa-save"></i> Guardar como PDF</button>
+	</div>
+</div>

@@ -43,6 +43,7 @@ function editarModal(id, habitacion_id, cama_estado, nombre) {
  */
 function InsertarCama() {
   var nombre = $("#nombre_cama").val();
+  var tipoCama = $("#comboTipoCama").val();
   var habitacion = $("#comboHabitacion").val();
   var cama_estado = $("#comboEstadoCama").val();
   var dir = $('#dir').val();
@@ -54,7 +55,7 @@ function InsertarCama() {
           dataType: "html",
           type: "POST",
           url: dir + "/camas/crear", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
-          data: "nombre=" + nombre + "&habitacion=" + habitacion + "&cama_estado=" + cama_estado, //Se añade el parametro de busqueda del medico
+          data: "nombre=" + nombre + "&habitacion=" + habitacion + "&cama_estado=" + cama_estado + "&tipo_cama=" + tipoCama, //Se añade el parametro de busqueda del medico
           beforeSend: function (data) {
             $("#data_Table").html("Procesando...");
           },
@@ -99,6 +100,7 @@ function InsertarCama() {
 function ActualizarCama() {
   var id = $("#cama_id").val();
   var habitacion = $("#comboHabitacion").val();
+  var tipoCama = $("#comboTipoCama").val();
   var cama_estado = $("#comboEstadoCama").val();
   var nombre = $("#nombre_cama").val();
   var dir = $('#dir').val();
@@ -110,7 +112,7 @@ function ActualizarCama() {
           dataType: "html",
           type: "POST",
           url: dir + "/camas/editar", // ruta donde se encuentra nuestro action que procesa la peticion XmlHttpRequest
-          data: "id=" + id + "&nombre=" + nombre + "&habitacion=" + habitacion + "&cama_estado=" + cama_estado, //Se añade el parametro de busqueda del medico
+          data: "id=" + id + "&nombre=" + nombre + "&habitacion=" + habitacion + "&cama_estado=" + cama_estado + "&tipo_cama=" + tipoCama, //Se añade el parametro de busqueda del medico
           beforeSend: function (data) {
             $("#data_Table").html("Procesando...");
           },

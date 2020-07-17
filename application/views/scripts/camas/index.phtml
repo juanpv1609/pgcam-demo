@@ -68,7 +68,7 @@
 
 <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-dialog " role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-primary" id="exampleModalLabel"></h5>
@@ -79,20 +79,31 @@
             <form class="needs-validation" method="post" id="formCamas" name="formCamas" novalidate>
                 <div class="modal-body">
                     <input type="hidden" id="cama_id" name="cama_id">
-                    <?php echo $this->data_habitaciones;?>
-                    <div class="form-group">
-                        <label for="nombre_cama">Nombre de la cama:</label>
-                        <input type="text" id="nombre_cama" class="form-control " name="nombre_cama" required
-                            autocomplete="off" >
-                        <div class="valid-feedback">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <?php echo $this->data_habitaciones;?>
                         </div>
-                        <div class="invalid-feedback">
-                            Este campo es necesario.
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="nombre_cama">Nombre de la cama:</label>
+                                <input type="text" id="nombre_cama" class="form-control " name="nombre_cama" required autocomplete="off">
+                                <div class="valid-feedback">
+                                </div>
+                                <div class="invalid-feedback">
+                                    Este campo es necesario.
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <?php echo $this->data_estado_cama;?>
-
-
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <?php echo $this->data_tipo;?>
+                        </div>
+                        <div class="col-sm-4">
+                            <?php echo $this->data_estado_cama;?>
+                        </div>
+                    </div>           
                 </div>
                 <div class="modal-footer d-flex justify-content-between">
                     <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>

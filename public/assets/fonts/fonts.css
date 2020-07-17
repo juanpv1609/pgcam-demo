@@ -58,6 +58,10 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
+.divSala {
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
 /* div tarjetas bdd */
 .divBDD {
   max-height: 600px;
@@ -66,4 +70,16 @@
 }
 .select2-results__options {
   font-size: 14px !important;
+}
+table.table-borderedd>thead>tr>th {
+  border: 0.8px solid black;
+}
+table.table-borderedd>thead>tr>td {
+  border: 0.8px solid black;
+}
+table.table-borderedd>tbody>tr>td {
+  border: 0.8px solid black;
+}
+table.table-borderedd>tbody>tr>th {
+  border: 0.8px solid black;
 }

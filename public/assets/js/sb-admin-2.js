@@ -62,6 +62,7 @@
     //------SELECT2
     $(document).ready(function() {
       // ejemplo de popover
+      
       $('[data-toggle="popover"]').popover({
         trigger: 'hover',
         placement: 'auto'
@@ -93,6 +94,9 @@
         title: 'Fecha',
         content: moment().format("dddd, MMMM Do YYYY, h:mm a")
       });
+      // sala de espera
+      
+      
       dataTables();
       //-------------------------
       $('.btn-icon-split').addClass('lift');

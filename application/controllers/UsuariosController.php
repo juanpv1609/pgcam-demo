@@ -491,9 +491,13 @@ class UsuariosController extends Zend_Controller_Action
      */
     public function tabla_perfiles()
     {
+        
         $fc = Zend_Controller_Front::getInstance()->getRequest()->getBaseUrl();
         $obj = new Application_Model_DbTable_Perfiles();
         $datosarea = $obj->listar_perfiles();
+        $usuario = Zend_Auth::getInstance()->getIdentity();
+        
+        $boton_permisos=($usuario->perf_id==1) ? '' : 'disabled Title="Usted no puede realizar esta accion"';
         $Listaarea = '';
         if (!$datosarea) {
             $Listaarea .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -510,7 +514,6 @@ class UsuariosController extends Zend_Controller_Action
                     <th>DESCRIPCION</th>
                     <th class="text-center" title="Usuarios" ><i class="fas fa-users"></i></th>
                     <th>RUTA PREDETERMINADA</th>
-                    <th>ESTADO</th>
                     <th>PERMISOS</th>
                     <th>ACCION</th>
                 </tr>
@@ -518,36 +521,35 @@ class UsuariosController extends Zend_Controller_Action
                 <tbody>';
             foreach ($datosarea as $item):
                 $cuenta = $obj->cuenta_usuarios_perfil($item->perf_id);
-            $estado= $obj->listar_controladores($item->perf_id, 1);
-            $boton = (!$estado) ? 'disabled Title="Ya estan todos los permisos"' : '';
-            $Listaarea .= "<tr>";
-            $Listaarea .= "<td class='d-flex justify-content-between'>" . $item->perf_id . "<span class='badge badge-" . $item->perf_color . " '>&nbsp;</span></td>";
-            $Listaarea .= "<td>" . strtoupper($item->perf_nombre) . "</td>";
-            $Listaarea .= "<td class='text-center'>" . count($cuenta) . "</td>";
-            $Listaarea .= "<td><a class='btn-link' href='" . $fc . "/" . $item->perf_controlador . "/" . $item->perf_accion . "'>
-			                " . $fc . "/" . $item->perf_controlador . "/" . $item->perf_accion . "</a></td>";
+                $estado= $obj->listar_controladores($item->perf_id, 1);
+                $boton = (!$estado) ? 'disabled Title="Ya estan todos los permisos"' : '';
+                $Listaarea .= "<tr>";
+                $Listaarea .= "<td class='d-flex justify-content-between'>" . $item->perf_id . "<span class='badge ' style='background: " . $item->perf_color . "'>&nbsp;</span></td>";
+                $Listaarea .= "<td>" . strtoupper($item->perf_nombre) . "</td>";
+                $Listaarea .= "<td class='text-center'>" . count($cuenta) . "</td>";
+                $Listaarea .= "<td><a class='btn-link' href='" . $fc . "/" . $item->perf_controlador . "/" . $item->perf_accion . "'>
+                                " . $fc . "/" . $item->perf_controlador . "/" . $item->perf_accion . "</a></td>";
 
-            $Listaarea .= "<td>Activa</td>";
-            $Listaarea .= '<td><div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button"  class="btn btn-dark btn-sm border-0" 
-                                onclick="editarModalUpermisos(' . $item->perf_id . ',`' . $item->perf_nombre . '`)">
-                                <i class="fas fa-user-lock  mr-2"></i><span class="text">Editar</span></button>
-                                </div></td>';
-            $Listaarea .= "<td>
-			                    <div class='btn-group' role='group' aria-label='Basic example'>
+                
+                $Listaarea .= '<td><button type="button"  class="btn btn-dark btn-sm border-0" '.$boton_permisos.' 
+                                    onclick="editarModalUpermisos(' . $item->perf_id . ',`' . $item->perf_nombre . '`)">
+                                    <i class="fas fa-user-lock  mr-2"></i><span class="text">Editar</span></button>
+                                    </td>';
+                $Listaarea .= "<td>
+                                    <div class='btn-group' role='group' aria-label='Basic example'>
 
-			                        <!--  debo enviar la busqueda por ajax -->
-                                    <button type='button' class='btn btn-outline-dark btn-sm  border-0 ' 
-                                    onclick='editarModalUperfil(" . $item->perf_id . ",`" . $item->perf_nombre . "`,`" . $item->perf_color ."`)' >
-			                            <i class='far fa-edit  '></i>
-			                        </button>
-			                        <button type='button' class='btn btn-outline-danger btn-sm border-0 ' onclick='eliminarPerfil(" . $item->perf_id . ")' >
-			                            <i class='far fa-trash-alt'></i>
-			                        </button>
-			                        </div>
+                                        <!--  debo enviar la busqueda por ajax -->
+                                        <button type='button' class='btn btn-outline-dark btn-sm  border-0 ' 
+                                        onclick='editarModalUperfil(" . $item->perf_id . ",`" . $item->perf_nombre . "`,`" . $item->perf_color ."`)' >
+                                            <i class='far fa-edit  '></i>
+                                        </button>
+                                        <button type='button' class='btn btn-outline-danger btn-sm border-0 ' onclick='eliminarPerfil(" . $item->perf_id . ")' >
+                                            <i class='far fa-trash-alt'></i>
+                                        </button>
+                                        </div>
 
-			                    </td>
-			                </tr>";
+                                    </td>
+                                </tr>";
             endforeach;
 
             $Listaarea .= "</tbody></table>";
@@ -642,7 +644,6 @@ class UsuariosController extends Zend_Controller_Action
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                </div>
                 </div>';
         } else {
             foreach ($datosarea as $item):
@@ -680,7 +681,6 @@ class UsuariosController extends Zend_Controller_Action
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                </div>
                 </div>';
         } else {
             foreach ($datosarea as $item):

@@ -50,6 +50,7 @@
           <actionMethod actionName="asignar"/>
           <actionMethod actionName="cambio"/>
           <actionMethod actionName="historial"/>
+          <actionMethod actionName="sala"/>
         </controllerFile>
         <controllerFile controllerName="Usuarios">
           <actionMethod actionName="index"/>
@@ -63,6 +64,13 @@
           <actionMethod actionName="index"/>
         </controllerFile>
         <controllerFile controllerName="Reportes">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="disponibilidad"/>
+          <actionMethod actionName="censo"/>
+          <actionMethod actionName="general"/>
+          <actionMethod actionName="servicio"/>
+        </controllerFile>
+        <controllerFile controllerName="Sala">
           <actionMethod actionName="index"/>
         </controllerFile>
       </controllersDirectory>
@@ -182,6 +190,15 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Paciente">
             <viewScriptFile forActionName="historial"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Reportes">
+            <viewScriptFile forActionName="general"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Reportes">
+            <viewScriptFile forActionName="servicio"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Sala">
+            <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

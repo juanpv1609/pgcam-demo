@@ -17,7 +17,123 @@
 
 	</div>
 	<div class="card-body">	
-
+		<div class="row ">
+			<div class="col-lg-6 py-3 ">
+				<div class="card  shadow  h-100">
+					<div class="card-header d-flex justify-content-between">
+						<h6 class="m-0 ">Detalle de asignacion de cama</h6>
+					</div>
+					<div class="card-body text-xxs">
+						<div class="d-flex justify-content-start pb-2">
+							<div class="input-group input-group-sm ">
+								<div class="input-group-prepend">
+									<select name="opcionBusquedaPaciente" id="opcionBusquedaPaciente"
+										class="custom-select custom-select-sm  rounded-0" type="button" data-toggle="dropdown"
+										aria-expanded="false" required autocomplete="off">
+										<option value="1">EMERGENCIA</option>
+										<option value="2">C EXTERNA</option>
+									</select>
+			
+								</div>
+								<input type="text" class="form-control " id="paciente_id" name="paciente_id"
+									value="<?php if (isset($_GET['id'])) echo $_GET['id']; ?>"
+									placeholder="Buscar por N. de Archivo o N. de Cédula..." aria-label="Search"
+									aria-describedby="buscar_paciente_hc" required autocomplete="off"
+									onkeyup="if (event.keyCode == 13) DatosPaciente();">
+								<div class="input-group-append">
+			
+									<button class="btn btn-dark" type="submit" onclick="DatosPaciente();">
+										<i class="fas fa-search fa-sm"></i>
+									</button>
+								</div>
+							</div>
+			
+						</div>
+						<div class="row pt-4">
+							<div class="col-sm-7 table-responsive " id="tablaDatosPaciente1">
+								<table class="table table-borderless table-sm ">
+									<tbody>
+										<tr>
+											<th>N Archivo: </th>
+											<td><span class="text-uppercase " id="paciente_hc" title="Numero de archivo"></span></td>
+										</tr>
+										<tr>
+											<th>Paciente:</th>
+											<td><span class="text-uppercase" id="apellido_paterno" title="Nombre del paciente"></span>
+											</td>
+										</tr>
+										<tr>
+											<th>NUHC:</th>
+											<td><span class="text-uppercase" id="cedula" title="Numero Unico de Historia Clinica"></span>
+											</td>
+										</tr>
+										<!-- <tr>
+															<td>Fecha de nacimiento:</td>
+															<td><span class="text-uppercase" id="fecha_n"></span></td>
+															</tr>
+							
+															<td>Edad:</td>
+															<td><span class="text-uppercase" id="Edad"></span></td>
+															</tr>
+															<tr>
+																<td>Genero:</td>
+																<td><span class="text-uppercase" id="Genero"></span></td>
+															</tr> -->
+									</tbody>
+								</table>
+							</div>
+							<div class="col-sm-5 table-responsive">
+								<input type="hidden" id="cama_id">
+								<input type="hidden" id="especialidad_id">
+								<table class="table table-borderless  table-sm" id="tablaDatosPacienteCama">
+			
+									<tbody>
+			
+										<tr>
+											<th>Servicio:</th>
+											<td><span class="text-uppercase" id="servicio"></span></td>
+										</tr>
+										<tr>
+											<th>Habitacion:</th>
+											<td><span class="text-uppercase" id="habitacion"></span></td>
+										</tr>
+										<tr>
+											<th>Cama:</th>
+											<td><span class="text-uppercase" id="cama"></span></td>
+										</tr>
+			
+									</tbody>
+								</table>
+							</div>
+			
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 py-3">
+				<div class="card shadow h-100">
+					<a class="d-block card-header " href="#collapseCardExample" data-toggle="collapse" role="button"
+						aria-expanded="true" aria-controls="collapseCardExample">
+						<h6 class="m-0  text-gray-600">Diagnosticos de ingreso </h6>
+					</a>
+					<div class="collapse show" id="collapseCardExample">
+						<div class="card-body text-xxs">
+							<div class="row">
+								<div class="col-sm-12">
+									<div id="" class="table-responsive ">
+										<?php echo $this->getDiagnosticos();?>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+		
+				</div>
+			</div>
+			
+		
+		
+		</div>
 		<div class="row ">
 			<div class="col-sm-12">
 				<div class="card shadow  text-xxs">
@@ -34,117 +150,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row ">
-			<div class="col-lg-6 py-3">
-				<div class="card shadow h-100">
-					<a class="d-block card-header " 
-							href="#collapseCardExample" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample" >
-						<h6 class="m-0  text-gray-600">Diagnosticos de ingreso </h6>
-					</a>
-					<div class="collapse show" id="collapseCardExample">
-						<div class="card-body text-xxs">
-							<div class="row">
-								<div class="col-sm-12">
-									<div id="" class="table-responsive ">
-										<?php echo $this->getDiagnosticos();?>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-				</div>
-			</div>
-			<div class="col-lg-6 py-3 ">
-				<div class="card  shadow  h-100">
-					<div class="card-header d-flex justify-content-between">
-						<h6 class="m-0 ">Detalle de asignacion de cama</h6>
-					</div>
-					<div class="card-body text-xxs">
-						<div class="d-flex justify-content-start pb-2">
-							<div class="input-group input-group-sm ">
-								<div class="input-group-prepend">
-									<select name="opcionBusquedaPaciente" id="opcionBusquedaPaciente" class="custom-select custom-select-sm " type="button"
-										data-toggle="dropdown" aria-expanded="false" required autocomplete="off">
-										<option value="1">EMERGENCIA</option>
-										<option value="2">C EXTERNA</option>
-									</select>
-				
-								</div>
-								<input type="text" class="form-control " id="paciente_id" name="paciente_id"
-								value="<?php if (isset($_GET['id'])) echo $_GET['id']; ?>"
-									placeholder="Buscar por hc o cedula..." aria-label="Search" aria-describedby="buscar_paciente_hc"
-									required autocomplete="off" onkeyup="if (event.keyCode == 13) DatosPaciente();" >
-								<div class="input-group-append">
-				
-									<button class="btn btn-dark" type="submit" onclick="DatosPaciente();">
-										<i class="fas fa-search fa-sm"></i>
-									</button>
-								</div>				
-							</div>				
-						</div>
-						<div class="row pt-4">
-							<div class="col-sm-7 table-responsive " id="tablaDatosPaciente1">
-								<table class="table table-borderless table-sm ">
-									<tbody>
-										<tr>
-											<th>N Archivo: </th>
-											<td><span class="text-uppercase " id="paciente_hc"></span></td>
-										</tr>
-										<tr>
-											<th>Paciente:</th>
-											<td><span class="text-uppercase" id="apellido_paterno"></span></td>
-										</tr>
-										<tr>
-											<th>N Cedula:</th>
-											<td><span class="text-uppercase" id="cedula"></span></td>
-										</tr>
-										<!-- <tr>
-										<td>Fecha de nacimiento:</td>
-										<td><span class="text-uppercase" id="fecha_n"></span></td>
-										</tr>
 		
-										<td>Edad:</td>
-										<td><span class="text-uppercase" id="Edad"></span></td>
-										</tr>
-										<tr>
-											<td>Genero:</td>
-											<td><span class="text-uppercase" id="Genero"></span></td>
-										</tr> -->
-									</tbody>
-								</table>
-							</div>
-							<div class="col-sm-5 table-responsive">
-								<input type="hidden" id="cama_id">
-								<input type="hidden" id="especialidad_id">
-								<table class="table table-borderless  table-sm" id="tablaDatosPacienteCama">
-									
-									<tbody>
-										
-										<tr>
-											<th>Servicio:</th>
-											<td><span class="text-uppercase" id="servicio"></span></td>
-										</tr>
-										<tr>
-											<th>Habitacion:</th>
-											<td><span class="text-uppercase" id="habitacion"></span></td>
-										</tr>
-										<tr>
-											<th>Cama:</th>
-											<td><span class="text-uppercase" id="cama"></span></td>
-										</tr>
-
-									</tbody>
-								</table>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-		</div>
 	</div>
 	<div class="card-footer d-flex justify-content-between">
 		<button class="btn btn-danger btn-icon-split" type="button" onclick="limpiaFormAsignacion();">

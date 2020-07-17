@@ -1,9 +1,9 @@
-const esp = "http://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json";
+const esp = "../public/assets/lang/Spanish.json";
 var buttons_config =[
       {
             extend: 'collection',
-            text: '<i class="fas fa-download  pr-4"></i>',
-            className: 'btn btn-dark btn-sm px-4',
+            text: '<i class="fas fa-download text-white-50 pr-4"></i>',
+            className: 'btn btn-dark btn-sm px-3',
             titleAttr: 'Exportar',
             autoClose: true,
             buttons: [
@@ -84,6 +84,9 @@ function dataTables(){
       buttons = new $.fn.dataTable.Buttons(table, {
             buttons: buttons_config
     }).container().appendTo($('#exportButtons'));
+
+     
+      
 }
 function toDataTable(table) {
       $(table).addClass('table-hover').DataTable();

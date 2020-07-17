@@ -18,73 +18,65 @@
 
 <div class="row">
   <div class="col-md-3 col-sm-6 col-12">
-    <!-- small box -->
-    <div class="small-box bg-primary text-white ">
-      <div class="inner">
-        <h3><?php echo $this->cuenta_pacientes; ?></h3>
-
-        <p>Pacientes internos</p>
-
+    <div class="info-box  text-dark">
+      <span class="info-box-icon bg-primary text-white">
+        <a href="<?php echo $this->baseUrl();?>/listar_paciente" class="text-white" ><i class="fas fa-user-tag "></i>
+        </a></span>
+  
+      <div class="info-box-content">
+        <span class="info-box-text">Pacientes internos</span>
+        <span class="info-box-number"><?php echo $this->cuenta_pacientes; ?></span>
       </div>
-      <div class="icon">
-        <i class="fas fa-user-tag "></i>
-      </div>
-
-      <a href="<?php echo $this->baseUrl();?>/listar_paciente" class="small-box-footer">Mas info <i
-          class="fas fa-arrow-circle-right"></i></a>
+      <!-- /.info-box-content -->
     </div>
+    <!-- /.info-box -->
   </div>
+
   <div class="col-md-3 col-sm-6 col-12">
-    <!-- small box -->
-    <div class="small-box bg-secondary text-white ">
-      <div class="inner">
-        <h3><?php echo $this->cuenta_camas_disp; ?><sup style="font-size: 20px">%</sup></h3>
-
-        <p>Camas disponibles</p>
-
+    <div class="info-box  text-dark">
+      <span class="info-box-icon bg-secondary text-white">
+        <a href="<?php echo $this->baseUrl();?>/camas?op=Disponible" class="text-white"><i class="fas fa-bed "></i>
+        </a></span>
+  
+      <div class="info-box-content">
+        <span class="info-box-text">Camas disponibles</span>
+        <span class="info-box-number"><?php echo $this->cuenta_camas_disp; ?> %</span>
       </div>
-      <div class="icon">
-        <i class="fas fa-bed "></i>
-      </div>
-
-      <a href="<?php echo $this->baseUrl();?>/camas?op=Disponible" class="small-box-footer">Mas info <i
-          class="fas fa-arrow-circle-right"></i></a>
+      <!-- /.info-box-content -->
     </div>
+    <!-- /.info-box -->
   </div>
+
   <div class="col-md-3 col-sm-6 col-12">
-    <!-- small box -->
-    <div class="small-box bg-danger text-white ">
-      <div class="inner">
-        <h3><?php echo $this->cuenta_camas_ocup; ?><sup style="font-size: 20px">%</sup></h3>
-
-        <p>Camas ocupadas</p>
-
+    <div class="info-box  text-dark">
+      <span class="info-box-icon bg-danger text-white">
+        <a href="<?php echo $this->baseUrl();?>/camas?op=Ocupada" class="text-white"><i class="fas fa-bed "></i>
+        </a></span>
+  
+      <div class="info-box-content">
+        <span class="info-box-text">Camas ocupadas</span>
+        <span class="info-box-number"><?php echo $this->cuenta_camas_ocup; ?> %</span>
       </div>
-      <div class="icon">
-        <i class="fas fa-bed "></i>
-      </div>
-
-      <a href="<?php echo $this->baseUrl();?>/camas?op=Ocupada" class="small-box-footer">Mas info <i
-          class="fas fa-arrow-circle-right"></i></a>
+      <!-- /.info-box-content -->
     </div>
+    <!-- /.info-box -->
   </div>
+
   <div class="col-md-3 col-sm-6 col-12">
-    <!-- small box -->
-    <div class="small-box bg-warning text-dark ">
-      <div class="inner">
-        <h3><?php echo $this->cuenta_camas_desinf; ?><sup style="font-size: 20px">%</sup></h3>
-
-        <p>En desinfeccion</p>
-
+    <div class="info-box  text-dark">
+      <span class="info-box-icon bg-warning text-white">
+        <a href="<?php echo $this->baseUrl();?>/camas?op=Desinfeccion" class="text-dark"><i class="fas fa-bed "></i>
+        </a></span>
+  
+      <div class="info-box-content">
+        <span class="info-box-text">En desinfeccion</span>
+        <span class="info-box-number"><?php echo $this->cuenta_camas_desinf; ?> %</span>
       </div>
-      <div class="icon">
-        <i class="fas fa-bed "></i>
-      </div>
-
-      <a href="<?php echo $this->baseUrl();?>/camas?op=Desinfeccion" class="small-box-footer">Mas info <i
-          class="fas fa-arrow-circle-right"></i></a>
+      <!-- /.info-box-content -->
     </div>
+    <!-- /.info-box -->
   </div>
+ 
 
 </div>
 
@@ -124,21 +116,18 @@
   
   <div class="col-lg-3">
     <div class="row">
+      
       <div class="col-12">
-        <!-- small box -->
-        <div class="small-box bg-success text-white ">
-          <div class="inner">
-            <h3><?php echo $this->cuenta_usuarios ?></h3>
-      
-            <p>Usuarios</p>
-      
+        <div class="info-box  text-dark">
+          <span class="info-box-icon bg-success text-white">
+            <a href="<?php echo $this->baseUrl();?>/listar_usuarios" class="text-white"><i class="fas fa-users "></i>
+            </a></span>
+        
+          <div class="info-box-content">
+            <span class="info-box-text">Usuarios</span>
+            <span class="info-box-number"><?php echo $this->cuenta_usuarios ?></span>
           </div>
-          <div class="icon">
-            <i class="fas fa-users "></i>
-          </div>
-      
-          <a href="<?php echo $this->baseUrl();?>/listar_usuarios" class="small-box-footer">Mas info <i
-              class="fas fa-arrow-circle-right"></i></a>
+          <!-- /.info-box-content -->
         </div>
       </div>
 
@@ -210,12 +199,12 @@
               $datos = $obj->listar();
               if(isset($datos)): 
                 foreach ($datos as $item): ?>
-        <button type="button" class="btn btn-<?php echo $item->especialidad_color ?> btn-xs " data-toggle="popover"
+        <button type="button" class="btn btn-xs text-white" style="background: <?php echo $item->especialidad_color ?>;" data-toggle="popover"
           data-content="<?php echo $item->especialidad_nombre ?>"
           onclick="mapaDeCamas('<?php echo $item->especialidad_id ?>');">
           <small><?php echo $item->especialidad_alias ?></small>
         </button>
-        <?php   endforeach;
+        <?php  endforeach;
                endif; ?>
         <button type="button" class="btn btn-light btn-xs" onclick="mapaDeCamas(0);"
         data-toggle="popover"

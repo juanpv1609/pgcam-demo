@@ -68,10 +68,11 @@ class DatabaseController extends Zend_Controller_Action
             $Listaarea .= '<table class="table table-bordered  table-sm"  width="100%" >
                     <thead class="table-dark text-center">';
             $Listaarea .= "<tr>";
-            $Listaarea .="<th>PK</th>";
+            $Listaarea .="<th>LLAVE</th>";
             $Listaarea .="<th>COLUMNA</th>";
             $Listaarea .="<th>TIPO</th>";
             $Listaarea .="<th>NULO</th>";
+            $Listaarea .="<th>DESCRIPCION</th>";
             $Listaarea .= "</tr>";
 
             $Listaarea .= '</thead>
@@ -80,7 +81,7 @@ class DatabaseController extends Zend_Controller_Action
 
             foreach ($dicc as $d):
                     foreach ($llaves as $l):
-                        $pk = (($d->columna_nombre==$l->column_name) and ($l->constraint_type=='PRIMARY KEY')) ? '<i class="fas fa-key text-orange" ></i>' : '';
+                        $pk = (($d->columna_nombre==$l->column_name) and ($l->constraint_type=='PRIMARY KEY')) ? 'PK' : '';
             endforeach;
             $Listaarea .= "<tr>";
             $Listaarea .= "<td class='text-center'>" . $pk . "</td>";
@@ -88,6 +89,8 @@ class DatabaseController extends Zend_Controller_Action
 
             $Listaarea .= "<td>" . $d->columna_tipo_dato . "(" . $d->columna_longitud . ")</td>";
             $Listaarea .= "<td>" . $d->columna_nulo . "</td>";
+            $Listaarea .= "<td>" . $d->columna_descripcion . "</td>";
+
 
             $Listaarea .= "</tr>";
 

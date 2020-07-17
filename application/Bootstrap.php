@@ -42,6 +42,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             )
         );
         $router->addRoute(
+            'sala',
+            new Zend_Controller_Router_Route(
+                'sala',
+                array('controller' => 'sala',
+                        'action' => 'index')
+            )
+        );
+        $router->addRoute(
             'registrar_paciente',
             new Zend_Controller_Router_Route(
                 'registrar_paciente',
@@ -97,5 +105,22 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                         'action' => 'register')
             )
         );
+        $router->addRoute(
+            'reporte_general',
+            new Zend_Controller_Router_Route(
+                'reporte_general',
+                array('controller' => 'reportes',
+                        'action' => 'general')
+            )
+        );
+        $router->addRoute(
+    'reporte_especialidad',
+    new Zend_Controller_Router_Route(
+                'reporte_especialidad',
+                array('controller' => 'reportes',
+                        'action' => 'servicio')
+            )
+);
+
     }
 }

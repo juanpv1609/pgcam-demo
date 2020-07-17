@@ -38,6 +38,8 @@ class CamasController extends Zend_Controller_Action
         echo $this->view->headScript();
         $this->view->data = $this->tabla_camas();
         $this->view->data_habitaciones = $this->select_habitacion();
+        $this->view->data_tipo = $this->select_tipo();
+
         $this->view->data_estado_cama = $this->select_estado_cama();
         $this->view->titulo="Camas Registradas";
     }
@@ -57,10 +59,12 @@ class CamasController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout(); // Solo si estas usando Zend_Layout
         if ($this->getRequest()->isXmlHttpRequest()) {//Detectamos si es una llamada AJAX
             $cama_nombre = $this->getRequest()->getParam('nombre');
+            $tipo_cama = $this->getRequest()->getParam('tipo_cama');
             $habitacion = $this->getRequest()->getParam('habitacion');
+
             $cama_estado = $this->getRequest()->getParam('cama_estado');
             $obj = new Application_Model_DbTable_Camas();
-            $obj->insertarcama($cama_nombre, $habitacion, $cama_estado);
+            $obj->insertarcama($cama_nombre, $habitacion, $cama_estado,$tipo_cama);
             echo $this->tabla_camas();
         }
     }
@@ -83,9 +87,11 @@ class CamasController extends Zend_Controller_Action
             $id = $this->getRequest()->getParam('id');
             $habitacion = $this->getRequest()->getParam('habitacion');
             $cama_nombre = $this->getRequest()->getParam('nombre');
+            $tipo_cama = $this->getRequest()->getParam('tipo_cama');
             $cama_estado = $this->getRequest()->getParam('cama_estado');
+
             $obj = new Application_Model_DbTable_Camas();
-            $obj->actualizarcama($id, $cama_nombre, $habitacion, $cama_estado);
+            $obj->actualizarcama($id, $cama_nombre, $habitacion, $cama_estado,$tipo_cama);
             echo $this->tabla_camas();
         }
     }
@@ -108,6 +114,38 @@ class CamasController extends Zend_Controller_Action
             $obj->eliminarcama($id);
             echo $this->tabla_camas();
         }
+    }
+    /**
+     * select_tipo()
+     * * Esta funcion crea el template SELECT HTML que sera mostrado en el view
+     * * Obtiene una lista de las habitaciones
+     * ! se ejecuta despues de: index, crear, editar, eliminar
+     * @param obj Crea un objeto tipo DbTable py realiza el metodo listar
+     */
+
+    public function select_tipo()
+    {
+        $obj = new Application_Model_DbTable_Camas();
+        $datos = $obj->listar_tipo_cama();
+        $Lista = '<div  class="form-group">';
+        if (!$datos) {
+            $Lista .= '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error !</strong> No se encontraron resultados
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                </div>';
+        } else {
+            $Lista .= '<label for="comboTipoCama">Seleccione el tipo de cama:</label>';
+
+            $Lista .= '<select class="custom-select" name="comboTipoCama" id="comboTipoCama">';
+            foreach ($datos as $item):
+                $Lista .= "<option value='". $item->cama_tipo_id ."'>" . $item->cama_tipo_descripcion . "</option>";
+            endforeach;
+            $Lista .= "</select></div>";
+        }
+        return $Lista;
     }
     /**
      * select_habitacion()
@@ -198,6 +236,7 @@ class CamasController extends Zend_Controller_Action
                 <tr>
                     <th >ID</th>
                     <th >DESCRIPCION</th>
+                    <th >SALA</th>
                     <th >HABITACION</th>
                     <th >ESPECIALIDAD</th>
                     <th >PISO</th>
@@ -210,14 +249,15 @@ class CamasController extends Zend_Controller_Action
             foreach ($datos as $item):
 
                 $cadena .= "<tr>";
-            $cadena .= "<td>" . $item->cama_id . "</td>";
-            $cadena .= "<td>Cama " . $item->cama_nombre . "</td>";
-            $cadena .= "<td>" . $item->habitacion_nombre . "</td>";
-            $cadena .= "<td>" . $item->especialidad_nombre . "</td>";
-            $cadena .= "<td>" . $item->piso_nombre . "</td>";
-            $cadena .= "<td>" . $item->area_nombre . "</td>";
+                $cadena .= "<td>" . $item->cama_id . "</td>";
+                $cadena .= "<td>Cama " . $item->cama_nombre . "</td>";
+                $cadena .= "<td>" . $item->cama_tipo_descripcion . "</td>";
+                $cadena .= "<td>" . $item->habitacion_nombre . "</td>";
+                $cadena .= "<td>" . $item->especialidad_nombre . "</td>";
+                $cadena .= "<td>" . $item->piso_nombre . "</td>";
+                $cadena .= "<td>" . $item->area_nombre . "</td>";
 
-            $cadena .= "<td>". $item->cama_estado_descripcion ."</td>
+                $cadena .= "<td>". $item->cama_estado_descripcion ."</td>
                 <td>
                 <div class='btn-group' role='group' aria-label='Basic example'>
                 

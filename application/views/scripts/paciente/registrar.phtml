@@ -17,12 +17,36 @@
 
 	</div>
 	<div class="card-body text-xs" id="contenido">
-		<div class="d-flex justify-content-end pb-4">
+		<div class="d-flex justify-content-between pb-4">
+			<div class="form-inline align-bottom">
+				<span>Recién Nacido:</span>
+				<div class="custom-control custom-checkbox  mx-4">
+					<input class="custom-control-input" type="radio" name="recienNacidoRadio" id="si" value="SI"
+						onclick="setNacidos()">
+					<label class="custom-control-label font-weight-bold " for="si">
+						SI
+					</label>
+				</div>
+				<div class="custom-control custom-checkbox mx-4 ">
+					<input class="custom-control-input" type="radio" name="recienNacidoRadio" id="no" value="NO" checked
+						onclick="setNacidos()">
+					<label class="custom-control-label font-weight-bold" for="no">
+						NO
+					</label>
+				</div>
+				<div class="form-inline d-none" id="divNacidos">
+					<input class=" form-control form-control-sm mx-4 border-primary" type="number" name="numNacidosVivos"
+						id="numNacidosVivos" placeholder="Número de nacidos vivos" value="" autocomplete="off" min="0" pattern="\d">
+
+				</div>
+			</div>
+
 			<form class="needs-validation" method="post" id="form_paciente_busca" name="form_paciente_busca" novalidate>
 				<div class="input-group input-group-sm ">
 					<input type="text" class="form-control" id="busca_paciente" name="busca_paciente"
 						value="<?php if (isset($_GET['id'])) echo $_GET['id']; ?>" placeholder="Buscar por hc o cedula..."
-						aria-label="Search" aria-describedby="buscar_paciente_hc" required autocomplete="off">
+						aria-label="Search" aria-describedby="buscar_paciente_hc" required autocomplete="off"
+						pattern="\d{1,10}">
 					<div class="input-group-append">
 						<button class="btn btn-primary" type="submit" onclick="BuscaPaciente();">
 							<i class="fas fa-search fa-sm"></i>
@@ -31,18 +55,20 @@
 					<div class="valid-feedback">
 					</div>
 					<div class="invalid-feedback">
+						Solo digitos
 					</div>
 				</div>
 			</form>
 		</div>
 		<form class="needs-validation" method="post" id="paciente_admision" name="paciente_admision" novalidate>
+			<input type="hidden" id="numNac" name="numNac">
 			<div class="row">
 				<div class="col-sm-2">
 					<div class="form-group">
 						<label for="apellido_paterno">Apellido paterno:</label>
-						<input type="text" id="apellido_paterno" class="form-control form-control-sm" name="apellido_paterno" maxlength="25"
-							required autocomplete="off" onkeyup="this.value = this.value.toUpperCase();"
-							pattern="\D{1,25}">
+						<input type="text" id="apellido_paterno" class="form-control form-control-sm" name="apellido_paterno"
+							maxlength="25" required autocomplete="off" onkeyup="this.value = this.value.toUpperCase();"
+							pattern="\D{1,25}" value="">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -52,9 +78,9 @@
 				<div class="col-sm-2">
 					<div class="form-group">
 						<label for="apellido_materno">Apellido materno:</label>
-						<input type="text" id="apellido_materno" class="form-control form-control-sm" name="apellido_materno" maxlength="25"
-							required autocomplete="off" onkeyup="this.value = this.value.toUpperCase();"
-							pattern="\D{1,25}">
+						<input type="text" id="apellido_materno" class="form-control form-control-sm" name="apellido_materno"
+							maxlength="25" autocomplete="off" onkeyup="this.value = this.value.toUpperCase();"
+							pattern="\D{1,25}" value="">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -64,9 +90,9 @@
 				<div class="col-sm-2">
 					<div class="form-group ">
 						<label for="primer_nombre">Primer nombre:</label>
-						<input type="text" id="primer_nombre" class="form-control form-control-sm" name="primer_nombre" maxlength="25"
-						required autocomplete="off" onkeyup="this.value = this.value.toUpperCase();"
-							pattern="\D{1,25}">
+						<input type="text" id="primer_nombre" class="form-control form-control-sm" name="primer_nombre"
+							maxlength="25" required autocomplete="off" onkeyup="this.value = this.value.toUpperCase();"
+							pattern="\D{1,25}" value="">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -76,9 +102,9 @@
 				<div class="col-sm-2">
 					<div class="form-group">
 						<label for="segundo_nombre">Segundo nombre:</label>
-						<input type="text" id="segundo_nombre" class="form-control form-control-sm" name="segundo_nombre" maxlength="25"
-							required autocomplete="off" onkeyup="this.value = this.value.toUpperCase();"
-							pattern="\D{1,25}">
+						<input type="text" id="segundo_nombre" class="form-control form-control-sm" name="segundo_nombre"
+							maxlength="25" autocomplete="off" onkeyup="this.value = this.value.toUpperCase();"
+							pattern="\D{1,25}" value="">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -88,12 +114,12 @@
 				<div class="col-sm-2">
 					<div class="form-group">
 						<label for="cedula">N Cedula:</label>
-						<input type="text" id="cedula" class="form-control form-control-sm" name="cedula" maxlength="10" 
-						required autocomplete="off" pattern="\d{10}">
+						<input type="text" id="cedula" class="form-control form-control-sm" name="cedula" maxlength="20"
+							 autocomplete="off"  >
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
-							Sólo dígitos (10)
+							Cedula o pasaporte
 						</div>
 					</div>
 				</div>
@@ -101,7 +127,7 @@
 					<div class="form-group">
 						<label for="telefono">N Telefono:</label>
 						<input type="tel" id="telefono" class="form-control form-control-sm" name="telefono" maxlength="10"
-						 placeholder="Ej:0987654321" required autocomplete="off" pattern="^0+\d{9}">
+							placeholder="Ej:0987654321"  autocomplete="off" pattern="^0+\d{9}" value="">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -118,7 +144,7 @@
 					<div class="form-group">
 						<label for="comboCant">Canton:</label>
 						<select class="form-control form-control-sm " name="comboCant" id="comboCant"
-							onchange="getParroquias();"  required autocomplete="off" >
+							onchange="getParroquias();" autocomplete="off">
 						</select>
 						<div class='valid-feedback'>
 						</div>
@@ -129,8 +155,8 @@
 				<div class="col-sm-2">
 					<div class="form-group">
 						<label for="comboParroq">Parroquia:</label>
-						<select class="form-control form-control-sm   " name="comboParroq" id="comboParroq" required
-							autocomplete="off"  >
+						<select class="form-control form-control-sm   " name="comboParroq" id="comboParroq"
+							autocomplete="off">
 						</select>
 						<div class='valid-feedback'>
 						</div>
@@ -141,9 +167,9 @@
 				<div class="col-sm-2">
 					<div class="form-group">
 						<label for="barrio">Barrio:</label>
-						<input type="text" id="barrio" class="form-control form-control-sm" name="barrio" required maxlength="50"
-							autocomplete="off" maxlength="50" onkeyup="this.value = this.value.toUpperCase();"
-							pattern="[[:alnum:]]{1,50}">
+						<input type="text" id="barrio" class="form-control form-control-sm" name="barrio" 
+							maxlength="50" autocomplete="off" maxlength="50" onkeyup="this.value = this.value.toUpperCase();"
+							pattern="[[:alnum:]]{1,50}" value="">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -153,9 +179,9 @@
 				<div class="col-sm-4">
 					<div class="form-group">
 						<label for="direccion">Direccion domiciliaria:</label>
-						<input type="text" id="direccion" class="form-control form-control-sm" name="direccion" required maxlength="150"
-							autocomplete="off" maxlength="120" onkeyup="this.value = this.value.toUpperCase();"
-							pattern="[[:alnum:]]{1,150}">
+						<input type="text" id="direccion" class="form-control form-control-sm" name="direccion" 
+							maxlength="150" autocomplete="off" maxlength="120" onkeyup="this.value = this.value.toUpperCase();"
+							pattern="[[:alnum:]]{1,150}" value="">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -178,9 +204,9 @@
 				<div class="col-sm-2">
 					<div class="form-group">
 						<label for="lugar_n">Lugar de nacimiento:</label>
-						<input type="text" id="lugar_n" class="form-control form-control-sm" name="lugar_n" required maxlength="20"
-							autocomplete="off" maxlength="20" onkeyup="this.value = this.value.toUpperCase();"
-							pattern="[[:alnum:]]{1,20}" >
+						<input type="text" id="lugar_n" class="form-control form-control-sm" name="lugar_n" 
+							maxlength="20" autocomplete="off" maxlength="20" onkeyup="this.value = this.value.toUpperCase();"
+							pattern="[[:alnum:]]{1,20}" value="">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -197,8 +223,8 @@
 				<div class="col-sm-1">
 					<div class="form-group">
 						<label for="comboEdad">Edad:</label>
-						<input type="text" id="comboEdad"  class="form-control form-control-sm bg-white" name="comboEdad"  
-						autocomplete="off" required>
+						<input type="text" id="comboEdad" class="form-control form-control-sm bg-white" name="comboEdad"
+							autocomplete="off" required>
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -210,7 +236,7 @@
 					<div class="form-group">
 						<label for="comboGenero">Genero:</label>
 						<select name="comboGenero" id="comboGenero" class="form-control form-control-sm  " required
-							autocomplete="off" >
+							autocomplete="off">
 							<option value=""></option>
 							<option value="F">F</option>
 							<option value="M">M</option>
@@ -233,9 +259,9 @@
 				<div class="col-sm-2">
 					<div class="form-group">
 						<label for="ocupacion">Ocupacion:</label>
-						<input type="text" id="ocupacion" class="form-control form-control-sm" name="ocupacion" required maxlength="50"
-							autocomplete="off" maxlength="50" onkeyup="this.value = this.value.toUpperCase();"
-							pattern="\D{1,50}">
+						<input type="text" id="ocupacion" class="form-control form-control-sm" name="ocupacion" 
+							maxlength="50" autocomplete="off" maxlength="50" onkeyup="this.value = this.value.toUpperCase();"
+							pattern="\D{1,50}" value="">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -245,9 +271,9 @@
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label for="trabajo">Empresa donde trabaja:</label>
-						<input type="text" id="trabajo" class="form-control form-control-sm" name="trabajo" required maxlength="50"
-							autocomplete="off" maxlength="50" onkeyup="this.value = this.value.toUpperCase();"
-							pattern="[[:alnum:]]{1,50}">
+						<input type="text" id="trabajo" class="form-control form-control-sm" name="trabajo" 
+							maxlength="50" autocomplete="off" maxlength="50" onkeyup="this.value = this.value.toUpperCase();"
+							pattern="[[:alnum:]]{1,50}" value="">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -260,9 +286,9 @@
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label for="referido">Referido de:</label>
-						<input type="text" id="referido" class="form-control form-control-sm" name="referido" required maxlength="50"
-							autocomplete="off" maxlength="50" onkeyup="this.value = this.value.toUpperCase();"
-							pattern="[[:alnum:]]{1,50}">
+						<input type="text" id="referido" class="form-control form-control-sm" name="referido" 
+							maxlength="50" autocomplete="off" maxlength="50" onkeyup="this.value = this.value.toUpperCase();"
+							pattern="[[:alnum:]]{1,50}" value="">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -275,8 +301,8 @@
 					<div class="form-group">
 						<label for="contacto_nombre">En caso necesario avisar a:</label>
 						<input type="text" id="contacto_nombre" class="form-control form-control-sm" name="contacto_nombre"
-							required autocomplete="off" maxlength="50" onkeyup="this.value = this.value.toUpperCase();"
-							pattern="\D{1,50}">
+							 autocomplete="off" maxlength="50" onkeyup="this.value = this.value.toUpperCase();"
+							pattern="\D{1,50}" value="">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -287,9 +313,8 @@
 					<div class="form-group">
 						<label for="contacto_parentezco">Parentezco:</label>
 						<input type="text" id="contacto_parentezco" class="form-control form-control-sm"
-							name="contacto_parentezco" required autocomplete="off" maxlength="30"
-							onkeyup="this.value = this.value.toUpperCase();"
-							pattern="\D{1,30}">
+							name="contacto_parentezco"  autocomplete="off" maxlength="30"
+							onkeyup="this.value = this.value.toUpperCase();" pattern="\D{1,30}" value="">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -300,9 +325,8 @@
 					<div class="form-group">
 						<label for="contacto_direccion">Direccion:</label>
 						<input type="text" id="contacto_direccion" class="form-control form-control-sm"
-							name="contacto_direccion" required autocomplete="off" maxlength="150"
-							onkeyup="this.value = this.value.toUpperCase();"
-							pattern="[[:alnum:]]{1,150}">
+							name="contacto_direccion"  autocomplete="off" maxlength="150"
+							onkeyup="this.value = this.value.toUpperCase();" pattern="[[:alnum:]]{1,150}" value="">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -313,7 +337,7 @@
 					<div class="form-group">
 						<label for="contacto_telefono">N Telefono:</label>
 						<input type="tel" id="contacto_telefono" class="form-control form-control-sm" name="contacto_telefono"
-							placeholder="Ej:0987654321" required autocomplete="off" maxlength="10"  pattern="^0+\d{9}">
+							placeholder="Ej:0987654321"  autocomplete="off" maxlength="10" pattern="^0+\d{9}" value="">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -330,9 +354,9 @@
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label for="fuente_info">Fuente de informacion:</label>
-						<input type="text" id="fuente_info" class="form-control form-control-sm" name="fuente_info" required
+						<input type="text" id="fuente_info" class="form-control form-control-sm" name="fuente_info" 
 							autocomplete="off" maxlength="50" onkeyup="this.value = this.value.toUpperCase();"
-							pattern="[[:alnum:]]{1,50}">
+							pattern="[[:alnum:]]{1,50}" value="">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -342,9 +366,9 @@
 				<div class="col-sm-4">
 					<div class="form-group">
 						<label for="institucion">Institucion o persona que entrega al paciente:</label>
-						<input type="text" id="institucion" class="form-control form-control-sm" name="institucion" required
+						<input type="text" id="institucion" class="form-control form-control-sm" name="institucion" 
 							autocomplete="off" maxlength="50" onkeyup="this.value = this.value.toUpperCase();"
-							pattern="[[:alnum:]]{1,50}">
+							pattern="[[:alnum:]]{1,50}" value="">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -355,8 +379,8 @@
 					<div class="form-group">
 						<label for="institucion_telefono">N Telefono:</label>
 						<input type="tel" id="institucion_telefono" class="form-control form-control-sm "
-							placeholder="Ej:0987654321" name="institucion_telefono" required autocomplete="off" maxlength="10"
-							pattern="^0+\d{9}">
+							placeholder="Ej:0987654321" name="institucion_telefono"  autocomplete="off" maxlength="10"
+							pattern="^0+\d{9}" value="">
 						<div class="valid-feedback">
 						</div>
 						<div class="invalid-feedback">
@@ -383,4 +407,22 @@
 			</div>
 		</form>
 	</div>
+</div>
+<div class=" my-4  text-xs">
+	<div class="container py-2 text-dark">
+		<h5 class="text-dark">Importante</h5>
+		<p>Para pacientes que <strong class="text-primary">no posean un documento de
+				identificación</strong>,
+			dejar el campo <strong class="text-primary">N Cédula</strong> vacío, a continuación se le generará un <strong
+				class="text-primary">Código Unico de Historia Clínica</strong>.<br>
+			Para <strong class="text-primary">recién nacidos vivos</strong> deberá llenar el
+			formulario con
+			<strong class="text-primary">información de la madre</strong> e indicar el <strong class="text-primary">número
+				de nacidos vivos</strong>.<br>
+			Para pacientes <strong class="text-primary">extranjeros</strong> en el campo <strong
+				class="text-primary">provincia</strong>
+			deberá seleccionar <strong class="text-primary">extranjera</strong>.</p>
+	</div>
+			
+	
 </div>

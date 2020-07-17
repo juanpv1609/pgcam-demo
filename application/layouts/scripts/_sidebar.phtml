@@ -102,8 +102,7 @@
         <i class="fas fa-fw fa-bed"></i>
         <span>Camas</span></a>
     </li>
-    <li
-      class="nav-item <?php echo $this->setActive('cie10','descripcion'); echo $this->setActive('cie10','categoria'); echo $this->setActive('cie10','capitulo');?>">
+    <li class="nav-item <?php echo $this->setActive('cie10','descripcion'); echo $this->setActive('cie10','categoria'); echo $this->setActive('cie10','capitulo');?>">
       <a class="nav-link collapsed py-1" data-toggle="collapse" data-target="#collapseUtilities3" aria-expanded="true"
         aria-controls="collapseUtilities" href="#">
         <i class="fas fa-fw fa-heartbeat"></i>
@@ -112,9 +111,9 @@
         <div class="bg-light  collapse-inner rounded">
           <h6 class="collapse-header text-gray-800"><strong>Buscar:</strong></h6>
           <a class="collapse-item py-1" href="<?php echo $this->baseUrl();?>/cie10/descripcion">
-            <i class="fas fa-fw fa-chevron-right"></i> <span>Por descripcion</span></a>
+            <i class="fas fa-fw fa-chevron-right"></i> <span>Por descripción</span></a>
           <a class="collapse-item py-1" href="<?php echo $this->baseUrl();?>/cie10/categoria">
-            <i class="fas fa-fw fa-chevron-right"></i> <span>Por categoria</span></a>
+            <i class="fas fa-fw fa-chevron-right"></i> <span>Por categoría</span></a>
           <a class="collapse-item py-1" href="<?php echo $this->baseUrl();?>/cie10/capitulo">
             <i class="fas fa-fw fa-chevron-right"></i> <span>Por capitulo</span></a>
     
@@ -129,11 +128,22 @@
   <hr class="sidebar-divider">
   <!-- Heading -->
   <div class="sidebar-heading">Reportes</div>
-  <!-- Nav Item - Charts -->
-  <li class="nav-item <?php echo $this->setActive('reportes','index'); ?>">
-    <a class="nav-link py-1" href="<?php echo $this->baseUrl();?>/reportes">
+  <li
+    class="nav-item <?php echo $this->setActive('reportes','index'); echo $this->setActive('reportes','disponibilidad'); echo $this->setActive('reportes','censo');?>">
+    <a class="nav-link collapsed py-1" data-toggle="collapse" data-target="#collapseUtilities4" aria-expanded="true"
+      aria-controls="collapseUtilities" href="#">
       <i class="fas fa-fw fa-chart-line"></i>
       <span>Reportes</span></a>
+    <div id="collapseUtilities4" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+      <div class="bg-light  collapse-inner rounded">
+        <h6 class="collapse-header text-gray-800"><strong>Opciones:</strong></h6>
+        <a class="collapse-item py-1" href="<?php echo $this->baseUrl();?>/reporte_general">
+         <i class="fas fa-fw fa-chevron-right"></i> <span>General</span></a>
+        <a class="collapse-item py-1" href="<?php echo $this->baseUrl();?>/reporte_especialidad">
+         <i class="fas fa-fw fa-chevron-right"></i> <span>Por Servicio</span></a>
+  
+      </div>
+    </div>
   </li>
 
   <!-- Divider -->
