@@ -44,7 +44,7 @@
         "jquery": "3.4.1",
         "jquery.easing": "^1.4.1",
         "jszip": "^3.3.0",
-        "moment": "^2.25.3",
+        "moment": "^2.29.4",
         "pdfmake": "^0.1.65",
         "popper.js": "^1.16.1",
         "select2": "~4.0",
