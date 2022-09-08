@@ -43,7 +43,7 @@
         "datatables.net-rowgroup-bs4": "^1.1.2",
         "jquery": "3.4.1",
         "jquery.easing": "^1.4.1",
-        "jszip": "^3.3.0",
+        "jszip": "^3.7.0",
         "moment": "^2.25.3",
         "pdfmake": "^0.1.65",
         "popper.js": "^1.16.1",
